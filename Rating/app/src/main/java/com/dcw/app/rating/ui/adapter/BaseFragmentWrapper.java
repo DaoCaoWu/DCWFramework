@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dcw.app.rating.config.BundleConstant;
-import com.dcw.framework.rating.R;
+import com.dcw.app.rating.R;
 import com.dcw.app.rating.ui.SpinningDialog;
 import com.dcw.app.rating.util.Util;
 import com.dcw.framework.pac.ui.BaseFragment;

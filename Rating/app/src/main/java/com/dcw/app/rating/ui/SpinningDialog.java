@@ -5,8 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
 import com.dcw.app.rating.log.L;
+import com.dcw.app.rating.R;
 
 public class SpinningDialog extends Dialog {
 

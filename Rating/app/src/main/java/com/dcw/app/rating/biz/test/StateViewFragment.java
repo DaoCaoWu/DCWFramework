@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.dcw.framework.rating.R;
+import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.app.rating.ui.lib.StateView;

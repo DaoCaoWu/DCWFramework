@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.ViewConfiguration;
 
+import com.dcw.app.rating.R;
 import com.dcw.app.rating.ui.adapter.BaseActivityWrapper;
 import com.dcw.app.rating.ui.adapter.FrameworkManifest;
 import com.dcw.app.rating.ui.adapter.ToastManager;
 import com.dcw.framework.pac.basic.FrameworkFacade;
-import com.dcw.framework.rating.R;
 
 import java.lang.reflect.Field;
 

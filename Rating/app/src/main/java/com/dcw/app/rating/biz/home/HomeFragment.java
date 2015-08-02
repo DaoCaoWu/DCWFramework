@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.dcw.framework.rating.R;
+import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;

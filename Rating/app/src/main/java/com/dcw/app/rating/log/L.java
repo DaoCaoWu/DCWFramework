@@ -99,6 +99,6 @@ public class L {
             String logBody = Log.getStackTraceString(ex);
             log = String.format(LOG_FORMAT, logMessage, logBody);
         }
-        Log.println(priority, BuildConfig.APPLICATION_ID, log);
+        Log.println(priority, BuildConfig.BUILD_TYPE, log);
     }
 }
