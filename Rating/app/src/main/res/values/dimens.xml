@@ -2,4 +2,105 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_large_size_20">20dp</dimen>
+    <dimen name="text_header_size_18">18dp</dimen>
+    <dimen name="text_title_size_16">16dp</dimen>
+    <dimen name="text_content_size_14">14dp</dimen>
+    <dimen name="text_content_small_size_13">13dp</dimen>
+    <dimen name="text_small_size_12">12dp</dimen>
+
+    <dimen name="top_bar_height">48dip</dimen>
+
+    <!--文字大小-->
+    <!--主体-->
+    <dimen name="display_4">112sp</dimen>
+    <dimen name="display_3">56sp</dimen>
+    <dimen name="display_2">45sp</dimen>
+    <dimen name="display_1">34sp</dimen>
+    <!--大字标题;新闻提要-->
+    <dimen name="headline">24sp</dimen>
+    <!--标题-->
+    <dimen name="title">20sp</dimen>
+    <!--副标题-->
+    <dimen name="subhead">16sp</dimen>
+    <dimen name="subhead_small">15sp</dimen>
+    <!--内容-->
+    <dimen name="body">14sp</dimen>
+    <dimen name="body_small">13sp</dimen>
+    <!--标题，说明文字-->
+    <dimen name="caption">12sp</dimen>
+    <!--菜单-->
+    <dimen name="menu">14sp</dimen>
+    <!--按钮-->
+    <dimen name="button">14sp</dimen>
+    <!--文字大小-->
+
+    <!--文字相隔-->
+    <dimen name="display_2_leading">45pt</dimen>
+    <dimen name="display_1_leading">40pt</dimen>
+    <dimen name="headline_leading">32pt</dimen>
+    <dimen name="subhead_leading">28pt</dimen>
+    <dimen name="subhead_small_leading">24pt</dimen>
+    <dimen name="body_leading">24pt</dimen>
+    <dimen name="body_small_leading">20pt</dimen>
+    <!--相隔-->
+
+    <!--字间距-->
+    <dimen name="display_4_tracking">10pt</dimen>
+    <dimen name="display_3_tracking">5pt</dimen>
+    <dimen name="display_2_tracking">0pt</dimen>
+    <dimen name="display_1_tracking">0pt</dimen>
+    <dimen name="headline_tracking">0pt</dimen>
+    <dimen name="title_tracking">5pt</dimen>
+    <dimen name="subhead_tracking">10pt</dimen>
+    <dimen name="subhead_small_tracking">10pt</dimen>
+    <dimen name="body_tracking">10pt</dimen>
+    <dimen name="body_small_tracking">10pt</dimen>
+    <dimen name="caption_tracking">20pt</dimen>
+    <dimen name="menu_tracking">10pt</dimen>
+    <dimen name="button_tracking">10pt</dimen>
+    <!--字间距-->
+
+    <!--分割线-->
+    <dimen name="divider_height">1px</dimen>
+
+    <!--控件高度-->
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="space_between_content_areas">8dp</dimen>
+    <dimen name="list_item_title_height">72dp</dimen>
+    <dimen name="list_item_headline_height">56dp</dimen>
+    <dimen name="list_item_subtitle_height">48dp</dimen>
+    <dimen name="list_item_single_line_height">56dp</dimen>
+    <dimen name="list_item_two_lines_height">72dp</dimen>
+    <dimen name="list_item_three_lines_height">88dp</dimen>
+    <dimen name="list_item_menu_item_height">488dp</dimen>
+
+    <!--控件宽度-->
+    <dimen name="screen_edge_left_and_right_margins">16dp</dimen>
+    <dimen name="content_associated_with_an_icon_or_avatar_left_margin">72dp</dimen>
+    <dimen name="horizontal_margins_on_mobile">16dp</dimen>
+    <dimen name="navigation_right_margin">56dp</dimen>
+    <dimen name="horizontal_margins_on_gird_view">24dp</dimen>
+
+    <!--浮动按钮-->
+    <dimen name="floating_action_button">40dp</dimen>
+    <dimen name="floating_action_button_large">56dp</dimen>
+    <dimen name="floating_action_button_res_size">24dp</dimen>
+    <dimen name="raised_button">0dp</dimen>
+    <dimen name="flat_button_mini_width">88dp</dimen>
+    <dimen name="flat_button_mini_height">36dp</dimen>
+
+    <!--图片-->
+    <dimen name="icon_small">24dp</dimen>
+    <dimen name="icon">48dp</dimen>
+
+    <!--卡片-->
+    <dimen name="card_content_text_size">14sp</dimen>
+    <dimen name="card_content_text_size_large">16sp</dimen>
+    <dimen name="card_title_text_size">24sp</dimen>
+    <dimen name="card_button_text_size">14sp</dimen>
+    <dimen name="card_space">8dp</dimen>
+    <dimen name="card_contents_space">16dp</dimen>
+
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="text_color_33">#ff333333</color>
+    <color name="text_color_66">#ff666666</color>
+    <color name="text_color_89">#ff898989</color>
+    <color name="text_color_b5">#ffb5b5b5</color>
+
+    <color name="color_f2">#fff2f2f2</color>
+    <color name="color_33">#ff333333</color>
+    <color name="color_d1">#ffd1d1d1</color>
+    <color name="color_72">#FF727272</color>
+    <color name="color_66">#ff666666</color>
+    <color name="color_b7">#00B722</color>
+    <color name="color_99">#999999</color>
+    <color name="color_cc">#cccccc</color>
+    <color name="color_ff">#ffffffff</color>
+    <color name="color_f0">#ffff0000</color>
+    <color name="color_ed">#ededed</color>
+    <color name="divider">#eeeeee</color>
+    <color name="divider_small">#e7e7e7</color>
+    <color name="dialog_page_background">#80000000</color>
+    <color name="nav_bg">#f6f6f6</color>
+    <color name="orange_text">#ff8800</color>
+    <color name="gray">#ffcccccc</color>
+    <color name="gray_semitransparent">#cccccccc</color>
+    <color name="light_gray">#ffeeeeee</color>
+    <color name="light_gray1">#ffe0e0e0</color>
+    <color name="light_gray2">#fff2f2f2</color>
+    <color name="light_gray3">#ffe2e2e2</color>
+    <color name="light_gray4">#ffcecece</color>
+    <color name="light_gray5">#ffb5b5b5</color>
+    <color name="light_gray6">#ff959595</color>
+    <color name="light_gray_floating">#dcdcdc</color>
+    <color name="light_gray7">#ffd3d3d3</color>
+    <color name="light_gray8">#ffcdc9c4</color>
+    <color name="light_gray_semitransparent">#cceeeeee</color>
+    <color name="black_overlay">#60000000</color>
+    <color name="dark_gray">#ff999999</color>
+    <color name="dark_yellow">#ffb71c</color>
+</resources>

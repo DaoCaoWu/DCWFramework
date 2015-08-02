@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StateView">
+        <attr name="StateView_svState">
+
+            <!-- The state is to show the content -->
+            <enum name="content" value="0x00" />
+            <!-- The state is to show loading indication -->
+            <enum name="loading" value="0x01" />
+            <!-- The state is to show loading indication -->
+            <enum name="error_network" value="0x02" />
+            <!-- The state is to show loading indication -->
+            <enum name="error_unknown" value="0x03" />
+            <!-- The state is to show empty view -->
+            <enum name="empty" value="0x04" />
+        </attr>
+
+        <attr name="StateView_svLoadingLayout" format="reference" />
+        <attr name="StateView_svErrorUnknownLayout" format="reference" />
+        <attr name="StateView_svErrorNetworkLayout" format="reference" />
+        <attr name="StateView_svEmptyLayout" format="reference"/>
+
+        <attr name="StateView_svErrorTitleUnknownStringId" format="string" />
+        <attr name="svErrorTitleNetworkStringId" format="string" />
+        <attr name="StateView_svErrorTapToRetryStringId" format="string" />
+    </declare-styleable>
+</resources>

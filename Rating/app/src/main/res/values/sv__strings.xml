@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_title_network">网络错误</string>
+    <string name="error_title_unknown">加载失败,请检查网络</string>
+    <string name="tap_to_retry">点击重试</string>
+    <string name="empty_title">Title</string>
+    <string name="empty_sub_title">SubTitle</string>
+    <string name="empty_button">Refresh</string>
+</resources>

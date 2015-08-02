@@ -1,8 +1,66 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">#673AB7</item>
+        <item name="colorPrimaryDark">#512DA8</item>
+        <item name="colorAccent">#FF4081</item>
+    </style>
+
+    <style name="Icon" parent="@android:style/Theme">
+        <!--<item name="cornerRadius">2dp</item>-->
+    </style>
+
+    <style name="Icon.Small" parent="Icon">
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_width">36dp</item>
+    </style>
+
+    <style name="Icon.Big" parent="Icon">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">60dp</item>
+    </style>
+
+    <style name="Icon.Middle" parent="Icon">
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">45dp</item>
+    </style>
+
+    <style name="ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:divider">@color/divider_small</item>
+        <item name="android:dividerHeight">1px</item>
+        <item name="android:listSelector">@drawable/list_item_selector</item>
+    </style>
+
+    <style name="top_bar_title_center">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:textColor">@color/color_33</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">48dip</item>
+        <item name="android:layout_marginRight">48dip</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textSize">@dimen/text_large_size_20</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="top_bar_btn_comm_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:textColor">@color/top_bar_right_btn_text_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_content_size_14</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:layout_alignParentRight">true</item>
     </style>
 
 </resources>
