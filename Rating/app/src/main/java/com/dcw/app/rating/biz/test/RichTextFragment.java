@@ -1,30 +1,32 @@
 package com.dcw.app.rating.biz.test;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
+import com.dcw.app.rating.biz.test.model.Contributor;
+import com.dcw.app.rating.biz.test.model.Reviews;
+import com.dcw.app.rating.biz.test.module.GithubModule;
+import com.dcw.app.rating.net.api.GitHub;
+import com.dcw.app.rating.net.loader.RequestCallback;
+import com.dcw.app.rating.net.loader.RetrofitLoader;
+import com.dcw.app.rating.net.loader.RetrofitLoaderManager;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
-import com.dcw.app.rating.util.TaskExecutor;
 import com.dcw.framework.util.LinkTouchMovementMethod;
 import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-
-import retrofit.RestAdapter;
-import retrofit.http.GET;
 
 @InjectLayout(R.layout.fragment_rich_text)
-public class RichTextFragment extends BaseFragmentWrapper {
+public class RichTextFragment extends BaseFragmentWrapper implements RequestCallback<Contributor> {
     private static final String TAG = "RichTextFragment";
 
     @InjectView(value = R.id.tv_content, listeners = View.OnClickListener.class)
@@ -36,6 +38,8 @@ public class RichTextFragment extends BaseFragmentWrapper {
     @InjectView(R.id.toolbar)
     private Toolbar mToolbar;
 
+    GitHub gitHubService;
+
     @Override
     public Class getHostActivity() {
         return MainActivity.class;
@@ -43,12 +47,14 @@ public class RichTextFragment extends BaseFragmentWrapper {
 
     @Override
     public void initData() {
-
+        gitHubService = GithubModule.buildGitHubRestClient();
+        ContributorLoader loader = new ContributorLoader(getActivity(), gitHubService);
+        RetrofitLoaderManager.init(getLoaderManager(), ContributorLoader.class.hashCode(), loader, this);
     }
 
     @Override
     public void initUI() {
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         mToolbar.setTitle("RichTextFragment");
         String text = "文本点击事件测试:\n1.给新文本添加部分点击\n谷歌\n2.给整个新文本添加点击\n百度网址\n";
         int start = text.length() + 3;
@@ -68,44 +74,7 @@ public class RichTextFragment extends BaseFragmentWrapper {
         }, "www.baidu.com").append("\n3.给已存在文本添加点击\n").appendTouchableEdge(start, end, new TouchableSpan.OnClickListener() {
             @Override
             public void onClick(String content) {
-//                    String a = "a[好的][好的][好叫][好的][好叫][好叫][好叫][好叫][好叫][好]";
-//                    Pattern p = Pattern.compile("\\[[\u4e00-\u9fa5]+\\]");
-//                    int b = 0;
-//                    Matcher m = p.matcher(a);
-//                    while (m.find()) {
-//                        b++;
-//                    }
-//
-//                    Toast.makeText(getActivity(), content + b, 0).show();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Create a very simple REST adapter which points the GitHub API endpoint.
-                        RestAdapter restAdapter = new RestAdapter.Builder()
-                                .setEndpoint(API_URL)
-                                .build();
-
-                        // Create an instance of our GitHub API interface.
-                        GitHub github = restAdapter.create(GitHub.class);
-
-                        // Fetch and print a list of the contributors to this library.
-                        Contributor contributors = github.contributors();
-                        StringBuffer sb = new StringBuffer();
-                        for (Reviews review : contributors.reviews) {
-//                                sb.append(contributors.status).append("(").append(contributors.count).append(")");
-                            sb.append(review.reviewId).append("(").append(review.textExcerpt).append(")");
-                        }
-                        final CharSequence cs = sb.toString();
-                        TaskExecutor.runTaskOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mTVResult.setText(cs);
-                                System.out.println(cs);
-                            }
-                        });
-                    }
-                }).start();
-
+                getLoaderManager().getLoader(ContributorLoader.class.hashCode()).startLoading();
             }
         }, "已存在文本").build();
         mTVContent.setText(sp);
@@ -117,24 +86,35 @@ public class RichTextFragment extends BaseFragmentWrapper {
 
     }
 
-    private static final String API_URL = "http://api.dianping.com";
-
-    static class Contributor {
-        String status;
-        int count;
-        List<Reviews> reviews;
+    @Override
+    public void onFailure(Exception ex) {
+        Toast.makeText(getActivity(), "Error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    static class Reviews {
-        @SerializedName("review_id")
-        long reviewId;
-        @SerializedName("text_excerpt")
-        String textExcerpt;
+    @Override
+    public void onSuccess(Contributor contributors) {
+        Log.d("ContributorLoader", "onSuccess");
+        StringBuffer sb = new StringBuffer();
+        for (Reviews review : contributors.reviews) {
+//                                sb.append(contributors.status).append("(").append(contributors.count).append(")");
+            sb.append(review.reviewId).append("(").append(review.textExcerpt).append(")");
+        }
+        final CharSequence cs = sb.toString();
+        mTVResult.setText(cs);
+        System.out.println(cs);
     }
 
-    interface GitHub {
-        @GET("/v1/review/get_recent_reviews?appkey=80855985&sign=D68211CE7C912A80237F874B3979B1B56CAFC9BF&business_id=6110204")
-        Contributor contributors();
+    static class ContributorLoader extends RetrofitLoader<Contributor, GitHub> {
+
+        public ContributorLoader(Context context, GitHub service) {
+            super(context, service);
+        }
+
+        @Override
+        public Contributor call(GitHub service) {
+            Log.d("IssuesLoader", "call");
+            return service.getContributors();
+        }
     }
 
 }

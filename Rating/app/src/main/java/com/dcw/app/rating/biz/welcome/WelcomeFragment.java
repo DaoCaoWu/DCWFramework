@@ -37,8 +37,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
                 startFragment(HomeFragment.class);
-//                getActivity().getSupportFragmentManager().beginTransaction().remove(WelcomeFragment.this).commitAllowingStateLoss();
             }
-        }, 1000);
+        }, 1500);
     }
 }
