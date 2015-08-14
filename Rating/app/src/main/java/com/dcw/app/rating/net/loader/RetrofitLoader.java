@@ -2,60 +2,56 @@ package com.dcw.app.rating.net.loader;
 
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 
-public abstract class RetrofitLoader<D, R> extends AsyncTaskLoader<Response<D>> {
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+public abstract class RetrofitLoader<D, R> extends Loader<RetrofitResponse<D>> {
 
     private final R mService;
 
-    private Response<D> mCachedResponse;
+    private RetrofitResponse<D> mCachedResponse;
 
     public RetrofitLoader(Context context, R service) {
-
         super(context);
-
         mService = service;
     }
 
     @Override
-    public Response<D> loadInBackground() {
+    protected void onStartLoading() {
+        super.onStartLoading();
+        call(mService, new Callback<D>() {
+            @Override
+            public void success(D d, Response response) {
+                mCachedResponse = new RetrofitResponse<D>();
+                mCachedResponse.setIsSuccess(true);
+                mCachedResponse.setResult(d);
+                mCachedResponse.setResponse(response);
+                deliverResult(mCachedResponse);
+            }
 
-        try {
-
-            final D data = call(mService);
-            mCachedResponse = Response.ok(data);
-
-        } catch (Exception ex) {
-
-            mCachedResponse = Response.error(ex);
-        }
-
-        return mCachedResponse;
+            @Override
+            public void failure(RetrofitError error) {
+                mCachedResponse = new RetrofitResponse<D>();
+                mCachedResponse.setIsSuccess(false);
+                mCachedResponse.setError(error);
+                deliverResult(mCachedResponse);
+            }
+        });
     }
 
     @Override
-    protected void onStartLoading() {
-
-        super.onStartLoading();
-
-        if (mCachedResponse != null) {
-
-            deliverResult(mCachedResponse);
-        }
-
-        if (takeContentChanged() || mCachedResponse == null) {
-
-            forceLoad();
-        }
+    protected void onForceLoad() {
+        super.onForceLoad();
     }
 
     @Override
     protected void onReset() {
-
         super.onReset();
-
         mCachedResponse = null;
     }
 
-    public abstract D call(R service);
+    public abstract void call(R service, Callback<D> callback);
 }

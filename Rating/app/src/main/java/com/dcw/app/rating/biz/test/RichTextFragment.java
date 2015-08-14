@@ -15,7 +15,6 @@ import com.dcw.app.rating.biz.test.model.Contributor;
 import com.dcw.app.rating.biz.test.model.Reviews;
 import com.dcw.app.rating.biz.test.module.GithubModule;
 import com.dcw.app.rating.net.api.GitHub;
-import com.dcw.app.rating.net.loader.RequestCallback;
 import com.dcw.app.rating.net.loader.RetrofitLoader;
 import com.dcw.app.rating.net.loader.RetrofitLoaderManager;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
@@ -25,8 +24,12 @@ import com.dcw.framework.util.TouchableSpan;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 @InjectLayout(R.layout.fragment_rich_text)
-public class RichTextFragment extends BaseFragmentWrapper implements RequestCallback<Contributor> {
+public class RichTextFragment extends BaseFragmentWrapper implements Callback<Contributor> {
     private static final String TAG = "RichTextFragment";
 
     @InjectView(value = R.id.tv_content, listeners = View.OnClickListener.class)
@@ -48,8 +51,7 @@ public class RichTextFragment extends BaseFragmentWrapper implements RequestCall
     @Override
     public void initData() {
         gitHubService = GithubModule.buildGitHubRestClient();
-        ContributorLoader loader = new ContributorLoader(getActivity(), gitHubService);
-        RetrofitLoaderManager.init(getLoaderManager(), ContributorLoader.class.hashCode(), loader, this);
+        RetrofitLoaderManager.initLoader(this, new ContributorLoader(getActivity(), gitHubService), this);
     }
 
     @Override
@@ -87,12 +89,13 @@ public class RichTextFragment extends BaseFragmentWrapper implements RequestCall
     }
 
     @Override
-    public void onFailure(Exception ex) {
-        Toast.makeText(getActivity(), "Error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+    public void failure(RetrofitError retrofitError) {
+
+        Toast.makeText(getActivity(), "Error: " + retrofitError.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onSuccess(Contributor contributors) {
+    public void success(Contributor contributors, Response response) {
         Log.d("ContributorLoader", "onSuccess");
         StringBuffer sb = new StringBuffer();
         for (Reviews review : contributors.reviews) {
@@ -104,16 +107,16 @@ public class RichTextFragment extends BaseFragmentWrapper implements RequestCall
         System.out.println(cs);
     }
 
-    static class ContributorLoader extends RetrofitLoader<Contributor, GitHub> {
+    class ContributorLoader extends RetrofitLoader<Contributor, GitHub> {
 
         public ContributorLoader(Context context, GitHub service) {
             super(context, service);
         }
 
         @Override
-        public Contributor call(GitHub service) {
-            Log.d("IssuesLoader", "call");
-            return service.getContributors();
+        public void call(GitHub service, Callback<Contributor> callback) {
+            Log.d(this.getClass().getSimpleName(), "call");
+            service.getContributors(callback);
         }
     }
 
