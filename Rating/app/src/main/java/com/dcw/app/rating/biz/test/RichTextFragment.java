@@ -38,8 +38,8 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
     @InjectView(R.id.tv_result)
     private TextView mTVResult;
 
-    @InjectView(R.id.toolbar)
-    private Toolbar mToolbar;
+//    @InjectView(R.id.toolbar)
+//    private Toolbar mToolbar;
 
     GitHub gitHubService;
 
@@ -56,8 +56,8 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
 
     @Override
     public void initUI() {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-        mToolbar.setTitle("RichTextFragment");
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        setTitle("RichTextFragment");
         String text = "文本点击事件测试:\n1.给新文本添加部分点击\n谷歌\n2.给整个新文本添加点击\n百度网址\n";
         int start = text.length() + 3;
         int end = start + 5;
@@ -107,7 +107,7 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
         System.out.println(cs);
     }
 
-    class ContributorLoader extends RetrofitLoader<Contributor, GitHub> {
+    static class ContributorLoader extends RetrofitLoader<Contributor, GitHub> {
 
         public ContributorLoader(Context context, GitHub service) {
             super(context, service);

@@ -51,6 +51,6 @@
         fresco:roundWithOverlayColor="#333333"
         fresco:roundingBorderWidth="10dp"
         fresco:roundingBorderColor="#33CC5B"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
 </LinearLayout>
