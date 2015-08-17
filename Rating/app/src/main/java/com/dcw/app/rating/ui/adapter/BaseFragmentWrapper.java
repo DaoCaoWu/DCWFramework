@@ -16,8 +16,10 @@ import com.dcw.app.rating.util.Util;
 import com.dcw.framework.pac.ui.BaseFragment;
 import com.dcw.framework.view.DCWAnnotation;
 
+import java.lang.reflect.Constructor;
 
-public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate {
+
+public abstract class BaseFragmentWrapper<TB extends AbsToolbar> extends BaseFragment implements ICreateTemplate {
 
     private boolean mIsDestroy;
     protected View mRootView;
@@ -31,6 +33,10 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
     }
 
     public abstract Class getHostActivity();
+
+    public Class getToolbar() throws NoSuchMethodException {
+        return NavigationBar.class;
+    }
 
     public void setTitle(CharSequence title) {
         mTitle = title;
@@ -91,19 +97,26 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
         if (mRootView == null) {
             throw new NullPointerException("mRootView is null, This is called after inflated view ");
         }
-        mToolBar = new NavigationBar((AppCompatActivity) getActivity());
-        mToolBar.setTitle(mTitle);
-        mToolBar.setToolBarActionListener(new INavigationBarAction() {
-            @Override
-            public void onRightAction() {
-                onRightBtnClicked();
-            }
+        try {
+            Class<TB> toolbarClass = getToolbar();
+            Constructor<TB> constructor = toolbarClass.getConstructor(AppCompatActivity.class);
+            mToolBar = constructor.newInstance((AppCompatActivity) getActivity());
+            mToolBar.setTitle(mTitle);
+            mToolBar.setToolBarActionListener(new INavigationBarAction() {
+                @Override
+                public void onRightAction() {
+                    onRightBtnClicked();
+                }
 
-            @Override
-            public void onBack() {
-                onBackPressed();
-            }
-        });
+                @Override
+                public void onBack() {
+                    onBackPressed();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void onRightBtnClicked() {
