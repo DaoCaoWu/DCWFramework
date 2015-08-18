@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Rating</string>
+    <string name="author">\@Copyright DaoCaoRen</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="operate_fail">Operate Fail</string>
