@@ -1,13 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".biz.MainActivity">
-    <item android:id="@+id/action_search"
-        android:title="@string/search"
+    tools:context=".biz.home.HomeFragment">
+    <item
+        android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/search"
         app:showAsAction="always" />
-    <item android:id="@+id/action_more"
-        android:title="@string/more"
+    <item
+        android:id="@+id/action_more"
         android:icon="@android:drawable/ic_menu_more"
+        android:title="@string/more"
         app:showAsAction="ifRoom" />
 </menu>

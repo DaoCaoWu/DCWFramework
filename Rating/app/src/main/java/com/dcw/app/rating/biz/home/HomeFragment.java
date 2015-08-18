@@ -1,8 +1,8 @@
 package com.dcw.app.rating.biz.home;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +21,12 @@ import com.dcw.framework.view.annotation.InjectLayout;
 public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        getActivity().supportInvalidateOptionsMenu();
+    }
+
+    @Override
     public Class getHostActivity() {
         return MainActivity.class;
     }
@@ -28,6 +34,11 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
     @Override
     public Class getToolbar() {
         return DrawerToolbar.class;
+    }
+
+    @Override
+    public int getMenuResId() {
+        return R.menu.menu_home;
     }
 
     @Override
@@ -42,7 +53,6 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
 
     @Override
     public void initListeners() {
-
     }
 
     @Override
@@ -50,7 +60,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
 //        mToolBar = new DrawerToolbar((AppCompatActivity)getActivity());
 //        mToolBar.setTitle(mTitle);
         super.initToolbar();
-        mToolBar.getToolbar().setNavigationIcon(R.mipmap.ic_launcher);
+//        mToolBar.getToolbar().setNavigationIcon(R.mipmap.ic_launcher);
         mToolBar.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -97,7 +107,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
             default:
                 fragmentClass = SearchFragment.class;
         }
-        ((DrawerToolbar)mToolBar).toggle();
+        ((DrawerToolbar) mToolBar).toggle();
         // Insert the fragment by replacing any existing fragment
         startFragment(fragmentClass);
     }
@@ -105,5 +115,4 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
     @Override
     public void onClick(View view) {
     }
-
 }

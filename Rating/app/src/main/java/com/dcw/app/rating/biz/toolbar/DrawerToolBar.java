@@ -3,7 +3,9 @@ package com.dcw.app.rating.biz.toolbar;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,11 +28,7 @@ public class DrawerToolbar extends AbsToolbar {
 
     @Override
     protected void initToolbar() {
-        if (mActivity == null) {
-            return;
-        }
-        mToolbar = (Toolbar) mActivity.findViewById(R.id.toolbar);
-        mToolbar.inflateMenu(R.menu.menu_home);
+        super.initToolbar();
         mDrawer = (DrawerLayout) mActivity.findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) mActivity.findViewById(R.id.navigation_view);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -40,6 +38,7 @@ public class DrawerToolbar extends AbsToolbar {
             }
         });
         mDrawerToggle = setupDrawerToggle();
+        mDrawerToggle.syncState();
         mDrawer.setDrawerListener(mDrawerToggle);
     }
 

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,6 +40,10 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolbar> extends BaseFra
         return NavigationBar.class;
     }
 
+    public int getMenuResId() {
+        return R.menu.menu_main;
+    }
+
     public void setTitle(CharSequence title) {
         mTitle = title;
     }
@@ -46,6 +52,7 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolbar> extends BaseFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mIsDestroy = false;
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -117,6 +124,39 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolbar> extends BaseFra
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(getMenuResId(), menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void updateOptionMenu() {
+        if (mToolBar != null && mToolBar.getToolbar() != null && mToolBar.getToolbar().getMenu() != null) {
+            mToolBar.getToolbar().getMenu().clear();
+            getActivity().getMenuInflater().inflate(getMenuResId(), mToolBar.getToolbar().getMenu());
+            getActivity().supportInvalidateOptionsMenu();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateOptionMenu();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            updateOptionMenu();
+        }
+    }
+
+    @Override
+    public void onResult(Bundle bundle) {
+        super.onResult(bundle);
     }
 
     public void onRightBtnClicked() {
