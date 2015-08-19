@@ -14,13 +14,13 @@ import com.nineoldandroids.animation.ValueAnimator;
 /**
  * Created by adao12 on 2015/8/16.
  */
-public abstract class AbsToolbar {
+public abstract class AbsToolBar {
 
     protected Toolbar mToolbar;
     protected AppCompatActivity mActivity;
     protected IMenuAction mToolBarActionListener;
 
-    public AbsToolbar(AppCompatActivity activity) {
+    public AbsToolBar(AppCompatActivity activity) {
         mActivity = activity;
         initToolbar();
     }

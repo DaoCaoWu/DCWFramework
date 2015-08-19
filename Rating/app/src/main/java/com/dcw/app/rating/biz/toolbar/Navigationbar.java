@@ -9,9 +9,9 @@ import com.dcw.app.rating.R;
 /**
  * Created by adao12 on 2015/8/17.
  */
-public class NavigationBar extends AbsToolbar {
+public class Navigationbar extends AbsToolBar {
 
-    public NavigationBar(AppCompatActivity activity) {
+    public Navigationbar(AppCompatActivity activity) {
         super(activity);
     }
 

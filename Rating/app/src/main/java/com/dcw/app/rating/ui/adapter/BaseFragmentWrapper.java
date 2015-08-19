@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.toolbar.AbsToolbar;
+import com.dcw.app.rating.biz.toolbar.AbsToolBar;
 import com.dcw.app.rating.biz.toolbar.INavigationBarAction;
-import com.dcw.app.rating.biz.toolbar.NavigationBar;
+import com.dcw.app.rating.biz.toolbar.Navigationbar;
 import com.dcw.app.rating.config.BundleConstant;
 import com.dcw.app.rating.util.Util;
 import com.dcw.framework.pac.ui.BaseFragment;
@@ -21,11 +21,11 @@ import com.dcw.framework.view.DCWAnnotation;
 import java.lang.reflect.Constructor;
 
 
-public abstract class BaseFragmentWrapper<TB extends AbsToolbar> extends BaseFragment implements ICreateTemplate {
+public abstract class BaseFragmentWrapper<TB extends AbsToolBar> extends BaseFragment implements ICreateTemplate {
 
     private boolean mIsDestroy;
     protected View mRootView;
-    protected AbsToolbar mToolBar;
+    protected AbsToolBar mToolBar;
     protected CharSequence mTitle;
 
     public BaseFragmentWrapper() {
@@ -37,7 +37,7 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolbar> extends BaseFra
     public abstract Class getHostActivity();
 
     public Class getToolbar() throws NoSuchMethodException {
-        return NavigationBar.class;
+        return Navigationbar.class;
     }
 
     public int getMenuResId() {

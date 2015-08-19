@@ -3,12 +3,9 @@ package com.dcw.app.rating.biz.toolbar;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.dcw.app.rating.R;
@@ -16,13 +13,13 @@ import com.dcw.app.rating.R;
 /**
  * Created by adao12 on 2015/8/16.
  */
-public class DrawerToolbar extends AbsToolbar {
+public class DrawerToolBar extends AbsToolBar {
 
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    public DrawerToolbar(AppCompatActivity activity) {
+    public DrawerToolBar(AppCompatActivity activity) {
         super(activity);
     }
 

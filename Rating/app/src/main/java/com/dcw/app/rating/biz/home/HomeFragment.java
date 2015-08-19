@@ -13,12 +13,12 @@ import com.dcw.app.rating.biz.search.SearchFragment;
 import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.test.StateViewFragment;
-import com.dcw.app.rating.biz.toolbar.DrawerToolbar;
+import com.dcw.app.rating.biz.toolbar.DrawerToolBar;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 @InjectLayout(R.layout.fragment_home)
-public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
+public class HomeFragment extends BaseFragmentWrapper<DrawerToolBar> {
 
     @Override
     public void onAttach(Activity activity) {
@@ -33,7 +33,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
 
     @Override
     public Class getToolbar() {
-        return DrawerToolbar.class;
+        return DrawerToolBar.class;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
                 return false;
             }
         });
-        ((DrawerToolbar) mToolBar).setNavigationItemSelectedListener(
+        ((DrawerToolBar) mToolBar).setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -85,7 +85,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        ((DrawerToolbar) mToolBar).onConfigurationChanged(newConfig);
+        ((DrawerToolBar) mToolBar).onConfigurationChanged(newConfig);
 
     }
 
@@ -107,7 +107,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolbar> {
             default:
                 fragmentClass = SearchFragment.class;
         }
-        ((DrawerToolbar) mToolBar).toggle();
+        ((DrawerToolBar) mToolBar).toggle();
         // Insert the fragment by replacing any existing fragment
         startFragment(fragmentClass);
     }
