@@ -12,14 +12,14 @@ import com.dcw.app.rating.biz.account.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.app.rating.ui.mvc.Controller;
 
-public class ToolbarController extends Controller<Navigation, ToolbarModel> implements IBackAction, Toolbar.OnMenuItemClickListener {
+public class ToolbarController extends Controller<NavigationBar, ToolbarModel> implements IBackAction, Toolbar.OnMenuItemClickListener {
 
     BaseFragmentWrapper mFragment;
     IBackAction mOnNavigationOnClickListener;
     OnInitToolbarListener mOnInitToolbarListener;
     Toolbar.OnMenuItemClickListener mOnMenuItemClickListener;
 
-    public ToolbarController(Navigation view, ToolbarModel model) {
+    public ToolbarController(NavigationBar view, ToolbarModel model) {
         super(view, model);
         getView().setViewListener(this);
         getModel().addObserver(getView());

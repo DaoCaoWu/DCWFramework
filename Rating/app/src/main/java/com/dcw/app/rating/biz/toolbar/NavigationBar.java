@@ -9,19 +9,19 @@ import com.dcw.app.rating.biz.account.ToolbarModel;
 import com.dcw.app.rating.ui.mvc.View;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 
-public class Navigation extends Toolbar implements View<IBackAction> {
+public class NavigationBar extends Toolbar implements View<IBackAction> {
 
     public IBackAction mListener;
 
-    public Navigation(Context context) {
+    public NavigationBar(Context context) {
         super(context, null);
     }
 
-    public Navigation(Context context, AttributeSet attrs) {
+    public NavigationBar(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public Navigation(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NavigationBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.dcw.app.rating.biz.toolbar.Navigation
+    <com.dcw.app.rating.biz.toolbar.NavigationBar
         android:id="@+id/toolbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
