@@ -5,24 +5,11 @@ import com.dcw.app.rating.ui.mvc.core.Observable;
 /**
  * Created by adao12 on 2015/10/17.
  */
-public class ViewController<V extends View, M extends Observable> {
-
-    private V mView;
-
-    private M mModel;
+public class ViewController<V extends View, M extends Observable> extends Controller<V, M> {
 
     public ViewController(V view, M model) {
-        mView = view;
-        mModel = model;
+        super(view, model);
         registerObserver();
-    }
-
-    public V getView() {
-        return mView;
-    }
-
-    public M getModel() {
-        return mModel;
     }
 
     public void registerObserver() {

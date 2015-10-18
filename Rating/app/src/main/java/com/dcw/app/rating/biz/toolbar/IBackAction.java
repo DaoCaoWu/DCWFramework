@@ -5,5 +5,5 @@ package com.dcw.app.rating.biz.toolbar;
  */
 public interface IBackAction extends IMenuAction {
 
-    void onBack();
+    void onNavigationOnClicked();
 }

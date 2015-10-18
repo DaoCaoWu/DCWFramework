@@ -57,7 +57,7 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
     @Override
     public void initUI() {
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-        setTitle("RichTextFragment");
+//        setTitle("RichTextFragment");
         String text = "文本点击事件测试:\n1.给新文本添加部分点击\n谷歌\n2.给整个新文本添加点击\n百度网址\n";
         int start = text.length() + 3;
         int end = start + 5;

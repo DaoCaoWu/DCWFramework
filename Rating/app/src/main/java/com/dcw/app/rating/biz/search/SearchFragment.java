@@ -17,22 +17,22 @@ import com.dcw.framework.view.annotation.InjectLayout;
  * Created by adao12 on 2015/8/16.
  */
 @InjectLayout(R.layout.fragment_search)
-public class SearchFragment extends BaseFragmentWrapper<SearchToolbar> {
+public class SearchFragment extends BaseFragmentWrapper {
 
     @Override
     public Class getHostActivity() {
         return MainActivity.class;
     }
 
-    @Override
-    public Class getToolbar() {
-        return SearchToolbar.class;
-    }
-
-    @Override
-    public int getMenuResId() {
-        return R.menu.menu_search;
-    }
+//    @Override
+//    public Class getToolbar() {
+//        return SearchToolbar.class;
+//    }
+//
+//    @Override
+//    public int getMenuResId() {
+//        return R.menu.menu_search;
+//    }
 
     @Override
     public void initData() {
@@ -64,9 +64,9 @@ public class SearchFragment extends BaseFragmentWrapper<SearchToolbar> {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                if (mToolBar.getToolBarActionListener() instanceof INavigationBarAction) {
-                    ((INavigationBarAction) mToolBar.getToolBarActionListener()).onBack();
-                }
+//                if (mToolBar.getToolBarActionListener() instanceof INavigationBarAction) {
+//                    ((INavigationBarAction) mToolBar.getToolBarActionListener()).onNavigationOnClicked();
+//                }
                 return true;
             }
         });

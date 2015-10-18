@@ -18,7 +18,7 @@ import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 @InjectLayout(R.layout.fragment_home)
-public class HomeFragment extends BaseFragmentWrapper<DrawerToolBar> {
+public class HomeFragment extends BaseFragmentWrapper {
 
     @Override
     public void onAttach(Activity activity) {
@@ -31,15 +31,15 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolBar> {
         return MainActivity.class;
     }
 
-    @Override
-    public Class getToolbar() {
-        return DrawerToolBar.class;
-    }
-
-    @Override
-    public int getMenuResId() {
-        return R.menu.menu_home;
-    }
+//    @Override
+//    public Class getToolbar() {
+//        return DrawerToolBar.class;
+//    }
+//
+//    @Override
+//    public int getMenuResId() {
+//        return R.menu.menu_home;
+//    }
 
     @Override
     public void initData() {
@@ -48,44 +48,44 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolBar> {
 
     @Override
     public void initUI() {
-        setTitle("Home");
+//        setTitle("Home");
     }
 
     @Override
     public void initListeners() {
     }
 
-    @Override
-    protected void initToolbar() {
-//        mToolBar = new DrawerToolbar((AppCompatActivity)getActivity());
-//        mToolBar.setTitle(mTitle);
-        super.initToolbar();
-//        mToolBar.getToolbar().setNavigationIcon(R.mipmap.ic_launcher);
-        mToolBar.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_search:
-                        startFragment(SearchFragment.class);
-                        break;
-                }
-                return false;
-            }
-        });
-        ((DrawerToolBar) mToolBar).setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
+//    @Override
+//    protected void initToolbar() {
+////        mToolBar = new DrawerToolbar((AppCompatActivity)getActivity());
+////        mToolBar.setTitle(mTitle);
+//        super.initToolbar();
+////        mToolBar.getToolbar().setNavigationIcon(R.mipmap.ic_launcher);
+//        mToolBar.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.action_search:
+//                        startFragment(SearchFragment.class);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+//        ((DrawerToolBar) mToolBar).setNavigationItemSelectedListener(
+//                new NavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        selectDrawerItem(menuItem);
+//                        return true;
+//                    }
+//                });
+//    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        ((DrawerToolBar) mToolBar).onConfigurationChanged(newConfig);
+//        ((DrawerToolBar) mToolBar).onConfigurationChanged(newConfig);
 
     }
 
@@ -107,7 +107,7 @@ public class HomeFragment extends BaseFragmentWrapper<DrawerToolBar> {
             default:
                 fragmentClass = SearchFragment.class;
         }
-        ((DrawerToolBar) mToolBar).toggle();
+//        ((DrawerToolBar) mToolBar).toggle();
         // Insert the fragment by replacing any existing fragment
         startFragment(fragmentClass);
     }

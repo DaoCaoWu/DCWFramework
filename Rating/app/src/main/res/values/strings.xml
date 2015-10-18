@@ -13,6 +13,7 @@
     <string name="account">Account</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
+    <string name="sign_in">Sign In</string>
 
     <string name="dialog_delete_items_title">Delete items</string>
     <string name="dialog_delete_items_confirm">Yes</string>

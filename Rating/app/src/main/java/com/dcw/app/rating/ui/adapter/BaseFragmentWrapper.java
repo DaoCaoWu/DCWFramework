@@ -2,7 +2,6 @@ package com.dcw.app.rating.ui.adapter;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,23 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.toolbar.AbsToolBar;
-import com.dcw.app.rating.biz.toolbar.INavigationBarAction;
-import com.dcw.app.rating.biz.toolbar.Navigationbar;
+import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.config.BundleConstant;
 import com.dcw.app.rating.util.Util;
 import com.dcw.framework.pac.ui.BaseFragment;
 import com.dcw.framework.view.DCWAnnotation;
 
-import java.lang.reflect.Constructor;
 
-
-public abstract class BaseFragmentWrapper<TB extends AbsToolBar> extends BaseFragment implements ICreateTemplate {
+public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate {
 
     private boolean mIsDestroy;
     protected View mRootView;
-    protected AbsToolBar mToolBar;
-    protected CharSequence mTitle;
+    protected ToolbarController mToolbarController;
 
     public BaseFragmentWrapper() {
         super();
@@ -35,18 +29,6 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolBar> extends BaseFra
     }
 
     public abstract Class getHostActivity();
-
-    public Class getToolbar() throws NoSuchMethodException {
-        return Navigationbar.class;
-    }
-
-    public int getMenuResId() {
-        return R.menu.menu_main;
-    }
-
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,14 +56,6 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolBar> extends BaseFra
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mToolBar == null) {
-            initToolbar();
-        }
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mIsDestroy = true;
@@ -100,67 +74,9 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolBar> extends BaseFra
         return fragmentType;
     }
 
-    protected void initToolbar() {
-        if (mRootView == null) {
-            throw new NullPointerException("mRootView is null, This is called after inflated view ");
-        }
-        try {
-            Class<TB> toolbarClass = getToolbar();
-            Constructor<TB> constructor = toolbarClass.getConstructor(AppCompatActivity.class);
-            mToolBar = constructor.newInstance((AppCompatActivity) getActivity());
-            mToolBar.setTitle(mTitle);
-            mToolBar.setToolBarActionListener(new INavigationBarAction() {
-                @Override
-                public void onRightAction() {
-                    onRightBtnClicked();
-                }
-
-                @Override
-                public void onBack() {
-                    onBackPressed();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(getMenuResId(), menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    private void updateOptionMenu() {
-        if (mToolBar != null && mToolBar.getToolbar() != null && mToolBar.getToolbar().getMenu() != null) {
-            mToolBar.getToolbar().getMenu().clear();
-            getActivity().getMenuInflater().inflate(getMenuResId(), mToolBar.getToolbar().getMenu());
-            getActivity().supportInvalidateOptionsMenu();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateOptionMenu();
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            updateOptionMenu();
-        }
-    }
-
     @Override
     public void onResult(Bundle bundle) {
         super.onResult(bundle);
-    }
-
-    public void onRightBtnClicked() {
-
     }
 
     protected <T> T findViewById(int id) {
@@ -176,6 +92,48 @@ public abstract class BaseFragmentWrapper<TB extends AbsToolBar> extends BaseFra
                 Util.hideKeyboard(getActivity(), v.getWindowToken());
             }
         } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (mToolbarController != null) {
+            mToolbarController.attachToFragment(this);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if (mToolbarController != null) {
+            mToolbarController.onCreateOptionsMenu(menu, inflater);
+        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (mToolbarController != null) {
+            mToolbarController.onPrepareOptionsMenu(menu);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mToolbarController != null) {
+            mToolbarController.updateOptionMenu();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (mToolbarController != null) {
+                mToolbarController.updateOptionMenu();
+            }
         }
     }
 }
