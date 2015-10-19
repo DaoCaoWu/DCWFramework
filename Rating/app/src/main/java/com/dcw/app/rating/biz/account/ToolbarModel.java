@@ -18,7 +18,11 @@ public class ToolbarModel extends Observable {
     private MenuItem mBtnRight;
 
     public ToolbarModel(String title) {
-        this(title, 0, false, false);
+        this(title, 0, true, false);
+    }
+
+    public ToolbarModel(String title, boolean showHomeAsUp) {
+        this(title, 0, showHomeAsUp, false);
     }
 
     public ToolbarModel(String title, @MenuRes int menuResId) {

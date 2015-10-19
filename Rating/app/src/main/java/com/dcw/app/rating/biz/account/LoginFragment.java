@@ -23,7 +23,7 @@ public class LoginFragment extends BaseFragmentWrapper {
     @Override
     public void initUI() {
         new LoginController((LoginView) findViewById(R.id.root_view), new UserModel());
-        mToolbarController = new ToolbarController((NavigationBar) findViewById(R.id.toolbar), new ToolbarModel(getString(R.string.sign_in)));
+        mToolbarController = new ToolbarController((NavigationBar) findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName(), false));
     }
 
     @Override
