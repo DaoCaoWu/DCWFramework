@@ -8,29 +8,20 @@ import android.view.MenuItem;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
+import com.dcw.app.rating.biz.account.ToolbarModel;
+import com.dcw.app.rating.biz.toolbar.NavigationBar;
+import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
+import com.dcw.app.rating.ui.adapter.ToastManager;
 import com.dcw.framework.view.annotation.InjectLayout;
 
-/**
- * Created by adao12 on 2015/8/16.
- */
 @InjectLayout(R.layout.fragment_search)
-public class SearchFragment extends BaseFragmentWrapper {
+public class SearchFragment extends BaseFragmentWrapper implements SearchView.OnQueryTextListener {
 
     @Override
     public Class getHostActivity() {
         return MainActivity.class;
     }
-
-//    @Override
-//    public Class getToolbar() {
-//        return SearchToolbar.class;
-//    }
-//
-//    @Override
-//    public int getMenuResId() {
-//        return R.menu.menu_search;
-//    }
 
     @Override
     public void initData() {
@@ -39,7 +30,7 @@ public class SearchFragment extends BaseFragmentWrapper {
 
     @Override
     public void initUI() {
-
+        mToolbarController = new ToolbarController((NavigationBar) findViewById(R.id.toolbar), new ToolbarModel(getString(R.string.search), R.menu.menu_search));
     }
 
     @Override
@@ -50,10 +41,11 @@ public class SearchFragment extends BaseFragmentWrapper {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        mSearchView.setIconifiedByDefault(false);
+        final MenuItem searchItem = menu.findItem(R.id.btn_right);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setIconifiedByDefault(false);
         MenuItemCompat.expandActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
@@ -62,11 +54,20 @@ public class SearchFragment extends BaseFragmentWrapper {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-//                if (mToolBar.getToolBarActionListener() instanceof INavigationBarAction) {
-//                    ((INavigationBarAction) mToolBar.getToolBarActionListener()).onNavigationOnClicked();
-//                }
+                mToolbarController.onNavigationOnClicked(mToolbarController.getView());
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        ToastManager.getInstance().showToast(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
