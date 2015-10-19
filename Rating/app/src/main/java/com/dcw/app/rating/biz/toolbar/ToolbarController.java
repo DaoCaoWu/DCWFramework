@@ -48,8 +48,7 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
             if (mOnInitToolbarListener == null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setDisplayShowHomeEnabled(false);
+                actionBar.setDisplayHomeAsUpEnabled(getModel().isShowHomeAsUp());
             } else {
                 mOnInitToolbarListener.onInitToolbar(getView(), actionBar);
             }

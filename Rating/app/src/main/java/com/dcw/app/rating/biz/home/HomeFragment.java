@@ -8,8 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -67,7 +65,7 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
     public void onInitToolbar(Toolbar toolbar, ActionBar actionBar) {
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
@@ -113,7 +111,8 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
             default:
                 fragmentClass = SearchFragment.class;
         }
-        toggle();
+//        toggle();
+        mDrawerToggle.onOptionsItemSelected(menuItem);
         // Insert the fragment by replacing any existing fragment
         startFragment(fragmentClass);
         return true;
@@ -124,9 +123,8 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        mDrawerToggle.syncState();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
