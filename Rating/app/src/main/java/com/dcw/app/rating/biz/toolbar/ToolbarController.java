@@ -8,19 +8,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.dcw.app.rating.biz.account.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.app.rating.ui.mvc.Controller;
 
-public class ToolbarController extends Controller<NavigationBar, ToolbarModel> implements IBackAction, Toolbar.OnMenuItemClickListener {
+public class ToolbarController extends Controller<NavigationBar, ToolbarModel> implements NavigationBar.IBackAction, Toolbar.OnMenuItemClickListener {
 
     BaseFragmentWrapper mFragment;
-    IBackAction mOnNavigationOnClickListener;
+    NavigationBar.IBackAction mOnNavigationOnClickListener;
     OnInitToolbarListener mOnInitToolbarListener;
     Toolbar.OnMenuItemClickListener mOnMenuItemClickListener;
 
-    public ToolbarController(NavigationBar view, ToolbarModel model) {
-        super(view, model);
+    public ToolbarController(Object view, ToolbarModel model) {
+        super((NavigationBar) view, model);
         getView().setViewListener(this);
         getModel().addObserver(getView());
     }
@@ -29,7 +28,7 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
         mOnMenuItemClickListener = onMenuItemClickListener;
     }
 
-    public void setOnNavigationOnClickListener(IBackAction onNavigationOnClickListener) {
+    public void setOnNavigationOnClickListener(NavigationBar.IBackAction onNavigationOnClickListener) {
         mOnNavigationOnClickListener = onNavigationOnClickListener;
     }
 

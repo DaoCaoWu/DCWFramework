@@ -9,8 +9,7 @@ import android.widget.ListView;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.app.RatingApplication;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.account.ToolbarModel;
-import com.dcw.app.rating.biz.toolbar.NavigationBar;
+import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.db.bean.Cache;
 import com.dcw.app.rating.db.dao.CacheDao;
@@ -77,7 +76,7 @@ public class AbsListFragment extends BaseFragmentWrapper {
 
     @Override
     public void initUI() {
-        mToolbarController = new ToolbarController((NavigationBar)findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName(), 0, true, true));
+        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName(), 0, true));
     }
 
     @Override

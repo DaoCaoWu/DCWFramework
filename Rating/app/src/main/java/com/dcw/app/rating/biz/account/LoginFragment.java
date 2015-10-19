@@ -2,8 +2,8 @@ package com.dcw.app.rating.biz.account;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.toolbar.NavigationBar;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
+import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
@@ -23,7 +23,7 @@ public class LoginFragment extends BaseFragmentWrapper {
     @Override
     public void initUI() {
         new LoginController((LoginView) findViewById(R.id.root_view), new UserModel());
-        mToolbarController = new ToolbarController((NavigationBar) findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName(), false));
+        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName(), false));
     }
 
     @Override

@@ -13,13 +13,12 @@ import android.view.View;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.account.ToolbarModel;
+import com.dcw.app.rating.biz.toolbar.NavigationBar;
+import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.biz.search.SearchFragment;
 import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.test.StateViewFragment;
-import com.dcw.app.rating.biz.toolbar.IBackAction;
-import com.dcw.app.rating.biz.toolbar.NavigationBar;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
@@ -27,7 +26,7 @@ import com.dcw.framework.view.annotation.InjectView;
 
 @InjectLayout(R.layout.fragment_home)
 public class HomeFragment extends BaseFragmentWrapper implements ToolbarController.OnInitToolbarListener
-        , Toolbar.OnMenuItemClickListener, IBackAction, NavigationView.OnNavigationItemSelectedListener {
+        , Toolbar.OnMenuItemClickListener, NavigationBar.IBackAction, NavigationView.OnNavigationItemSelectedListener {
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
@@ -50,8 +49,8 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
 
     @Override
     public void initUI() {
-        ToolbarModel model = new ToolbarModel(getString(R.string.home), R.menu.menu_home, true, true);
-        mToolbarController = new ToolbarController((NavigationBar) findViewById(R.id.toolbar), model);
+        ToolbarModel model = new ToolbarModel(getString(R.string.home), R.menu.menu_home, true);
+        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
         mToolbarController.setOnInitToolbarListener(this);
         mToolbarController.setOnMenuItemClickListener(this);
         mToolbarController.setOnNavigationOnClickListener(this);

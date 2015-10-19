@@ -8,9 +8,6 @@ import com.dcw.app.rating.biz.home.HomeFragment;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
-/**
- * Created by adao12 on 2015/8/4.
- */
 @InjectLayout(R.layout.fragment_welcome)
 public class WelcomeFragment extends BaseFragmentWrapper {
 

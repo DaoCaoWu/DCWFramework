@@ -9,11 +9,10 @@ import android.widget.Toast;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.account.ToolbarModel;
+import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.biz.test.model.Contributor;
 import com.dcw.app.rating.biz.test.model.Reviews;
 import com.dcw.app.rating.biz.test.module.GithubModule;
-import com.dcw.app.rating.biz.toolbar.NavigationBar;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.net.api.GitHub;
 import com.dcw.app.rating.net.loader.RetrofitLoader;
@@ -54,7 +53,7 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
 
     @Override
     public void initUI() {
-        mToolbarController = new ToolbarController((NavigationBar)findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName()));
+        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName()));
         String text = "文本点击事件测试:\n1.给新文本添加部分点击\n谷歌\n2.给整个新文本添加点击\n百度网址\n";
         int start = text.length() + 3;
         int end = start + 5;
