@@ -64,7 +64,7 @@ public abstract class AbsToolBar {
                 @Override
                 public void onClick(View v) {
                     if (mToolBarActionListener != null) {
-                        ((IBackAction) mToolBarActionListener).onNavigationOnClicked();
+                        ((IBackAction) mToolBarActionListener).onNavigationOnClicked(v);
                     }
                 }
             });

@@ -5,6 +5,7 @@ import android.os.Handler;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.account.LoginFragment;
+import com.dcw.app.rating.biz.home.HomeFragment;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
@@ -35,7 +36,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(LoginFragment.class);
+                startFragment(HomeFragment.class);
             }
         }, 1500);
     }

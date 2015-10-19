@@ -48,7 +48,8 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
             if (mOnInitToolbarListener == null) {
-                actionBar.setDisplayHomeAsUpEnabled(getModel().isShowHomeAsUp());
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setDisplayShowHomeEnabled(false);
             } else {
                 mOnInitToolbarListener.onInitToolbar(getView(), actionBar);
             }
@@ -69,7 +70,7 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
         getView().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                onNavigationOnClicked();
+                onNavigationOnClicked(v);
             }
         });
     }
@@ -101,11 +102,11 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
     }
 
     @Override
-    public void onNavigationOnClicked() {
+    public void onNavigationOnClicked(View v) {
         if (mOnNavigationOnClickListener == null)
             mFragment.onBackPressed();
         else
-            mOnNavigationOnClickListener.onNavigationOnClicked();
+            mOnNavigationOnClickListener.onNavigationOnClicked(v);
     }
 
     public interface OnInitToolbarListener {
