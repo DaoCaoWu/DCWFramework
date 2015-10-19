@@ -25,6 +25,34 @@ public abstract class AbsToolBar {
         initToolbar();
     }
 
+    private static void toggleActionBarIcon(ActionDrawableState state, final ActionBarDrawerToggle toggle, boolean animate) {
+        if (animate) {
+            float start = state == ActionDrawableState.BURGER ? 0f : 1.0f;
+            float end = Math.abs(start - 1);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                ValueAnimator offsetAnimator = ValueAnimator.ofFloat(start, end);
+                offsetAnimator.setDuration(300);
+                offsetAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+                offsetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float offset = (Float) animation.getAnimatedValue();
+                        toggle.onDrawerSlide(null, offset);
+                    }
+                });
+                offsetAnimator.start();
+            } else {
+                //do the same with nine-old-androids lib :)
+            }
+        } else {
+            if (state == ActionDrawableState.BURGER) {
+                toggle.onDrawerClosed(null);
+            } else {
+                toggle.onDrawerOpened(null);
+            }
+        }
+    }
+
     protected void initToolbar() {
         if (mActivity == null) {
             return;
@@ -58,43 +86,15 @@ public abstract class AbsToolBar {
         }
     }
 
-    public void setToolBarActionListener(IMenuAction toolBarActionListener) {
-        this.mToolBarActionListener = toolBarActionListener;
-    }
-
     public IMenuAction getToolBarActionListener() {
         return mToolBarActionListener;
     }
 
-    private enum ActionDrawableState {
-        BURGER, ARROW
+    public void setToolBarActionListener(IMenuAction toolBarActionListener) {
+        this.mToolBarActionListener = toolBarActionListener;
     }
 
-    private static void toggleActionBarIcon(ActionDrawableState state, final ActionBarDrawerToggle toggle, boolean animate) {
-        if (animate) {
-            float start = state == ActionDrawableState.BURGER ? 0f : 1.0f;
-            float end = Math.abs(start - 1);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                ValueAnimator offsetAnimator = ValueAnimator.ofFloat(start, end);
-                offsetAnimator.setDuration(300);
-                offsetAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-                offsetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        float offset = (Float) animation.getAnimatedValue();
-                        toggle.onDrawerSlide(null, offset);
-                    }
-                });
-                offsetAnimator.start();
-            } else {
-                //do the same with nine-old-androids lib :)
-            }
-        } else {
-            if (state == ActionDrawableState.BURGER) {
-                toggle.onDrawerClosed(null);
-            } else {
-                toggle.onDrawerOpened(null);
-            }
-        }
+    private enum ActionDrawableState {
+        BURGER, ARROW
     }
 }

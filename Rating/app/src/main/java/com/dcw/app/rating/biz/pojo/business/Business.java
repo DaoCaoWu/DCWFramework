@@ -9,13 +9,13 @@ import java.util.List;
  */
 public class Business {
 
-	@SerializedName("business_id")
-	private String businessId;
+    @SerializedName("business_id")
+    private String businessId;
 
     private String name;
 
-	@SerializedName("branch_name")
-	private String branchName;
+    @SerializedName("branch_name")
+    private String branchName;
 
     private String address;
 
@@ -31,82 +31,82 @@ public class Business {
 
     private String longitude;
 
-	@SerializedName("avg_rating")
-	private String avgRating;
+    @SerializedName("avg_rating")
+    private String avgRating;
 
-	@SerializedName("rating_img_url")
-	private String ratingImgUrl;
+    @SerializedName("rating_img_url")
+    private String ratingImgUrl;
 
-	@SerializedName("rating_s_img_url")
-	private String ratingSImgUrl;
+    @SerializedName("rating_s_img_url")
+    private String ratingSImgUrl;
 
-	@SerializedName("product_grade")
-	private String productGrade;
+    @SerializedName("product_grade")
+    private String productGrade;
 
-	@SerializedName("decoration_grade")
-	private String decorationGrade;
+    @SerializedName("decoration_grade")
+    private String decorationGrade;
 
-	@SerializedName("service_grade")
-	private String serviceGrade;
+    @SerializedName("service_grade")
+    private String serviceGrade;
 
-	@SerializedName("product_score")
-	private String productScore;
+    @SerializedName("product_score")
+    private String productScore;
 
-	@SerializedName("decoration_score")
-	private String decorationScore;
+    @SerializedName("decoration_score")
+    private String decorationScore;
 
-	@SerializedName("service_score")
-	private String serviceScore;
+    @SerializedName("service_score")
+    private String serviceScore;
 
-	@SerializedName("avg_price")
-	private String avgPrice;
+    @SerializedName("avg_price")
+    private String avgPrice;
 
-	@SerializedName("review_count")
-	private String reviewCount;
+    @SerializedName("review_count")
+    private String reviewCount;
 
-	@SerializedName("review_list_url")
-	private String reviewListUrl;
+    @SerializedName("review_list_url")
+    private String reviewListUrl;
 
     private String distance;
 
-	@SerializedName("business_url")
-	private String businessUrl;
+    @SerializedName("business_url")
+    private String businessUrl;
 
-	@SerializedName("photo_url")
-	private String photoUrl;
+    @SerializedName("photo_url")
+    private String photoUrl;
 
-	@SerializedName("s_photo_url")
-	private String sPhotoUrl;
+    @SerializedName("s_photo_url")
+    private String sPhotoUrl;
 
-	@SerializedName("photo_count")
-	private String photoCount;
+    @SerializedName("photo_count")
+    private String photoCount;
 
-	@SerializedName("photo_list_url")
-	private String photoListUrl;
+    @SerializedName("photo_list_url")
+    private String photoListUrl;
 
-	@SerializedName("has_coupon")
-	private String hasCoupon;
+    @SerializedName("has_coupon")
+    private String hasCoupon;
 
-	@SerializedName("coupon_id")
-	private String couponId;
+    @SerializedName("coupon_id")
+    private String couponId;
 
-	@SerializedName("coupon_description")
-	private String couponDescription;
+    @SerializedName("coupon_description")
+    private String couponDescription;
 
-	@SerializedName("coupon_url")
-	private String couponUrl;
+    @SerializedName("coupon_url")
+    private String couponUrl;
 
-	@SerializedName("has_deal")
-	private String hasDeal;
+    @SerializedName("has_deal")
+    private String hasDeal;
 
-	@SerializedName("deal_count")
-	private String dealCount;
+    @SerializedName("deal_count")
+    private String dealCount;
 
-    private List<Deal> dealss ;
+    private List<Deal> dealss;
 
-	@SerializedName("has_online_reservation")
-	private String hasOnlineReservation;
+    @SerializedName("has_online_reservation")
+    private String hasOnlineReservation;
 
-	@SerializedName("online_reservation_url")
-	private String onlineReservationUrl;
+    @SerializedName("online_reservation_url")
+    private String onlineReservationUrl;
 }

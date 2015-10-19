@@ -1,13 +1,5 @@
 package com.dcw.app.rating.biz.test;
 
-import android.content.res.Configuration;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -185,7 +177,7 @@ public class StateViewFragment extends BaseFragmentWrapper {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_state:
-                index ++;
+                index++;
                 if (index >= StateView.ContentState.values().length) {
                     index = 0;
                 }

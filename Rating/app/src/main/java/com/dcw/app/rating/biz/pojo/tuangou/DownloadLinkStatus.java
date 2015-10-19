@@ -13,6 +13,6 @@ public class DownloadLinkStatus {
 
     private String count;
 
-	@SerializedName("download_linkss")
-	private List<DownloadLink> downloadLinkss;
+    @SerializedName("download_linkss")
+    private List<DownloadLink> downloadLinkss;
 }

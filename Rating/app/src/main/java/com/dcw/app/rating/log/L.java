@@ -37,14 +37,16 @@ public class L {
     /**
      * Enables/disables detail logging of app work.
      * Consider {@link L#disableLogging()} to disable
-     *  logging completely (even error logs)<br />
+     * logging completely (even error logs)<br />
      * Debug logs are disabled by default.
      */
     public static void writeDebugLogs(boolean writeDebugLogs) {
         L.writeDebugLogs = writeDebugLogs;
     }
 
-    /** Enables/disables logging of app completely (even error logs). */
+    /**
+     * Enables/disables logging of app completely (even error logs).
+     */
     public static void writeLogs(boolean writeLogs) {
         L.writeLogs = writeLogs;
     }

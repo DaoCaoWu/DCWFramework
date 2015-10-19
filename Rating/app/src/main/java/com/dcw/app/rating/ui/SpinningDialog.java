@@ -5,21 +5,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.dcw.app.rating.log.L;
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.log.L;
 
 public class SpinningDialog extends Dialog {
 
     private TextView mMsgTextView;
 
-    public SpinningDialog(Context context, int theme){
-        super(context,theme);
+    public SpinningDialog(Context context, int theme) {
+        super(context, theme);
     }
 
     public SpinningDialog(Activity context, String msg) {
         this(context, msg, false);
     }
-    
+
     public SpinningDialog(Activity context, String msg, boolean smallDialog) {
         super(context, android.R.style.Theme_NoTitleBar);
         getWindow().setBackgroundDrawableResource(R.color.dialog_page_background);
@@ -38,16 +38,16 @@ public class SpinningDialog extends Dialog {
         mMsgTextView.setText(msg);
     }
 
-    public void setTag(Object tag) {
-        mMsgTextView.setTag(tag);
+    public SpinningDialog(Activity context) {
+        this(context, null);
     }
 
     public Object getTag() {
         return mMsgTextView.getTag();
     }
 
-    public SpinningDialog(Activity context) {
-        this(context, null);
+    public void setTag(Object tag) {
+        mMsgTextView.setTag(tag);
     }
 
     public void setMessage(String msg) {

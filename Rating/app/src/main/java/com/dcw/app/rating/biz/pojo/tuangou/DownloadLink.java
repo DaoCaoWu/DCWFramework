@@ -9,16 +9,19 @@ public class DownloadLink {
 
     private String url;
 
-    public void setCity(String city){
-        this.city = city;
-    }
-    public String getCity(){
+    public String getCity() {
         return this.city;
     }
-    public void setUrl(String url){
-        this.url = url;
+
+    public void setCity(String city) {
+        this.city = city;
     }
-    public String getUrl(){
+
+    public String getUrl() {
         return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -9,8 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dcw.app.rating.db.bean.Cache;
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.db.bean.Cache;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;

@@ -36,12 +36,11 @@ import java.util.Date;
  * This class is for collecting crash log of the app and sending them to remote server
  */
 public class ErrorReporter implements Thread.UncaughtExceptionHandler {
-    //    private final static String ERR_LOG_TYPE = "9gameclient";
-    private Context mContext;
-
     private final int JNICRASH = 0;
     private final int CRASH = 1;
     private final int ANRTRACE = 2;
+    //    private final static String ERR_LOG_TYPE = "9gameclient";
+    private Context mContext;
 
     public ErrorReporter(Context ctx) {
         mContext = ctx;

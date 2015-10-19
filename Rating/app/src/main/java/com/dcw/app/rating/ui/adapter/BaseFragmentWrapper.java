@@ -18,9 +18,9 @@ import com.dcw.framework.view.DCWAnnotation;
 
 public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate {
 
-    private boolean mIsDestroy;
     protected View mRootView;
     protected ToolbarController mToolbarController;
+    private boolean mIsDestroy;
 
     public BaseFragmentWrapper() {
         super();

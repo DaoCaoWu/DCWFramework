@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class AdditionalInfo {
 
-	@SerializedName("more_reviews_url")
-	private String moreReviewsUrl;
+    @SerializedName("more_reviews_url")
+    private String moreReviewsUrl;
 }

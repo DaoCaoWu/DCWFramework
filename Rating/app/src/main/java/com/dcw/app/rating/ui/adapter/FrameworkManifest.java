@@ -5,12 +5,11 @@ import com.dcw.framework.pac.basic.IFrameworkManifest;
 
 public class FrameworkManifest implements IFrameworkManifest {
     @Override
-    public String[] getControllers()
-    {
+    public String[] getControllers() {
         String[] controllers = new String[]{
                 LauncherController.class.getName(),
         };
-        return  controllers;
+        return controllers;
     }
 
     @Override

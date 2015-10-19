@@ -9,16 +9,19 @@ public class Error {
 
     private String errorMessage;
 
-    public void setErrorCode(String errorCode){
-        this.errorCode = errorCode;
-    }
-    public String getErrorCode(){
+    public String getErrorCode() {
         return this.errorCode;
     }
-    public void setErrorMessage(String errorMessage){
-        this.errorMessage = errorMessage;
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
-    public String getErrorMessage(){
+
+    public String getErrorMessage() {
         return this.errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

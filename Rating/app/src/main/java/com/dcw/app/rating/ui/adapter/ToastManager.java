@@ -5,35 +5,34 @@ import android.widget.Toast;
 
 public class ToastManager {
 
+    private static ToastManager gInstance = new ToastManager();
     Context mContext;
 
-    private static ToastManager gInstance = new ToastManager();
-
-    private ToastManager(){
+    private ToastManager() {
 
     }
 
-    public static ToastManager getInstance(){
+    public static ToastManager getInstance() {
         return gInstance;
     }
 
-    public void showToast(int textId, int DurationType){
+    public void showToast(int textId, int DurationType) {
         Toast.makeText(mContext, textId, DurationType).show();
     }
 
-    public void showToast(CharSequence text, int DurationType){
+    public void showToast(CharSequence text, int DurationType) {
         Toast.makeText(mContext, text, DurationType).show();
     }
 
-    public void showToast(int textId){
+    public void showToast(int textId) {
         showToast(textId, Toast.LENGTH_SHORT);
     }
 
-    public void showToast(CharSequence text){
+    public void showToast(CharSequence text) {
         showToast(text, Toast.LENGTH_SHORT);
     }
 
-    public void init(Context context){
+    public void init(Context context) {
         mContext = context;
     }
 }

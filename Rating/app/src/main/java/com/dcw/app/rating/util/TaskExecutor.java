@@ -63,12 +63,12 @@ public class TaskExecutor {
         if (sMainHandler == null)
             sMainHandler = new Handler(Looper.getMainLooper());
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        if( stackTraceElements!=null ) {
-            if( stackTraceElements.length > 5) {
-                Thread.currentThread().setName( stackTraceElements[4].getClassName() + "|" + stackTraceElements[4].getMethodName() + "|" + stackTraceElements[4].getLineNumber());
-            } else if ( stackTraceElements.length > 0 ) {
-                int index = stackTraceElements.length-1;
-                Thread.currentThread().setName( stackTraceElements[index].getClassName() + "|" + stackTraceElements[index].getMethodName() + "|" + stackTraceElements[index].getLineNumber());
+        if (stackTraceElements != null) {
+            if (stackTraceElements.length > 5) {
+                Thread.currentThread().setName(stackTraceElements[4].getClassName() + "|" + stackTraceElements[4].getMethodName() + "|" + stackTraceElements[4].getLineNumber());
+            } else if (stackTraceElements.length > 0) {
+                int index = stackTraceElements.length - 1;
+                Thread.currentThread().setName(stackTraceElements[index].getClassName() + "|" + stackTraceElements[index].getMethodName() + "|" + stackTraceElements[index].getLineNumber());
             } else {
                 Thread.currentThread().setName("unkonwn class");
             }

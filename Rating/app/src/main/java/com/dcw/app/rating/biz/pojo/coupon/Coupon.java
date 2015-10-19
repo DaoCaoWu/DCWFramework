@@ -12,36 +12,36 @@ import java.util.List;
  */
 public class Coupon {
 
-	@SerializedName("coupon_id")
-	private String couponId;
+    @SerializedName("coupon_id")
+    private String couponId;
 
     private String title;
 
     private String description;
 
-    private List<Region> regionss ;
+    private List<Region> regionss;
 
-    private List<Category> categoriess ;
+    private List<Category> categoriess;
 
-	@SerializedName("download_count")
-	private String downloadCount;
+    @SerializedName("download_count")
+    private String downloadCount;
 
-	@SerializedName("publish_date")
-	private String publishDate;
+    @SerializedName("publish_date")
+    private String publishDate;
 
-	@SerializedName("expiration_date")
-	private String expirationDate;
+    @SerializedName("expiration_date")
+    private String expirationDate;
 
     private String distance;
 
-	@SerializedName("logo_img_url")
-	private String logoImgUrl;
+    @SerializedName("logo_img_url")
+    private String logoImgUrl;
 
-	@SerializedName("coupon_url")
-	private String couponUrl;
+    @SerializedName("coupon_url")
+    private String couponUrl;
 
-	@SerializedName("coupon_h5_url")
-	private String couponH5Url;
+    @SerializedName("coupon_h5_url")
+    private String couponH5Url;
 
-    private List<Business> businessess ;
+    private List<Business> businessess;
 }

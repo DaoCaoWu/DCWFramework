@@ -2,8 +2,6 @@ package com.dcw.app.rating.biz.home;
 
 import android.app.Activity;
 import android.content.res.Configuration;
-import android.support.design.widget.NavigationView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -13,7 +11,6 @@ import com.dcw.app.rating.biz.search.SearchFragment;
 import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.test.StateViewFragment;
-import com.dcw.app.rating.biz.toolbar.DrawerToolBar;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 

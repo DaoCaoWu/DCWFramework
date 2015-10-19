@@ -1,14 +1,6 @@
 package com.dcw.app.rating.cache;
 
-import android.support.v4.util.LruCache;
-import android.text.TextUtils;
-
-import com.dcw.app.rating.app.RatingApplication;
-import com.dcw.app.rating.db.bean.Cache;
-import com.dcw.app.rating.db.dao.CacheDao;
 import com.dcw.app.rating.log.L;
-
-import java.util.List;
 
 /**
  * @author JiaYing.Cheng

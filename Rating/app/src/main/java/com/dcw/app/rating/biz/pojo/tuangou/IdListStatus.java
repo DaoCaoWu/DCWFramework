@@ -13,6 +13,6 @@ public class IdListStatus {
 
     private String count;
 
-	@SerializedName("id_lists")
-	private List<Integer> idLists;
+    @SerializedName("id_lists")
+    private List<Integer> idLists;
 }

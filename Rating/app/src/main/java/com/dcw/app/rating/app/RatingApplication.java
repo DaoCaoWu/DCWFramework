@@ -24,11 +24,15 @@ public class RatingApplication extends Application {
     private ErrorReporter mErrorReporter;
     private DataCache mDataCache;
 
+    public static RatingApplication getInstance() {
+        return sInstance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         setupDatabase();
-        sInstance =  this;
+        sInstance = this;
         mErrorReporter = new ErrorReporter(this);
         mDataCache = new DataCache(1024 * 100);
         mDataCache.clearExpiredCache();
@@ -46,10 +50,6 @@ public class RatingApplication extends Application {
 
     public DaoSession getDaoSession() {
         return daoSession;
-    }
-
-    public static RatingApplication getInstance() {
-        return sInstance;
     }
 
     public ErrorReporter getErrorReporter() {

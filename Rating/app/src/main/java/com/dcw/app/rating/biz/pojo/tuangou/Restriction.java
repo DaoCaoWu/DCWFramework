@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Restriction {
 
-	@SerializedName("is_reservation_required")
-	private String isReservationRequired;
+    @SerializedName("is_reservation_required")
+    private String isReservationRequired;
 
-	@SerializedName("is_refundable")
-	private String isRefundable;
+    @SerializedName("is_refundable")
+    private String isRefundable;
 
-	@SerializedName("special_tips")
-	private String specialTips;
+    @SerializedName("special_tips")
+    private String specialTips;
 }

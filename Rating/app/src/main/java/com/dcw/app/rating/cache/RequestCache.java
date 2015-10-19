@@ -16,17 +16,15 @@ import java.util.Map;
  */
 public class RequestCache extends BaseCache {
 
-    private LruCache<String, Map<String, Cache>> mLruCache;
-
     /**
      * 默认缓存大小100k
      */
     public final static int DEFAULT_CACHE_SIZE = 64;
-
     /**
      * 延迟数据库删除缓存时间，使数据库缓存有效期大于内存缓存, 2天
      */
     public final static int DEFAULT_CACHE_TIME = 86400 * 2;
+    private LruCache<String, Map<String, Cache>> mLruCache;
 
     public RequestCache(int cacheSizeInBytes) {
         super(cacheSizeInBytes, DEFAULT_CACHE_SIZE, DEFAULT_CACHE_TIME);

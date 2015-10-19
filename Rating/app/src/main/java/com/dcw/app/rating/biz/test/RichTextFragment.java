@@ -1,8 +1,6 @@
 package com.dcw.app.rating.biz.test;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.util.Log;
 import android.view.View;
@@ -31,17 +29,14 @@ import retrofit.client.Response;
 @InjectLayout(R.layout.fragment_rich_text)
 public class RichTextFragment extends BaseFragmentWrapper implements Callback<Contributor> {
     private static final String TAG = "RichTextFragment";
-
+    GitHub gitHubService;
     @InjectView(value = R.id.tv_content, listeners = View.OnClickListener.class)
     private TextView mTVContent;
 
+    //    @InjectView(R.id.toolbar)
+//    private Toolbar mToolbar;
     @InjectView(R.id.tv_result)
     private TextView mTVResult;
-
-//    @InjectView(R.id.toolbar)
-//    private Toolbar mToolbar;
-
-    GitHub gitHubService;
 
     @Override
     public Class getHostActivity() {

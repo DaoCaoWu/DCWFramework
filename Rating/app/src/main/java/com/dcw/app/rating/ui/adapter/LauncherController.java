@@ -2,8 +2,6 @@ package com.dcw.app.rating.ui.adapter;
 
 import android.os.Bundle;
 
-import com.dcw.app.rating.biz.home.HomeFragment;
-import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.welcome.WelcomeFragment;
 import com.dcw.framework.pac.basic.BaseController;
 import com.dcw.framework.pac.basic.FrameworkMessage;

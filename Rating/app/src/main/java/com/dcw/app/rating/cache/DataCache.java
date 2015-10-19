@@ -14,17 +14,15 @@ import com.dcw.app.rating.log.L;
  */
 public class DataCache extends BaseCache {
 
-    private LruCache<String, Cache> mLruCache;
-
     /**
      * 默认缓存大小100k
      */
     public final static int DEFAULT_CACHE_SIZE = 1024 * 100;
-
     /**
      * 延迟数据库删除缓存时间，使数据库缓存有效期大于内存缓存, 1天
      */
     public final static int DEFAULT_CACHE_TIME = 7 * 86400;
+    private LruCache<String, Cache> mLruCache;
 
     public DataCache(int cacheSizeInBytes) {
         super(cacheSizeInBytes, DEFAULT_CACHE_SIZE, DEFAULT_CACHE_TIME);
@@ -112,6 +110,7 @@ public class DataCache extends BaseCache {
      * 根据key值获取缓存值
      * 1.当命中缓存时，如果缓存失效则返回null
      * 2.当命中数据库时，如果缓存失效则返回null
+     *
      * @param key 缓存key
      * @return 缓存值
      */

@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class City {
 
-	@SerializedName("city_name")
-	private String cityName;
+    @SerializedName("city_name")
+    private String cityName;
 
-    private List<String> districtss ;
+    private List<String> districtss;
 
 }

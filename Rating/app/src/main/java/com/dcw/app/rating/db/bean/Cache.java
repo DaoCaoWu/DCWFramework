@@ -4,25 +4,30 @@ package com.dcw.app.rating.db.bean;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
+
 /**
  * Entity mapped to table cache.
  */
 public class Cache {
 
+    /**
+     * 内存缓存
+     */
+    public final static int CACHE_FROM_MEMORY = 0;
+    /**
+     * 数据库缓存
+     */
+    public final static int CACHE_FROM_DATABASE = 1;
+    /**
+     * 缓存类型
+     */
+    public int type = -1;
     private Integer groupId;
+
+    // KEEP FIELDS - put your custom fields here
     private String key;
     private String value;
     private Long expireTime;
-
-    // KEEP FIELDS - put your custom fields here
-    /** 缓存类型 */
-    public int type = -1;
-
-    /** 内存缓存 */
-    public final static int CACHE_FROM_MEMORY = 0;
-
-    /** 数据库缓存 */
-    public final static int CACHE_FROM_DATABASE = 1;
     // KEEP FIELDS END
 
     public Cache() {
@@ -37,6 +42,31 @@ public class Cache {
         this.key = key;
         this.value = value;
         this.expireTime = expireTime;
+    }
+
+    // KEEP METHODS - put your custom methods here
+    public Cache(String value, long expireTime) {
+        this.value = value;
+        this.expireTime = expireTime;
+    }
+
+    public Cache(String key, String value, long expireTime) {
+        this.key = key;
+        this.value = value;
+        this.expireTime = expireTime;
+    }
+
+    public Cache(String value, long expireTime, int type) {
+        this.value = value;
+        this.expireTime = expireTime;
+        this.type = type;
+    }
+
+    public Cache(int groupId, String value, long expireTime, int type) {
+        this.groupId = groupId;
+        this.value = value;
+        this.expireTime = expireTime;
+        this.type = type;
     }
 
     public Integer getGroupId() {
@@ -69,31 +99,6 @@ public class Cache {
 
     public void setExpireTime(Long expireTime) {
         this.expireTime = expireTime;
-    }
-
-    // KEEP METHODS - put your custom methods here
-    public Cache(String value, long expireTime) {
-        this.value = value;
-        this.expireTime = expireTime;
-    }
-
-    public Cache(String key, String value, long expireTime) {
-        this.key = key;
-        this.value = value;
-        this.expireTime = expireTime;
-    }
-
-    public Cache(String value, long expireTime, int type) {
-        this.value = value;
-        this.expireTime = expireTime;
-        this.type = type;
-    }
-
-    public Cache(int groupId, String value, long expireTime, int type) {
-        this.groupId = groupId;
-        this.value = value;
-        this.expireTime = expireTime;
-        this.type = type;
     }
     // KEEP METHODS END
 

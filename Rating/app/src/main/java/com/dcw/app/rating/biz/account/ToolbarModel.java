@@ -50,6 +50,10 @@ public class ToolbarModel extends Observable {
         return mMenuResId;
     }
 
+    public void setMenuResId(int menuResId) {
+        mMenuResId = menuResId;
+    }
+
     public boolean isShowHomeAsUp() {
         return mShowHomeAsUp;
     }
@@ -65,10 +69,6 @@ public class ToolbarModel extends Observable {
     public void setShowRightBtn(boolean showRightBtn) {
         mBtnRight.setIsShow(showRightBtn);
         notifyObservers(this, mBtnRight);
-    }
-
-    public void setMenuResId(int menuResId) {
-        mMenuResId = menuResId;
     }
 
     public MenuItem getBtnRight() {

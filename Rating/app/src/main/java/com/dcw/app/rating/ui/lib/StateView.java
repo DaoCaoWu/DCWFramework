@@ -1,4 +1,5 @@
 package com.dcw.app.rating.ui.lib;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
@@ -95,16 +96,12 @@ public class StateView extends FrameLayout {
         mViewState.emptyLayoutResId = resourceId;
     }
 
-    private void setNetworkErrorTitleString(String string) {
-        mViewState.networkErrorTitleString = string;
-    }
-
     public String getNetworkErrorTitleString() {
         return mViewState.networkErrorTitleString;
     }
 
-    private void setGeneralErrorTitleString(String string) {
-        mViewState.generalErrorTitleString = string;
+    private void setNetworkErrorTitleString(String string) {
+        mViewState.networkErrorTitleString = string;
     }
 
     public void setCustomErrorString(String string) {
@@ -123,12 +120,16 @@ public class StateView extends FrameLayout {
         return mViewState.generalErrorTitleString;
     }
 
-    private void setTapToRetryString(String string) {
-        mViewState.tapToRetryString = string;
+    private void setGeneralErrorTitleString(String string) {
+        mViewState.generalErrorTitleString = string;
     }
 
     public String getTapToRetryString() {
         return mViewState.tapToRetryString;
+    }
+
+    private void setTapToRetryString(String string) {
+        mViewState.tapToRetryString = string;
     }
 
     public int getLoadingLayoutResourceId() {
@@ -269,6 +270,7 @@ public class StateView extends FrameLayout {
 
     /**
      * Builds the empty view if not currently built, and returns the view
+     *
      * @return Empty view{@link View}
      */
     public View getEmptyView() {
@@ -296,6 +298,7 @@ public class StateView extends FrameLayout {
 
     /**
      * set empty view button click listener
+     *
      * @param listener {@link android.view.View.OnClickListener}
      */
     public void setOnEmptyViewBtnClickListener(View.OnClickListener listener) {
@@ -438,14 +441,18 @@ public class StateView extends FrameLayout {
 
         EMPTY(0x04);
 
-        public final int nativeInt;
-
         private final static SparseArray<ContentState> sStates = new SparseArray<ContentState>();
 
         static {
             for (ContentState scaleType : values()) {
                 sStates.put(scaleType.nativeInt, scaleType);
             }
+        }
+
+        public final int nativeInt;
+
+        private ContentState(int nativeValue) {
+            this.nativeInt = nativeValue;
         }
 
         public static ContentState getState(int nativeInt) {
@@ -455,13 +462,18 @@ public class StateView extends FrameLayout {
 
             return null;
         }
-
-        private ContentState(int nativeValue) {
-            this.nativeInt = nativeValue;
-        }
     }
 
     public static class SavedState extends View.BaseSavedState {
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
         StateViewData state;
 
         public SavedState(Parcelable superState) {
@@ -478,19 +490,18 @@ public class StateView extends FrameLayout {
             super.writeToParcel(out, flags);
             out.writeParcelable(state, flags);
         }
-
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
     }
 
     public static class StateViewData implements Parcelable {
+        public static final Parcelable.Creator<StateViewData> CREATOR = new Parcelable.Creator<StateViewData>() {
+            public StateViewData createFromParcel(Parcel in) {
+                return new StateViewData(in);
+            }
+
+            public StateViewData[] newArray(int size) {
+                return new StateViewData[size];
+            }
+        };
         public String customErrorString;
         public int loadingLayoutResId;
         public int generalErrorLayoutResId;
@@ -532,16 +543,6 @@ public class StateView extends FrameLayout {
             dest.writeString(tapToRetryString);
             dest.writeString(state.name());
         }
-
-        public static final Parcelable.Creator<StateViewData> CREATOR = new Parcelable.Creator<StateViewData>() {
-            public StateViewData createFromParcel(Parcel in) {
-                return new StateViewData(in);
-            }
-
-            public StateViewData[] newArray(int size) {
-                return new StateViewData[size];
-            }
-        };
     }
 
     /**

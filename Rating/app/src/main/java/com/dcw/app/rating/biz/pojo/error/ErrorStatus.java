@@ -9,16 +9,19 @@ public class ErrorStatus {
 
     private String error;
 
-    public void setStatus(String status){
-        this.status = status;
-    }
-    public String getStatus(){
+    public String getStatus() {
         return this.status;
     }
-    public void setError(String error){
-        this.error = error;
+
+    public void setStatus(String status) {
+        this.status = status;
     }
-    public String getError(){
+
+    public String getError() {
         return this.error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

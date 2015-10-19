@@ -9,18 +9,21 @@ public class Root {
 
     private String status;
 
-    private List<City> citiess ;
+    private List<City> citiess;
 
-    public void setStatus(String status){
-        this.status = status;
-    }
-    public String getStatus(){
+    public String getStatus() {
         return this.status;
     }
-    public void setCities(List<City> cities){
-        this.citiess = cities;
+
+    public void setStatus(String status) {
+        this.status = status;
     }
-    public List<City> getCities(){
+
+    public List<City> getCities() {
         return this.citiess;
+    }
+
+    public void setCities(List<City> cities) {
+        this.citiess = cities;
     }
 }

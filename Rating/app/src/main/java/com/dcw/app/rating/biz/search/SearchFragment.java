@@ -8,8 +8,6 @@ import android.view.MenuItem;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.toolbar.INavigationBarAction;
-import com.dcw.app.rating.biz.toolbar.SearchToolbar;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 

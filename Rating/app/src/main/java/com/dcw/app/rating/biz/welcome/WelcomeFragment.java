@@ -5,8 +5,6 @@ import android.os.Handler;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.account.LoginFragment;
-import com.dcw.app.rating.biz.home.HomeFragment;
-import com.dcw.app.rating.ui.adapter.BaseActivityWrapper;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 

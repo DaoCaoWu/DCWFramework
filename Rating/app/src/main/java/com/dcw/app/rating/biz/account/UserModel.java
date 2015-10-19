@@ -17,11 +17,11 @@ public class UserModel extends Model {
         return mAccount;
     }
 
-    public void setPassword(String password) {
-        mAccount.setPassword(password);
-    }
-
     public void setAccount(String account) {
         mAccount.setAccount(account);
+    }
+
+    public void setPassword(String password) {
+        mAccount.setPassword(password);
     }
 }

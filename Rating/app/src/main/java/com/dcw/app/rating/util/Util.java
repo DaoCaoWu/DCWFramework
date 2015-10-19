@@ -13,7 +13,7 @@ public class Util {
     }
 
     public static void showKeyboard(Context ctx, View token) {
-        if(token == null){
+        if (token == null) {
             return;
         }
 

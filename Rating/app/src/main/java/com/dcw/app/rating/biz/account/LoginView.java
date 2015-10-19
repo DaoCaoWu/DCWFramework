@@ -27,12 +27,12 @@ public class LoginView extends LinearLayout implements com.dcw.app.rating.ui.mvc
      */
     private ViewListener mViewListener;
 
-    public void setViewListener(ViewListener mViewListener) {
-        this.mViewListener = mViewListener;
-    }
-
     public LoginView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public void setViewListener(ViewListener mViewListener) {
+        this.mViewListener = mViewListener;
     }
 
     @Override

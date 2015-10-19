@@ -8,6 +8,6 @@ import com.google.gson.annotations.SerializedName;
 public class Root {
     private String status;
 
-	@SerializedName("search_result_url")
-	private String searchResultUrl;
- }
+    @SerializedName("search_result_url")
+    private String searchResultUrl;
+}
