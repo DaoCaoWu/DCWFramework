@@ -9,11 +9,11 @@ import android.widget.Toast;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.biz.test.model.Contributor;
 import com.dcw.app.rating.biz.test.model.Reviews;
 import com.dcw.app.rating.biz.test.module.GithubModule;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
+import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.net.api.GitHub;
 import com.dcw.app.rating.net.loader.RetrofitLoader;
 import com.dcw.app.rating.net.loader.RetrofitLoaderManager;

@@ -1,10 +1,7 @@
 package com.dcw.app.rating.biz.toolbar;
 
-import android.support.annotation.IdRes;
 import android.support.annotation.MenuRes;
 
-import com.dcw.app.rating.R;
-import com.dcw.app.rating.app.RatingApplication;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 
 public class ToolbarModel extends Observable {

@@ -1,41 +1,26 @@
 package com.dcw.app.rating.biz.home;
 
-import android.app.Activity;
-import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.toolbar.NavigationBar;
-import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.biz.search.SearchFragment;
 import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.test.StateViewFragment;
+import com.dcw.app.rating.biz.toolbar.DrawerBarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
+import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
-import com.dcw.framework.view.annotation.InjectView;
 
 @InjectLayout(R.layout.fragment_home)
 public class HomeFragment extends BaseFragmentWrapper implements ToolbarController.OnInitToolbarListener
-        , Toolbar.OnMenuItemClickListener, NavigationBar.IBackAction, NavigationView.OnNavigationItemSelectedListener {
-    @InjectView(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle mDrawerToggle;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        getActivity().supportInvalidateOptionsMenu();
-    }
+        , Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     public Class getHostActivity() {
@@ -50,10 +35,10 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
     @Override
     public void initUI() {
         ToolbarModel model = new ToolbarModel(getString(R.string.home), R.menu.menu_home, true);
-        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
+        mToolbarController = new DrawerBarController(findViewById(R.id.toolbar), model);
         mToolbarController.setOnInitToolbarListener(this);
         mToolbarController.setOnMenuItemClickListener(this);
-        mToolbarController.setOnNavigationOnClickListener(this);
+        ((DrawerBarController) mToolbarController).setOnNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -62,24 +47,10 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
 
     @Override
     public void onInitToolbar(Toolbar toolbar, ActionBar actionBar) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        mDrawerToggle.syncState();
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
-
-    public void toggle() {
-        if (mDrawerLayout.isDrawerVisible(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            mDrawerLayout.openDrawer(GravityCompat.START);
-        }
-    }
-
-    @Override
-    public void onNavigationOnClicked(View v) {
-        toggle();
+        ((DrawerBarController) mToolbarController).setNavigationView(navigationView);
+        ((DrawerBarController) mToolbarController).setDrawerLayout(drawerLayout);
     }
 
     @Override
@@ -111,24 +82,11 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
                 fragmentClass = SearchFragment.class;
         }
 //        toggle();
-        mDrawerToggle.onOptionsItemSelected(menuItem);
+//        mDrawerToggle.onOptionsItemSelected(menuItem);
         // Insert the fragment by replacing any existing fragment
         startFragment(fragmentClass);
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
 }

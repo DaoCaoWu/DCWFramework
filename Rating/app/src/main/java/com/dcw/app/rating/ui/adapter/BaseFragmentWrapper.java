@@ -1,10 +1,12 @@
 package com.dcw.app.rating.ui.adapter;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -108,6 +110,22 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
         super.onCreateOptionsMenu(menu, inflater);
         if (mToolbarController != null) {
             mToolbarController.onCreateOptionsMenu(menu, inflater);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mToolbarController != null) {
+            return mToolbarController.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (mToolbarController != null) {
+            mToolbarController.onConfigurationChanged(newConfig);
         }
     }
 

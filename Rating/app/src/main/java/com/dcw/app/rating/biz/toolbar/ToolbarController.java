@@ -1,5 +1,6 @@
 package com.dcw.app.rating.biz.toolbar;
 
+import android.content.res.Configuration;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,13 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
                 mOnInitToolbarListener.onInitToolbar(getView(), actionBar);
             }
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
+    }
+
+    public void onConfigurationChanged(Configuration newConfig) {
     }
 
     /**
