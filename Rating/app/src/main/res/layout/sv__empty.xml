@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center">
 
     <ImageView
         android:id="@+id/empty_image"
         android:layout_width="150dip"
         android:layout_height="150dip"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/bg_empty" />
+        android:src="@drawable/bg_empty"/>
 
     <TextView
         android:id="@+id/empty_title"
@@ -21,7 +21,7 @@
         android:text="@string/empty_title"
         android:textColor="@color/black_normal"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/empty_subtitle"
@@ -30,7 +30,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:textColor="@color/black_disabled"
-        android:text="@string/empty_sub_title" />
+        android:text="@string/empty_sub_title"/>
     <!-- Add a layout to button, because it has minWidth -->
     <LinearLayout
         android:id="@+id/empty_button"
@@ -48,6 +48,6 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/btn_refresh"
             android:gravity="center"
-            android:text="@string/empty_button" />
+            android:text="@string/empty_button"/>
     </LinearLayout>
 </LinearLayout>

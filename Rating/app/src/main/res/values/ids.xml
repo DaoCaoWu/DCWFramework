@@ -8,4 +8,7 @@
     <item type="id" name="et_password"/>
     <item type="id" name="btn_submit"/>
     <item type="id" name="root_view"/>
+    <item type="id" name="iv_icon"/>
+    <item type="id" name="tv_subtitle"/>
+    <item type="id" name="tv_content"/>
 </resources>

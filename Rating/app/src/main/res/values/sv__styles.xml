@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Button.Retry" parent="@android:style/Widget.Button">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:background">@drawable/btn_retry</item>

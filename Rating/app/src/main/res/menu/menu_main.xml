@@ -1,5 +1,4 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<menu
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".biz.MainActivity">
     <!--<item android:id="@id/btn_right" android:title="@string/more" app:showAsAction="ifRoom" />-->

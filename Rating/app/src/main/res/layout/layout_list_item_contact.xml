@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    style="@style/list_item_style"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@id/iv_icon"
+        style="@style/list_item_icon_style.avatar"
+        android:contentDescription="@string/avatar"/>
+
+    <TextView
+        android:id="@id/tv_title"
+        style="@style/list_item_title_style.title"
+        android:layout_toRightOf="@id/iv_icon"
+        tools:text="@string/title"/>
+
+    <TextView
+        style="@style/list_item_title_style.content"
+        android:layout_below="@id/tv_title"
+        android:layout_toRightOf="@id/iv_icon"
+        tools:text="@string/content"/>
+</RelativeLayout>

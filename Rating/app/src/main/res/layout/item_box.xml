@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/boxItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/boxItem"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="8dp">
 
     <TextView
         android:id="@+id/tvItemId"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="---"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <View
         android:id="@+id/vLine"
@@ -21,25 +21,25 @@
         android:layout_height="1dp"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
-        android:background="#999999" />
+        android:background="#999999"/>
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="---" />
+        android:text="---"/>
 
     <TextView
         android:id="@+id/tvSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="---" />
+        android:text="---"/>
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="---" />
+        android:text="---"/>
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/fresco_img1"
@@ -51,6 +51,6 @@
         fresco:roundWithOverlayColor="#333333"
         fresco:roundingBorderWidth="10dp"
         fresco:roundingBorderColor="#33CC5B"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
 </LinearLayout>

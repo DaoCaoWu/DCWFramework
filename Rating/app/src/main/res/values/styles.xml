@@ -64,4 +64,48 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
+    <style name="list_item_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+        <item name="android:background">@drawable/list_item_selector</item>
+    </style>
+
+    <style name="list_item_icon_style">
+        <item name="android:layout_width">@dimen/icon</item>
+        <item name="android:layout_height">@dimen/icon</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/ic_launcher</item>
+    </style>
+
+    <style name="list_item_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="list_item_icon_style.avatar" parent="list_item_icon_style">
+        <item name="android:id">@id/iv_icon</item>
+        <item name="android:contentDescription">@string/avatar</item>
+    </style>
+
+    <style name="list_item_title_style.title" parent="list_item_title_style">
+        <item name="android:id">@id/tv_title</item>
+        <item name="android:textSize">@dimen/text_title_size_16</item>
+        <item name="android:textColor">@color/text_color_33</item>
+    </style>
+
+    <style name="list_item_title_style.content" parent="list_item_title_style">
+        <item name="android:id">@id/tv_content</item>
+        <item name="android:layout_marginTop">@dimen/space_between_content_areas</item>
+        <item name="android:textSize">@dimen/text_content_size_14</item>
+        <item name="android:textColor">@color/text_color_66</item>
+    </style>
+
+    <style name="list_view_style">
+        <item name="android:id">@id/lv_list</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:listSelector">@drawable/list_item_selector</item>
+    </style>
 </resources>
