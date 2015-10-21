@@ -9,16 +9,16 @@ import com.dcw.app.rating.ui.mvc.core.Observer;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public abstract class AbsListAdapter<D> extends BaseAdapter implements Observer {
+public abstract class AbsListAdapter<D, M extends ListDataModel<D>> extends BaseAdapter implements Observer {
 
     /**
      * the activity context from the activity where adapter is in.
      */
     private Context mContext = null;
 
-    private ListDataModel<D> mModel;
+    private M mModel;
 
-    public AbsListAdapter(Context context, ListDataModel<D> model) {
+    public AbsListAdapter(Context context, M model) {
         mContext = context;
         mModel = model;
         mModel.addObserver(this);
@@ -32,11 +32,11 @@ public abstract class AbsListAdapter<D> extends BaseAdapter implements Observer 
         mContext = context;
     }
 
-    public ListDataModel<D> getModel() {
+    public M getModel() {
         return mModel;
     }
 
-    public void setModel(ListDataModel<D> model) {
+    public void setModel(M model) {
         if (mModel.equals(model)) {
             return;
         }

@@ -65,6 +65,7 @@
     </style>
 
     <style name="list_item_style">
+        <item name="android:id">@id/list_item</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/activity_horizontal_margin</item>
@@ -108,4 +109,15 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:listSelector">@drawable/list_item_selector</item>
     </style>
+
+    <style name="catalog_style" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/catalog_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/screen_edge_left_and_right_margins</item>
+        <item name="android:textSize">@dimen/caption</item>
+        <item name="android:textColor">@color/color_99</item>
+        <item name="android:background">@color/color_ed</item>
+    </style>
+
 </resources>

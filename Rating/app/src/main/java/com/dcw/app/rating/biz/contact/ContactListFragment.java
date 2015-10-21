@@ -28,7 +28,22 @@ public class ContactListFragment extends BaseFragmentWrapper {
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName()));
         List<Contact> contacts = new ArrayList<Contact>();
         contacts.add(new Contact("adao12", "13570320927"));
-        new ContactController((ContactListView) findViewById(R.id.root_view), new ContactModel(contacts)).getModel().addItem(new Contact("adao13", "13570320927"));
+        ContactController c = new ContactController((ContactListView) findViewById(R.id.root_view), new ContactModel(contacts));
+        c.getModel().addItem(new Contact("cdao13", "13570320927"));
+        c.getModel().addItem(new Contact("cdao13", "13570320927"));
+        c.getModel().addItem(new Contact("zdao13", "13570320927"));
+        c.getModel().addItem(new Contact("cdao13", "13570320927"));
+        c.getModel().addItem(new Contact("xdao13", "13570320927"));
+        c.getModel().addItem(new Contact("jdao13", "13570320927"));
+        c.getModel().addItem(new Contact("edao13", "13570320927"));
+        c.getModel().addItem(new Contact("qdao13", "13570320927"));
+        c.getModel().addItem(new Contact("ydao13", "13570320927"));
+        c.getModel().addItem(new Contact("ydao13", "13570320927"));
+        c.getModel().addItem(new Contact("udao13", "13570320927"));
+        c.getModel().addItem(new Contact("idao13", "13570320927"));
+        c.getModel().addItem(new Contact("odao13", "13570320927"));
+        c.getModel().addItem(new Contact("pdao13", "13570320927"));
+        c.getModel().addItem(new Contact("ldao13", "13570320927"));
     }
 
     @Override

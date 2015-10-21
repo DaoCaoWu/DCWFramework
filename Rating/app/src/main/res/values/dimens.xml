@@ -103,4 +103,11 @@
     <dimen name="card_space">8dp</dimen>
     <dimen name="card_contents_space">16dp</dimen>
 
+    <dimen name="letter_layout_height">70dp</dimen>
+    <dimen name="float_layer_letter_size">35sp</dimen>
+    <dimen name="sidebar_padding">12dp</dimen>
+    <dimen name="sidebar_width">25dp</dimen>
+    <dimen name="catalog_height">20dp</dimen>
+    <dimen name="img_side_length">35dp</dimen>
+
 </resources>

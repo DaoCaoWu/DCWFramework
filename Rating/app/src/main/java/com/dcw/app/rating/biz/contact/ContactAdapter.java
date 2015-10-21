@@ -10,27 +10,33 @@ import com.dcw.app.rating.R;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class ContactAdapter extends AbsListAdapter<Contact> {
+public class ContactAdapter extends AbsListAdapter<Contact, ContactModel> {
 
-    public ContactAdapter(Context context, ListDataModel<Contact> model) {
+    public ContactAdapter(Context context, ContactModel model) {
         super(context, model);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemView holder = null;
+        CatalogItemView holder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.layout_list_item_contact, null);
-            holder = new ItemView(convertView);
+                    .inflate(R.layout.layout_list_item_catalog, null);
+            holder = new CatalogItemView(convertView);
             convertView.setTag(holder);
         } else {
-            holder = (ItemView) convertView.getTag();
+            holder = (CatalogItemView) convertView.getTag();
         }
 
         Contact contact = getItem(position);
+        int section = getModel().getSectionForPosition(position);
+        if (position == getModel().getPositionForSection(section)) {
+            holder.getLLCatalog().setVisibility(View.VISIBLE);
+        } else {
+            holder.getLLCatalog().setVisibility(View.GONE);
+        }
         if (contact != null) {
-            holder.update(null, contact.getName(), contact.getPhoneNum());
+            holder.update(contact.getSortKey(), null, contact.getName(), contact.getPhoneNum());
         }
         return convertView;
     }

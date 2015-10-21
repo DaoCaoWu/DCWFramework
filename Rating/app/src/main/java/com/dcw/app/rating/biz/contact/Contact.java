@@ -3,12 +3,11 @@ package com.dcw.app.rating.biz.contact;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class Contact {
+public class Contact extends SortLetter {
 
-    private int mCcontactId;
+    private int mContactId;
     private String mName;
     private String mPhoneNum;
-    private String mSortKey; // for sort
     private Long mPhotoId;
     private String mLookUpKey;
     private int mSelected = 0;
@@ -20,12 +19,12 @@ public class Contact {
         mPhoneNum = phoneNum;
     }
 
-    public int getCcontactId() {
-        return mCcontactId;
+    public int getContactId() {
+        return mContactId;
     }
 
-    public void setCcontactId(int ccontactId) {
-        mCcontactId = ccontactId;
+    public void setContactId(int contactId) {
+        mContactId = contactId;
     }
 
     public String getName() {
@@ -42,14 +41,6 @@ public class Contact {
 
     public void setPhoneNum(String phoneNum) {
         mPhoneNum = phoneNum;
-    }
-
-    public String getSortKey() {
-        return mSortKey;
-    }
-
-    public void setSortKey(String sortKey) {
-        mSortKey = sortKey;
     }
 
     public Long getPhotoId() {

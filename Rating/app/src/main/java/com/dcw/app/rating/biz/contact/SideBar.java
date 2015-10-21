@@ -15,11 +15,12 @@ public class SideBar extends View {
 
     private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
 
-    public static String[] b = { "↑", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-                                 "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-                                 "W", "X", "Y", "Z", "#"
-                               };
-    private int choose = -1;//
+    public static String[] b = {"↑", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+            "W", "X", "Y", "Z", "#"
+    };
+
+    private int choose = -1;
 
     private Paint paint = new Paint();
 
@@ -75,7 +76,7 @@ public class SideBar extends View {
         final float y = event.getY();// 点击y坐标
         final int oldChoose = choose;
         final OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
-        final int c = (int)(y / getHeight() * b.length); // 点击y坐标所占总高度的比例*b数组的长度就等于点击b中的个数.
+        final int c = (int) (y / getHeight() * b.length); // 点击y坐标所占总高度的比例*b数组的长度就等于点击b中的个数.
 
         switch (action) {
             case MotionEvent.ACTION_UP:
@@ -115,11 +116,11 @@ public class SideBar extends View {
         return true;
     }
 
-    public void setOnTouchingLetterChangedListener(
-        OnTouchingLetterChangedListener onTouchingLetterChangedListener) {
+    public void setOnTouchingLetterChangedListener(OnTouchingLetterChangedListener onTouchingLetterChangedListener) {
         this.onTouchingLetterChangedListener = onTouchingLetterChangedListener;
     }
+
     public interface OnTouchingLetterChangedListener {
-        public void onTouchingLetterChanged(String s);
+        void onTouchingLetterChanged(String s);
     }
 }
