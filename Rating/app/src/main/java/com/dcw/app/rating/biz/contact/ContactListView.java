@@ -17,11 +17,6 @@ import com.dcw.framework.view.annotation.InjectView;
 public class ContactListView extends LinearLayout implements View<ContactListView.ViewListener> {
     @InjectView(R.id.lv_list)
     private ListView mListView;
-
-    public ListView getListView() {
-        return mListView;
-    }
-
     private ViewListener mListener;
 
     public ContactListView(Context context) {
@@ -30,6 +25,10 @@ public class ContactListView extends LinearLayout implements View<ContactListVie
 
     public ContactListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public ListView getListView() {
+        return mListView;
     }
 
     @Override

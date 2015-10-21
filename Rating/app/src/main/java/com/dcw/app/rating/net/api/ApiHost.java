@@ -5,5 +5,6 @@ package com.dcw.app.rating.net.api;
  */
 public class ApiHost {
 
-    public static final String API_URL = "http://api.dianping.com";
+    public static final String API_URL = "http://sns.mock.uctest.local:8024";
+//    public static final String API_URL = "http://api.dianping.com";
 }

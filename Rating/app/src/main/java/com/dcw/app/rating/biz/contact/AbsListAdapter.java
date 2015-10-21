@@ -32,6 +32,10 @@ public abstract class AbsListAdapter<D> extends BaseAdapter implements Observer 
         mContext = context;
     }
 
+    public ListDataModel<D> getModel() {
+        return mModel;
+    }
+
     public void setModel(ListDataModel<D> model) {
         if (mModel.equals(model)) {
             return;
@@ -39,10 +43,6 @@ public abstract class AbsListAdapter<D> extends BaseAdapter implements Observer 
         mModel.deleteObserver(this);
         mModel = model;
         mModel.addObserver(this);
-    }
-
-    public ListDataModel<D> getModel() {
-        return mModel;
     }
 
     @Override

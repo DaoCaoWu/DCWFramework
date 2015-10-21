@@ -9,8 +9,9 @@ import android.widget.Toast;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.test.model.Contributor;
-import com.dcw.app.rating.biz.test.model.Reviews;
+import com.dcw.app.rating.biz.test.model.Comment;
+import com.dcw.app.rating.biz.test.model.ListData;
+import com.dcw.app.rating.biz.test.model.ResultData;
 import com.dcw.app.rating.biz.test.module.GithubModule;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
@@ -24,12 +25,14 @@ import com.dcw.framework.util.TouchableSpan;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 @InjectLayout(R.layout.fragment_rich_text)
-public class RichTextFragment extends BaseFragmentWrapper implements Callback<Contributor> {
+public class RichTextFragment extends BaseFragmentWrapper implements Callback<ResultData<ListData<Comment>>> {
     private static final String TAG = "RichTextFragment";
     GitHub gitHubService;
     @InjectView(value = R.id.tv_content, listeners = View.OnClickListener.class)
@@ -48,7 +51,7 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
     @Override
     public void initData() {
         gitHubService = GithubModule.buildGitHubRestClient();
-        RetrofitLoaderManager.initLoader(this, new ContributorLoader(getActivity(), gitHubService), this);
+        RetrofitLoaderManager.initLoader(this, new CommentsLoader(getActivity(), gitHubService), this);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
         }, "www.baidu.com").append("\n3.给已存在文本添加点击\n").appendTouchableEdge(start, end, new TouchableSpan.OnClickListener() {
             @Override
             public void onClick(String content) {
-                getLoaderManager().getLoader(ContributorLoader.class.hashCode()).startLoading();
+                getLoaderManager().getLoader(CommentsLoader.class.hashCode()).startLoading();
             }
         }, "已存在文本").build();
         mTVContent.setText(sp);
@@ -91,28 +94,32 @@ public class RichTextFragment extends BaseFragmentWrapper implements Callback<Co
     }
 
     @Override
-    public void success(Contributor contributors, Response response) {
-        Log.d("ContributorLoader", "onSuccess");
+    public void success(ResultData<ListData<Comment>> resultData, Response response) {
+        Log.d("Loader", "onSuccess");
         StringBuffer sb = new StringBuffer();
-        for (Reviews review : contributors.reviews) {
-//                                sb.append(contributors.status).append("(").append(contributors.count).append(")");
-            sb.append(review.reviewId).append("(").append(review.textExcerpt).append(")");
+        if (resultData.getData() != null) {
+            List<Comment> list = resultData.getData().getList();
+            if (list != null) {
+                for (Comment comment : list) {
+                    sb.append(comment.getText()).append("\n");
+                }
+                CharSequence cs = sb.toString();
+                mTVResult.setText(cs);
+                System.out.println(cs);
+            }
         }
-        final CharSequence cs = sb.toString();
-        mTVResult.setText(cs);
-        System.out.println(cs);
     }
 
-    static class ContributorLoader extends RetrofitLoader<Contributor, GitHub> {
+    static class CommentsLoader extends RetrofitLoader<ResultData<ListData<Comment>>, GitHub> {
 
-        public ContributorLoader(Context context, GitHub service) {
+        public CommentsLoader(Context context, GitHub service) {
             super(context, service);
         }
 
         @Override
-        public void call(GitHub service, Callback<Contributor> callback) {
+        public void call(GitHub service, Callback<ResultData<ListData<Comment>>> callback) {
             Log.d(this.getClass().getSimpleName(), "call");
-            service.getContributors(callback);
+            service.getComments(callback);
         }
     }
 
