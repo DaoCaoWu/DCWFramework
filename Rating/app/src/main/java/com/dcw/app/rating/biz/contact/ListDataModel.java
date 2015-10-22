@@ -1,8 +1,5 @@
 package com.dcw.app.rating.biz.contact;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-
 import com.dcw.app.rating.ui.mvc.core.Observable;
 
 import java.util.ArrayList;

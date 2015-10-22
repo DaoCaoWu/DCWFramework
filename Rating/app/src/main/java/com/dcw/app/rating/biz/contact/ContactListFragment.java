@@ -7,9 +7,6 @@ import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @InjectLayout(R.layout.fragment_contact_list)
 public class ContactListFragment extends BaseFragmentWrapper {
 

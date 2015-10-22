@@ -3,12 +3,8 @@ package com.dcw.app.rating.biz.contact;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorJoiner;
-import android.database.MatrixCursor;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.widget.SectionIndexer;
-
-import com.dcw.app.rating.util.TaskExecutor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,125 +17,66 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
 
     public ContactModel(final Context context) {
         super();
-        setDataList(getContactListFromLocal2(context));
-        TaskExecutor.executeTask(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
+        setDataList(getContactListFromLocal(context));
     }
 
     public ContactModel(List<Contact> dataList) {
         super(dataList);
     }
 
-    private List<Contact> getContactListFromLocal2(Context context) {
-        List<Contact> contactList = new ArrayList<Contact>();
-
-        String[] contactProjection = new String[] {
-                ContactsContract.Contacts._ID,
-                ContactsContract.Contacts.DISPLAY_NAME,
-        };
-        String[] phoneProjection = new String[] {
-                ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
-                ContactsContract.CommonDataKinds.Phone.NUMBER,
-        };
-        String[] matrixProjection = new String[] {
-                ContactsContract.Contacts._ID,
-                ContactsContract.Contacts.DISPLAY_NAME,
-                "phone_number"
-        };
-        // 查询联系人数据
-        Cursor contactCursor = context.getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI, contactProjection, null, null, "sort_key");
-        // 查询联系人数据
-        Cursor phoneCursor = context.getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, phoneProjection, null, null, "sort_key");
-
-        CursorJoiner cursorJoiner = new CursorJoiner(contactCursor, new String[]{ContactsContract.Contacts._ID}
-                , phoneCursor, new String[]{ContactsContract.CommonDataKinds.Phone.CONTACT_ID});
-        MatrixCursor matrixCursor = new MatrixCursor(matrixProjection, contactCursor.getColumnCount());
-
-        for (CursorJoiner.Result result : cursorJoiner) {
-            switch (result) {
-                case BOTH:
-                    String contactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts._ID));
-                    String contactName = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                    String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    Contact contact = new Contact();
-                    contact.setContactId(contactId);
-                    contact.setName(contactName);
-                    contact.setPhoneNum(phoneNumber);
-                    matrixCursor.addRow(new String[]{contactId, contactName, phoneNumber});
-                    contactList.add(contact);
-                    break;
-            }
-        }
-
-        contactCursor.close();
-        phoneCursor.close();
-
-        return contactList;
-    }
-
     private List<Contact> getContactListFromLocal(Context context) {
         List<Contact> contactList = new ArrayList<Contact>();
 
+        String[] contactProjection = new String[]{
+                ContactsContract.Contacts._ID,
+                ContactsContract.Contacts.DISPLAY_NAME,
+        };
+        String[] phoneProjection = new String[]{
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER,
+        };
         // 查询联系人数据
-        Cursor cursor = context.getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI, null, null, null, "sort_key");
-        if (cursor == null) {
+        Cursor contactCursor = context.getContentResolver().query(
+                ContactsContract.Contacts.CONTENT_URI, contactProjection, null, null, ContactsContract.Contacts.DISPLAY_NAME);
+        if (contactCursor == null) {
             return contactList;
         }
-        while (cursor.moveToNext()) {
-            boolean hasPhoneNumber = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0;
-            // 获取联系人的姓名
-            String contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-            if (!TextUtils.isEmpty(contactName) && hasPhoneNumber) {
-                String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                Cursor phoneCursor = context.getContentResolver().query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "="
-                                + contactId, null, null);
-                if (phoneCursor != null) {
-                    while (phoneCursor.moveToNext()) {
-                        String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        if (!TextUtils.isEmpty(phoneNumber)) {
-                            // 获取联系人的Id
-                            Contact contact = new Contact();
-                            contact.setContactId(contactId);
-                            contact.setName(contactName);
-                            contact.setPhoneNum(phoneNumber);
-                            if (!phoneCursor.isClosed()) {
-                                phoneCursor.close();
-                            }
-                            contactList.add(contact);
-                            break;
-                        }
-                    }
-                }
+        Cursor phoneCursor = context.getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, phoneProjection, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+        if (phoneCursor == null) {
+            contactCursor.close();
+            return contactList;
+        }
+        CursorJoiner cursorJoiner = new CursorJoiner(contactCursor, new String[]{ContactsContract.Contacts.DISPLAY_NAME}
+                , phoneCursor, new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME});
+        String contactId;
+        String contactName;
+        String phoneNumber;
+        for (CursorJoiner.Result result : cursorJoiner) {
+            switch (result) {
+                case BOTH:
+                    contactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts._ID));
+                    contactName = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    contactList.add(new Contact(contactId, contactName, phoneNumber));
+                    break;
             }
         }
-
-        if (!cursor.isClosed()) {
-            cursor.close();
-        }
-
+        contactCursor.close();
+        phoneCursor.close();
         return contactList;
     }
 
     @Override
     public void setDataList(List<Contact> dataList) {
         super.setDataList(dataList);
+        sortDataList();
     }
 
     @Override
     public void notifyObservers() {
         super.notifyObservers();
-//        sortDataList();
     }
 
     private void sortDataList() {
