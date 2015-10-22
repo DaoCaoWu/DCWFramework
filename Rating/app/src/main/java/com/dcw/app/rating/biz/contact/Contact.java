@@ -1,11 +1,13 @@
 package com.dcw.app.rating.biz.contact;
 
+import android.text.TextUtils;
+
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
 public class Contact extends SortLetter {
 
-    private int mContactId;
+    private String mContactId;
     private String mName;
     private String mPhoneNum;
     private Long mPhotoId;
@@ -14,16 +16,19 @@ public class Contact extends SortLetter {
     private String mFormattedNumber;
     private String mPinyin;
 
+    public Contact() {
+    }
+
     public Contact(String name, String phoneNum) {
         mName = name;
         mPhoneNum = phoneNum;
     }
 
-    public int getContactId() {
+    public String getContactId() {
         return mContactId;
     }
 
-    public void setContactId(int contactId) {
+    public void setContactId(String contactId) {
         mContactId = contactId;
     }
 
@@ -33,6 +38,27 @@ public class Contact extends SortLetter {
 
     public void setName(String name) {
         mName = name;
+        if (!TextUtils.isEmpty(name)) {
+            // 有联系人姓名得到对应的拼音
+            String pinyin = PinYin.getPinYin(name);
+            setPinyin(pinyin);
+            String firstPinyin = converterToFirstSpell(name);
+            String sortString = firstPinyin.substring(0, 1).toUpperCase();
+            if (sortString.matches("[A-Z]")) {
+                setSortKey(sortString);
+            } else {
+                setSortKey("#");
+            }
+        }
+    }
+
+    private String converterToFirstSpell(String chines) {
+        String firstPinYin = chines.substring(0, 1);
+        String result = PinYin.getPinYin2(firstPinYin);
+        if (TextUtils.isEmpty(result)) {
+            result = chines;
+        }
+        return result;
     }
 
     public String getPhoneNum() {

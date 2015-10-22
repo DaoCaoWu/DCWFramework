@@ -13,15 +13,13 @@ import java.util.List;
  */
 public class ListDataModel<D> extends Observable {
 
-    protected LayoutInflater mInflater;
     /**
      * the list store the data to show.
      */
     private List<D> mDataList = null;
-    /**
-     * the activity context from the activity where adapter is in.
-     */
-    private Context mContext = null;
+
+    public ListDataModel() {
+    }
 
     public ListDataModel(List<D> dataList) {
         setDataList(dataList);
