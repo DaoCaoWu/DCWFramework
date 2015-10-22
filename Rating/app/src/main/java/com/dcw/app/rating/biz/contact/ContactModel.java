@@ -44,7 +44,6 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
 
     private List<Contact> getContactListFromLocal(Context context) {
         List<Contact> contactList = new ArrayList<Contact>();
-
         String[] contactProjection = new String[]{
                 ContactsContract.Contacts._ID,
                 ContactsContract.Contacts.DISPLAY_NAME,
@@ -69,26 +68,25 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
         }
         CursorJoiner cursorJoiner = new CursorJoiner(contactCursor, new String[]{ContactsContract.Contacts.DISPLAY_NAME}
                 , phoneCursor, new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME});
-        String contactId;
-        String contactName;
-        String lookupKey;
-        Long phoneId;
-        String phoneNumber;
         for (CursorJoiner.Result result : cursorJoiner) {
             switch (result) {
                 case BOTH:
-                    contactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts._ID));
-                    contactName = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                    lookupKey = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
-                    phoneId = phoneCursor.getLong(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
-                    phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    contactList.add(new Contact(contactId, contactName, phoneNumber, phoneId, lookupKey));
+                    contactList.add(transform(contactCursor, phoneCursor));
                     break;
             }
         }
         contactCursor.close();
         phoneCursor.close();
         return contactList;
+    }
+
+    private Contact transform(Cursor contactCursor, Cursor phoneCursor) {
+        String contactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts._ID));
+        String contactName = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        String lookupKey = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+        Long phoneId = phoneCursor.getLong(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
+        String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+        return new Contact(contactId, contactName, phoneNumber, phoneId, lookupKey);
     }
 
     @Override
