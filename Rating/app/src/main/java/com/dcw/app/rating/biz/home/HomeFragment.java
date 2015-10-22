@@ -56,7 +56,7 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_search:
+            case R.id.btn_right:
                 startFragment(SearchFragment.class);
                 break;
         }

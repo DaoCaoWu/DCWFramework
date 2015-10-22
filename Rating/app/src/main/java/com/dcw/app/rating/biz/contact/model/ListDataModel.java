@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.model;
 
 import com.dcw.app.rating.ui.mvc.core.Observable;
 

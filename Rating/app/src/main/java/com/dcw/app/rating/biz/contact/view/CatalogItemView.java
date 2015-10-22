@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.view;
 
 import android.view.View;
 import android.widget.TextView;

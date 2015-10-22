@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

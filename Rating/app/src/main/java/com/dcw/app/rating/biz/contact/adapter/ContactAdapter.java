@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.biz.contact.model.ContactModel;
+import com.dcw.app.rating.biz.contact.model.bean.Contact;
+import com.dcw.app.rating.biz.contact.view.CatalogItemView;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.

@@ -1,50 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dcw.app.rating.biz.contact.ContactListView
-    android:id="@id/root_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/transparent"
+              android:orientation="vertical">
 
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.dcw.app.rating.biz.contact.LetterIndexView
-        android:id="@id/container"
+    <com.dcw.app.rating.biz.contact.view.StickyListView
+        android:id="@id/root_view"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ListView
-            style="@style/list_view_style"/>
 
-        <include
-            android:id="@id/catalog_bar"
-            layout="@layout/layout_catalog"
-            android:visibility="gone"/>
+        <com.dcw.app.rating.biz.contact.view.LetterIndexView
+            android:id="@id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@id/tv_float"
-            android:layout_width="@dimen/floating_action_button"
-            android:layout_height="@dimen/floating_action_button"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:textColor="@color/color_66"
-            android:textSize="@dimen/headline"
-            tools:visibility="visible"
-            tools:text="A"
-            android:visibility="invisible" />
+            <ListView
+                style="@style/list_view_style"/>
 
-        <com.dcw.app.rating.biz.contact.SideBar
-            android:id="@id/sidebar"
-            android:layout_width="@dimen/horizontal_margins_on_gird_view"
-            android:layout_height="match_parent"
-            android:layout_gravity="right|center_vertical"
-            android:paddingTop="@dimen/screen_edge_left_and_right_margins"
-            android:paddingBottom="@dimen/screen_edge_left_and_right_margins" />
-    </com.dcw.app.rating.biz.contact.LetterIndexView>
+            <include
+                android:id="@id/catalog_bar"
+                layout="@layout/layout_catalog"
+                android:visibility="gone"/>
 
-</com.dcw.app.rating.biz.contact.ContactListView>
+            <TextView
+                android:id="@id/tv_float"
+                android:layout_width="@dimen/floating_action_button"
+                android:layout_height="@dimen/floating_action_button"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:textColor="@color/color_66"
+                android:textSize="@dimen/headline"
+                android:visibility="invisible"
+                tools:text="A"
+                tools:visibility="visible"/>
+
+            <com.dcw.app.rating.biz.contact.view.SideBar
+                android:id="@id/sidebar"
+                android:layout_width="@dimen/horizontal_margins_on_gird_view"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:paddingBottom="@dimen/screen_edge_left_and_right_margins"
+                android:paddingTop="@dimen/screen_edge_left_and_right_margins"/>
+        </com.dcw.app.rating.biz.contact.view.LetterIndexView>
+
+    </com.dcw.app.rating.biz.contact.view.StickyListView>
+</LinearLayout>

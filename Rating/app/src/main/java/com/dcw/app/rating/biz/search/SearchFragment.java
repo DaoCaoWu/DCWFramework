@@ -30,7 +30,7 @@ public class SearchFragment extends BaseFragmentWrapper implements SearchView.On
 
     @Override
     public void initUI() {
-        mToolbarController = new ToolbarController((NavigationBar) findViewById(R.id.toolbar), new ToolbarModel(getString(R.string.search), R.menu.menu_search));
+        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(getString(R.string.search), R.menu.menu_search));
     }
 
     @Override
@@ -62,7 +62,6 @@ public class SearchFragment extends BaseFragmentWrapper implements SearchView.On
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        ToastManager.getInstance().showToast(query);
         return false;
     }
 

@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -17,7 +17,7 @@ import com.dcw.framework.view.annotation.InjectView;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class ContactListView extends LinearLayout implements com.dcw.app.rating.ui.mvc.View<ContactListView.ViewListener>, AbsListView.OnScrollListener {
+public class StickyListView extends LinearLayout implements com.dcw.app.rating.ui.mvc.View<StickyListView.ViewListener>, AbsListView.OnScrollListener {
 
     @InjectView(R.id.lv_list)
     ListView mListView;
@@ -30,11 +30,11 @@ public class ContactListView extends LinearLayout implements com.dcw.app.rating.
     private ViewListener mListener;
     private AbsListView.OnScrollListener mOnScrollListener;
 
-    public ContactListView(Context context) {
+    public StickyListView(Context context) {
         super(context);
     }
 
-    public ContactListView(Context context, AttributeSet attrs) {
+    public StickyListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

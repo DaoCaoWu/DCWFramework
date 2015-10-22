@@ -3,7 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".biz.home.HomeFragment">
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/btn_right"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/search"
         app:showAsAction="always"/>

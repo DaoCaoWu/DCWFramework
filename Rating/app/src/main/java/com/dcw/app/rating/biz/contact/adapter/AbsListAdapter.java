@@ -1,8 +1,9 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.adapter;
 
 import android.content.Context;
 import android.widget.BaseAdapter;
 
+import com.dcw.app.rating.biz.contact.model.ListDataModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 

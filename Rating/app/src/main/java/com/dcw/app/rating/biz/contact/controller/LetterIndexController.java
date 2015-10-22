@@ -1,5 +1,7 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.controller;
 
+import com.dcw.app.rating.biz.contact.model.ContactModel;
+import com.dcw.app.rating.biz.contact.view.LetterIndexView;
 import com.dcw.app.rating.ui.mvc.Controller;
 
 /**

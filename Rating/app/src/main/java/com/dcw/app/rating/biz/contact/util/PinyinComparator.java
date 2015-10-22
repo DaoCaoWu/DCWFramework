@@ -1,4 +1,6 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.util;
+
+import com.dcw.app.rating.biz.contact.model.bean.SortLetter;
 
 import java.util.Comparator;
 

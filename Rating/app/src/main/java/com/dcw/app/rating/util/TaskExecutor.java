@@ -103,4 +103,8 @@ public class TaskExecutor {
             sScheduledThreadPoolExecutor = null;
         }
     }
+
+    public interface RunnableCallback<D> {
+        void onRun(D data);
+    }
 }

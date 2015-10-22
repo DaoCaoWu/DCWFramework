@@ -1,6 +1,9 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.model.bean;
 
 import android.text.TextUtils;
+
+import com.dcw.app.rating.biz.contact.util.LetterToDigital;
+import com.dcw.app.rating.biz.contact.util.PinYin;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
@@ -28,7 +31,14 @@ public class Contact extends SortLetter {
         setName(name);
         mPhoneNum = phoneNum;
         mPhotoId = photoId;
-        mLookUpKey = lookUpKey;
+        mLookUpKey = LetterToDigital.getNum(lookUpKey, false);
+    }
+
+    public boolean contain(String keyword) {
+        if (getPhoneNum().contains(keyword) || getLookUpKey().contains(keyword) || getPinyin().contains(keyword)) {
+            return true;
+        }
+        return false;
     }
 
     public String getContactId() {
@@ -69,7 +79,7 @@ public class Contact extends SortLetter {
     }
 
     public String getPhoneNum() {
-        return mPhoneNum;
+        return mPhoneNum == null ? "" : mPhoneNum;
     }
 
     public void setPhoneNum(String phoneNum) {
@@ -85,7 +95,7 @@ public class Contact extends SortLetter {
     }
 
     public String getLookUpKey() {
-        return mLookUpKey;
+        return mLookUpKey == null ? "" : mLookUpKey;
     }
 
     public void setLookUpKey(String lookUpKey) {
@@ -109,7 +119,7 @@ public class Contact extends SortLetter {
     }
 
     public String getPinyin() {
-        return mPinyin;
+        return mPinyin == null ? "" : mPinyin;
     }
 
     public void setPinyin(String pinyin) {

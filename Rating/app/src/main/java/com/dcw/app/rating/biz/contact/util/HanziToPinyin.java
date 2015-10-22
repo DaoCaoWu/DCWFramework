@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact;
+package com.dcw.app.rating.biz.contact.util;
 
 import android.text.TextUtils;
 import android.util.Log;

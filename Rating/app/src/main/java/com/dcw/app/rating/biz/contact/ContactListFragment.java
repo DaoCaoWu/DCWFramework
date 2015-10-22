@@ -1,14 +1,21 @@
 package com.dcw.app.rating.biz.contact;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
+import com.dcw.app.rating.biz.contact.controller.ContactController;
+import com.dcw.app.rating.biz.contact.model.ContactModel;
+import com.dcw.app.rating.biz.contact.view.StickyListView;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 @InjectLayout(R.layout.fragment_contact_list)
-public class ContactListFragment extends BaseFragmentWrapper {
+public class ContactListFragment extends BaseFragmentWrapper implements MenuItem.OnMenuItemClickListener {
 
     @Override
     public Class getHostActivity() {
@@ -22,12 +29,30 @@ public class ContactListFragment extends BaseFragmentWrapper {
 
     @Override
     public void initUI() {
-        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName()));
-        new ContactController((ContactListView) findViewById(R.id.root_view), new ContactModel());
+        ToolbarModel model = new ToolbarModel(this.getClass().getSimpleName(), R.menu.menu_home, true);
+        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
+        new ContactController((StickyListView) findViewById(R.id.root_view), new ContactModel()).loadContacts();
     }
 
     @Override
     public void initListeners() {
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        final MenuItem searchItem = menu.findItem(R.id.btn_right);
+        searchItem.setOnMenuItemClickListener(this);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.btn_right:
+                startFragment(SearchContactFragment.class);
+                break;
+        }
+        return false;
     }
 }
