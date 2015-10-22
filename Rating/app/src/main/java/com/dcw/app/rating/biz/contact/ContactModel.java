@@ -6,22 +6,40 @@ import android.database.CursorJoiner;
 import android.provider.ContactsContract;
 import android.widget.SectionIndexer;
 
+import com.dcw.app.rating.util.TaskExecutor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import retrofit.Callback;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
 public class ContactModel extends ListDataModel<Contact> implements SectionIndexer {
 
-    public ContactModel(final Context context) {
+    public ContactModel() {
         super();
-        setDataList(getContactListFromLocal(context));
     }
 
     public ContactModel(List<Contact> dataList) {
         super(dataList);
+    }
+
+    public void getContactListAsyn(final Context context, final Callback<List<Contact>> callback) {
+        TaskExecutor.executeTask(new Runnable() {
+            @Override
+            public void run() {
+                final List<Contact> contacts = getContactListFromLocal(context);
+                TaskExecutor.runTaskOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.success(contacts, null);
+                    }
+                });
+            }
+        });
     }
 
     private List<Contact> getContactListFromLocal(Context context) {
@@ -30,11 +48,12 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
         String[] contactProjection = new String[]{
                 ContactsContract.Contacts._ID,
                 ContactsContract.Contacts.DISPLAY_NAME,
+                ContactsContract.Contacts.LOOKUP_KEY
         };
         String[] phoneProjection = new String[]{
-                ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Phone._ID,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                ContactsContract.CommonDataKinds.Phone.NUMBER
         };
         // 查询联系人数据
         Cursor contactCursor = context.getContentResolver().query(
@@ -52,14 +71,18 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
                 , phoneCursor, new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME});
         String contactId;
         String contactName;
+        String lookupKey;
+        Long phoneId;
         String phoneNumber;
         for (CursorJoiner.Result result : cursorJoiner) {
             switch (result) {
                 case BOTH:
                     contactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts._ID));
                     contactName = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    lookupKey = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+                    phoneId = phoneCursor.getLong(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
                     phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    contactList.add(new Contact(contactId, contactName, phoneNumber));
+                    contactList.add(new Contact(contactId, contactName, phoneNumber, phoneId, lookupKey));
                     break;
             }
         }
@@ -84,6 +107,7 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
             return;
         }
         Collections.sort(getDataList(), new PinyinComparator());
+        notifyObservers();
     }
 
     @Override

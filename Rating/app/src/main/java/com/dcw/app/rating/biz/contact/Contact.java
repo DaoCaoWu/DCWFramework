@@ -20,9 +20,15 @@ public class Contact extends SortLetter {
     }
 
     public Contact(String contactId, String name, String phoneNum) {
-        setContactId(contactId);
+        this(contactId, name, phoneNum, 0L, null);
+    }
+
+    public Contact(String contactId, String name, String phoneNum, Long photoId, String lookUpKey) {
+        mContactId = contactId;
         setName(name);
-        setPhoneNum(phoneNum);
+        mPhoneNum = phoneNum;
+        mPhotoId = photoId;
+        mLookUpKey = lookUpKey;
     }
 
     public String getContactId() {

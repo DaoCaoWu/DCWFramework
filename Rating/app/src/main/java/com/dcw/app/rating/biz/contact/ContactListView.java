@@ -57,7 +57,7 @@ public class ContactListView extends LinearLayout implements com.dcw.app.rating.
 
     @Override
     public <T> void update(Observable observable, T data, Object... args) {
-
+//        ((ContactAdapter)getListView().getAdapter()).notifyDataSetChanged();
     }
 
     @Override
