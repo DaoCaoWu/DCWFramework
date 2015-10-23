@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact.util;
+package com.dcw.app.rating.biz.contact.pinyin;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/22.

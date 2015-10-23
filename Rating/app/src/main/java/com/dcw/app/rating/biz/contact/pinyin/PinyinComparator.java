@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact.util;
+package com.dcw.app.rating.biz.contact.pinyin;
 
 import com.dcw.app.rating.biz.contact.model.bean.SortLetter;
 

@@ -2,8 +2,8 @@ package com.dcw.app.rating.biz.contact.model.bean;
 
 import android.text.TextUtils;
 
-import com.dcw.app.rating.biz.contact.util.LetterToDigital;
-import com.dcw.app.rating.biz.contact.util.PinYin;
+import com.dcw.app.rating.biz.contact.pinyin.LetterToDigital;
+import com.dcw.app.rating.biz.contact.pinyin.PinYin;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.

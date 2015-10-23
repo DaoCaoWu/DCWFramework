@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact.util;
+package com.dcw.app.rating.biz.contact.pinyin;
 
 import java.util.ArrayList;
 
