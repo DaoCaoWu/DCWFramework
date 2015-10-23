@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
@@ -21,12 +22,12 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
 
     @InjectView(R.id.lv_list)
     ListView mListView;
-    @InjectView(R.id.container)
-    private LetterIndexView mIndexView;
     @InjectView(R.id.catalog_bar)
     View mLLCatalog;
     @InjectView(R.id.tv_content)
     TextView mCatalogView;
+    @InjectView(R.id.container)
+    private LetterIndexView mIndexView;
     private ViewListener mListener;
     private AbsListView.OnScrollListener mOnScrollListener;
 
@@ -57,7 +58,13 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
 
     @Override
     public <T> void update(Observable observable, T data, Object... args) {
-//        ((ContactAdapter)getListView().getAdapter()).notifyDataSetChanged();
+        if (observable instanceof ContactModel) {
+            ContactModel model = (ContactModel) observable;
+            if (model.getCount() == 0) {
+                mLLCatalog.setVisibility(GONE);
+            }
+
+        }
     }
 
     @Override

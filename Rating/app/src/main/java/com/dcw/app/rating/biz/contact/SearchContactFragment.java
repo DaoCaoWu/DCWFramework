@@ -35,7 +35,7 @@ public class SearchContactFragment extends SearchFragment implements AbsListView
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        mController.searchContacts(mCacheModel, newText);
+        mController.getModel().search(mCacheModel, newText);
         return super.onQueryTextChange(newText);
     }
 

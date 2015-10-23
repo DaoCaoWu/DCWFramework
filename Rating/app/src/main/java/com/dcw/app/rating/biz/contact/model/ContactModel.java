@@ -20,6 +20,12 @@ import java.util.List;
  */
 public class ContactModel extends ListDataModel<Contact> implements SectionIndexer {
 
+    public static final int NOT_LOAD = 0;
+    public static final int LOADING = 1;
+    public static final int LOADED = 2;
+
+    int mLoadContactListState;
+
     public ContactModel() {
         super();
     }
@@ -32,30 +38,21 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
         TaskExecutor.executeTask(new Runnable() {
             @Override
             public void run() {
+                mLoadContactListState = LOADING;
                 final List<Contact> contacts = getContactListFromContactProvider(context);
                 TaskExecutor.runTaskOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         setDataList(contacts);
+                        mLoadContactListState = LOADED;
                     }
                 });
             }
         });
     }
 
-    public void getContactListAsyn(final Context context, final TaskExecutor.RunnableCallback<List<Contact>> callback) {
-        TaskExecutor.executeTask(new Runnable() {
-            @Override
-            public void run() {
-                final List<Contact> contacts = getContactListFromContactProvider(context);
-                TaskExecutor.runTaskOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onRun(contacts);
-                    }
-                });
-            }
-        });
+    public int getLoadContactListState() {
+        return mLoadContactListState;
     }
 
     private List<Contact> getContactListFromContactProvider(Context context) {
@@ -105,39 +102,36 @@ public class ContactModel extends ListDataModel<Contact> implements SectionIndex
         return new Contact(contactId, contactName, phoneNumber, phoneId, lookupKey);
     }
 
-    public void search(final ContactModel model, final String keyword, final TaskExecutor.RunnableCallback<List<Contact>> callback) {
-        TaskExecutor.executeTask(new Runnable() {
-            @Override
-            public void run() {
-                if (model == null || model.getCount() == 0 || TextUtils.isEmpty(keyword)) {
-                    return;
-                }
-                List<Contact> cacheContacts = model.getDataList();
-                final List<Contact> contacts = new ArrayList<Contact>();
-                for (Contact contact : cacheContacts) {
-                    if (contact.contain(keyword)) {
-                        contacts.add(contact);
-                    }
-                }
-                TaskExecutor.runTaskOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onRun(contacts);
-                    }
-                });
+    public void search(ContactModel model, String keyword) {
+        if (model == null || model.getLoadContactListState() != LOADED || model.getCount() == 0 || TextUtils.isEmpty(keyword)) {
+            return;
+        }
+        List<Contact> cacheContacts = model.getDataList();
+        List<Contact> contacts = getDataList();
+        if (contacts == null) {
+            contacts = new ArrayList<Contact>();
+        } else {
+            contacts.clear();
+        }
+        for (Contact contact : cacheContacts) {
+            if (contact.contain(keyword)) {
+                contacts.add(contact);
             }
-        });
+        }
+        setDataList(contacts);
+    }
+
+    @Override
+    public void clearData() {
+        super.clearData();
+        mLoadContactListState = NOT_LOAD;
     }
 
     @Override
     public void setDataList(List<Contact> dataList) {
         super.setDataList(dataList);
         sortDataList();
-    }
-
-    @Override
-    public void notifyObservers() {
-        super.notifyObservers();
+        notifyObservers();
     }
 
     private void sortDataList() {

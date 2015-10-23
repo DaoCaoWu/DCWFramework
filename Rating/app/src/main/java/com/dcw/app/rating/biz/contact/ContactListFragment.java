@@ -31,7 +31,7 @@ public class ContactListFragment extends BaseFragmentWrapper implements MenuItem
     public void initUI() {
         ToolbarModel model = new ToolbarModel(this.getClass().getSimpleName(), R.menu.menu_home, true);
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
-        new ContactController((StickyListView) findViewById(R.id.root_view), new ContactModel()).loadContacts();
+        new ContactController((StickyListView) findViewById(R.id.root_view), new ContactModel()).getModel().loadContactListAsyn(getActivity());
     }
 
     @Override

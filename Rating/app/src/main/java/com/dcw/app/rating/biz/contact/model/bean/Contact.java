@@ -35,7 +35,7 @@ public class Contact extends SortLetter {
     }
 
     public boolean contain(String keyword) {
-        if (getPhoneNum().contains(keyword) || getLookUpKey().contains(keyword) || getPinyin().contains(keyword)) {
+        if (getPhoneNum().contains(keyword) || getName().contains(keyword) || getPinyin().contains(PinYin.getPinYin(keyword))) {
             return true;
         }
         return false;

@@ -13,22 +13,16 @@ import com.dcw.app.rating.R;
 
 public class SideBar extends View {
 
-    private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
-
     public static String[] b = {"↑", "A", "B", "C", "D", "E", "F", "G", "H", "I",
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
             "W", "X", "Y", "Z", "#"
     };
-
+    private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
     private int choose = -1;
 
     private Paint paint = new Paint();
 
     private TextView mTextDialog;
-
-    public void setTextView(TextView mTextDialog) {
-        this.mTextDialog = mTextDialog;
-    }
 
     public SideBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -40,6 +34,10 @@ public class SideBar extends View {
 
     public SideBar(Context context) {
         super(context);
+    }
+
+    public void setTextView(TextView mTextDialog) {
+        this.mTextDialog = mTextDialog;
     }
 
     /**

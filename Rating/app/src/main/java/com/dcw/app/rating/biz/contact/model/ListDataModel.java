@@ -110,4 +110,16 @@ public class ListDataModel<D> extends Observable {
         mDataList.addAll(items);
         notifyObservers();
     }
+
+    @Override
+    public void notifyObservers() {
+        setChanged();
+        super.notifyObservers();
+    }
+
+    @Override
+    public <T> void notifyObservers(T data, Object... args) {
+        setChanged();
+        super.notifyObservers(data, args);
+    }
 }
