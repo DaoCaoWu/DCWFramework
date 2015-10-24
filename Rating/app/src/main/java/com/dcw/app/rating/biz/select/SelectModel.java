@@ -62,6 +62,13 @@ public class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
      */
     private long mInitSelectedId = -1;
 
+    public SelectModel() {
+        super();
+    }
+
+    public SelectModel(List<T> dataList) {
+        super(dataList);
+    }
 
     /**
      * 初始化selectedMap、canBeSelectedMap的数据
@@ -81,6 +88,7 @@ public class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
 
     public void notifyDataSetChanged() {
         onDataListChange();
+        notifyObservers();
     }
 
     private void onDataListChange() {

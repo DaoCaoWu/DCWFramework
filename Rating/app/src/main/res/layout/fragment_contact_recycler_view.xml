@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/transparent"
+              android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.dcw.app.rating.biz.select.ContactRecyclerView
+        android:id="@id/root_view"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.dcw.app.rating.biz.contact.view.LetterIndexView
+            android:id="@id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/lv_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@id/catalog_bar"
+                layout="@layout/layout_catalog"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@id/tv_float"
+                android:layout_width="@dimen/floating_action_button"
+                android:layout_height="@dimen/floating_action_button"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:textColor="@color/color_66"
+                android:textSize="@dimen/headline"
+                android:visibility="invisible"
+                tools:text="A"
+                tools:visibility="visible"/>
+
+            <com.dcw.app.rating.biz.contact.view.SideBar
+                android:id="@id/sidebar"
+                android:layout_width="@dimen/horizontal_margins_on_gird_view"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:paddingBottom="@dimen/screen_edge_left_and_right_margins"
+                android:paddingTop="@dimen/screen_edge_left_and_right_margins"/>
+        </com.dcw.app.rating.biz.contact.view.LetterIndexView>
+
+    </com.dcw.app.rating.biz.select.ContactRecyclerView>
+</LinearLayout>

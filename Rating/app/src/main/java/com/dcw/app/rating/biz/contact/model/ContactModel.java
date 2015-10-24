@@ -9,6 +9,7 @@ import android.widget.SectionIndexer;
 
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.pinyin.PinyinComparator;
+import com.dcw.app.rating.biz.select.SelectModel;
 import com.dcw.app.rating.util.TaskExecutor;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class ContactModel extends ListDataModel<Contact> implements SectionIndexer {
+public class ContactModel extends SelectModel<Contact> implements SectionIndexer {
 
     public static final int NOT_LOAD = 0;
     public static final int LOADING = 1;

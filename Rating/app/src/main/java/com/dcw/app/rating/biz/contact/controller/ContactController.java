@@ -21,11 +21,11 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
         new LetterIndexController(getView().getIndexView(), model);
         ContactAdapter adapter = new ContactAdapter(getView().getContext(), getModel());
         getView().getListView().setAdapter(adapter);
+        getView().setViewListener(this);
         getModel().addObserver(this);
         getModel().addObserver(adapter);
         getModel().addObserver(getView());
         getModel().addObserver(getView().getIndexView());
-        getView().setViewListener(this);
         getView().getIndexView().setTouchingLetterChangedListener(this);
     }
 

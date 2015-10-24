@@ -29,7 +29,7 @@ import com.dcw.framework.view.annotation.InjectLayout;
  * @email adao12.vip@gmail.com
  * @create 15/10/23
  */
-@InjectLayout(R.layout.fragment_contact_list)
+@InjectLayout(R.layout.fragment_contact_recycler_view)
 public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMenuItemClickListener {
 
     @Override
@@ -46,7 +46,7 @@ public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMe
     public void initUI() {
         ToolbarModel model = new ToolbarModel(this.getClass().getSimpleName(), R.menu.menu_home, true);
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
-        new ContactController((StickyListView) findViewById(R.id.root_view), new ContactModel()).getModel().loadContactListAsyn(getActivity());
+        new SelectContactController((ContactRecyclerView) findViewById(R.id.root_view), new ContactModel()).getModel().loadContactListAsyn(getActivity());
     }
 
     @Override

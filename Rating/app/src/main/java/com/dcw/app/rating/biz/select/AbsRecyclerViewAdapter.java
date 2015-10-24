@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcw.app.rating.biz.contact.model.ListDataModel;
+import com.dcw.app.rating.ui.mvc.core.Observable;
+import com.dcw.app.rating.ui.mvc.core.Observer;
 
 import java.lang.reflect.Constructor;
 
@@ -25,7 +27,7 @@ import java.lang.reflect.Constructor;
  * @email adao12.vip@gmail.com
  * @create 15/10/23
  */
-public class AbsRecyclerViewAdapter<D, M extends ListDataModel<D>, VH extends AbsRecyclerViewHolder<ListDataModel<D>, D>> extends RecyclerView.Adapter<VH> {
+public class AbsRecyclerViewAdapter<D, M extends ListDataModel<D>, VH extends AbsRecyclerViewHolder<M, D>> extends RecyclerView.Adapter<VH> implements Observer {
 
     private Context mContext;
     private M mModel;
@@ -67,5 +69,10 @@ public class AbsRecyclerViewAdapter<D, M extends ListDataModel<D>, VH extends Ab
     @Override
     public int getItemCount() {
         return mModel.getCount();
+    }
+
+    @Override
+    public <T> void update(Observable observable, T data, Object... args) {
+        notifyDataSetChanged();
     }
 }

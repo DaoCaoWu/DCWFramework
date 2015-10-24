@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
+import com.dcw.app.rating.biz.contact.view.CatalogItemView;
 import com.dcw.app.rating.biz.contact.view.ItemView;
 
 /**
@@ -24,29 +26,37 @@ import com.dcw.app.rating.biz.contact.view.ItemView;
  * @email adao12.vip@gmail.com
  * @create 15/10/23
  */
-public class SelectItemView extends AbsRecyclerViewHolder<SelectModel<Contact>, Contact> {
+public class SelectItemView extends AbsRecyclerViewHolder<ContactModel, Contact> {
 
-    ItemView mItemView;
+    CatalogItemView mItemView;
     CheckBox mCbSelect;
 
     public SelectItemView(View itemView) {
         super(itemView);
         View convertView = itemView.findViewById(R.id.container);
         mCbSelect = (CheckBox)itemView.findViewById(R.id.cb_select);
-        LayoutInflater.from(itemView.getContext()).inflate(R.layout.item_view_select, (ViewGroup)convertView, true);
-        mItemView = new ItemView(convertView);
+        View containerView = LayoutInflater.from(itemView.getContext()).inflate(R.layout.layout_list_item_catalog, (ViewGroup)convertView);
+        mItemView = new CatalogItemView(containerView);
     }
 
     @Override
-    public void onBindData(AbsRecyclerViewAdapter adapter, final SelectModel<Contact> model, final int position) {
+    public void onBindData(AbsRecyclerViewAdapter adapter, final ContactModel model, final int position) {
         Contact contact = model.getItem(position);
-        mItemView.update(null, contact.getName(), contact.getPhoneNum());
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                model.onCheckBoxClicked(position, v);
-            }
-        });
-        mCbSelect.setChecked(model.isSelected(position));
+        int section = model.getSectionForPosition(position);
+        if (position == model.getPositionForSection(section)) {
+            mItemView.getLLCatalog().setVisibility(View.VISIBLE);
+        } else {
+            mItemView.getLLCatalog().setVisibility(View.GONE);
+        }
+        if (contact != null) {
+            mItemView.update(contact.getSortKey(), null, contact.getName(), contact.getPhoneNum());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    model.onCheckBoxClicked(position, v);
+                }
+            });
+            mCbSelect.setChecked(model.isSelected(position));
+        }
     }
 }
