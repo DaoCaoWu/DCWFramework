@@ -31,7 +31,9 @@ public class AbsRecyclerViewAdapter<D, M extends ListDataModel<D>, VH extends Ab
 
     private Context mContext;
     private M mModel;
-    private @LayoutRes int mLayoutResId;
+    private
+    @LayoutRes
+    int mLayoutResId;
     private Class<VH> mVHClass;
 
     public AbsRecyclerViewAdapter(Context context, M model, @LayoutRes int layoutResId, Class<VH> vhClass) {

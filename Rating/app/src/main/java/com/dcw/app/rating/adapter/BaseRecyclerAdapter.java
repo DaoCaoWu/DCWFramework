@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
-
 import com.dcw.app.rating.log.LogUtils;
 
 import java.util.ArrayList;

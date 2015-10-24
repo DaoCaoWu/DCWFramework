@@ -3,8 +3,6 @@ package com.dcw.app.rating.biz.select;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.contact.adapter.ContactAdapter;
-import com.dcw.app.rating.biz.contact.controller.LetterIndexController;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;
@@ -31,7 +29,6 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
 
     public SelectContactController(ContactRecyclerView view, ContactModel model) {
         super(view, model);
-        new LetterIndexController(getView().getIndexView(), model);
         AbsRecyclerViewAdapter<Contact, ContactModel, SelectItemView> adapter
                 = new AbsRecyclerViewAdapter<Contact, ContactModel, SelectItemView>(
                 getView().getContext(), getModel(), R.layout.item_view_select, SelectItemView.class);
@@ -40,8 +37,8 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
         getModel().addObserver(this);
         getModel().addObserver(adapter);
         getModel().addObserver(getView());
-        getModel().addObserver(getView().getIndexView());
         getView().getIndexView().setTouchingLetterChangedListener(this);
+        getModel().setSelectedMode(SelectModel.TYPE_SELECT_MULTI);
     }
 
     @Override
@@ -51,7 +48,10 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
 
     @Override
     public void onTouchingLetterChanged(String s) {
-        //该字母首次出现的位置
+        if (SideBar.b[0].equals(s)) {
+            getView().getRecyclerView().scrollToPosition(0);
+            return;
+        }
         int position = getModel().getPositionForSection(s.charAt(0));
         if (position != -1) {
             getView().getRecyclerView().scrollToPosition(position);

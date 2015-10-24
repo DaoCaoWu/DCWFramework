@@ -18,14 +18,12 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
 
     public ContactController(StickyListView view, ContactModel model) {
         super(view, model);
-        new LetterIndexController(getView().getIndexView(), model);
         ContactAdapter adapter = new ContactAdapter(getView().getContext(), getModel());
         getView().getListView().setAdapter(adapter);
         getView().setViewListener(this);
         getModel().addObserver(this);
         getModel().addObserver(adapter);
         getModel().addObserver(getView());
-        getModel().addObserver(getView().getIndexView());
         getView().getIndexView().setTouchingLetterChangedListener(this);
     }
 
@@ -36,7 +34,10 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
 
     @Override
     public void onTouchingLetterChanged(String s) {
-        //该字母首次出现的位置
+        if (SideBar.b[0].equals(s)) {
+            getView().getListView().setSelection(0);
+            return;
+        }
         int position = getModel().getPositionForSection(s.charAt(0));
         if (position != -1) {
             getView().getListView().setSelection(position + getView().getListView().getHeaderViewsCount());

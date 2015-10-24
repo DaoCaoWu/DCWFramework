@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 public class Md5EncryptionHelper {
     /**
      * 获取MD5字符串
+     *
      * @param content 需要转换的字符串
      * @return String
      */

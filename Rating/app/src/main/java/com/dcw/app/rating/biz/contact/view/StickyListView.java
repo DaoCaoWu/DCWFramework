@@ -3,7 +3,6 @@ package com.dcw.app.rating.biz.contact.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
+import com.dcw.app.rating.biz.select.CatalogHelper;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
@@ -28,6 +28,7 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
     TextView mCatalogView;
     @InjectView(R.id.container)
     private LetterIndexView mIndexView;
+    CatalogHelper mCatalogHelper;
     private ViewListener mListener;
     private AbsListView.OnScrollListener mOnScrollListener;
 
@@ -71,6 +72,7 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
     protected void onFinishInflate() {
         super.onFinishInflate();
         DCWAnnotation.inject(this);
+        mCatalogHelper = new CatalogHelper(mLLCatalog, R.id.catalog_bar);
         getListView().setOnScrollListener(this);
     }
 
@@ -83,53 +85,57 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        View childView = view.getChildAt(0);
-        if (childView != null) {
-            int titleHeight = mLLCatalog.getHeight();
-            int bottom = childView.getBottom();
-            int top = childView.getTop();
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLLCatalog.getLayoutParams();
-            if (bottom < titleHeight) {
-                LinearLayout subChildView = (LinearLayout) view.getChildAt(1);
-                if (subChildView != null) {
-                    if (subChildView.getChildCount() > 0) {
-                        if (subChildView.getChildAt(0).getVisibility() != View.VISIBLE) {
-                            return;
-                        }
-                    }
-                }
-                float pushedDistance = bottom - titleHeight;
-                params.topMargin = (int) pushedDistance;
-                mLLCatalog.setLayoutParams(params);
-                mLLCatalog.setVisibility(View.VISIBLE);
-            } else {
-                if (params.topMargin != 0) {
-                    params.topMargin = 0;
-                    mLLCatalog.setLayoutParams(params);
-                }
-                if (firstVisibleItem == 0) {
-                    if (top < 0) {
-                        mLLCatalog.setVisibility(View.VISIBLE);
-                    } else {
-                        mLLCatalog.setVisibility(View.GONE);
-                        return;
-                    }
-                }
-            }
-            if (view.getItemAtPosition(firstVisibleItem) != null) {
-                mLLCatalog.setVisibility(View.VISIBLE);
-                if (mListener != null) {
-                    mListener.onCatalogViewShouldUpdate(mCatalogView, firstVisibleItem);
-                }
-            } else {
-                mLLCatalog.setVisibility(View.GONE);
-            }
-        } else {
-            mLLCatalog.setVisibility(View.VISIBLE);
+        mCatalogHelper.onScroll(view);
+        if (mCatalogHelper.isExist(view.getChildAt(0)) && mListener != null) {
+            mListener.onCatalogViewShouldUpdate(mCatalogView, firstVisibleItem);
         }
-        if (mOnScrollListener != null) {
-            mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-        }
+//        View firstVisibleItemView = view.getChildAt(0);
+//        if (firstVisibleItemView != null) {
+//            int mLLCatalogHeight = mLLCatalog.getHeight();
+//            int bottom = firstVisibleItemView.getBottom();
+//            int top = firstVisibleItemView.getTop();
+//            ViewGroup.MarginLayoutParams mLLCatalogLayoutParams = (ViewGroup.MarginLayoutParams) mLLCatalog.getLayoutParams();
+//            if (bottom < mLLCatalogHeight) {
+//                LinearLayout secondVisibleItemView = (LinearLayout) view.getChildAt(1);
+//                if (secondVisibleItemView != null) {
+//                    if (secondVisibleItemView.getChildCount() > 0) {
+//                        if (!secondVisibleItemView.getChildAt(0).isShown()) {
+//                            return;
+//                        }
+//                    }
+//                }
+//                float pushedDistance = bottom - mLLCatalogHeight;
+//                mLLCatalogLayoutParams.topMargin = (int) pushedDistance;
+//                mLLCatalog.setLayoutParams(mLLCatalogLayoutParams);
+//                mLLCatalog.setVisibility(View.VISIBLE);
+//            } else {
+//                if (mLLCatalogLayoutParams.topMargin != 0) {
+//                    mLLCatalogLayoutParams.topMargin = 0;
+//                    mLLCatalog.setLayoutParams(mLLCatalogLayoutParams);
+//                }
+//                if (firstVisibleItem == 0) {
+//                    if (top < 0) {
+//                        mLLCatalog.setVisibility(View.VISIBLE);
+//                    } else {
+//                        mLLCatalog.setVisibility(View.GONE);
+//                        return;
+//                    }
+//                }
+//            }
+//            if (view.getItemAtPosition(firstVisibleItem) != null) {
+//                mLLCatalog.setVisibility(View.VISIBLE);
+//                if (mListener != null) {
+//                    mListener.onCatalogViewShouldUpdate(mCatalogView, firstVisibleItem);
+//                }
+//            } else {
+//                mLLCatalog.setVisibility(View.GONE);
+//            }
+//        } else {
+//            mLLCatalog.setVisibility(View.VISIBLE);
+//        }
+//        if (mOnScrollListener != null) {
+//            mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+//        }
     }
 
     public interface ViewListener {

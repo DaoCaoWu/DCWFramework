@@ -3,13 +3,11 @@ package com.dcw.app.rating.app;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dcw.app.rating.BuildConfig;
 import com.dcw.app.rating.cache.BaseCache;
 import com.dcw.app.rating.cache.DataCache;
 import com.dcw.app.rating.db.dao.DaoMaster;
 import com.dcw.app.rating.db.dao.DaoSession;
 import com.dcw.app.rating.error.ErrorReporter;
-import com.github.mmin18.layoutcast.LayoutCast;
 
 /**
  * @author JiaYing.Cheng
@@ -36,9 +34,6 @@ public class RatingApplication extends Application {
         mErrorReporter = new ErrorReporter(this);
         mDataCache = new DataCache(1024 * 100);
         mDataCache.clearExpiredCache();
-        if (BuildConfig.DEBUG) {
-            LayoutCast.init(this);
-        }
     }
 
     private void setupDatabase() {

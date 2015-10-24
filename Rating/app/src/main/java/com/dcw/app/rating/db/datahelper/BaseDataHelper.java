@@ -21,6 +21,7 @@ public abstract class BaseDataHelper {
     private Context mContext;
 
     protected abstract Uri getContentUri();
+
     protected abstract String getTableName();
 
     public BaseDataHelper(Context context) {

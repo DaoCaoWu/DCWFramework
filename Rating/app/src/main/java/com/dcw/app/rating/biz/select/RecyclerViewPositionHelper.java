@@ -1,7 +1,9 @@
 package com.dcw.app.rating.biz.select;
+
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 /**
  * <p>Title: ucweb</p>
  * <p/>

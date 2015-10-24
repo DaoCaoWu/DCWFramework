@@ -4,9 +4,7 @@ import android.os.Handler;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.contact.ContactListFragment;
 import com.dcw.app.rating.biz.select.SelectFragment;
-import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 

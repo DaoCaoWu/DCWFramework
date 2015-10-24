@@ -526,8 +526,10 @@ public class HanziToPinyin {
          * original string in source.
          */
         public String target;
+
         public Token() {
         }
+
         public Token(int type, String source, String target) {
             this.type = type;
             this.source = source;

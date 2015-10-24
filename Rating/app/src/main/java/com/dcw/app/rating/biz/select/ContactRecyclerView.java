@@ -6,9 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
@@ -44,6 +42,7 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
     @InjectView(R.id.container)
     private LetterIndexView mIndexView;
     RecyclerViewPositionHelper mPositionHelper;
+    CatalogHelper mCatalogHelper;
     StickyListView.ViewListener mListener;
 
     public ContactRecyclerView(Context context) {
@@ -66,7 +65,6 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
             if (model.getCount() == 0) {
                 mLLCatalog.setVisibility(GONE);
             }
-
         }
     }
 
@@ -85,6 +83,7 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setOnScrollListener(mOnScrollListener);
+        mCatalogHelper = new CatalogHelper(mLLCatalog, R.id.catalog_bar);
     }
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
@@ -96,51 +95,58 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             mPositionHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
-            int firstVisibleItem = mPositionHelper.findFirstVisibleItemPosition();
-            View childView = recyclerView.getChildAt(0);
-            if (childView != null) {
-                int titleHeight = mLLCatalog.getHeight();
-                int bottom = childView.getBottom();
-                int top = childView.getTop();
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLLCatalog.getLayoutParams();
-                if (bottom < titleHeight) {
-                    RelativeLayout subChildView = (RelativeLayout) recyclerView.getChildAt(1);
-                    if (subChildView != null) {
-                        if (subChildView.getChildCount() > 0) {
-                            if (subChildView.getChildAt(0).getVisibility() != View.VISIBLE) {
-                                return;
-                            }
-                        }
-                    }
-                    float pushedDistance = bottom - titleHeight;
-                    params.topMargin = (int) pushedDistance;
-                    mLLCatalog.setLayoutParams(params);
-                    mLLCatalog.setVisibility(View.VISIBLE);
-                } else {
-                    if (params.topMargin != 0) {
-                        params.topMargin = 0;
-                        mLLCatalog.setLayoutParams(params);
-                    }
-                    if (firstVisibleItem == 0) {
-                        if (top < 0) {
-                            mLLCatalog.setVisibility(View.VISIBLE);
-                        } else {
-                            mLLCatalog.setVisibility(View.GONE);
-                            return;
-                        }
-                    }
-                }
-                if (recyclerView.findViewHolderForAdapterPosition(firstVisibleItem) != null) {
-                    mLLCatalog.setVisibility(View.VISIBLE);
-                    if (mListener != null) {
-                        mListener.onCatalogViewShouldUpdate(mCatalogView, firstVisibleItem);
-                    }
-                } else {
-                    mLLCatalog.setVisibility(View.GONE);
-                }
-            } else {
-                mLLCatalog.setVisibility(View.VISIBLE);
+            mCatalogHelper.onScroll(recyclerView);
+            if (mListener != null) {
+                mListener.onCatalogViewShouldUpdate(mCatalogView, mPositionHelper.findFirstVisibleItemPosition());
             }
+//            int firstVisibleItem = mPositionHelper.findFirstVisibleItemPosition();
+//            View firstVisibleItemView = recyclerView.getChildAt(0);
+//            if (firstVisibleItemView != null) {
+//                int catalogHeight = mLLCatalog.getHeight();
+//                int bottom = firstVisibleItemView.getBottom();
+//                int top = firstVisibleItemView.getTop();
+//                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLLCatalog.getLayoutParams();
+//                if (bottom < catalogHeight) {
+//                    RelativeLayout secondVisibleItemViewWrap = (RelativeLayout) recyclerView.getChildAt(1);
+//                    if (secondVisibleItemViewWrap != null) {
+//                        ViewGroup secondVisibleItemView = (ViewGroup)((ViewGroup)secondVisibleItemViewWrap.getChildAt(0)).getChildAt(0);
+//                        if (secondVisibleItemView != null) {
+//                            if (secondVisibleItemView.getChildCount() > 0) {
+//                                if (secondVisibleItemView.getChildAt(0).getVisibility() != View.VISIBLE) {
+//                                    return;
+//                                }
+//                            }
+//                        }
+//                    }
+//                    float pushedDistance = bottom - catalogHeight;
+//                    params.topMargin = (int) pushedDistance;
+//                    mLLCatalog.setLayoutParams(params);
+//                    mLLCatalog.setVisibility(View.VISIBLE);
+//                } else {
+//                    if (params.topMargin != 0) {
+//                        params.topMargin = 0;
+//                        mLLCatalog.setLayoutParams(params);
+//                    }
+//                    if (firstVisibleItem == 0) {
+//                        if (top < 0) {
+//                            mLLCatalog.setVisibility(View.VISIBLE);
+//                        } else {
+//                            mLLCatalog.setVisibility(View.GONE);
+//                            return;
+//                        }
+//                    }
+//                }
+//                if (recyclerView.findViewHolderForAdapterPosition(firstVisibleItem) != null) {
+//                    mLLCatalog.setVisibility(View.VISIBLE);
+//                    if (mListener != null) {
+//                        mListener.onCatalogViewShouldUpdate(mCatalogView, firstVisibleItem);
+//                    }
+//                } else {
+//                    mLLCatalog.setVisibility(View.GONE);
+//                }
+//            } else {
+//                mLLCatalog.setVisibility(View.VISIBLE);
+//            }
         }
     };
 }

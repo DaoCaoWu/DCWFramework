@@ -7,13 +7,15 @@ import android.view.MenuItem;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.contact.SearchContactFragment;
-import com.dcw.app.rating.biz.contact.controller.ContactController;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
-import com.dcw.app.rating.biz.contact.view.StickyListView;
+import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
+import com.dcw.app.rating.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
+
+import java.util.List;
 
 /**
  * <p>Title: ucweb</p>
@@ -46,7 +48,13 @@ public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMe
     public void initUI() {
         ToolbarModel model = new ToolbarModel(this.getClass().getSimpleName(), R.menu.menu_home, true);
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
-        new SelectContactController((ContactRecyclerView) findViewById(R.id.root_view), new ContactModel()).getModel().loadContactListAsyn(getActivity());
+        final SelectContactController scc = new SelectContactController((ContactRecyclerView) findViewById(R.id.root_view), new ContactModel());
+        scc.getModel().loadContactListAsyn(getActivity(), new TaskExecutor.RunnableCallback<List<Contact>>() {
+            @Override
+            public void onRun(List<Contact> data) {
+                scc.getModel().setMaxSelectNum(scc.getModel().getCount());
+            }
+        });
     }
 
     @Override

@@ -29,12 +29,12 @@ public interface ISelect<T> {
 
     /**
      * get the delegate which will response the select event
+     *
      * @return
      */
     OnItemSelectedListener getOnItemSelectedListener();
 
     /**
-     *
      * @param onSelectedListener the delegate which will response the select event
      */
     void setOnItemSelectedListener(OnItemSelectedListener onSelectedListener);
@@ -47,12 +47,14 @@ public interface ISelect<T> {
     /**
      * restore the state into init. exclude select mode and data source.
      * while set a new select limit num.
+     *
      * @param maxSelectedNum
      */
     void restore(int maxSelectedNum);
 
     /**
      * judge whether the data of position is selected or not.
+     *
      * @param pos
      * @return
      */
@@ -60,6 +62,7 @@ public interface ISelect<T> {
 
     /**
      * judge whether the data of position can be selected or not.
+     *
      * @param pos
      * @return
      */
@@ -67,6 +70,7 @@ public interface ISelect<T> {
 
     /**
      * set the data of position to be selectable.
+     *
      * @param pos
      * @param canBeSelected
      */
@@ -74,6 +78,7 @@ public interface ISelect<T> {
 
     /**
      * make the data of pos is isSelected
+     *
      * @param pos
      * @param isSelected
      */
@@ -81,12 +86,14 @@ public interface ISelect<T> {
 
     /**
      * get the num of selected
+     *
      * @return
      */
     int getSelectedCount();
 
     /**
      * get index of last selected data, only working on TYPE_SELECT_SINGLE mode.
+     *
      * @return
      */
     int getLastSelectedIndex();
@@ -94,6 +101,7 @@ public interface ISelect<T> {
     /**
      * just make index point to the data of position @index, only working on TYPE_SELECT_SINGLE mode,
      * and will not invoke any event.
+     *
      * @param index
      */
     void setLastSelectedIndex(int index);
@@ -101,24 +109,28 @@ public interface ISelect<T> {
     /**
      * just make index point to the data that is marked with @id, only working on TYPE_SELECT_SINGLE mode,
      * and will not invoke any event.
+     *
      * @param id
      */
     void setInitSelectedId(long id);
 
     /**
      * Is single mode?
+     *
      * @return
      */
     boolean isSingleSelectedMode();
 
     /**
      * get the selected data object,only working on TYPE_SELECT_SINGLE mode
+     *
      * @return
      */
     T getLastSelected();
 
     /**
      * get the selected data object list
+     *
      * @return
      */
     List<T> getSelectedData();

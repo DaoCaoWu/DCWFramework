@@ -52,6 +52,26 @@ public class ContactModel extends SelectModel<Contact> implements SectionIndexer
         });
     }
 
+    public void loadContactListAsyn(final Context context, final TaskExecutor.RunnableCallback<List<Contact>> callback) {
+        TaskExecutor.executeTask(new Runnable() {
+            @Override
+            public void run() {
+                mLoadContactListState = LOADING;
+                final List<Contact> contacts = getContactListFromContactProvider(context);
+                TaskExecutor.runTaskOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setDataList(contacts);
+                        mLoadContactListState = LOADED;
+                        if (callback != null) {
+                            callback.onRun(contacts);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     public int getLoadContactListState() {
         return mLoadContactListState;
     }

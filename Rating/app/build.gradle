@@ -27,7 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:design:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
-    compile 'com.github.mmin18.layoutcast:library:1.+@aar'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     //圆形头像  代码地址-----> https://github.com/hdodenhof/CircleImageView
     compile 'de.hdodenhof:circleimageview:1.2.1'
