@@ -71,7 +71,6 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
     protected void onFinishInflate() {
         super.onFinishInflate();
         DCWAnnotation.inject(this);
-        mIndexView.setListView(mListView);
         getListView().setOnScrollListener(this);
     }
 

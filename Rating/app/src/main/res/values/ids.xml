@@ -17,4 +17,6 @@
     <item type="id" name="container"/>
     <item type="id" name="list_item"/>
     <item type="id" name="result_container"/>
+    <item type="id" name="cb_select"/>
+    <item type="id" name="item_container"/>
 </resources>

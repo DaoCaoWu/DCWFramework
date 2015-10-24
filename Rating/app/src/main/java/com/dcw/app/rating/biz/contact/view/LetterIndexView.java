@@ -3,7 +3,6 @@ package com.dcw.app.rating.biz.contact.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
@@ -29,11 +28,11 @@ public class LetterIndexView extends FrameLayout implements com.dcw.app.rating.u
 
     @InjectView(R.id.sidebar)
     SideBar mSideBar;
-    ListView mListView;
     @InjectView(R.id.tv_float)
     TextView mFloatView;
 
     ViewListener mListener;
+    SideBar.OnTouchingLetterChangedListener mTouchingLetterChangedListener;
 
     public LetterIndexView(Context context) {
         super(context);
@@ -52,12 +51,8 @@ public class LetterIndexView extends FrameLayout implements com.dcw.app.rating.u
         mListener = listener;
     }
 
-    public ListView getListView() {
-        return mListView;
-    }
-
-    public void setListView(ListView listView) {
-        mListView = listView;
+    public void setTouchingLetterChangedListener(SideBar.OnTouchingLetterChangedListener touchingLetterChangedListener) {
+        mTouchingLetterChangedListener = touchingLetterChangedListener;
     }
 
     @Override
@@ -74,17 +69,22 @@ public class LetterIndexView extends FrameLayout implements com.dcw.app.rating.u
             @Override
             public void onTouchingLetterChanged(String s) {
                 if (SideBar.b[0].equals(s)) {
-                    mListView.smoothScrollToPosition(0);
+                    if (mListener != null) {
+                        mListener.smoothScrollToPosition(0);
+                    }
                     return;
                 }
-                if (mListener != null) {
-                    mListener.onTouchingLetterChanged(s);
+                if (mTouchingLetterChangedListener != null) {
+                    mTouchingLetterChangedListener.onTouchingLetterChanged(s);
                 }
             }
         });
     }
 
     public interface ViewListener {
-        void onTouchingLetterChanged(String s);
+
+        void setSelection(int position);
+
+        void smoothScrollToPosition(int position);
     }
 }
