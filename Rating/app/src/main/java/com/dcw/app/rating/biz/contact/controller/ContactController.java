@@ -1,5 +1,6 @@
 package com.dcw.app.rating.biz.contact.controller;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
@@ -9,6 +10,7 @@ import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.ContactViewHolder;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
+import com.dcw.app.rating.ui.adapter.ToastManager;
 import com.dcw.app.rating.ui.mvc.Controller;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
@@ -16,12 +18,12 @@ import com.dcw.app.rating.ui.mvc.core.Observer;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class ContactController extends Controller<StickyListView, ContactModel> implements StickyListView.ViewListener, SideBar.OnTouchingLetterChangedListener, Observer {
+public class ContactController extends Controller<StickyListView, ContactModel> implements StickyListView.ViewListener, SideBar.OnTouchingLetterChangedListener, ContactViewHolder.ContactViewHolderListener, Observer {
 
     public ContactController(StickyListView view, ContactModel model) {
         super(view, model);
         getView().getListView().setAdapter(new ListViewAdapter<ContactModel, Contact>(
-                getView().getContext(), getModel(), R.layout.layout_list_item_catalog, ContactViewHolder.class));
+                getView().getContext(), getModel(), R.layout.layout_list_item_catalog, ContactViewHolder.class, this));
         getView().setViewListener(this);
         getModel().addObserver(this);
         getModel().addObserver(getView());
@@ -43,6 +45,11 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
         if (position != -1) {
             getView().getListView().setSelection(position + getView().getListView().getHeaderViewsCount());
         }
+    }
+
+    @Override
+    public void onItemViewClicked(View itemView, Contact contact) {
+        ToastManager.getInstance().showToast(contact.getName());
     }
 
     @Override

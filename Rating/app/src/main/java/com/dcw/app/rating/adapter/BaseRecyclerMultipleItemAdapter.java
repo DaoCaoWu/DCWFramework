@@ -18,15 +18,8 @@ import java.util.List;
  * Why & What is modified:
  */
 public abstract class BaseRecyclerMultipleItemAdapter<T> extends BaseRecyclerAdapter<T> {
-    public static enum ITEM_TYPE {
-        ITEM_TYPE_HEADER,
-        ITEM_TYPE_CONTENT,
-        ITEM_TYPE_BOTTOM
-    }
-
     protected int mHeaderCount;//头部View个数
     protected int mBottomCount;//底部View个数
-
     public BaseRecyclerMultipleItemAdapter(Context context) {
         super(context);
     }
@@ -141,4 +134,10 @@ public abstract class BaseRecyclerMultipleItemAdapter<T> extends BaseRecyclerAda
     public abstract RecyclerView.ViewHolder onCreateBottomView(ViewGroup parent);//创建底部View
 
     public abstract int getContentItemCount();//获取中间内容个数
+
+    public static enum ITEM_TYPE {
+        ITEM_TYPE_HEADER,
+        ITEM_TYPE_CONTENT,
+        ITEM_TYPE_BOTTOM
+    }
 }

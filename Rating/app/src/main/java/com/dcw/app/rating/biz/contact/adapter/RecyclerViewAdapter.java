@@ -2,13 +2,15 @@ package com.dcw.app.rating.biz.contact.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
+import com.dcw.app.rating.biz.contact.adapter.viewholder.RecyclerViewHolder;
 import com.dcw.app.rating.biz.contact.model.ListDataModel;
-import com.dcw.app.rating.biz.contact.view.viewholder.RecyclerViewHolder;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 
@@ -22,14 +24,22 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     private
     @LayoutRes
     int mLayoutResId;
-    private Class<? extends RecyclerViewHolder<M, D>> mVHClass;
+    private Class<? extends ItemViewHolder<M, D>> mViewHolderClazz;
+    private LayoutInflater mInflater;
+    private Object mViewHolderListener;
 
-    public RecyclerViewAdapter(Context context, M model, @LayoutRes int layoutResId, Class<? extends RecyclerViewHolder<M, D>> vhClass) {
+    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz) {
+        this(context, model, layoutResId, viewHolderClazz, null);
+    }
+
+    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object viewHolderListener) {
         mContext = context;
         mModel = model;
         mLayoutResId = layoutResId;
-        mVHClass = vhClass;
+        mViewHolderClazz = viewHolderClazz;
         mModel.addObserver(this);
+        mInflater = LayoutInflater.from(mContext);
+        mViewHolderListener = viewHolderListener;
     }
 
     public M getModel() {
@@ -43,24 +53,25 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     @Override
     public RecyclerViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
-            Constructor<? extends RecyclerViewHolder<M, D>> constructor = mVHClass.getConstructor(View.class);
-            return constructor.newInstance(LayoutInflater.from(getContext()).inflate(mLayoutResId, parent, false));
+            Constructor<? extends ItemViewHolder<M, D>> constructor = mViewHolderClazz.getConstructor(View.class);
+            return new RecyclerViewHolder<M, D>(constructor.newInstance(mInflater.inflate(mLayoutResId, parent, false)));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Unable to find a public constructor that takes an argument View in " +
-                    mVHClass.getSimpleName(), e);
+                    mViewHolderClazz.getSimpleName(), e);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e.getTargetException());
         } catch (InstantiationException e) {
-            throw new RuntimeException("Unable to instantiate " + mVHClass.getSimpleName(), e);
+            throw new RuntimeException("Unable to instantiate " + mViewHolderClazz.getSimpleName(), e);
         }
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void onBindViewHolder(RecyclerViewHolder<M, D> holder, int position) {
-        holder.onBindData(this, getModel(), position);
+        holder.mdItemViewHolder.setListener(mViewHolderListener);
+        holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
+        holder.mdItemViewHolder.onBindData(getModel(), position);
     }
 
     @Override
@@ -71,10 +82,5 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     @Override
     public <T> void update(Observable observable, T data, Object... args) {
         notifyDataSetChanged();
-    }
-
-    public interface OnBindDataListener<M extends ListDataModel<D>, D> {
-
-        void onBindData(RecyclerViewAdapter adapter, M model, int position);
     }
 }

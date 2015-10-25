@@ -29,15 +29,11 @@ import java.util.Map;
  * Why & What is modified:
  */
 public class SharedPreferencesHelper {
+    public static String lastImagePath = "";
     private static SharedPreferences sPreferences = null;
     private String DEFAULT_APP_IMAGE_DATA_DIRECTORY;
-    public static String lastImagePath = "";
 
     private SharedPreferencesHelper() {
-    }
-
-    private static class SharedPreferencesHelperHolder {
-        private static SharedPreferencesHelper appSharedPreferencesHelper = new SharedPreferencesHelper();
     }
 
     public static SharedPreferencesHelper getInstance() {
@@ -314,5 +310,9 @@ public class SharedPreferencesHelper {
 
     public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
         sPreferences.unregisterOnSharedPreferenceChangeListener(listener);
+    }
+
+    private static class SharedPreferencesHelperHolder {
+        private static SharedPreferencesHelper appSharedPreferencesHelper = new SharedPreferencesHelper();
     }
 }

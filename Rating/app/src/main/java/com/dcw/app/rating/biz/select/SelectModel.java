@@ -172,23 +172,6 @@ public class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
         return mInitSelectedId;
     }
 
-    public int getInitSelectedIndex() {
-
-        int index = -1;
-        if (isSingleSelectedMode()) {
-
-            int idHashCode = String.valueOf(mInitSelectedId).hashCode();
-            for (T obj : getDataList()) {
-                if (idHashCode == obj.hashCode()) {
-                    index = getDataList().indexOf(obj);
-                    break;
-                }
-            }
-            return index;
-        }
-        return index;
-    }
-
     @Override
     public void setInitSelectedId(long id) {
 
@@ -208,6 +191,22 @@ public class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
         }
     }
 
+    public int getInitSelectedIndex() {
+
+        int index = -1;
+        if (isSingleSelectedMode()) {
+
+            int idHashCode = String.valueOf(mInitSelectedId).hashCode();
+            for (T obj : getDataList()) {
+                if (idHashCode == obj.hashCode()) {
+                    index = getDataList().indexOf(obj);
+                    break;
+                }
+            }
+            return index;
+        }
+        return index;
+    }
 
     /**
      * default restore the selectedArray, mCanBeSelectedArray, mLastSelectedIndex

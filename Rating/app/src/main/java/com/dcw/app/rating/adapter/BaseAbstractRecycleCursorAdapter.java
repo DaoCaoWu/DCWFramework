@@ -52,13 +52,14 @@ import android.widget.Filterable;
 public abstract class BaseAbstractRecycleCursorAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> implements Filterable,
         CursorFilter.CursorFilterClient {
     /**
-     * Call when bind view with the cursor
-     *
-     * @param holder
-     * @param cursor
+     * If set the adapter will register a content observer on the cursor and will call
+     * {@link #onContentChanged()} when a notification comes in.  Be careful when
+     * using this flag: you will need to unset the current Cursor from the adapter
+     * to avoid leaks due to its registered observers.  This flag is not needed
+     * when using a CursorAdapter with a
+     * {@link android.content.CursorLoader}.
      */
-    public abstract void onBindViewHolder(VH holder, Cursor cursor);
-
+    public static final int FLAG_REGISTER_CONTENT_OBSERVER = 0x02;
     /**
      * This field should be made private, so it is hidden from the SDK.
      * {@hide}
@@ -105,16 +106,6 @@ public abstract class BaseAbstractRecycleCursorAdapter<VH extends RecyclerView.V
     protected FilterQueryProvider mFilterQueryProvider;
 
     /**
-     * If set the adapter will register a content observer on the cursor and will call
-     * {@link #onContentChanged()} when a notification comes in.  Be careful when
-     * using this flag: you will need to unset the current Cursor from the adapter
-     * to avoid leaks due to its registered observers.  This flag is not needed
-     * when using a CursorAdapter with a
-     * {@link android.content.CursorLoader}.
-     */
-    public static final int FLAG_REGISTER_CONTENT_OBSERVER = 0x02;
-
-    /**
      * Recommended constructor.
      *
      * @param c       The cursor from which to get the data.
@@ -125,6 +116,14 @@ public abstract class BaseAbstractRecycleCursorAdapter<VH extends RecyclerView.V
     public BaseAbstractRecycleCursorAdapter(Context context, Cursor c, int flags) {
         init(context, c, flags);
     }
+
+    /**
+     * Call when bind view with the cursor
+     *
+     * @param holder
+     * @param cursor
+     */
+    public abstract void onBindViewHolder(VH holder, Cursor cursor);
 
     void init(Context context, Cursor c, int flags) {
         boolean cursorPresent = c != null;

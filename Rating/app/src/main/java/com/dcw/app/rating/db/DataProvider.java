@@ -31,7 +31,9 @@ public class DataProvider extends ContentProvider {
     public static final Object obj = new Object();
     public static final String AUTHORITY = "com.ithooks.android.xreap";
     public static final String SCHEME = "content://";
+    private static final UriMatcher sUriMATCHER = new UriMatcher(UriMatcher.NO_MATCH) {{
 
+    }};
     private static DBHelper mDBHelper;
 
     public static DBHelper getDBHelper() {
@@ -39,6 +41,13 @@ public class DataProvider extends ContentProvider {
             mDBHelper = new DBHelper(RatingApplication.getInstance().getApplicationContext());
         }
         return mDBHelper;
+    }
+
+    public static void clearDBCache() {
+        synchronized (DataProvider.obj) {
+            DataProvider.DBHelper mDBHelper = DataProvider.getDBHelper();
+            SQLiteDatabase db = mDBHelper.getWritableDatabase();
+        }
     }
 
     @Override
@@ -64,10 +73,6 @@ public class DataProvider extends ContentProvider {
             return cursor;
         }
     }
-
-    private static final UriMatcher sUriMATCHER = new UriMatcher(UriMatcher.NO_MATCH) {{
-
-    }};
 
     private String matchTable(Uri uri) {
         String table = null;
@@ -144,13 +149,6 @@ public class DataProvider extends ContentProvider {
             }
             getContext().getContentResolver().notifyChange(uri, null);
             return count;
-        }
-    }
-
-    public static void clearDBCache() {
-        synchronized (DataProvider.obj) {
-            DataProvider.DBHelper mDBHelper = DataProvider.getDBHelper();
-            SQLiteDatabase db = mDBHelper.getWritableDatabase();
         }
     }
 

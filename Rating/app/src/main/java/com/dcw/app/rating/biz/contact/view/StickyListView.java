@@ -26,9 +26,9 @@ public class StickyListView extends LinearLayout implements com.dcw.app.rating.u
     View mLLCatalog;
     @InjectView(R.id.tv_content)
     TextView mCatalogView;
+    CatalogHelper mCatalogHelper;
     @InjectView(R.id.container)
     private LetterIndexView mIndexView;
-    CatalogHelper mCatalogHelper;
     private ViewListener mListener;
     private AbsListView.OnScrollListener mOnScrollListener;
 

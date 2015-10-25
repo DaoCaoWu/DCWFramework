@@ -25,11 +25,26 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
     View mLLCatalog;
     @InjectView(R.id.tv_content)
     TextView mCatalogView;
-    @InjectView(R.id.container)
-    private LetterIndexView mIndexView;
     RecyclerViewPositionHelper mPositionHelper;
     CatalogHelper mCatalogHelper;
     StickyListView.ViewListener mListener;
+    @InjectView(R.id.container)
+    private LetterIndexView mIndexView;
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            mPositionHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+            mCatalogHelper.onScroll(recyclerView);
+            if (mListener != null) {
+                mListener.onCatalogViewShouldUpdate(mCatalogView, mPositionHelper.findFirstVisibleItemPosition());
+            }
+        }
+    };
 
     public ContactRecyclerView(Context context) {
         super(context);
@@ -71,20 +86,4 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
         mRecyclerView.setOnScrollListener(mOnScrollListener);
         mCatalogHelper = new CatalogHelper(mLLCatalog, R.id.catalog_bar);
     }
-
-    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-        }
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            mPositionHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
-            mCatalogHelper.onScroll(recyclerView);
-            if (mListener != null) {
-                mListener.onCatalogViewShouldUpdate(mCatalogView, mPositionHelper.findFirstVisibleItemPosition());
-            }
-        }
-    };
 }

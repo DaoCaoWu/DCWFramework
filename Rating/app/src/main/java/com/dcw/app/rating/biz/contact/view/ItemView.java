@@ -9,13 +9,14 @@ import com.dcw.app.rating.R;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class ItemView {
+public class ItemView extends BaseItemView {
 
     ImageView mIvIcon;
     TextView mTvTitle;
     TextView mTvContent;
 
     public ItemView(View itemView) {
+        super(itemView.findViewById(R.id.list_item));
         mIvIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
         mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
         mTvContent = (TextView) itemView.findViewById(R.id.tv_content);

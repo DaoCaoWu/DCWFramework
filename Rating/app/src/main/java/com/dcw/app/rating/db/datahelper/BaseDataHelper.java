@@ -20,13 +20,13 @@ import android.support.v4.content.CursorLoader;
 public abstract class BaseDataHelper {
     private Context mContext;
 
-    protected abstract Uri getContentUri();
-
-    protected abstract String getTableName();
-
     public BaseDataHelper(Context context) {
         mContext = context;
     }
+
+    protected abstract Uri getContentUri();
+
+    protected abstract String getTableName();
 
     public Context getContext() {
         return mContext;
