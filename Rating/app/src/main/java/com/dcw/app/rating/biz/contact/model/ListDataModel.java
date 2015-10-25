@@ -1,5 +1,6 @@
 package com.dcw.app.rating.biz.contact.model;
 
+import com.dcw.app.rating.ui.mvc.Model;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class ListDataModel<D> extends Observable {
+public class ListDataModel<D> extends Model {
 
     /**
      * the list store the data to show.
