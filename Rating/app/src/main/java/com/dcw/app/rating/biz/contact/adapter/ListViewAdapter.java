@@ -117,8 +117,4 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
         notifyDataSetChanged();
     }
 
-    public interface OnBindDataListener<M extends ListDataModel<D>, D> {
-
-        void onBindData(M model, int position);
-    }
 }

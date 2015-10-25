@@ -3,13 +3,12 @@ package com.dcw.app.rating.biz.contact.adapter.viewholder;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.dcw.app.rating.biz.contact.adapter.ListViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ListDataModel;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public abstract class ItemViewHolder<M extends ListDataModel<D>, D> implements ListViewAdapter.OnBindDataListener<M, D>, OnBindViewEventListener<M, D> {
+public abstract class ItemViewHolder<M extends ListDataModel<D>, D> implements OnBindDataListener<M, D>, OnBindViewEventListener<M, D> {
 
     public final View itemView;
     ItemViewInfo mItemViewInfo;
