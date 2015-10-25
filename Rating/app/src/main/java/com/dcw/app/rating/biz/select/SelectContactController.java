@@ -3,6 +3,7 @@ package com.dcw.app.rating.biz.select;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.biz.contact.adapter.RecyclerViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;
@@ -11,31 +12,16 @@ import com.dcw.app.rating.ui.mvc.Controller;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 
-/**
- * <p>Title: ucweb</p>
- * <p/>
- * <p>Description: </p>
- * ......
- * <p>Copyright: Copyright (c) 2015</p>
- * <p/>
- * <p>Company: ucweb.com</p>
- *
- * @author JiaYing.Cheng
- * @version 1.0
- * @email adao12.vip@gmail.com
- * @create 15/10/24
- */
 public class SelectContactController extends Controller<ContactRecyclerView, ContactModel> implements StickyListView.ViewListener, SideBar.OnTouchingLetterChangedListener, Observer {
 
     public SelectContactController(ContactRecyclerView view, ContactModel model) {
         super(view, model);
-        AbsRecyclerViewAdapter<Contact, ContactModel, SelectItemView> adapter
-                = new AbsRecyclerViewAdapter<Contact, ContactModel, SelectItemView>(
+        RecyclerViewAdapter<ContactModel, Contact> adapter
+                = new RecyclerViewAdapter<ContactModel, Contact>(
                 getView().getContext(), getModel(), R.layout.item_view_select, SelectItemView.class);
         getView().getRecyclerView().setAdapter(adapter);
         getView().setViewListener(this);
         getModel().addObserver(this);
-        getModel().addObserver(adapter);
         getModel().addObserver(getView());
         getView().getIndexView().setTouchingLetterChangedListener(this);
         getModel().setSelectedMode(SelectModel.TYPE_SELECT_MULTI);

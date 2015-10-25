@@ -15,10 +15,10 @@ public class ItemView {
     TextView mTvTitle;
     TextView mTvContent;
 
-    public ItemView(View convertView) {
-        mIvIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
-        mTvTitle = (TextView) convertView.findViewById(R.id.tv_title);
-        mTvContent = (TextView) convertView.findViewById(R.id.tv_content);
+    public ItemView(View itemView) {
+        mIvIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
+        mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+        mTvContent = (TextView) itemView.findViewById(R.id.tv_content);
     }
 
     public void update(String iconUrl, String title, String content) {

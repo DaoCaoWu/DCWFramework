@@ -2,9 +2,11 @@ package com.dcw.app.rating.biz.contact.controller;
 
 import android.widget.TextView;
 
-import com.dcw.app.rating.biz.contact.adapter.ContactAdapter;
+import com.dcw.app.rating.R;
+import com.dcw.app.rating.biz.contact.adapter.ListViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
+import com.dcw.app.rating.biz.contact.view.ContactViewHolder;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
 import com.dcw.app.rating.ui.mvc.Controller;
@@ -18,11 +20,10 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
 
     public ContactController(StickyListView view, ContactModel model) {
         super(view, model);
-        ContactAdapter adapter = new ContactAdapter(getView().getContext(), getModel());
-        getView().getListView().setAdapter(adapter);
+        getView().getListView().setAdapter(new ListViewAdapter<ContactModel, Contact>(
+                getView().getContext(), getModel(), R.layout.layout_list_item_catalog, ContactViewHolder.class));
         getView().setViewListener(this);
         getModel().addObserver(this);
-        getModel().addObserver(adapter);
         getModel().addObserver(getView());
         getView().getIndexView().setTouchingLetterChangedListener(this);
     }

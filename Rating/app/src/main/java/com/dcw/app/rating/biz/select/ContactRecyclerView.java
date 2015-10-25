@@ -17,20 +17,6 @@ import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
 
-/**
- * <p>Title: ucweb</p>
- * <p/>
- * <p>Description: </p>
- * ......
- * <p>Copyright: Copyright (c) 2015</p>
- * <p/>
- * <p>Company: ucweb.com</p>
- *
- * @author JiaYing.Cheng
- * @version 1.0
- * @email adao12.vip@gmail.com
- * @create 15/10/24
- */
 public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rating.ui.mvc.View<StickyListView.ViewListener> {
 
     @InjectView(R.id.lv_list)
@@ -99,54 +85,6 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
             if (mListener != null) {
                 mListener.onCatalogViewShouldUpdate(mCatalogView, mPositionHelper.findFirstVisibleItemPosition());
             }
-//            int firstVisibleItem = mPositionHelper.findFirstVisibleItemPosition();
-//            View firstVisibleItemView = recyclerView.getChildAt(0);
-//            if (firstVisibleItemView != null) {
-//                int catalogHeight = mLLCatalog.getHeight();
-//                int bottom = firstVisibleItemView.getBottom();
-//                int top = firstVisibleItemView.getTop();
-//                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLLCatalog.getLayoutParams();
-//                if (bottom < catalogHeight) {
-//                    RelativeLayout secondVisibleItemViewWrap = (RelativeLayout) recyclerView.getChildAt(1);
-//                    if (secondVisibleItemViewWrap != null) {
-//                        ViewGroup secondVisibleItemView = (ViewGroup)((ViewGroup)secondVisibleItemViewWrap.getChildAt(0)).getChildAt(0);
-//                        if (secondVisibleItemView != null) {
-//                            if (secondVisibleItemView.getChildCount() > 0) {
-//                                if (secondVisibleItemView.getChildAt(0).getVisibility() != View.VISIBLE) {
-//                                    return;
-//                                }
-//                            }
-//                        }
-//                    }
-//                    float pushedDistance = bottom - catalogHeight;
-//                    params.topMargin = (int) pushedDistance;
-//                    mLLCatalog.setLayoutParams(params);
-//                    mLLCatalog.setVisibility(View.VISIBLE);
-//                } else {
-//                    if (params.topMargin != 0) {
-//                        params.topMargin = 0;
-//                        mLLCatalog.setLayoutParams(params);
-//                    }
-//                    if (firstVisibleItem == 0) {
-//                        if (top < 0) {
-//                            mLLCatalog.setVisibility(View.VISIBLE);
-//                        } else {
-//                            mLLCatalog.setVisibility(View.GONE);
-//                            return;
-//                        }
-//                    }
-//                }
-//                if (recyclerView.findViewHolderForAdapterPosition(firstVisibleItem) != null) {
-//                    mLLCatalog.setVisibility(View.VISIBLE);
-//                    if (mListener != null) {
-//                        mListener.onCatalogViewShouldUpdate(mCatalogView, firstVisibleItem);
-//                    }
-//                } else {
-//                    mLLCatalog.setVisibility(View.GONE);
-//                }
-//            } else {
-//                mLLCatalog.setVisibility(View.VISIBLE);
-//            }
         }
     };
 }

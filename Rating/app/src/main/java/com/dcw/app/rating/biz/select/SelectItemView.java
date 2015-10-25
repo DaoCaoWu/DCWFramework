@@ -6,25 +6,13 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.dcw.app.rating.R;
+import com.dcw.app.rating.biz.contact.adapter.RecyclerViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.CatalogItemView;
+import com.dcw.app.rating.biz.contact.view.viewholder.RecyclerViewHolder;
 
-/**
- * <p>Title: ucweb</p>
- * <p/>
- * <p>Description: </p>
- * ......
- * <p>Copyright: Copyright (c) 2015</p>
- * <p/>
- * <p>Company: ucweb.com</p>
- *
- * @author JiaYing.Cheng
- * @version 1.0
- * @email adao12.vip@gmail.com
- * @create 15/10/23
- */
-public class SelectItemView extends AbsRecyclerViewHolder<ContactModel, Contact> {
+public class SelectItemView extends RecyclerViewHolder<ContactModel, Contact> {
 
     CatalogItemView mItemView;
     CheckBox mCbSelect;
@@ -38,7 +26,7 @@ public class SelectItemView extends AbsRecyclerViewHolder<ContactModel, Contact>
     }
 
     @Override
-    public void onBindData(AbsRecyclerViewAdapter adapter, final ContactModel model, final int position) {
+    public void onBindData(RecyclerViewAdapter adapter, final ContactModel model, final int position) {
         Contact contact = model.getItem(position);
         int section = model.getSectionForPosition(position);
         if (position == model.getPositionForSection(section)) {
