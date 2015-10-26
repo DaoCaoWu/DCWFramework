@@ -1,7 +1,8 @@
 package com.dcw.app.rating.biz.contact.model;
 
+import android.util.SparseArray;
+
 import com.dcw.app.rating.ui.mvc.Model;
-import com.dcw.app.rating.ui.mvc.core.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class ListDataModel<D> extends Model {
      * the list store the data to show.
      */
     private List<D> mDataList = null;
+
+    private SparseArray<ItemViewHolderBean<? extends ListDataModel<D>, D>> mHolderBeans;
 
     public ListDataModel() {
     }
@@ -38,6 +41,17 @@ public class ListDataModel<D> extends Model {
     public void setDataList(List<D> dataList) {
         this.mDataList = dataList == null ? new ArrayList<D>() : dataList;
         notifyObservers();
+    }
+
+    public void addItemViewHolderBean(int viewType, ItemViewHolderBean<? extends ListDataModel<D>, D> bean) {
+        if (mHolderBeans == null) {
+            mHolderBeans = new SparseArray<ItemViewHolderBean<? extends ListDataModel<D>, D>>();
+        }
+        mHolderBeans.append(viewType, bean);
+    }
+
+    public ItemViewHolderBean<? extends ListDataModel<D>, D> getItemViewHolderBean(int viewType) {
+        return mHolderBeans.get(viewType);
     }
 
     /**
@@ -96,6 +110,14 @@ public class ListDataModel<D> extends Model {
 
     public long getItemId(int position) {
         return position;
+    }
+
+    public int getViewTypeCount() {
+        return mHolderBeans == null ? 0 : mHolderBeans.size();
+    }
+
+    public int getItemViewType(int position) {
+        return 0;
     }
 
     /**

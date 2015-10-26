@@ -17,9 +17,9 @@ public class ItemView extends BaseItemView {
 
     public ItemView(View itemView) {
         super(itemView.findViewById(R.id.list_item));
-        mIvIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
-        mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-        mTvContent = (TextView) itemView.findViewById(R.id.tv_content);
+        mIvIcon = (ImageView) this.itemView.findViewById(R.id.iv_icon);
+        mTvTitle = (TextView) this.itemView.findViewById(R.id.tv_title);
+        mTvContent = (TextView) this.itemView.findViewById(R.id.tv_content);
     }
 
     public void update(String iconUrl, String title, String content) {
