@@ -2,12 +2,12 @@ package com.dcw.app.rating.biz.select;
 
 import android.view.View;
 
-import com.dcw.app.rating.biz.contact.model.MultiListDataModel;
+import com.dcw.app.rating.biz.contact.model.ListDataModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SelectModel<T> extends MultiListDataModel<T> implements ISelect<T> {
+public abstract class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
 
     /**
      * you can select only one data in list

@@ -20,6 +20,7 @@ import java.util.List;
 public abstract class BaseRecyclerMultipleItemAdapter<T> extends BaseRecyclerAdapter<T> {
     protected int mHeaderCount;//头部View个数
     protected int mBottomCount;//底部View个数
+
     public BaseRecyclerMultipleItemAdapter(Context context) {
         super(context);
     }

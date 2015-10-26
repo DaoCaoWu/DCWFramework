@@ -7,7 +7,6 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.widget.SectionIndexer;
 
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.pinyin.PinyinComparator;
 import com.dcw.app.rating.biz.select.SelectModel;
@@ -43,16 +42,6 @@ public class ContactModel extends SelectModel<Contact> implements SectionIndexer
 //        }
 //        return 0;
 //    }
-
-    @Override
-    public int getItemViewHolderLayoutId(int viewType) {
-        return getItemViewHolderBean(viewType).getItemViewHolderLayoutId();
-    }
-
-    @Override
-    public Class<? extends ItemViewHolder<ContactModel, Contact>> getItemViewHolderClazz(int viewType) {
-        return getItemViewHolderBean(viewType).getItemViewHolderClazz();
-    }
 
     public void loadContactListAsyn(final Context context) {
         TaskExecutor.executeTask(new Runnable() {

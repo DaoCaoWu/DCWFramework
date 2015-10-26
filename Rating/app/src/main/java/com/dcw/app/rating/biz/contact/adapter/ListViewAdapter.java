@@ -119,17 +119,17 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
 
     public ItemViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
-            Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().getItemViewHolderBean(viewType).<M>getItemViewHolderClazz().getConstructor(View.class);
+            Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
             return constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Unable to find a public constructor that takes an argument View in " +
-                    getModel().getItemViewHolderBean(viewType).<M>getItemViewHolderClazz().getSimpleName(), e);
+                    getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e.getTargetException());
         } catch (InstantiationException e) {
-            throw new RuntimeException("Unable to instantiate " + getModel().getItemViewHolderBean(viewType).<M>getItemViewHolderClazz().getSimpleName(), e);
+            throw new RuntimeException("Unable to instantiate " + getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
         }
     }
 

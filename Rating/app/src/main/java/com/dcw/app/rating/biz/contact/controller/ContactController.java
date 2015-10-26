@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.contact.adapter.MultiListViewAdapter;
+import com.dcw.app.rating.biz.contact.adapter.ListViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.ItemViewHolderBean;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
@@ -26,7 +26,7 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
         super(view, model);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
 //        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
-        getView().getListView().setAdapter(new MultiListViewAdapter<ContactModel, Contact>(
+        getView().getListView().setAdapter(new ListViewAdapter<ContactModel, Contact>(
                 getView().getContext(), getModel(), this));
         getView().setViewListener(this);
         getModel().addObserver(this);

@@ -3,7 +3,6 @@ package com.dcw.app.rating.biz.select;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.contact.adapter.MultiRecyclerViewAdapter;
 import com.dcw.app.rating.biz.contact.adapter.RecyclerViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.ItemViewHolderBean;
@@ -23,7 +22,7 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
                 getView().getContext(), getModel(), R.layout.item_view_select, SelectItemView.class);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
 //        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
-        getView().getRecyclerView().setAdapter(new MultiRecyclerViewAdapter<ContactModel, Contact>(getView().getContext(), getModel()));
+        getView().getRecyclerView().setAdapter(new RecyclerViewAdapter<ContactModel, Contact>(getView().getContext(), getModel()));
         getView().setViewListener(this);
         getModel().addObserver(this);
         getModel().addObserver(getView());

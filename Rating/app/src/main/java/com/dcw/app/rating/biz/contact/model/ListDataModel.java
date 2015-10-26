@@ -50,8 +50,8 @@ public class ListDataModel<D> extends Model {
         mHolderBeans.append(viewType, bean);
     }
 
-    public ItemViewHolderBean<? extends ListDataModel<D>, D> getItemViewHolderBean(int viewType) {
-        return mHolderBeans.get(viewType);
+    public <M extends ListDataModel<D>> ItemViewHolderBean<M, D> getItemViewHolderBean(int viewType) {
+        return (ItemViewHolderBean<M, D>) mHolderBeans.get(viewType);
     }
 
     /**

@@ -37,7 +37,7 @@ public class ItemViewHolderBean<M extends ListDataModel<D>, D> {
         return mItemViewHolderLayoutId;
     }
 
-    public <M extends ListDataModel<D>> Class<? extends ItemViewHolder<M, D>> getItemViewHolderClazz() {
-        return (Class<? extends ItemViewHolder<M, D>>) mItemViewHolderClazz;
+    public Class<? extends ItemViewHolder<M, D>> getItemViewHolderClazz() {
+        return mItemViewHolderClazz;
     }
 }
