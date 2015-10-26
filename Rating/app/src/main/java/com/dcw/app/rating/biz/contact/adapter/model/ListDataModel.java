@@ -1,7 +1,8 @@
-package com.dcw.app.rating.biz.contact.model;
+package com.dcw.app.rating.biz.contact.adapter.model;
 
 import android.util.SparseArray;
 
+import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.rating.ui.mvc.Model;
 
 import java.util.ArrayList;

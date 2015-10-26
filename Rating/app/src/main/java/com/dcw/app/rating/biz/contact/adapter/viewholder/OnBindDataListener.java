@@ -1,6 +1,6 @@
 package com.dcw.app.rating.biz.contact.adapter.viewholder;
 
-import com.dcw.app.rating.biz.contact.model.ListDataModel;
+import com.dcw.app.rating.biz.contact.adapter.model.ListDataModel;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.

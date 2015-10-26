@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.biz.contact.adapter.viewholder.RecyclerViewHolder;
-import com.dcw.app.rating.biz.contact.model.ItemViewHolderBean;
-import com.dcw.app.rating.biz.contact.model.ListDataModel;
+import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolderBean;
+import com.dcw.app.rating.biz.contact.adapter.model.ListDataModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 

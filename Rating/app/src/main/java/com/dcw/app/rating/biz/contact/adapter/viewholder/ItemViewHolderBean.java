@@ -1,8 +1,8 @@
-package com.dcw.app.rating.biz.contact.model;
+package com.dcw.app.rating.biz.contact.adapter.viewholder;
 
 import android.support.annotation.LayoutRes;
 
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
+import com.dcw.app.rating.biz.contact.adapter.model.ListDataModel;
 
 /**
  * <p>Title: ucweb</p>
