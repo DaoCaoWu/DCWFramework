@@ -11,7 +11,6 @@ import com.dcw.app.rating.biz.contact.model.ListDataModel;
 public abstract class ItemViewHolder<M extends ListDataModel<D>, D> implements OnBindDataListener<M, D>, OnBindViewEventListener<M, D> {
 
     public final View itemView;
-    ItemViewInfo mItemViewInfo;
     Object mListener;
 
     public ItemViewHolder(View itemView) {
@@ -19,14 +18,6 @@ public abstract class ItemViewHolder<M extends ListDataModel<D>, D> implements O
             throw new IllegalArgumentException("itemView may not be null");
         }
         this.itemView = itemView;
-    }
-
-    public ItemViewInfo getItemViewInfo() {
-        return mItemViewInfo;
-    }
-
-    public void setItemViewInfo(ItemViewInfo itemViewInfo) {
-        mItemViewInfo = itemViewInfo;
     }
 
     @SuppressWarnings("unchecked")

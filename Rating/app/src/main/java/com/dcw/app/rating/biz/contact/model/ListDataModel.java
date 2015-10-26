@@ -43,6 +43,15 @@ public class ListDataModel<D> extends Model {
         notifyObservers();
     }
 
+    /**
+     * 设置要绑定的数据
+     *
+     * @param dataList 传入的数据
+     */
+    public void setDataListNoNotify(List<D> dataList) {
+        this.mDataList = dataList == null ? new ArrayList<D>() : dataList;
+    }
+
     public void addItemViewHolderBean(int viewType, ItemViewHolderBean<? extends ListDataModel<D>, D> bean) {
         if (mHolderBeans == null) {
             mHolderBeans = new SparseArray<ItemViewHolderBean<? extends ListDataModel<D>, D>>();

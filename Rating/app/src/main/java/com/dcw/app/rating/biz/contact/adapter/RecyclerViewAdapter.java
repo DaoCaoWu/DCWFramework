@@ -67,6 +67,16 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     }
 
     @Override
+    public int getItemCount() {
+        return mModel.getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mModel.getItemViewType(position);
+    }
+
+    @Override
     public RecyclerViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
             Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
@@ -88,16 +98,6 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
         holder.mdItemViewHolder.setListener(mViewHolderListener);
         holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
         holder.mdItemViewHolder.onBindData(getModel(), position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mModel.getCount();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return mModel.getItemViewType(position);
     }
 
     @Override

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewInfo;
 import com.dcw.app.rating.biz.contact.model.ItemViewHolderBean;
 import com.dcw.app.rating.biz.contact.model.ListDataModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
@@ -56,7 +55,6 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
     public LayoutInflater getInflater() {
         return mInflater;
     }
-
 
     public void setViewHolderListener(Object viewHolderListener) {
         mViewHolderListener = viewHolderListener;
@@ -106,7 +104,6 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
         if (convertView == null) {
             //Create a new view holder using reflection
             holder = onCreateViewHolder(parent, getItemViewType(position));
-            holder.setItemViewInfo(new ItemViewInfo(getItemViewType(position), position));
             convertView = holder.itemView;
             convertView.setTag(holder);
         } else {
