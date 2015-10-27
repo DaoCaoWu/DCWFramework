@@ -11,7 +11,7 @@ import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
-import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
+import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
 import com.dcw.app.rating.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
 

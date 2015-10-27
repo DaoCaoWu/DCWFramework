@@ -1,4 +1,4 @@
-package com.dcw.app.rating.ui.adapter;
+package com.dcw.app.rating.ui.framework;
 
 
 import com.dcw.framework.pac.basic.IFrameworkManifest;

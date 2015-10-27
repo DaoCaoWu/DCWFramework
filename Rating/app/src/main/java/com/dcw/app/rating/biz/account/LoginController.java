@@ -1,6 +1,6 @@
 package com.dcw.app.rating.biz.account;
 
-import com.dcw.app.rating.ui.adapter.ToastManager;
+import com.dcw.app.rating.ui.framework.ToastManager;
 import com.dcw.app.rating.ui.mvc.ViewController;
 
 /**

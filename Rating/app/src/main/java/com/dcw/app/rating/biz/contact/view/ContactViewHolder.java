@@ -2,7 +2,7 @@ package com.dcw.app.rating.biz.contact.view;
 
 import android.view.View;
 
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 

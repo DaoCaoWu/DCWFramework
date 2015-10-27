@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact.adapter;
+package com.dcw.app.rating.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.rating.biz.contact.adapter.model.ListDataModel;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
+import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 
@@ -44,11 +44,7 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
     }
 
     public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object listener) {
-        mContext = context;
-        mModel = model;
-        mModel.addObserver(this);
-        mInflater = LayoutInflater.from(mContext);
-        mViewHolderListener = listener;
+        this(context, model, listener);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz));
     }
 
@@ -116,6 +112,7 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
 
     public ItemViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
+            //Create a new view holder using reflection
             Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
             return constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false));
         } catch (IllegalAccessException e) {

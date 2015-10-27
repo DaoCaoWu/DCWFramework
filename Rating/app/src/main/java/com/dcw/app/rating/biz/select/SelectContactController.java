@@ -3,9 +3,9 @@ package com.dcw.app.rating.biz.select;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.contact.adapter.RecyclerViewAdapter;
+import com.dcw.app.rating.ui.adapter.RecyclerViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolderBean;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;

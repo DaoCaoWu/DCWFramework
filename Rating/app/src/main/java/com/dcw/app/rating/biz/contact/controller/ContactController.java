@@ -4,15 +4,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.contact.adapter.ListViewAdapter;
+import com.dcw.app.rating.ui.adapter.ListViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolderBean;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.ContactViewHolder;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
 import com.dcw.app.rating.biz.select.SelectItemView;
-import com.dcw.app.rating.ui.adapter.ToastManager;
+import com.dcw.app.rating.ui.framework.ToastManager;
 import com.dcw.app.rating.ui.mvc.Controller;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;

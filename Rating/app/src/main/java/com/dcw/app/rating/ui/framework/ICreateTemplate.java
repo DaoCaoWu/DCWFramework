@@ -1,4 +1,4 @@
-package com.dcw.app.rating.ui.adapter;
+package com.dcw.app.rating.ui.framework;
 
 public interface ICreateTemplate {
 

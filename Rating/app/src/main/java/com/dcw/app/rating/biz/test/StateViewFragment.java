@@ -8,7 +8,7 @@ import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
-import com.dcw.app.rating.ui.adapter.BaseFragmentWrapper;
+import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
 import com.dcw.app.rating.ui.lib.StateView;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;

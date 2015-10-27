@@ -3,9 +3,9 @@ package com.dcw.app.rating.biz;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
 
-import com.dcw.app.rating.ui.adapter.BaseActivityWrapper;
-import com.dcw.app.rating.ui.adapter.FrameworkManifest;
-import com.dcw.app.rating.ui.adapter.ToastManager;
+import com.dcw.app.rating.ui.framework.BaseActivityWrapper;
+import com.dcw.app.rating.ui.framework.FrameworkManifest;
+import com.dcw.app.rating.ui.framework.ToastManager;
 import com.dcw.framework.pac.basic.FrameworkFacade;
 
 import java.lang.reflect.Field;

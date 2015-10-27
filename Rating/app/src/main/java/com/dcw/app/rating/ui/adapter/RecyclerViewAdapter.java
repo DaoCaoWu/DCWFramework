@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.contact.adapter;
+package com.dcw.app.rating.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -8,16 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.RecyclerViewHolder;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.rating.biz.contact.adapter.model.ListDataModel;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
+import com.dcw.app.rating.ui.adapter.viewholder.RecyclerViewHolder;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
+import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
+ */
 public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends RecyclerView.Adapter<RecyclerViewHolder<M, D>> implements Observer {
 
     private Context mContext;
@@ -41,12 +44,8 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
         this(context, model, layoutResId, viewHolderClazz, null);
     }
 
-    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object viewHolderListener) {
-        mContext = context;
-        mModel = model;
-        mModel.addObserver(this);
-        mInflater = LayoutInflater.from(mContext);
-        mViewHolderListener = viewHolderListener;
+    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object listener) {
+        this(context, model, listener);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz));
     }
 

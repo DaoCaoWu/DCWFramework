@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.biz.contact.adapter.viewholder.ItemViewHolder;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.CatalogItemView;
