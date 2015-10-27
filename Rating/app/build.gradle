@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.dcw.framework.rating"
-        minSdkVersion 10
+        minSdkVersion 8
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -28,12 +28,10 @@ dependencies {
     compile 'com.android.support:design:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
-    //圆形头像  代码地址-----> https://github.com/hdodenhof/CircleImageView
-    compile 'de.hdodenhof:circleimageview:1.2.1'
     //弹出提示信息    代码地址-----> https://github.com/johnkil/Android-AppMsg
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
     //SuperRecyclerView    代码地址-----> https://github.com/Malinskiy/SuperRecyclerView
     compile 'com.malinskiy:superrecyclerview:1.1.0'
     //超强滚动效果View    代码地址-----> https://github.com/ksoichiro/Android-ObservableScrollView
-    compile 'com.github.ksoichiro:android-observablescrollview:1.5.1'
+//    compile 'com.github.ksoichiro:android-observablescrollview:1.5.1'
 }

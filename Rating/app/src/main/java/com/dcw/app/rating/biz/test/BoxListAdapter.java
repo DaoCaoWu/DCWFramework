@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.db.bean.Cache;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -52,17 +48,17 @@ public class BoxListAdapter extends ArrayAdapter<Cache> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder viewHolder;
+        ViewHolder viewHolder = null;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_box, null);
-            viewHolder = new ViewHolder();
-            viewHolder.root = (LinearLayout) convertView.findViewById(R.id.boxItem);
-            viewHolder.tvId = (TextView) convertView.findViewById(R.id.tvItemId);
-            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-            viewHolder.tvSize = (TextView) convertView.findViewById(R.id.tvSize);
-            viewHolder.tvDescription = (TextView) convertView.findViewById(R.id.tvDescription);
-            convertView.setTag(viewHolder);
+//            convertView = inflater.inflate(R.layout.item_box, null);
+//            viewHolder = new ViewHolder();
+//            viewHolder.root = (LinearLayout) convertView.findViewById(R.id.boxItem);
+//            viewHolder.tvId = (TextView) convertView.findViewById(R.id.tvItemId);
+//            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+//            viewHolder.tvSize = (TextView) convertView.findViewById(R.id.tvSize);
+//            viewHolder.tvDescription = (TextView) convertView.findViewById(R.id.tvDescription);
+//            convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
@@ -89,14 +85,14 @@ public class BoxListAdapter extends ArrayAdapter<Cache> {
     }
 
     private void setImageView(View convertView, ViewHolder viewHolder) {
-        String imageUri2 = "http://ww1.sinaimg.cn/mw600/6345d84ejw1dvxp9dioykg.gif";
-        Uri uri2 = Uri.parse(imageUri2);
-        DraweeController draweeController2 = Fresco.newDraweeControllerBuilder().setUri(uri2).setAutoPlayAnimations(true).build();
-        viewHolder.mSimpleDraweeView = (SimpleDraweeView) convertView.findViewById(R.id.fresco_img1);
-        viewHolder.mSimpleDraweeView.setController(draweeController2);
-        RoundingParams mRoundParams2 = viewHolder.mSimpleDraweeView.getHierarchy().getRoundingParams();
-        mRoundParams2.setRoundAsCircle(true);
-        viewHolder.mSimpleDraweeView.getHierarchy().setRoundingParams(mRoundParams2);
+//        String imageUri2 = "http://ww1.sinaimg.cn/mw600/6345d84ejw1dvxp9dioykg.gif";
+//        Uri uri2 = Uri.parse(imageUri2);
+//        DraweeController draweeController2 = Fresco.newDraweeControllerBuilder().setUri(uri2).setAutoPlayAnimations(true).build();
+//        viewHolder.mSimpleDraweeView = (SimpleDraweeView) convertView.findViewById(R.id.fresco_img1);
+//        viewHolder.mSimpleDraweeView.setController(draweeController2);
+//        RoundingParams mRoundParams2 = viewHolder.mSimpleDraweeView.getHierarchy().getRoundingParams();
+//        mRoundParams2.setRoundAsCircle(true);
+//        viewHolder.mSimpleDraweeView.getHierarchy().setRoundingParams(mRoundParams2);
     }
 
     static class ViewHolder {
@@ -105,6 +101,6 @@ public class BoxListAdapter extends ArrayAdapter<Cache> {
         TextView tvName;
         TextView tvSize;
         TextView tvDescription;
-        SimpleDraweeView mSimpleDraweeView;
+//        SimpleDraweeView mSimpleDraweeView;
     }
 }

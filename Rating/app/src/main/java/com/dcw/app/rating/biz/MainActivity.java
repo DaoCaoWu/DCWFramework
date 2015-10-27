@@ -16,7 +16,7 @@ public class MainActivity extends BaseActivityWrapper {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getOverflowMenu();
+//        getOverflowMenu();
         startFramework();
     }
 

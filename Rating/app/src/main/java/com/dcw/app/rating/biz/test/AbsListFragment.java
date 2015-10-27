@@ -17,7 +17,6 @@ import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
 import com.dcw.app.rating.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class AbsListFragment extends BaseFragmentWrapper {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Fresco.initialize(getActivity());
+//        Fresco.initialize(getActivity());
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
