@@ -1,6 +1,7 @@
 package com.dcw.app.rating.biz.select;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +18,7 @@ import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
 
-public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rating.ui.mvc.View<StickyListView.ViewListener> {
+public class ContactRecyclerView extends SwipeRefreshLayout implements com.dcw.app.rating.ui.mvc.View<StickyListView.ViewListener> {
 
     @InjectView(R.id.lv_list)
     RecyclerView mRecyclerView;
@@ -39,6 +40,7 @@ public class ContactRecyclerView extends LinearLayout implements com.dcw.app.rat
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             mPositionHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
+            setEnabled(mPositionHelper.findFirstVisibleItemPosition() == 0);
             mCatalogHelper.onScroll(recyclerView);
             if (mListener != null) {
                 mListener.onCatalogViewShouldUpdate(mCatalogView, mPositionHelper.findFirstVisibleItemPosition());
