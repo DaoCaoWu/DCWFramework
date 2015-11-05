@@ -6,6 +6,7 @@ import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.select.SelectFragment;
 import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
+import com.dcw.app.rating.ui.qrcode.QRCodeFragment;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 @InjectLayout(R.layout.fragment_welcome)
@@ -32,7 +33,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(SelectFragment.class);
+                startFragment(QRCodeFragment.class);
             }
         }, 1500);
     }
