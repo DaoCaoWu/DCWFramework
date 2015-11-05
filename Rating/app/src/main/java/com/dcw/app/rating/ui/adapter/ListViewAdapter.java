@@ -25,18 +25,12 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
     private Context mContext;
     private M mModel;
     private LayoutInflater mInflater;
-    private Object mViewHolderListener;
 
     public ListViewAdapter(@NonNull Context context, @NonNull M model) {
-        this(context, model, null);
-    }
-
-    public ListViewAdapter(@NonNull Context context, @NonNull M model, Object listener) {
         mContext = context;
         mModel = model;
         mModel.addObserver(this);
         mInflater = LayoutInflater.from(mContext);
-        mViewHolderListener = listener;
     }
 
     public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz) {
@@ -44,16 +38,12 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
     }
 
     public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object listener) {
-        this(context, model, listener);
-        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz));
+        this(context, model);
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz, listener));
     }
 
     public LayoutInflater getInflater() {
         return mInflater;
-    }
-
-    public void setViewHolderListener(Object viewHolderListener) {
-        mViewHolderListener = viewHolderListener;
     }
 
     public Context getContext() {
@@ -128,7 +118,7 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
     }
 
     public void onBindViewHolder(ItemViewHolder<M, D> holder, int position) {
-        holder.setListener(mViewHolderListener);
+        holder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
         holder.onBindViewEvent(getModel(), position);
         holder.onBindData(getModel(), position);
     }

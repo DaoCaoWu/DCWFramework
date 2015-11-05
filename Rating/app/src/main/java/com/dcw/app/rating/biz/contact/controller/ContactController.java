@@ -27,7 +27,7 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
 //        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
         getView().getListView().setAdapter(new ListViewAdapter<ContactModel, Contact>(
-                getView().getContext(), getModel(), this));
+                getView().getContext(), getModel()));
         getView().setViewListener(this);
         getModel().addObserver(this);
         getModel().addObserver(getView());

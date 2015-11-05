@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dcw.app.rating.ui.adapter.model.RecyclerDataModel;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.ui.adapter.viewholder.RecyclerViewHolder;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
@@ -26,18 +27,12 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     private Context mContext;
     private M mModel;
     private LayoutInflater mInflater;
-    private Object mViewHolderListener;
 
     public RecyclerViewAdapter(Context context, M model) {
-        this(context, model, null);
-    }
-
-    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, Object listener) {
         mContext = context;
         mModel = model;
         mModel.addObserver(this);
         mInflater = LayoutInflater.from(mContext);
-        mViewHolderListener = listener;
     }
 
     public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz) {
@@ -45,16 +40,12 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     }
 
     public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object listener) {
-        this(context, model, listener);
-        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz));
+        this(context, model);
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz, listener));
     }
 
     public LayoutInflater getInflater() {
         return mInflater;
-    }
-
-    public void setViewHolderListener(Object viewHolderListener) {
-        mViewHolderListener = viewHolderListener;
     }
 
     public M getModel() {
@@ -67,17 +58,31 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
 
     @Override
     public int getItemCount() {
+        if (mModel instanceof RecyclerDataModel) {
+            return ((RecyclerDataModel) mModel).getHeaderViewCount() + mModel.getCount() + ((RecyclerDataModel) mModel).getFooterViewCount();
+        }
         return mModel.getCount();
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (mModel instanceof RecyclerDataModel) {
+            if (((RecyclerDataModel) mModel).isHeader(position)) {
+                return RecyclerDataModel.ITEM_VIEW_TYPE_HEADER + position;
+            } else if (((RecyclerDataModel) mModel).isFooter(position)) {
+                return RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER + position;
+            }
+        }
         return mModel.getItemViewType(position);
     }
 
     @Override
     public RecyclerViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
+            if (getModel().<M>getItemViewHolderBean(viewType) == null) {
+                int a = 1;
+                a++;
+            }
             Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
             return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
         } catch (IllegalAccessException e) {
@@ -94,7 +99,17 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder<M, D> holder, int position) {
-        holder.mdItemViewHolder.setListener(mViewHolderListener);
+        if (mModel instanceof RecyclerDataModel) {
+            if (((RecyclerDataModel) mModel).isHeader(position)) {
+                holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getHeaderViewHolderBean(position).getViewHolderListener());
+            } else if (((RecyclerDataModel) mModel).isFooter(position)) {
+                holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getFooterViewHolderBean(position).getViewHolderListener());
+            } else {
+                holder.mdItemViewHolder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
+            }
+        } else {
+            holder.mdItemViewHolder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
+        }
         holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
         holder.mdItemViewHolder.onBindData(getModel(), position);
     }

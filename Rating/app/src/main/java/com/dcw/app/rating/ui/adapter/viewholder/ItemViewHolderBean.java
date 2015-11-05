@@ -15,9 +15,20 @@ public class ItemViewHolderBean<M extends ListDataModel<D>, D> {
 
     private Class<? extends ItemViewHolder<M, D>> mItemViewHolderClazz;
 
+    private Object mViewHolderListener;
+
     public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder<M, D>> itemViewHolderClazz) {
+        this(itemViewHolderLayoutId, itemViewHolderClazz, null);
+    }
+
+    public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder<M, D>> itemViewHolderClazz, Object listener) {
         mItemViewHolderLayoutId = itemViewHolderLayoutId;
         mItemViewHolderClazz = itemViewHolderClazz;
+        mViewHolderListener = listener;
+    }
+
+    public Object getViewHolderListener() {
+        return mViewHolderListener;
     }
 
     public
@@ -30,3 +41,4 @@ public class ItemViewHolderBean<M extends ListDataModel<D>, D> {
         return mItemViewHolderClazz;
     }
 }
+

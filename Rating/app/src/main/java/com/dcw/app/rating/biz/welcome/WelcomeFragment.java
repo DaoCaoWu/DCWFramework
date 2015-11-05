@@ -33,7 +33,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(QRCodeFragment.class);
+                startFragment(SelectFragment.class);
             }
         }, 1500);
     }

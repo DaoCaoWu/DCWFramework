@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.ui.adapter.RecyclerViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
+import com.dcw.app.rating.ui.adapter.model.ListDataModel;
+import com.dcw.app.rating.ui.adapter.viewholder.FixViewHolderBean;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;
@@ -25,7 +27,11 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
         RecyclerViewAdapter<ContactModel, Contact> adapter
                 = new RecyclerViewAdapter<ContactModel, Contact>(
                 getView().getContext(), getModel(), R.layout.item_view_select, SelectItemView.class);
-        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
+        getModel().addHeaderViewHolderBean(0, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "abc", null));
+        getModel().addHeaderViewHolderBean(1, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "bbc", null));
+//        getModel().addFooterViewHolderBean(0, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "bbc", null));
+//        getModel().addFooterViewHolderBean(1, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "abc", null));
+//        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
 //        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
         getView().getRecyclerView().setAdapter(new RecyclerViewAdapter<ContactModel, Contact>(getView().getContext(), getModel()));
         getView().setViewListener(this);
@@ -39,7 +45,7 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
 
     @Override
     public void onCatalogViewShouldUpdate(TextView catalogView, int firstVisibleItem) {
-        catalogView.setText(getModel().getItem(firstVisibleItem).getSortKey());
+        catalogView.setText(getModel().getItem(firstVisibleItem) == null ? "" : getModel().getItem(firstVisibleItem).getSortKey());
     }
 
     @Override

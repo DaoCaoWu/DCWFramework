@@ -3,11 +3,12 @@ package com.dcw.app.rating.biz.select;
 import android.view.View;
 
 import com.dcw.app.rating.ui.adapter.model.ListDataModel;
+import com.dcw.app.rating.ui.adapter.model.RecyclerDataModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
+public abstract class SelectModel<T> extends RecyclerDataModel<T> implements ISelect<T> {
 
     /**
      * you can select only one data in list
