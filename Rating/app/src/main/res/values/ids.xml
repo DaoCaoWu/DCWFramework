@@ -20,4 +20,12 @@
     <item type="id" name="cb_select"/>
     <item type="id" name="cb_select1"/>
     <item type="id" name="item_container"/>
+    <item type="id" name="toolbar"/>
+    <item type="id" name="coordinator_layout"/>
+    <item type="id" name="app_bar_layout"/>
+    <item type="id" name="tab_layout"/>
+    <item type="id" name="drawer_layout"/>
+    <item type="id" name="view_pager"/>
+    <item type="id" name="navigation_view"/>
+    <item type="id" name="collapsing_toolbar_layout"/>
 </resources>

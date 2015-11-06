@@ -1,6 +1,9 @@
 package com.dcw.app.rating.biz.home;
 
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -8,19 +11,31 @@ import android.view.MenuItem;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.MainActivity;
+import com.dcw.app.rating.biz.account.LoginFragment;
+import com.dcw.app.rating.biz.contact.ContactListFragment;
 import com.dcw.app.rating.biz.search.SearchFragment;
+import com.dcw.app.rating.biz.select.SelectFragment;
 import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.test.StateViewFragment;
 import com.dcw.app.rating.biz.toolbar.DrawerBarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
+import com.dcw.app.rating.ui.adapter.FragmentAdapter;
+import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
+import com.dcw.framework.view.annotation.InjectView;
 
 @InjectLayout(R.layout.fragment_home)
 public class HomeFragment extends BaseFragmentWrapper implements ToolbarController.OnInitToolbarListener
         , Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
+    @InjectView(R.id.tab_layout)
+    TabLayout mTabLayout;
+    @InjectView(R.id.view_pager)
+    ViewPager mViewPager;
+    @InjectView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
     public Class getHostActivity() {
@@ -39,6 +54,18 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
         mToolbarController.setOnInitToolbarListener(this);
         mToolbarController.setOnMenuItemClickListener(this);
         ((DrawerBarController) mToolbarController).setOnNavigationItemSelectedListener(this);
+        ListDataModel<BaseFragmentWrapper> fragmentModel = new ListDataModel<BaseFragmentWrapper>();
+        fragmentModel.addItem(new ContactListFragment());
+        fragmentModel.addItem(new SelectFragment());
+        fragmentModel.addItem(new LoginFragment());
+//        for (int i = 0; i < fragmentModel.getCount(); i++) {
+//            mTabLayout.addTab(mTabLayout.newTab().setText(fragmentModel.getItem(i).getClass().getSimpleName()));
+//        }
+        FragmentAdapter<ListDataModel<BaseFragmentWrapper>, BaseFragmentWrapper> fragmentAdapter = new FragmentAdapter<ListDataModel<BaseFragmentWrapper>, BaseFragmentWrapper>(getActivity().getSupportFragmentManager(), fragmentModel);
+        mViewPager.setAdapter(fragmentAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabsFromPagerAdapter(fragmentAdapter);
+        mCollapsingToolbarLayout.setTitle(getClass().getSimpleName());
     }
 
     @Override
