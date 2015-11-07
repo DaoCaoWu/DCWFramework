@@ -22,10 +22,10 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
 
     public SelectContactController(ContactRecyclerView view, ContactModel model) {
         super(view, model);
-        getModel().addHeaderViewHolderBean(0, new FixViewHolderBean<String>(R.layout.item_view_select, HeaderView.class, "abc"));
-        getModel().addHeaderViewHolderBean(1, new FixViewHolderBean<String>(R.layout.item_view_select, HeaderView.class, "bbc"));
-        getModel().addFooterViewHolderBean(0, new FixViewHolderBean<String>(R.layout.item_view_select, HeaderView.class, "bbc"));
-        getModel().addFooterViewHolderBean(1, new FixViewHolderBean<String>(R.layout.item_view_select, HeaderView.class, "abc"));
+        getModel().addHeaderViewHolderBean(0, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "abc"));
+        getModel().addHeaderViewHolderBean(1, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "bbc"));
+        getModel().addFooterViewHolderBean(0, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "bbc"));
+        getModel().addFooterViewHolderBean(1, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "abc"));
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean(R.layout.item_view_select, SelectItemView.class));
         getModel().addItemViewHolderBean(1, new ItemViewHolderBean(R.layout.item_view_select_1, SelectItemView1.class));
         getView().getRecyclerView().setAdapter(new RecyclerViewAdapter<ContactModel>(getView().getContext(), getModel()));
