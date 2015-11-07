@@ -67,7 +67,7 @@ public class QRCodeFragment extends BaseFragmentWrapper implements View.OnClickL
                 //根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
                 Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 550);
                 mIvQrImage.setImageBitmap(qrCodeBitmap);
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "Text can not be empty", Toast.LENGTH_SHORT).show();
             }
 

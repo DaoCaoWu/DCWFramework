@@ -4,14 +4,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.ui.adapter.ListViewAdapter;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
-import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.ContactViewHolder;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
 import com.dcw.app.rating.biz.select.SelectItemView;
+import com.dcw.app.rating.biz.select.SelectItemView1;
+import com.dcw.app.rating.ui.adapter.ListViewAdapter;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.rating.ui.framework.ToastManager;
 import com.dcw.app.rating.ui.mvc.Controller;
 import com.dcw.app.rating.ui.mvc.core.Observable;
@@ -24,9 +25,9 @@ public class ContactController extends Controller<StickyListView, ContactModel> 
 
     public ContactController(StickyListView view, ContactModel model) {
         super(view, model);
-        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
-//        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
-        getView().getListView().setAdapter(new ListViewAdapter<ContactModel, Contact>(
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean(R.layout.item_view_select, SelectItemView.class));
+        getModel().addItemViewHolderBean(1, new ItemViewHolderBean(R.layout.item_view_select_1, SelectItemView1.class));
+        getView().getListView().setAdapter(new ListViewAdapter<ContactModel>(
                 getView().getContext(), getModel()));
         getView().setViewListener(this);
         getModel().addObserver(this);

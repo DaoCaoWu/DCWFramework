@@ -14,7 +14,7 @@ import com.dcw.app.rating.ui.mvc.core.Observer;
  * Created by jiaying.cjy@alibaba-inc.com on 2015/11/6.
  */
 public class FragmentAdapter<M extends ListDataModel<D>, D extends BaseFragmentWrapper> extends FragmentStatePagerAdapter implements Observer {
-    
+
     private M mModel;
 
     public FragmentAdapter(@NonNull FragmentManager fm, @NonNull M model) {

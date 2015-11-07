@@ -55,8 +55,8 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
         mToolbarController.setOnMenuItemClickListener(this);
         ((DrawerBarController) mToolbarController).setOnNavigationItemSelectedListener(this);
         ListDataModel<BaseFragmentWrapper> fragmentModel = new ListDataModel<BaseFragmentWrapper>();
-        fragmentModel.addItem(new ContactListFragment());
         fragmentModel.addItem(new SelectFragment());
+        fragmentModel.addItem(new ContactListFragment());
         fragmentModel.addItem(new LoginFragment());
 //        for (int i = 0; i < fragmentModel.getCount(); i++) {
 //            mTabLayout.addTab(mTabLayout.newTab().setText(fragmentModel.getItem(i).getClass().getSimpleName()));

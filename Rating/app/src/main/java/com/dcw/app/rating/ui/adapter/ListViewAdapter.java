@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 
@@ -20,7 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter implements Observer {
+public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implements Observer {
 
     private Context mContext;
     private M mModel;
@@ -33,13 +33,13 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz) {
+    public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz) {
         this(context, model, layoutResId, viewHolderClazz, null);
     }
 
-    public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object listener) {
+    public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, Object listener) {
         this(context, model);
-        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz, listener));
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean(layoutResId, viewHolderClazz, listener));
     }
 
     public LayoutInflater getInflater() {
@@ -86,7 +86,7 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
     @Override
     @SuppressWarnings("unchecked")
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemViewHolder<M, D> holder;
+        ItemViewHolder<M> holder;
         if (convertView == null) {
             //Create a new view holder using reflection
             holder = onCreateViewHolder(parent, getItemViewType(position));
@@ -94,31 +94,32 @@ public class ListViewAdapter<M extends ListDataModel<D>, D> extends BaseAdapter 
             convertView.setTag(holder);
         } else {
             //Reuse the view holder
-            holder = (ItemViewHolder<M, D>) convertView.getTag();
+            holder = (ItemViewHolder<M>) convertView.getTag();
         }
         onBindViewHolder(holder, position);
         return convertView;
     }
 
-    public ItemViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
+    @SuppressWarnings("unchecked")
+    public ItemViewHolder<M> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
             //Create a new view holder using reflection
-            Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
+            Constructor<? extends ItemViewHolder> constructor = getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
             return constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Unable to find a public constructor that takes an argument View in " +
-                    getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
+                    getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e.getTargetException());
         } catch (InstantiationException e) {
-            throw new RuntimeException("Unable to instantiate " + getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
+            throw new RuntimeException("Unable to instantiate " + getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
         }
     }
 
-    public void onBindViewHolder(ItemViewHolder<M, D> holder, int position) {
-        holder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
+    public void onBindViewHolder(ItemViewHolder<M> holder, int position) {
+        holder.setListener(getModel().getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
         holder.onBindViewEvent(getModel(), position);
         holder.onBindData(getModel(), position);
     }

@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 
 import com.dcw.app.rating.ui.adapter.model.RecyclerDataModel;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
-import com.dcw.app.rating.ui.adapter.viewholder.RecyclerViewHolder;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.rating.ui.adapter.model.ListDataModel;
+import com.dcw.app.rating.ui.adapter.viewholder.RecyclerViewHolder;
 import com.dcw.app.rating.ui.mvc.core.Observable;
 import com.dcw.app.rating.ui.mvc.core.Observer;
 
@@ -22,7 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public class RecyclerViewAdapter<M extends RecyclerDataModel<D>, D> extends RecyclerView.Adapter<RecyclerViewHolder<M, D>> implements Observer {
+public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerView.Adapter<RecyclerViewHolder<M>> implements Observer {
 
     private Context mContext;
     private M mModel;
@@ -35,13 +34,13 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel<D>, D> extends Recy
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz) {
+    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz) {
         this(context, model, layoutResId, viewHolderClazz, null);
     }
 
-    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M, D>> viewHolderClazz, Object listener) {
+    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, Object listener) {
         this(context, model);
-        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<M, D>(layoutResId, viewHolderClazz, listener));
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean(layoutResId, viewHolderClazz, listener));
     }
 
     public LayoutInflater getInflater() {
@@ -58,18 +57,13 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel<D>, D> extends Recy
 
     @Override
     public int getItemViewType(int position) {
-        int numHeaders = getModel().getHeaderViewCount();
-        if (position >= numHeaders) {
-            int adjPosition = position - numHeaders;
-            int adapterCount = getModel().getCount();
-            if (adjPosition < adapterCount) {
-                return getModel().getItemViewType(adjPosition);
-            }
-        }
-        if (position < numHeaders) {
+        if (getModel().isHeader(position)) {
             return RecyclerDataModel.ITEM_VIEW_TYPE_HEADER + position;
+        } else if (getModel().isFooter(position)) {
+            return RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER + position - getModel().getCount() - getModel().getHeaderViewCount();
+        } else {
+            return getModel().getItemViewType(position - getModel().getHeaderViewCount());
         }
-        return RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER + position - getModel().getCount() - getModel().getHeaderViewCount();
     }
 
     @Override
@@ -78,44 +72,43 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel<D>, D> extends Recy
     }
 
     @Override
-    public RecyclerViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
+    @SuppressWarnings("unchecked")
+    public RecyclerViewHolder<M> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
-            int position = getModel().getHeaderOrFooterPosition(viewType);
-            if (position != -1) {
-                if (viewType < 0) {
-                    Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getHeaderViewHolderBean(position).getItemViewHolderClazz().getConstructor(View.class);
-                    return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getHeaderViewHolderBean(position).getItemViewHolderLayoutId(), parent, false)));
-                } else if (viewType >= RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER) {
-                    Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getFooterViewHolderBean(position).getItemViewHolderClazz().getConstructor(View.class);
-                    return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getFooterViewHolderBean(position).getItemViewHolderLayoutId(), parent, false)));
-                }
+            if (getModel().isHeaderViewType(viewType)) {
+                Constructor<? extends ItemViewHolder> constructor = getModel().getHeaderViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
+                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getHeaderViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
+            } else if (getModel().isFooterViewType(viewType)) {
+                Constructor<? extends ItemViewHolder> constructor = getModel().getFooterViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
+                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getFooterViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
+            } else {
+                Constructor<? extends ItemViewHolder> constructor = getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
+                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
             }
-            Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
-            return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Unable to find a public constructor that takes an argument View in " +
-                    getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
+                    getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e.getTargetException());
         } catch (InstantiationException e) {
-            throw new RuntimeException("Unable to instantiate " + getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
+            throw new RuntimeException("Unable to instantiate " + getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
         }
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder<M, D> holder, int position) {
+    public void onBindViewHolder(RecyclerViewHolder<M> holder, int position) {
         if (getModel().isHeader(position)) {
-            holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getHeaderViewHolderBean(position).getViewHolderListener());
+            holder.mdItemViewHolder.setListener(getModel().getHeaderViewHolderBean(position).getViewHolderListener());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
             holder.mdItemViewHolder.onBindData(getModel(), position);
         } else if (getModel().isFooter(position)) {
-            holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getFooterViewHolderBean(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
+            holder.mdItemViewHolder.setListener(getModel().getFooterViewHolderBean(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getCount() - getModel().getHeaderViewCount());
             holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getCount() - getModel().getHeaderViewCount());
         } else {
-            holder.mdItemViewHolder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
+            holder.mdItemViewHolder.setListener(getModel().getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getHeaderViewCount());
             holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getHeaderViewCount());
         }

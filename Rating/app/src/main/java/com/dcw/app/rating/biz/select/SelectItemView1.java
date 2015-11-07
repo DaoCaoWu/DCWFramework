@@ -6,10 +6,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.CatalogItemView;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 
 /**
  * <p>Title: ucweb</p>
@@ -25,7 +25,7 @@ import com.dcw.app.rating.biz.contact.view.CatalogItemView;
  * @email adao12.vip@gmail.com
  * @create 15/10/26
  */
-public class SelectItemView1 extends ItemViewHolder<ContactModel, Contact> {
+public class SelectItemView1 extends ItemViewHolder<ContactModel> {
 
     CatalogItemView mItemView;
     CheckBox mCbSelect;

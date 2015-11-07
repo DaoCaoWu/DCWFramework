@@ -11,7 +11,7 @@ import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.CatalogItemView;
 import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 
-public class SelectItemView extends ItemViewHolder<ContactModel, Contact> {
+public class SelectItemView extends ItemViewHolder<ContactModel> {
 
     CatalogItemView mItemView;
     CheckBox mCbSelect;

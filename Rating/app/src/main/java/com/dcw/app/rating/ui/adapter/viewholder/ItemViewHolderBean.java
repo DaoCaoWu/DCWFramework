@@ -2,26 +2,24 @@ package com.dcw.app.rating.ui.adapter.viewholder;
 
 import android.support.annotation.LayoutRes;
 
-import com.dcw.app.rating.ui.adapter.model.ListDataModel;
-
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public class ItemViewHolderBean<M extends ListDataModel<D>, D> {
+public class ItemViewHolderBean {
 
     private
     @LayoutRes
     int mItemViewHolderLayoutId;
 
-    private Class<? extends ItemViewHolder<M, D>> mItemViewHolderClazz;
+    private Class<? extends ItemViewHolder> mItemViewHolderClazz;
 
     private Object mViewHolderListener;
 
-    public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder<M, D>> itemViewHolderClazz) {
+    public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz) {
         this(itemViewHolderLayoutId, itemViewHolderClazz, null);
     }
 
-    public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder<M, D>> itemViewHolderClazz, Object listener) {
+    public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, Object listener) {
         mItemViewHolderLayoutId = itemViewHolderLayoutId;
         mItemViewHolderClazz = itemViewHolderClazz;
         mViewHolderListener = listener;
@@ -37,7 +35,7 @@ public class ItemViewHolderBean<M extends ListDataModel<D>, D> {
         return mItemViewHolderLayoutId;
     }
 
-    public Class<? extends ItemViewHolder<M, D>> getItemViewHolderClazz() {
+    public Class<? extends ItemViewHolder> getItemViewHolderClazz() {
         return mItemViewHolderClazz;
     }
 }

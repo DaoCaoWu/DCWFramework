@@ -2,14 +2,14 @@ package com.dcw.app.rating.biz.contact.view;
 
 import android.view.View;
 
-import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
+import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolder;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public class ContactViewHolder extends ItemViewHolder<ContactModel, Contact> {
+public class ContactViewHolder extends ItemViewHolder<ContactModel> {
     CatalogItemView mCatalogItemView;
 
     public ContactViewHolder(View itemView) {

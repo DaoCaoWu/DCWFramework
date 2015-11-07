@@ -1,7 +1,6 @@
 package com.dcw.app.rating.ui.loadmore;
 
 import android.view.View;
-import android.widget.AbsListView;
 
 public interface LoadMoreContainer {
 

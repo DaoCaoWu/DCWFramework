@@ -2,23 +2,19 @@ package com.dcw.app.rating.ui.loadmore;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 
 public abstract class LoadMoreContainerBase<V extends ViewGroup> implements LoadMoreContainer {
 
+    final private V mTargetView;
     private LoadMoreUIHandler mLoadMoreUIHandler;
     private LoadMoreHandler mLoadMoreHandler;
-
     private boolean mIsLoading;
     private boolean mHasMore = false;
     private boolean mAutoLoadMore = true;
     private boolean mLoadError = false;
-
     private boolean mListEmpty = true;
     private boolean mShowLoadingForFirstPage = false;
     private View mFooterView;
-
-    final private V mTargetView;
 
 
     public LoadMoreContainerBase(V targetView) {

@@ -8,7 +8,7 @@ import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public abstract class ItemViewHolder<M extends ListDataModel<D>, D> implements OnBindDataListener<M, D>, OnBindViewEventListener<M, D> {
+public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindDataListener<M>, OnBindViewEventListener<M> {
 
     public final View itemView;
     Object mListener;

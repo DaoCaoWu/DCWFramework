@@ -2,10 +2,8 @@ package com.dcw.app.rating.ui.adapter.model;
 
 import android.util.SparseArray;
 import android.util.SparseIntArray;
-import android.widget.AdapterView;
 
 import com.dcw.app.rating.ui.adapter.viewholder.FixViewHolderBean;
-import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
 
 import java.util.List;
 
@@ -15,15 +13,15 @@ import java.util.List;
 public class RecyclerDataModel<D> extends ListDataModel<D> {
 
     public static final int ITEM_VIEW_TYPE_HEADER = Integer.MIN_VALUE;
-    public static final int ITEM_VIEW_TYPE_FOOTER = 100000;
+    public static final int ITEM_VIEW_TYPE_FOOTER = Integer.MAX_VALUE / 2;
 
-    private SparseArray<FixViewHolderBean<? extends ListDataModel<D>, D>> mHeaderBeans;
-    private SparseArray<FixViewHolderBean<? extends ListDataModel<D>, D>> mFooterBeans;
+    private SparseArray<FixViewHolderBean> mHeaderBeans;
+    private SparseArray<FixViewHolderBean> mFooterBeans;
     private SparseIntArray mViewTypePositionMap;
 
     public RecyclerDataModel() {
-        mHeaderBeans = new SparseArray<FixViewHolderBean<? extends ListDataModel<D>, D>>();
-        mFooterBeans = new SparseArray<FixViewHolderBean<? extends ListDataModel<D>, D>>();
+        mHeaderBeans = new SparseArray<FixViewHolderBean>();
+        mFooterBeans = new SparseArray<FixViewHolderBean>();
         mViewTypePositionMap = new SparseIntArray();
     }
 
@@ -36,26 +34,34 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         return mHeaderBeans != null && position < mHeaderBeans.size();
     }
 
+    public boolean isHeaderViewType(int viewType) {
+        return viewType < 0 && getHeaderOrFooterPosition(viewType) != -1;
+    }
+
     public boolean isFooter(int position) {
         return mFooterBeans != null && (position >= (mHeaderBeans.size() + getCount()) && position < (mHeaderBeans.size() + getCount() + mFooterBeans.size()));
     }
 
-    public void addHeaderViewHolderBean(int position, FixViewHolderBean<? extends ListDataModel<D>, D> bean) {
+    public boolean isFooterViewType(int viewType) {
+        return viewType >= ITEM_VIEW_TYPE_FOOTER && getHeaderOrFooterPosition(viewType) != -1;
+    }
+
+    public void addHeaderViewHolderBean(int position, FixViewHolderBean bean) {
         mHeaderBeans.append(position, bean);
         mViewTypePositionMap.append(ITEM_VIEW_TYPE_HEADER + position, position);
     }
 
-    public <M extends ListDataModel<D>> FixViewHolderBean<M, D> getHeaderViewHolderBean(int position) {
-        return (FixViewHolderBean<M, D>) mHeaderBeans.get(position);
+    public FixViewHolderBean getHeaderViewHolderBean(int position) {
+        return mHeaderBeans.get(position);
     }
 
-    public void addFooterViewHolderBean(int position, FixViewHolderBean<? extends ListDataModel<D>, D> bean) {
+    public void addFooterViewHolderBean(int position, FixViewHolderBean bean) {
         mFooterBeans.append(position, bean);
         mViewTypePositionMap.append(ITEM_VIEW_TYPE_FOOTER + position, position);
     }
 
-    public <M extends ListDataModel<D>> FixViewHolderBean<M, D> getFooterViewHolderBean(int position) {
-        return (FixViewHolderBean<M, D>) mFooterBeans.get(position);
+    public FixViewHolderBean getFooterViewHolderBean(int position) {
+        return mFooterBeans.get(position);
     }
 
     public int getHeaderViewCount() {
@@ -70,34 +76,14 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         return mViewTypePositionMap.get(viewType, -1);
     }
 
-    public Object getItemData(int position) {
-        // Header (negative positions will throw an IndexOutOfBoundsException)
-        int numHeaders = getHeaderViewCount();
-        if (position < numHeaders) {
-            if (mHeaderBeans != null) {
-                return mHeaderBeans.get(position).getData();
-            }
+    @SuppressWarnings("unchecked")
+    public <T> T getHeaderOrFooterItem(int position) {
+        if (isHeader(position)) {
+            return (T) mHeaderBeans.get(position).getData();
+        } else if (isFooter(position)) {
+            return (T) mFooterBeans.get(position - getCount() - getHeaderViewCount()).getData();
         }
-
-//        // Adapter
-//        final int adjPosition = position - numHeaders;
-//        int adapterCount = 0;
-//        if (getCount() != 0) {
-//            adapterCount = getCount();
-//            if (adjPosition < adapterCount) {
-//                return super.getItem(adjPosition);
-//            }
-//        }
-        if (mFooterBeans != null) {
-            return mFooterBeans.get(position - getCount() - getHeaderViewCount()).getData();
-        }
-        // Footer (off-limits positions will throw an IndexOutOfBoundsException)
         return null;
-    }
-
-    @Override
-    public D getItem(int position) {
-        return super.getItem(position - getHeaderViewCount());
     }
 
     @Override
@@ -113,26 +99,10 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         return -1;
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        int numHeaders = getHeaderViewCount();
-//        if (getCount() != 0 && position >= numHeaders) {
-//            int adjPosition = position - numHeaders;
-//            int adapterCount = getCount();
-//            if (adjPosition < adapterCount) {
-//                return super.getItemViewType(adjPosition);
-//            }
-//        }
-//        if (position < numHeaders) {
-//            return ITEM_VIEW_TYPE_HEADER + position;
-//        }
-//        return ITEM_VIEW_TYPE_FOOTER + position - getCount() - mHeaderBeans.size();
-//    }
-
     @Override
     public int getViewTypeCount() {
         if (getCount() > 0) {
-            return super.getViewTypeCount() + 1;
+            return super.getViewTypeCount() + mViewTypePositionMap.size();
         }
         return 1;
     }
