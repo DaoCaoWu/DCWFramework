@@ -26,13 +26,13 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
         super(view, model);
         RecyclerViewAdapter<ContactModel, Contact> adapter
                 = new RecyclerViewAdapter<ContactModel, Contact>(
-                getView().getContext(), getModel(), R.layout.item_view_select, SelectItemView.class);
+                getView().getContext(), getModel());
         getModel().addHeaderViewHolderBean(0, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "abc", null));
         getModel().addHeaderViewHolderBean(1, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "bbc", null));
-//        getModel().addFooterViewHolderBean(0, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "bbc", null));
-//        getModel().addFooterViewHolderBean(1, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "abc", null));
-//        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
-//        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
+        getModel().addFooterViewHolderBean(0, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "bbc", null));
+        getModel().addFooterViewHolderBean(1, new FixViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, HeaderView.class, "abc", null));
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select, SelectItemView.class));
+        getModel().addItemViewHolderBean(1, new ItemViewHolderBean<ContactModel, Contact>(R.layout.item_view_select_1, SelectItemView1.class));
         getView().getRecyclerView().setAdapter(new RecyclerViewAdapter<ContactModel, Contact>(getView().getContext(), getModel()));
         getView().setViewListener(this);
         getView().setColorSchemeResources(R.color.holo_blue_light, R.color.holo_red_light, R.color.holo_orange_light, R.color.holo_green_light);

@@ -35,13 +35,13 @@ public class ContactModel extends SelectModel<Contact> implements SectionIndexer
         super(dataList);
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        if (position % 3 == 0) {
-//            return 1;
-//        }
-//        return 0;
-//    }
+    @Override
+    public int getItemViewType(int position) {
+        if (position % 3 == 0) {
+            return 1;
+        }
+        return 0;
+    }
 
     public void loadContactListAsyn(final Context context) {
         TaskExecutor.executeTask(new Runnable() {

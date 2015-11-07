@@ -29,7 +29,7 @@ public class HeaderView extends ItemViewHolder<ContactModel, Contact> {
 
         @Override
         public void onBindData(final ContactModel model, final int position) {
-                mItemView.update((String)model.getHeaderOrFooterItem(position), (String)model.getHeaderOrFooterItem(position),(String)model.getHeaderOrFooterItem(position),(String)model.getHeaderOrFooterItem(position));
+                mItemView.update((String)model.getItemData(position), (String)model.getItemData(position),(String)model.getItemData(position),(String)model.getItemData(position));
 //                Contact contact = model.getItem(position);
 //                int section = model.getSectionForPosition(position);
 //                if (position == model.getPositionForSection(section)) {

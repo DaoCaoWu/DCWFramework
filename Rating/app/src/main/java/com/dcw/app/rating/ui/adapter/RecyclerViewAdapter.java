@@ -22,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends RecyclerView.Adapter<RecyclerViewHolder<M, D>> implements Observer {
+public class RecyclerViewAdapter<M extends RecyclerDataModel<D>, D> extends RecyclerView.Adapter<RecyclerViewHolder<M, D>> implements Observer {
 
     private Context mContext;
     private M mModel;
@@ -57,31 +57,38 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
     }
 
     @Override
-    public int getItemCount() {
-        if (mModel instanceof RecyclerDataModel) {
-            return ((RecyclerDataModel) mModel).getHeaderViewCount() + mModel.getCount() + ((RecyclerDataModel) mModel).getFooterViewCount();
+    public int getItemViewType(int position) {
+        int numHeaders = getModel().getHeaderViewCount();
+        if (position >= numHeaders) {
+            int adjPosition = position - numHeaders;
+            int adapterCount = getModel().getCount();
+            if (adjPosition < adapterCount) {
+                return getModel().getItemViewType(adjPosition);
+            }
         }
-        return mModel.getCount();
+        if (position < numHeaders) {
+            return RecyclerDataModel.ITEM_VIEW_TYPE_HEADER + position;
+        }
+        return RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER + position - getModel().getCount() - getModel().getHeaderViewCount();
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (mModel instanceof RecyclerDataModel) {
-            if (((RecyclerDataModel) mModel).isHeader(position)) {
-                return RecyclerDataModel.ITEM_VIEW_TYPE_HEADER + position;
-            } else if (((RecyclerDataModel) mModel).isFooter(position)) {
-                return RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER + position;
-            }
-        }
-        return mModel.getItemViewType(position);
+    public int getItemCount() {
+        return getModel().getHeaderViewCount() + getModel().getCount() + getModel().getFooterViewCount();
     }
 
     @Override
     public RecyclerViewHolder<M, D> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
-            if (getModel().<M>getItemViewHolderBean(viewType) == null) {
-                int a = 1;
-                a++;
+            int position = getModel().getHeaderOrFooterPosition(viewType);
+            if (position != -1) {
+                if (viewType < 0) {
+                    Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getHeaderViewHolderBean(position).getItemViewHolderClazz().getConstructor(View.class);
+                    return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getHeaderViewHolderBean(position).getItemViewHolderLayoutId(), parent, false)));
+                } else if (viewType >= RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER) {
+                    Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getFooterViewHolderBean(position).getItemViewHolderClazz().getConstructor(View.class);
+                    return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getFooterViewHolderBean(position).getItemViewHolderLayoutId(), parent, false)));
+                }
             }
             Constructor<? extends ItemViewHolder<M, D>> constructor = getModel().<M>getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
             return new RecyclerViewHolder<M, D>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
@@ -99,19 +106,19 @@ public class RecyclerViewAdapter<M extends ListDataModel<D>, D> extends Recycler
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder<M, D> holder, int position) {
-        if (mModel instanceof RecyclerDataModel) {
-            if (((RecyclerDataModel) mModel).isHeader(position)) {
-                holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getHeaderViewHolderBean(position).getViewHolderListener());
-            } else if (((RecyclerDataModel) mModel).isFooter(position)) {
-                holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getFooterViewHolderBean(position).getViewHolderListener());
-            } else {
-                holder.mdItemViewHolder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
-            }
+        if (getModel().isHeader(position)) {
+            holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getHeaderViewHolderBean(position).getViewHolderListener());
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
+            holder.mdItemViewHolder.onBindData(getModel(), position);
+        } else if (getModel().isFooter(position)) {
+            holder.mdItemViewHolder.setListener(((RecyclerDataModel) getModel()).getFooterViewHolderBean(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getCount() - getModel().getHeaderViewCount());
+            holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getCount() - getModel().getHeaderViewCount());
         } else {
             holder.mdItemViewHolder.setListener(getModel().<M>getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getHeaderViewCount());
+            holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getHeaderViewCount());
         }
-        holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
-        holder.mdItemViewHolder.onBindData(getModel(), position);
     }
 
     @Override

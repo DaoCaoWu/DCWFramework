@@ -64,6 +64,10 @@ public class ListDataModel<D> extends Model {
         return (ItemViewHolderBean<M, D>) mHolderBeans.get(viewType);
     }
 
+    public SparseArray<ItemViewHolderBean<? extends ListDataModel<D>, D>> getHolderBeans() {
+        return mHolderBeans;
+    }
+
     /**
      * 清除绑定数据数据
      */
