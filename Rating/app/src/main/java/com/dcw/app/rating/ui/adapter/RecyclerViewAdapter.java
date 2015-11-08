@@ -105,8 +105,8 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
             holder.mdItemViewHolder.onBindData(getModel(), position);
         } else if (getModel().isFooter(position)) {
             holder.mdItemViewHolder.setListener(getModel().getFooterViewHolderBean(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getCount() - getModel().getHeaderViewCount());
-            holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getCount() - getModel().getHeaderViewCount());
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
+            holder.mdItemViewHolder.onBindData(getModel(), position);
         } else {
             holder.mdItemViewHolder.setListener(getModel().getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getHeaderViewCount());

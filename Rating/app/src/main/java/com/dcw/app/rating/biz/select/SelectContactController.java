@@ -23,11 +23,14 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
     public SelectContactController(ContactRecyclerView view, ContactModel model) {
         super(view, model);
         getModel().addHeaderViewHolderBean(0, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "abc"));
-        getModel().addHeaderViewHolderBean(1, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "bbc"));
-        getModel().addFooterViewHolderBean(0, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "bbc"));
+        getModel().addHeaderViewHolderBean(1, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class));
+        getModel().addFooterViewHolderBean(0, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class));
         getModel().addFooterViewHolderBean(1, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "abc"));
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean(R.layout.item_view_select, SelectItemView.class));
         getModel().addItemViewHolderBean(1, new ItemViewHolderBean(R.layout.item_view_select_1, SelectItemView1.class));
+        getModel().setHeaderData(1, "哈哈");
+        getModel().setFooterData(0, "哈哈0");
+        getModel().setFooterData(1, "哈哈1");
         getView().getRecyclerView().setAdapter(new RecyclerViewAdapter<ContactModel>(getView().getContext(), getModel()));
         getView().setViewListener(this);
         getView().setColorSchemeResources(R.color.holo_blue_light, R.color.holo_red_light, R.color.holo_orange_light, R.color.holo_green_light);

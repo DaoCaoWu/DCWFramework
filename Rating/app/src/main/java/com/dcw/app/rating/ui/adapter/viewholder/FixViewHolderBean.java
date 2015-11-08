@@ -25,4 +25,8 @@ public class FixViewHolderBean extends ItemViewHolderBean {
     public Object getData() {
         return mData;
     }
+
+    public void setData(Object data) {
+        mData = data;
+    }
 }
