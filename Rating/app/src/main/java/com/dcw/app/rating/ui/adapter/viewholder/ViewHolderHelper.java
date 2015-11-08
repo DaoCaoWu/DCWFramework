@@ -48,7 +48,6 @@ public class ViewHolderHelper {
     private final SparseArray<View> views;
 
     private final Context context;
-    public int layoutId;
     private View convertView;
 
     protected ViewHolderHelper(Context context, View convertView) {
