@@ -11,6 +11,10 @@ import com.dcw.app.rating.ui.adapter.model.ListDataModel;
 public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindDataListener<M>, OnBindViewEventListener<M> {
 
     public final View itemView;
+    /**
+     * Views indexed with their IDs
+     */
+    private final ViewHolderHelper mHelper;
     Object mListener;
 
     public ItemViewHolder(View itemView) {
@@ -18,6 +22,11 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
             throw new IllegalArgumentException("itemView may not be null");
         }
         this.itemView = itemView;
+        this.mHelper = new ViewHolderHelper(itemView.getContext(), itemView);
+    }
+
+    public ViewHolderHelper getHelper() {
+        return mHelper;
     }
 
     /**

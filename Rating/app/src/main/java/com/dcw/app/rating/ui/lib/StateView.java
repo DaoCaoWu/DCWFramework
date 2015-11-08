@@ -147,10 +147,6 @@ public class StateView extends FrameLayout {
         return mViewState.state != null ? mViewState.state : ContentState.CONTENT;
     }
 
-    private void setState(int nativeInt) {
-        setState(ContentState.getState(nativeInt));
-    }
-
     /**
      * Configures the view to be in the given state, hiding and showing internally maintained-views as needed
      *
@@ -187,6 +183,10 @@ public class StateView extends FrameLayout {
 
             newStateView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void setState(int nativeInt) {
+        setState(ContentState.getState(nativeInt));
     }
 
     /**

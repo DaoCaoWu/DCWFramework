@@ -56,6 +56,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
     private ArrayList<FixedViewInfo> mFooterViewInfos = new ArrayList<FixedViewInfo>();
     private ListAdapter mOriginalAdapter;
     private ItemClickHandler mItemClickHandler;
+
     public GridViewWithHeaderAndFooter(Context context) {
         super(context);
         initHeaderGridView();
