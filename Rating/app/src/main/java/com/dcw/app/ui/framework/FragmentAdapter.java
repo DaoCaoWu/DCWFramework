@@ -1,4 +1,4 @@
-package com.dcw.app.ui.adapter;
+package com.dcw.app.ui.framework;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

@@ -22,6 +22,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.View;
@@ -33,9 +34,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 /**
  * Allows an abstraction of the ViewHolder pattern.<br>
@@ -181,24 +179,9 @@ public class ViewHolderHelper {
      * @param imageUrl The image URL.
      * @return The BaseAdapterHelper for chaining.
      */
-    public ViewHolderHelper setImageUrl(int viewId, String imageUrl) {
+    public ViewHolderHelper setImageUrl(int viewId, @NonNull OnFoundViewListener<ImageView> callback) {
         ImageView view = retrieveView(viewId);
-        Picasso.with(context).load(imageUrl).into(view);
-        return this;
-    }
-
-    /**
-     * Will download an image from a URL and put it in an ImageView.<br/>
-     *
-     * @param viewId         The view id.
-     * @param requestBuilder The Picasso request builder. (e.g.
-     *                       Picasso.with(context).load(imageUrl))
-     * @return The BaseAdapterHelper for chaining.
-     */
-    public ViewHolderHelper setImageBuilder(int viewId,
-                                            RequestCreator requestBuilder) {
-        ImageView view = retrieveView(viewId);
-        requestBuilder.into(view);
+        callback.onFoundView(view);
         return this;
     }
 

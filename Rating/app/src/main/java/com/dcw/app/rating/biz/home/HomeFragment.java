@@ -21,7 +21,7 @@ import com.dcw.app.rating.biz.test.StateViewFragment;
 import com.dcw.app.rating.biz.toolbar.DrawerBarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
-import com.dcw.app.ui.adapter.FragmentAdapter;
+import com.dcw.app.ui.framework.FragmentAdapter;
 import com.dcw.app.ui.adapter.model.ListDataModel;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
