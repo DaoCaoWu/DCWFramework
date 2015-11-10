@@ -27,6 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:design:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     //弹出提示信息    代码地址-----> https://github.com/johnkil/Android-AppMsg
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
