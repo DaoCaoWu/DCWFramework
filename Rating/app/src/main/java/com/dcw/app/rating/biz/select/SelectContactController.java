@@ -8,12 +8,12 @@ import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
-import com.dcw.app.rating.ui.adapter.RecyclerViewAdapter;
-import com.dcw.app.rating.ui.adapter.viewholder.FixViewHolderBean;
-import com.dcw.app.rating.ui.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.rating.ui.mvc.Controller;
-import com.dcw.app.rating.ui.mvc.core.Observable;
-import com.dcw.app.rating.ui.mvc.core.Observer;
+import com.dcw.app.ui.adapter.RecyclerViewAdapter;
+import com.dcw.app.ui.adapter.viewholder.FixViewHolderBean;
+import com.dcw.app.ui.adapter.viewholder.ItemViewHolderBean;
+import com.dcw.app.ui.mvc.Controller;
+import com.dcw.app.ui.mvc.core.Observable;
+import com.dcw.app.ui.mvc.core.Observer;
 import com.dcw.app.rating.util.TaskExecutor;
 
 import java.util.List;

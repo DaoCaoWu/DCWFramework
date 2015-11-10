@@ -4,10 +4,10 @@ import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 
-import com.dcw.app.rating.ui.mvc.View;
-import com.dcw.app.rating.ui.mvc.core.Observable;
+import com.dcw.app.ui.mvc.BaseView;
+import com.dcw.app.ui.mvc.core.Observable;
 
-public class NavigationBar extends Toolbar implements View<NavigationBar.IBackAction> {
+public class NavigationBar extends Toolbar implements BaseView<NavigationBar.IBackAction> {
 
     public IBackAction mListener;
 

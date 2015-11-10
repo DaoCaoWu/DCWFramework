@@ -18,7 +18,7 @@ import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.net.api.GitHub;
 import com.dcw.app.rating.net.loader.RetrofitLoader;
 import com.dcw.app.rating.net.loader.RetrofitLoaderManager;
-import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
+import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import com.dcw.framework.util.LinkTouchMovementMethod;
 import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;

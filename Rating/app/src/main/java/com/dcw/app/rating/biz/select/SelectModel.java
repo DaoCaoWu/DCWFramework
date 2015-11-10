@@ -2,7 +2,7 @@ package com.dcw.app.rating.biz.select;
 
 import android.view.View;
 
-import com.dcw.app.rating.ui.adapter.model.RecyclerDataModel;
+import com.dcw.app.ui.adapter.model.RecyclerDataModel;
 
 import java.util.ArrayList;
 import java.util.List;

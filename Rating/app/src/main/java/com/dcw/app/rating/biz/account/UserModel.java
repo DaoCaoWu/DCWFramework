@@ -1,6 +1,6 @@
 package com.dcw.app.rating.biz.account;
 
-import com.dcw.app.rating.ui.mvc.Model;
+import com.dcw.app.ui.mvc.Model;
 
 /**
  * Created by adao12 on 2015/10/17.

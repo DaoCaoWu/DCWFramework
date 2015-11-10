@@ -11,14 +11,15 @@ import android.widget.TextView;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.select.CatalogHelper;
-import com.dcw.app.rating.ui.mvc.core.Observable;
+import com.dcw.app.ui.mvc.BaseView;
+import com.dcw.app.ui.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
  */
-public class StickyListView extends LinearLayout implements com.dcw.app.rating.ui.mvc.View<StickyListView.ViewListener>, AbsListView.OnScrollListener {
+public class StickyListView extends LinearLayout implements BaseView<StickyListView.ViewListener>, AbsListView.OnScrollListener {
 
     @InjectView(R.id.lv_list)
     ListView mListView;

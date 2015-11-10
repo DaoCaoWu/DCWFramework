@@ -9,11 +9,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.dcw.app.rating.R;
-import com.dcw.app.rating.ui.mvc.core.Observable;
+import com.dcw.app.ui.mvc.BaseView;
+import com.dcw.app.ui.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
 
-public class LoginView extends LinearLayout implements com.dcw.app.rating.ui.mvc.View<LoginView.ViewListener> {
+public class LoginView extends LinearLayout implements BaseView<LoginView.ViewListener> {
 
     @InjectView(R.id.et_account)
     private EditText mEtAccount;

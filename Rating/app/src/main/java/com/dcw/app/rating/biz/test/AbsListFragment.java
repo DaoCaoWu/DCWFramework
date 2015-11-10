@@ -13,7 +13,7 @@ import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;
 import com.dcw.app.rating.db.bean.Cache;
 import com.dcw.app.rating.db.dao.CacheDao;
-import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
+import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import com.dcw.app.rating.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;

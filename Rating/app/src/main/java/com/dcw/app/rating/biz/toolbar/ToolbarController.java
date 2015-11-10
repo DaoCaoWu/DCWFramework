@@ -9,8 +9,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.dcw.app.rating.ui.framework.BaseFragmentWrapper;
-import com.dcw.app.rating.ui.mvc.Controller;
+import com.dcw.app.ui.framework.BaseFragmentWrapper;
+import com.dcw.app.ui.mvc.Controller;
 
 public class ToolbarController extends Controller<NavigationBar, ToolbarModel> implements NavigationBar.IBackAction, Toolbar.OnMenuItemClickListener {
 
