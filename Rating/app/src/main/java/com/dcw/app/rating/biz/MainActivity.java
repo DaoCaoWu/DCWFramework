@@ -1,14 +1,21 @@
 package com.dcw.app.rating.biz;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewConfiguration;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.dcw.app.ui.framework.BaseActivityWrapper;
 import com.dcw.app.ui.framework.FrameworkManifest;
 import com.dcw.app.ui.framework.ToastManager;
 import com.dcw.framework.pac.basic.FrameworkFacade;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.lang.reflect.Field;
+
+;
 
 
 public class MainActivity extends BaseActivityWrapper {

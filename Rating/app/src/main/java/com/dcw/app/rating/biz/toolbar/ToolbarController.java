@@ -1,6 +1,8 @@
 package com.dcw.app.rating.biz.toolbar;
 
+import android.annotation.TargetApi;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +10,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
+import com.dcw.app.rating.R;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import cn.ninegame.library.component.mvc.Controller;
 
@@ -47,13 +52,25 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
         activity.setSupportActionBar(getView());
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
+            initSystemBar(activity);
             if (mOnInitToolbarListener == null) {
                 actionBar.setDisplayHomeAsUpEnabled(getModel().isShowHomeAsUp());
             } else {
                 mOnInitToolbarListener.onInitToolbar(getView(), actionBar);
             }
         }
+
     }
+
+    private void initSystemBar(AppCompatActivity activity) {
+
+        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(getView().getDrawingCacheBackgroundColor());
+        SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
+    }
+
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         return false;
