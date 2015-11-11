@@ -38,7 +38,7 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
         this(context, model, layoutResId, viewHolderClazz, null);
     }
 
-    public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, Object listener) {
+    public <L> RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, L listener) {
         this(context, model);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean(layoutResId, viewHolderClazz, listener));
     }

@@ -86,7 +86,7 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         return null;
     }
 
-    public void setHeaderData(int viewType, Object data) {
+    public <T> void setHeaderData(int viewType, T data) {
         int headerViewType = ITEM_VIEW_TYPE_HEADER + viewType;
         if (isHeaderViewType(headerViewType)) {
             FixViewHolderBean bean = mHeaderBeans.get(getHeaderOrFooterPosition(headerViewType));
@@ -97,7 +97,7 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         }
     }
 
-    public void setFooterData(int viewType, Object data) {
+    public <T> void setFooterData(int viewType, T data) {
         int footerViewType = ITEM_VIEW_TYPE_FOOTER + viewType;
         if (isFooterViewType(footerViewType)) {
             FixViewHolderBean bean = mFooterBeans.get(getHeaderOrFooterPosition(footerViewType));

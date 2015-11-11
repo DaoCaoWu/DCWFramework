@@ -15,6 +15,8 @@ import android.view.WindowManager;
 
 import com.dcw.app.rating.R;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import cn.ninegame.library.component.mvc.Controller;
 
 public class ToolbarController extends Controller<NavigationBar, ToolbarModel> implements NavigationBar.IBackAction, Toolbar.OnMenuItemClickListener {

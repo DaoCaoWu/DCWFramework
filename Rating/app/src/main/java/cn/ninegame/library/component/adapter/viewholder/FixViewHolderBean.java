@@ -13,20 +13,21 @@ public class FixViewHolderBean extends ItemViewHolderBean {
         super(itemViewHolderLayoutId, itemViewHolderClazz);
     }
 
-    public FixViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, Object data) {
+    public <D> FixViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, D data) {
         this(itemViewHolderLayoutId, itemViewHolderClazz, data, null);
     }
 
-    public FixViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, Object data, Object listener) {
+    public <D, L> FixViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, D data, L listener) {
         super(itemViewHolderLayoutId, itemViewHolderClazz, listener);
         mData = data;
     }
 
-    public Object getData() {
-        return mData;
+    @SuppressWarnings("unchecked")
+    public <D> D getData() {
+        return (D)mData;
     }
 
-    public void setData(Object data) {
+    public <D> void setData(D data) {
         mData = data;
     }
 }

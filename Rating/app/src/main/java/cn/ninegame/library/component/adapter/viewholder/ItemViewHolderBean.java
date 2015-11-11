@@ -19,14 +19,15 @@ public class ItemViewHolderBean {
         this(itemViewHolderLayoutId, itemViewHolderClazz, null);
     }
 
-    public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, Object listener) {
+    public <L> ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, L listener) {
         mItemViewHolderLayoutId = itemViewHolderLayoutId;
         mItemViewHolderClazz = itemViewHolderClazz;
         mViewHolderListener = listener;
     }
 
-    public Object getViewHolderListener() {
-        return mViewHolderListener;
+    @SuppressWarnings("unchecked")
+    public <L> L getViewHolderListener() {
+        return (L)mViewHolderListener;
     }
 
     public
