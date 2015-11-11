@@ -1,9 +1,9 @@
-package com.dcw.app.ui.adapter.model;
+package cn.ninegame.library.component.adapter.model;
 
 import android.util.SparseArray;
 
-import com.dcw.app.ui.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.ui.mvc.Model;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
+import cn.ninegame.library.component.mvc.Model;
 
 import java.util.ArrayList;
 import java.util.List;

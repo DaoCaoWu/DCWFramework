@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 
-import com.dcw.app.ui.mvc.BaseView;
-import com.dcw.app.ui.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.BaseView;
+import cn.ninegame.library.component.mvc.core.Observable;
 
 public class NavigationBar extends Toolbar implements BaseView<NavigationBar.IBackAction> {
 

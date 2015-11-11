@@ -1,6 +1,6 @@
-package com.dcw.app.ui.mvc;
+package cn.ninegame.library.component.mvc;
 
-import com.dcw.app.ui.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.core.Observable;
 
 /**
  * Created by adao12 on 2015/10/17.

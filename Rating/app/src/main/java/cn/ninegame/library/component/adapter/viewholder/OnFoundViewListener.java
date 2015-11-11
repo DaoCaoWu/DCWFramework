@@ -1,4 +1,4 @@
-package com.dcw.app.ui.adapter.viewholder;
+package cn.ninegame.library.component.adapter.viewholder;
 
 public interface OnFoundViewListener<V> {
 

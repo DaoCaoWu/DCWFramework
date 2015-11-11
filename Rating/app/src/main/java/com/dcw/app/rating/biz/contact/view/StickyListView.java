@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.select.CatalogHelper;
-import com.dcw.app.ui.mvc.BaseView;
-import com.dcw.app.ui.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.BaseView;
+import cn.ninegame.library.component.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
 

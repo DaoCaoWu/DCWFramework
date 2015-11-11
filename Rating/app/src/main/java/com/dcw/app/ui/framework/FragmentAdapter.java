@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.dcw.app.ui.adapter.model.ListDataModel;
-import com.dcw.app.ui.framework.BaseFragmentWrapper;
-import com.dcw.app.ui.mvc.core.Observable;
-import com.dcw.app.ui.mvc.core.Observer;
+import cn.ninegame.library.component.adapter.model.ListDataModel;
+
+import cn.ninegame.library.component.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.core.Observer;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/11/6.

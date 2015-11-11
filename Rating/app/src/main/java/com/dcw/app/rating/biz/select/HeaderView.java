@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 import com.dcw.app.rating.R;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.view.CatalogItemView;
-import com.dcw.app.ui.adapter.viewholder.ItemViewHolder;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/11/6.

@@ -1,4 +1,4 @@
-package com.dcw.app.ui.adapter;
+package cn.ninegame.library.component.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.dcw.app.ui.adapter.model.ListDataModel;
-import com.dcw.app.ui.adapter.viewholder.ItemViewHolder;
-import com.dcw.app.ui.adapter.viewholder.ItemViewHolderBean;
-import com.dcw.app.ui.mvc.core.Observable;
-import com.dcw.app.ui.mvc.core.Observer;
+import cn.ninegame.library.component.adapter.model.ListDataModel;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
+import cn.ninegame.library.component.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.core.Observer;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
-import com.dcw.app.ui.adapter.viewholder.ItemViewHolder;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.

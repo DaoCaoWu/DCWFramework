@@ -1,7 +1,7 @@
 package com.dcw.app.rating.biz.account;
 
 import com.dcw.app.ui.framework.ToastManager;
-import com.dcw.app.ui.mvc.ViewController;
+import cn.ninegame.library.component.mvc.ViewController;
 
 /**
  * Created by adao12 on 2015/10/17.

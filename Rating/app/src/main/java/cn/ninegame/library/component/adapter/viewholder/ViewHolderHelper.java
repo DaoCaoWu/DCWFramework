@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dcw.app.ui.adapter.viewholder;
+package cn.ninegame.library.component.adapter.viewholder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

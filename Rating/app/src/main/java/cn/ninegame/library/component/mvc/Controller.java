@@ -1,4 +1,4 @@
-package com.dcw.app.ui.mvc;
+package cn.ninegame.library.component.mvc;
 
 /**
  * Created by adao12 on 2015/10/18.

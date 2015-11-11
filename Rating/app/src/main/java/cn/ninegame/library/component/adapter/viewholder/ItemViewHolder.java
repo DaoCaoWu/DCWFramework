@@ -1,9 +1,9 @@
-package com.dcw.app.ui.adapter.viewholder;
+package cn.ninegame.library.component.adapter.viewholder;
 
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.dcw.app.ui.adapter.model.ListDataModel;
+import cn.ninegame.library.component.adapter.model.ListDataModel;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.

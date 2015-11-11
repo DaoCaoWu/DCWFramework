@@ -1,9 +1,9 @@
-package com.dcw.app.ui.adapter.model;
+package cn.ninegame.library.component.adapter.model;
 
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 
-import com.dcw.app.ui.adapter.viewholder.FixViewHolderBean;
+import cn.ninegame.library.component.adapter.viewholder.FixViewHolderBean;
 
 import java.util.List;
 

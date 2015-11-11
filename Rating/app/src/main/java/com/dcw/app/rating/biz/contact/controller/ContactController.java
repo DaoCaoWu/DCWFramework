@@ -11,12 +11,12 @@ import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
 import com.dcw.app.rating.biz.select.SelectItemView;
 import com.dcw.app.rating.biz.select.SelectItemView1;
-import com.dcw.app.ui.adapter.ListViewAdapter;
-import com.dcw.app.ui.adapter.viewholder.ItemViewHolderBean;
+import cn.ninegame.library.component.adapter.ListViewAdapter;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import com.dcw.app.ui.framework.ToastManager;
-import com.dcw.app.ui.mvc.Controller;
-import com.dcw.app.ui.mvc.core.Observable;
-import com.dcw.app.ui.mvc.core.Observer;
+import cn.ninegame.library.component.mvc.Controller;
+import cn.ninegame.library.component.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.core.Observer;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.

@@ -1,4 +1,4 @@
-package com.dcw.app.ui.mvc.core;
+package cn.ninegame.library.component.mvc.core;
 
 import java.util.ArrayList;
 import java.util.List;

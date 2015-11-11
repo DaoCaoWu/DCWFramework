@@ -2,7 +2,7 @@ package com.dcw.app.rating.biz.toolbar;
 
 import android.support.annotation.MenuRes;
 
-import com.dcw.app.ui.mvc.core.Observable;
+import cn.ninegame.library.component.mvc.core.Observable;
 
 public class ToolbarModel extends Observable {
 
