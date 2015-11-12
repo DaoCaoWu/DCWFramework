@@ -26,6 +26,10 @@ public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implem
     private M mModel;
     private LayoutInflater mInflater;
 
+    /**
+     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model the model of model layer, which contains the data set to show
+     */
     public ListViewAdapter(@NonNull Context context, @NonNull M model) {
         mContext = context;
         mModel = model;
@@ -33,10 +37,24 @@ public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implem
         mInflater = LayoutInflater.from(mContext);
     }
 
+    /**
+     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model the model of model layer, which contains the data set to show
+     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
+     */
     public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz) {
         this(context, model, layoutResId, viewHolderClazz, null);
     }
 
+    /**
+     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model the model of model layer, which contains the data set to show
+     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
+     * @param listener the listener of events that views included in {@link ItemViewHolder} dispatched
+     * @param <L> the class type of the class implement listener
+     */
     public <L> ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, L listener) {
         this(context, model);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean(layoutResId, viewHolderClazz, listener));
@@ -115,6 +133,8 @@ public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implem
             throw new RuntimeException(e.getTargetException());
         } catch (InstantiationException e) {
             throw new RuntimeException("Unable to instantiate " + getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
+        } catch (ClassCastException e) {
+            throw new RuntimeException("the type of " + getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName() + "is not right.", e);
         }
     }
 

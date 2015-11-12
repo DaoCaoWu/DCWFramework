@@ -9,7 +9,7 @@ import android.widget.SectionIndexer;
 
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.pinyin.PinyinComparator;
-import com.dcw.app.rating.biz.select.SelectModel;
+import cn.ninegame.library.component.adapter.model.select.SelectModel;
 import com.dcw.app.rating.util.TaskExecutor;
 
 import java.util.ArrayList;

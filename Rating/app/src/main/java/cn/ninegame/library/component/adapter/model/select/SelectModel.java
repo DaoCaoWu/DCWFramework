@@ -1,11 +1,11 @@
-package com.dcw.app.rating.biz.select;
+package cn.ninegame.library.component.adapter.model.select;
 
 import android.view.View;
 
-import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
 
 public abstract class SelectModel<T> extends RecyclerDataModel<T> implements ISelect<T> {
 
@@ -33,18 +33,16 @@ public abstract class SelectModel<T> extends RecyclerDataModel<T> implements ISe
      */
     private Byte[] mCanBeSelectedArray;
     /**
-     * 最大选择数，默认只能选一个
+     * the limitation of max select, default 1
      */
     private int mMaxSelectNum = 1;
     /**
-     * 上次选择的位置
-     * -1 代表没有任何一个被选中
+     * the index of last selected, and -1 represent no selected last
      */
     private int mLastSelectedIndex = -1;
 
     /**
-     * 上次选择的位置
-     * -1 代表没有任何一个被选中
+     * init index of selected
      */
     private long mInitSelectedId = -1;
 
@@ -56,9 +54,6 @@ public abstract class SelectModel<T> extends RecyclerDataModel<T> implements ISe
         setDataList(dataList);
     }
 
-    /**
-     * 初始化selectedMap、canBeSelectedMap的数据
-     */
     private void initDate(List<T> dataList) {
 
         int newSize = getCount(dataList);

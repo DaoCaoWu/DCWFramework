@@ -27,6 +27,10 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
     private M mModel;
     private LayoutInflater mInflater;
 
+    /**
+     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model the model of model layer, which contains the data set to show
+     */
     public RecyclerViewAdapter(Context context, M model) {
         mContext = context;
         mModel = model;
@@ -34,10 +38,24 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
         mInflater = LayoutInflater.from(mContext);
     }
 
+    /**
+     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model the model of model layer, which contains the data set to show
+     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
+     */
     public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz) {
         this(context, model, layoutResId, viewHolderClazz, null);
     }
 
+    /**
+     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model the model of model layer, which contains the data set to show
+     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
+     * @param listener the listener of events that views included in {@link ItemViewHolder} dispatched
+     * @param <L> the class type of the class implement listener
+     */
     public <L> RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, L listener) {
         this(context, model);
         getModel().addItemViewHolderBean(0, new ItemViewHolderBean(layoutResId, viewHolderClazz, listener));
@@ -94,6 +112,8 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
             throw new RuntimeException(e.getTargetException());
         } catch (InstantiationException e) {
             throw new RuntimeException("Unable to instantiate " + getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName(), e);
+        } catch (ClassCastException e) {
+            throw new RuntimeException("the type of " + getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getSimpleName() + "is not right.", e);
         }
     }
 
@@ -101,16 +121,16 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
     public void onBindViewHolder(RecyclerViewHolder<M> holder, int position) {
         if (getModel().isHeader(position)) {
             holder.mdItemViewHolder.setListener(getModel().getHeaderViewHolderBean(position).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
-            holder.mdItemViewHolder.onBindData(getModel(), position);
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
+            holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
         } else if (getModel().isFooter(position)) {
             holder.mdItemViewHolder.setListener(getModel().getFooterViewHolderBean(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);
-            holder.mdItemViewHolder.onBindData(getModel(), position);
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
+            holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
         } else {
             holder.mdItemViewHolder.setListener(getModel().getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getHeaderViewCount());
-            holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getHeaderViewCount());
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getHeaderViewCount());    //adjust position
+            holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getHeaderViewCount()); //adjust position
         }
     }
 

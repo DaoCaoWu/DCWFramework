@@ -28,16 +28,16 @@ public class ListDataModel<D> extends Model {
     }
 
     /**
-     * get 绑定的数据
+     * get the data list binding adapter
      */
     public List<D> getDataList() {
         return mDataList;
     }
 
     /**
-     * 设置要绑定的数据
+     * binding adapter with data list and notify adapter that data set changed
      *
-     * @param dataList 传入的数据
+     * @param dataList the data would binding to adapter
      */
     public void setDataList(List<D> dataList) {
         this.mDataList = dataList == null ? new ArrayList<D>() : dataList;
@@ -45,7 +45,7 @@ public class ListDataModel<D> extends Model {
     }
 
     /**
-     * 设置要绑定的数据
+     * binding adapter with data list and don't notify adapter that data set changed
      *
      * @param dataList 传入的数据
      */
@@ -69,7 +69,7 @@ public class ListDataModel<D> extends Model {
     }
 
     /**
-     * 清除绑定数据数据
+     * clear data binding into adapter
      */
     public void clearData() {
         if (getCount() == 0) return;
@@ -79,7 +79,7 @@ public class ListDataModel<D> extends Model {
     }
 
     /**
-     * 添加列表项
+     * add single data into data set
      */
     public void addItem(D item) {
         if (item == null) return;
@@ -93,7 +93,7 @@ public class ListDataModel<D> extends Model {
     }
 
     /**
-     * 添加列表数据
+     * append a data set into the origin data set
      */
     public void addItems(List<D> items) {
         if (items == null) return;
@@ -106,7 +106,10 @@ public class ListDataModel<D> extends Model {
         notifyObservers();
     }
 
-
+    /**
+     * not working in these version
+     */
+    @Deprecated
     public boolean isEnabled(int position) {
         return mDataList != null && position >= 0 && position < mDataList.size();
     }
@@ -115,6 +118,10 @@ public class ListDataModel<D> extends Model {
         return mDataList == null ? 0 : mDataList.size();
     }
 
+    /**
+     * @param position the position exclude header views
+     * @return Returns the data of item in the position
+     */
     public D getItem(int position) {
         if (position >= getCount() || position < 0)
             return null;
@@ -122,6 +129,11 @@ public class ListDataModel<D> extends Model {
             return mDataList.get(position);
     }
 
+    /**
+     * simple return the position, and you can override the method to make your work well
+     * @param position the position exclude header views
+     * @return Returns the position
+     */
     public long getItemId(int position) {
         return position;
     }
@@ -135,16 +147,17 @@ public class ListDataModel<D> extends Model {
     }
 
     /**
-     * 替换所有
+     * replace the old data set with {@param items}
+     * @param items the new data set
      */
     public void replaceAll(List<D> items) {
-        if (items == null) return;
-
         if (mDataList == null) {
             mDataList = new ArrayList<D>();
         }
         mDataList.clear();
-        mDataList.addAll(items);
+        if (items != null) {
+            mDataList.addAll(items);
+        }
         notifyObservers();
     }
 

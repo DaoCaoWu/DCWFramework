@@ -36,7 +36,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
- * Allows an abstraction of the ViewHolder pattern.<br>
+ * Allows an abstraction of the ViewHolder pattern.
+ *
+ * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
 public class ViewHolderHelper {
 

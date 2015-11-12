@@ -30,36 +30,62 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         setDataList(dataList);
     }
 
+    /**
+     * @param position the real position, include header view and normal item view, and footer view
+     */
     public boolean isHeader(int position) {
         return mHeaderBeans != null && position < mHeaderBeans.size();
     }
 
+    /**
+     * @param viewType header view's view type
+     */
     public boolean isHeaderViewType(int viewType) {
         return viewType < 0 && getHeaderOrFooterPosition(viewType) != -1;
     }
 
+    /**
+     * @param position the real position, include header view and normal item view, and footer view
+     */
     public boolean isFooter(int position) {
         return mFooterBeans != null && (position >= (mHeaderBeans.size() + getCount()) && position < (mHeaderBeans.size() + getCount() + mFooterBeans.size()));
     }
 
+    /**
+     * @param viewType footer view's view type
+     */
     public boolean isFooterViewType(int viewType) {
         return viewType >= ITEM_VIEW_TYPE_FOOTER && getHeaderOrFooterPosition(viewType) != -1;
     }
 
+    /**
+     * @param position the position that you want add header view into
+     * @param bean the {@link FixViewHolderBean} you want to binding with header view
+     */
     public void addHeaderViewHolderBean(int position, FixViewHolderBean bean) {
         mHeaderBeans.append(position, bean);
         mViewTypePositionMap.append(ITEM_VIEW_TYPE_HEADER + position, position);
     }
 
+    /**
+     * @param position the adjust position of the header view list
+     */
     public FixViewHolderBean getHeaderViewHolderBean(int position) {
         return mHeaderBeans.get(position);
     }
 
+    /**
+     * @param position the position that you want add footer view into
+     * @param bean the {@link FixViewHolderBean} you want to binding with footer view
+     */
     public void addFooterViewHolderBean(int position, FixViewHolderBean bean) {
         mFooterBeans.append(position, bean);
         mViewTypePositionMap.append(ITEM_VIEW_TYPE_FOOTER + position, position);
     }
 
+    /**
+     * @param position the adjust position of the footer view list
+     */
     public FixViewHolderBean getFooterViewHolderBean(int position) {
         return mFooterBeans.get(position);
     }
@@ -72,12 +98,20 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         return mFooterBeans == null ? 0 : mFooterBeans.size();
     }
 
+    /**
+     * get the adjust position of the header or footer view list according to the view type of header or footer view
+     * @param viewType header view's view type equal the sum of {@link RecyclerDataModel#ITEM_VIEW_TYPE_HEADER} and position
+     *                 footer view's view type equal the sum of {@link RecyclerDataModel#ITEM_VIEW_TYPE_FOOTER} and position
+     */
     public int getHeaderOrFooterPosition(int viewType) {
         return mViewTypePositionMap.get(viewType, -1);
     }
 
+    /**
+     * @param position the real position, include header view and normal item view, and footer view
+     */
     @SuppressWarnings("unchecked")
-    public <T> T getHeaderOrFooterItem(int position) {
+    public <T> T getHeaderOrFooterItem(int position) throws ClassCastException {
         if (isHeader(position)) {
             return (T) mHeaderBeans.get(position).getData();
         } else if (isFooter(position)) {
@@ -86,8 +120,12 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         return null;
     }
 
-    public <T> void setHeaderData(int viewType, T data) {
-        int headerViewType = ITEM_VIEW_TYPE_HEADER + viewType;
+    /**
+     * @param position the real position, include header view and normal item view, and footer view
+     * @param data the data would bind to head view in the position
+     */
+    public <T> void setHeaderData(int position, T data) {
+        int headerViewType = ITEM_VIEW_TYPE_HEADER + position;
         if (isHeaderViewType(headerViewType)) {
             FixViewHolderBean bean = mHeaderBeans.get(getHeaderOrFooterPosition(headerViewType));
             if (bean != null) {
@@ -97,8 +135,12 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         }
     }
 
-    public <T> void setFooterData(int viewType, T data) {
-        int footerViewType = ITEM_VIEW_TYPE_FOOTER + viewType;
+    /**
+     * @param position the real position, include header view and normal item view, and footer view
+     * @param data the data would bind to head view in the position
+     */
+    public <T> void setFooterData(int position, T data) {
+        int footerViewType = ITEM_VIEW_TYPE_FOOTER + position;
         if (isFooterViewType(footerViewType)) {
             FixViewHolderBean bean = mFooterBeans.get(getHeaderOrFooterPosition(footerViewType));
             if (bean != null) {
@@ -108,6 +150,9 @@ public class RecyclerDataModel<D> extends ListDataModel<D> {
         }
     }
 
+    /**
+     * @param position the real position, include header view and normal item view, and footer view
+     */
     @Override
     public long getItemId(int position) {
         int numHeaders = getHeaderViewCount();

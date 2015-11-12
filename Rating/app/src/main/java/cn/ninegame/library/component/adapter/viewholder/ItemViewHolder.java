@@ -1,7 +1,9 @@
 package cn.ninegame.library.component.adapter.viewholder;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewDebug;
 
 import cn.ninegame.library.component.adapter.model.ListDataModel;
 
@@ -17,6 +19,9 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
     private final ViewHolderHelper mHelper;
     Object mListener;
 
+    /**
+     * @param itemView the view shows as a item of {@link android.widget.AbsListView} or {@link android.support.v7.widget.RecyclerView}
+     */
     public ItemViewHolder(View itemView) {
         if (itemView == null) {
             throw new IllegalArgumentException("itemView may not be null");
@@ -25,8 +30,23 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
         this.mHelper = new ViewHolderHelper(itemView.getContext(), itemView);
     }
 
+    /**
+     * Returns the {@link ViewHolderHelper}
+     * @return The holder's ViewHolderHelper
+     */
     public ViewHolderHelper getHelper() {
         return mHelper;
+    }
+
+    /**
+     * Returns the context the itemView is running in, through which it can
+     * access the current theme, resources, etc.
+     *
+     * @return The itemView's Context.
+     */
+    @ViewDebug.CapturedViewProperty
+    public Context getContext() {
+        return itemView.getContext();
     }
 
     /**
@@ -38,7 +58,7 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
     @SuppressWarnings("unchecked")
     public
     @Nullable
-    <L> L getListener() {
+    <L> L getListener() throws ClassCastException {
         return (L) mListener;
     }
 
@@ -51,7 +71,8 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
      * the Adapter is created.
      *
      * @param model    the data model that is used to populate the holder views.
-     * @param position the position of the item on the list.
+     * @param position when {@link ItemViewHolder} is header or footer the position is the real of the item on the list.
+     *                 while the adjust position of the item on the list, which exclude the head view count
      */
     @Override
     public void onBindViewEvent(M model, int position) {
@@ -62,7 +83,8 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
      * Must implement this method to populate the views with the data in the item object.
      *
      * @param model    the data model that is used to populate the holder views.
-     * @param position the position of the item on the list.
+     * @param position when {@link ItemViewHolder} is header or footer the position is the real of the item on the list.
+     *                 while the adjust position of the item on the list, which exclude the head view count
      */
     @Override
     public abstract void onBindData(M model, int position);

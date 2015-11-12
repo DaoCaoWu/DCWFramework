@@ -9,6 +9,7 @@ import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;
 import com.dcw.app.rating.biz.contact.view.StickyListView;
 import cn.ninegame.library.component.adapter.RecyclerViewAdapter;
+import cn.ninegame.library.component.adapter.model.select.SelectModel;
 import cn.ninegame.library.component.adapter.viewholder.FixViewHolderBean;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import cn.ninegame.library.component.mvc.Controller;

@@ -1,4 +1,4 @@
-package com.dcw.app.rating.biz.select;
+package cn.ninegame.library.component.adapter.model.select;
 
 import android.view.View;
 
