@@ -76,9 +76,9 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
     @Override
     public int getItemViewType(int position) {
         if (getModel().isHeader(position)) {
-            return RecyclerDataModel.ITEM_VIEW_TYPE_HEADER + position;
+            return getModel().getHeaderViewType(position);
         } else if (getModel().isFooter(position)) {
-            return RecyclerDataModel.ITEM_VIEW_TYPE_FOOTER + position - getModel().getCount() - getModel().getHeaderViewCount();
+            return getModel().getFooterViewType(position - getModel().getCount() - getModel().getHeaderViewCount());
         } else {
             return getModel().getItemViewType(position - getModel().getHeaderViewCount());
         }
@@ -94,11 +94,11 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
     public RecyclerViewHolder<M> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
             if (getModel().isHeaderViewType(viewType)) {
-                Constructor<? extends ItemViewHolder> constructor = getModel().getHeaderViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
-                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getHeaderViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
+                Constructor<? extends ItemViewHolder> constructor = getModel().getHeaderViewHolderBean(getModel().getHeaderPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
+                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getHeaderViewHolderBean(getModel().getHeaderPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
             } else if (getModel().isFooterViewType(viewType)) {
-                Constructor<? extends ItemViewHolder> constructor = getModel().getFooterViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
-                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getFooterViewHolderBean(getModel().getHeaderOrFooterPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
+                Constructor<? extends ItemViewHolder> constructor = getModel().getFooterViewHolderBean(getModel().getFooterPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
+                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getFooterViewHolderBean(getModel().getFooterPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
             } else {
                 Constructor<? extends ItemViewHolder> constructor = getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
                 return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
@@ -120,11 +120,11 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
     @Override
     public void onBindViewHolder(RecyclerViewHolder<M> holder, int position) {
         if (getModel().isHeader(position)) {
-            holder.mdItemViewHolder.setListener(getModel().getHeaderViewHolderBean(position).getViewHolderListener());
+            holder.mdItemViewHolder.setListener(getModel().getHeaderViewHolderBeanByIndex(position).getViewHolderListener());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
             holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
         } else if (getModel().isFooter(position)) {
-            holder.mdItemViewHolder.setListener(getModel().getFooterViewHolderBean(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
+            holder.mdItemViewHolder.setListener(getModel().getFooterViewHolderBeanByIndex(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
             holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
         } else {

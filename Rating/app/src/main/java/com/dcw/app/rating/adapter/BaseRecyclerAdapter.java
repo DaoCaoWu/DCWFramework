@@ -25,7 +25,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     protected final Context mContext;
     protected final LayoutInflater mLayoutInflater;
 
-    protected List<T> mDataList = new ArrayList<>();
+    protected List<T> mDataList = new ArrayList<T>();
 
     public BaseRecyclerAdapter(Context context) {
         mContext = context;
