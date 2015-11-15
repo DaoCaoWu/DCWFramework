@@ -13,7 +13,7 @@ import android.widget.CheckedTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 
 /**
  * <p>Title: ucweb</p>

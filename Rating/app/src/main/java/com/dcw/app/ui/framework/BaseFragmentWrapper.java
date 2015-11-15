@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.config.BundleConstant;
 import com.dcw.app.rating.util.Util;

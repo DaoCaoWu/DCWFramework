@@ -1,7 +1,7 @@
 package com.dcw.app.rating.log;
 
 
-import com.dcw.app.rating.BuildConfig;
+import com.dcw.app.BuildConfig;
 
 /**
  * Author:    ZhuWenWu

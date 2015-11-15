@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.

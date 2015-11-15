@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.biz.toolbar.ToolbarModel;

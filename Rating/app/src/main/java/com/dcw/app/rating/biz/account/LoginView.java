@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import cn.ninegame.library.component.mvc.BaseView;
 import cn.ninegame.library.component.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;

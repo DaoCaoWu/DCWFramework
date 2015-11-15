@@ -2,7 +2,7 @@ package com.dcw.app.rating.biz.contact;
 
 import android.widget.AbsListView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.contact.controller.ContactController;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.view.StickyListView;

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.app.RatingApplication;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;

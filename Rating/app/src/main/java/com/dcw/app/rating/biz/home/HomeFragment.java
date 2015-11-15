@@ -9,7 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.account.LoginFragment;
 import com.dcw.app.rating.biz.contact.ContactListFragment;

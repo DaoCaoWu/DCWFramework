@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 

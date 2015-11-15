@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.rating.biz.test.model.Comment;
 import com.dcw.app.rating.biz.test.model.ListData;

@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 
 public class SideBar extends View {
 

@@ -3,7 +3,7 @@ package com.dcw.app.rating.biz.select;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.SideBar;

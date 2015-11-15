@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.MainActivity;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;

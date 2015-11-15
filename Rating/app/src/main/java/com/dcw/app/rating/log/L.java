@@ -2,7 +2,7 @@ package com.dcw.app.rating.log;
 
 import android.util.Log;
 
-import com.dcw.app.rating.BuildConfig;
+import com.dcw.app.BuildConfig;
 
 
 public class L {

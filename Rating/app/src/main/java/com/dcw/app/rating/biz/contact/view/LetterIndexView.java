@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.framework.view.DCWAnnotation;
 import com.dcw.framework.view.annotation.InjectView;
 

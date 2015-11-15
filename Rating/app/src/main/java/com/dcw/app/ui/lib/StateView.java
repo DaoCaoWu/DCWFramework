@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 
 public class StateView extends FrameLayout {
     private StateViewData mViewState = new StateViewData(ContentState.CONTENT);

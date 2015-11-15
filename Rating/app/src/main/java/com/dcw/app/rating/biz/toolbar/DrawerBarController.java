@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 
 /**
  * Created by adao12 on 2015/10/20.

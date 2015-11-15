@@ -3,7 +3,7 @@ package com.dcw.app.rating.biz.contact.controller;
 import android.view.View;
 import android.widget.TextView;
 
-import com.dcw.app.rating.R;
+import com.dcw.app.R;
 import com.dcw.app.rating.biz.contact.model.ContactModel;
 import com.dcw.app.rating.biz.contact.model.bean.Contact;
 import com.dcw.app.rating.biz.contact.view.ContactViewHolder;
