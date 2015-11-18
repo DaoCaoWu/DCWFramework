@@ -2,18 +2,18 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        debug_config {
-            keyAlias 'debug'
-            keyPassword 'b-1210132'
-            storeFile file('E:/GitWorksapce/DCWFramework/Rating/app/debug_keystore.jks')
-            storePassword 'b-1210132'
-        }
-        release_config {
-            keyAlias 'release'
-            keyPassword 'b-1210132'
-            storeFile file('E:/GitWorksapce/DCWFramework/Rating/app/release_keystore.jks')
-            storePassword 'b-1210132'
-        }
+//        debug_config {
+//            keyAlias 'debug'
+//            keyPassword 'b-1210132'
+//            storeFile file('E:/GitWorksapce/DCWFramework/Rating/app/debug_keystore.jks')
+//            storePassword 'b-1210132'
+//        }
+//        release_config {
+//            keyAlias 'release'
+//            keyPassword 'b-1210132'
+//            storeFile file('E:/GitWorksapce/DCWFramework/Rating/app/release_keystore.jks')
+//            storePassword 'b-1210132'
+//        }
     }
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
