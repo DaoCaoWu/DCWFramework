@@ -1,6 +1,6 @@
 package com.dcw.app.rating.cache;
 
-import com.dcw.app.rating.app.RatingApplication;
+import com.dcw.app.rating.app.App;
 import com.dcw.app.rating.db.bean.Cache;
 import com.dcw.app.rating.db.dao.CacheDao;
 
@@ -27,7 +27,7 @@ public class DBCache implements DiskCache<String, Cache> {
 
     public DBCache(int cacheTime) {
         mCacheTime = cacheTime;
-        mCacheDAO = RatingApplication.getInstance().getDaoSession().getCacheDao();
+        mCacheDAO = App.getInstance().getDaoSession().getCacheDao();
     }
 
     @Override

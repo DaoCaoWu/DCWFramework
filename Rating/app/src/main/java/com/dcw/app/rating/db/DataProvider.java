@@ -14,7 +14,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
-import com.dcw.app.rating.app.RatingApplication;
+import com.dcw.app.rating.app.App;
 
 /**
  * Author:    ZhuWenWu
@@ -38,7 +38,7 @@ public class DataProvider extends ContentProvider {
 
     public static DBHelper getDBHelper() {
         if (mDBHelper == null) {
-            mDBHelper = new DBHelper(RatingApplication.getInstance().getApplicationContext());
+            mDBHelper = new DBHelper(App.getInstance().getApplicationContext());
         }
         return mDBHelper;
     }

@@ -38,5 +38,4 @@ dependencies {
     //图片加载  代码地址-----> https://github.com/square/picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'io.reactivex:rxjava:1.0.16'
-    compile 'com.jakewharton.timber:timber:4.1.0'
 }

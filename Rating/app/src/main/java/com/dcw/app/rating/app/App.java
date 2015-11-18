@@ -15,16 +15,18 @@ import com.dcw.app.rating.error.ErrorReporter;
  * @email adao12.vip@gmail.com
  * @create 15/5/5
  */
-public class RatingApplication extends Application {
+public class App extends Application {
 
-    private static RatingApplication sInstance;
+    private static App sInstance;
     private DaoSession daoSession;
     private ErrorReporter mErrorReporter;
     private DataCache mDataCache;
+    private AppComponent mAppComponent;
 
-    public static RatingApplication getInstance() {
+    public static App getInstance() {
         return sInstance;
     }
+
 
     @Override
     public void onCreate() {
@@ -34,6 +36,9 @@ public class RatingApplication extends Application {
         mErrorReporter = new ErrorReporter(this);
         mDataCache = new DataCache(1024 * 100);
         mDataCache.clearExpiredCache();
+        mAppComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
     private void setupDatabase() {
@@ -53,5 +58,9 @@ public class RatingApplication extends Application {
 
     public BaseCache getDataCache() {
         return mDataCache;
+    }
+
+    public AppComponent getAppComponent() {
+        return mAppComponent;
     }
 }

@@ -7,13 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dcw.app.rating.activity.ActivityComponent;
+import com.dcw.app.rating.activity.ActivityModule;
+import com.dcw.app.rating.app.App;
+import com.dcw.app.rating.app.AppModule;
 import com.dcw.framework.pac.ui.BaseActivity;
 
 public class BaseActivityWrapper extends BaseActivity {
 
+    ActivityComponent mActivityComponent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivityComponent = DaggerActivityComponent.builder()
+                .appModule(new AppModule((App) getApplication()))
+                .activityModule(new ActivityModule(this))
+                .build();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(this, true);
         }

@@ -1,6 +1,6 @@
 package com.dcw.app.rating.network.controller;
 
-import com.dcw.app.rating.app.RatingApplication;
+import com.dcw.app.rating.app.App;
 import com.dcw.app.rating.network.AppNetworkInfo;
 import com.dcw.app.rating.network.callback.UiDisplayListener;
 
@@ -30,7 +30,7 @@ public abstract class BaseHttpController<T> {
     }
 
     public void loadData() {
-        if (AppNetworkInfo.isNetworkAvailable(RatingApplication.getInstance().getApplicationContext())) {//没有网络时直接调用失败接口
+        if (AppNetworkInfo.isNetworkAvailable(App.getInstance().getApplicationContext())) {//没有网络时直接调用失败接口
             getNetData();
         } else {
             if (uiDisplayListener != null) {

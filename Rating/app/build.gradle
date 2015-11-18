@@ -1,4 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
 
 android {
     signingConfigs {
@@ -52,8 +62,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
-    compile 'com.squareup.dagger:dagger:1.2.+'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.+'
     //弹出提示信息    代码地址-----> https://github.com/johnkil/Android-AppMsg
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
     //SuperRecyclerView    代码地址-----> https://github.com/Malinskiy/SuperRecyclerView
@@ -61,4 +69,7 @@ dependencies {
     //超强滚动效果View    代码地址-----> https://github.com/ksoichiro/Android-ObservableScrollView
     //    compile 'com.github.ksoichiro:android-observablescrollview:1.5.1'
     compile 'com.google.zxing:core:3.2.1'
+    compile 'com.google.dagger:dagger:2.0.2'
+    apt 'com.google.dagger:dagger-compiler:2.0.2'
+    compile 'javax.annotation:javax.annotation-api:1.2'
 }
