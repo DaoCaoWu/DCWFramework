@@ -1,12 +1,9 @@
-package com.dcw.app.rating.activity;
+package com.dcw.app.rating.di.module;
 
-import android.support.v7.app.AppCompatActivity;
-
+import com.dcw.app.rating.di.scope.ActivityScope;
 import com.dcw.app.ui.framework.BaseActivityWrapper;
 
 import javax.inject.Inject;
-import javax.inject.Scope;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -25,7 +22,7 @@ public class ActivityModule {
     }
 
     @Provides
-    @Singleton
+    @ActivityScope
     BaseActivityWrapper provideActivity() {
         return mActivity;
     }

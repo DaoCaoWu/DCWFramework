@@ -7,6 +7,9 @@ import com.dcw.app.rating.cache.BaseCache;
 import com.dcw.app.rating.cache.DataCache;
 import com.dcw.app.rating.db.dao.DaoMaster;
 import com.dcw.app.rating.db.dao.DaoSession;
+import com.dcw.app.rating.di.component.AppComponent;
+import com.dcw.app.rating.di.component.DaggerAppComponent;
+import com.dcw.app.rating.di.module.AppModule;
 import com.dcw.app.rating.error.ErrorReporter;
 
 /**
@@ -31,11 +34,16 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initializeInjector();
         setupDatabase();
         sInstance = this;
         mErrorReporter = new ErrorReporter(this);
         mDataCache = new DataCache(1024 * 100);
         mDataCache.clearExpiredCache();
+
+    }
+
+    private void initializeInjector() {
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();

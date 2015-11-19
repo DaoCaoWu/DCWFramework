@@ -11,18 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcw.app.R;
+import com.dcw.app.rating.di.component.ActivityComponent;
 import com.dcw.app.rating.biz.toolbar.ToolbarController;
 import com.dcw.app.rating.config.BundleConstant;
+import com.dcw.app.rating.di.component.DaggerFragmentComponent;
+import com.dcw.app.rating.di.component.FragmentComponent;
+import com.dcw.app.rating.di.module.FragmentModule;
+import com.dcw.app.rating.di.HasComponent;
 import com.dcw.app.rating.util.Util;
 import com.dcw.framework.pac.ui.BaseFragment;
 import com.dcw.framework.view.DCWAnnotation;
 
 
-public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate {
+public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate, HasComponent<FragmentComponent> {
 
     protected View mRootView;
     protected ToolbarController mToolbarController;
     private boolean mIsDestroy;
+    private FragmentComponent mFragmentComponent;
 
     public BaseFragmentWrapper() {
         super();
@@ -37,6 +43,23 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
         super.onCreate(savedInstanceState);
         mIsDestroy = false;
         setHasOptionsMenu(true);
+        mFragmentComponent = DaggerFragmentComponent.builder()
+                .activityComponent(getActivityComponent())
+                .fragmentModule(new FragmentModule(this))
+                .build();
+    }
+
+    protected ActivityComponent getActivityComponent() {
+        return ((BaseActivityWrapper) getActivity()).getActivityComponent();
+    }
+
+    @Override
+    public FragmentComponent getComponent() {
+        return mFragmentComponent;
+    }
+
+    protected FragmentComponent getFragmentComponent() {
+        return mFragmentComponent;
     }
 
     @Override

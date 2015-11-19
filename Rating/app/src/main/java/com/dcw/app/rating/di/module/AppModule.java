@@ -1,4 +1,6 @@
-package com.dcw.app.rating.app;
+package com.dcw.app.rating.di.module;
+
+import com.dcw.app.rating.app.App;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -22,7 +22,6 @@ public class WelcomeFragment extends BaseFragmentWrapper {
 
     @Override
     public void initData() {
-
     }
 
     @Override
