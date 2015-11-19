@@ -1,2 +1,1 @@
-include ':app', ':library', ':sharesdk', ':JChat', ':JPush'
-include ':smssdk'
+include ':app', ':library'

@@ -27,7 +27,7 @@ public class DBCache implements DiskCache<String, Cache> {
 
     public DBCache(int cacheTime) {
         mCacheTime = cacheTime;
-        mCacheDAO = App.getInstance().getDaoSession().getCacheDao();
+//        mCacheDAO = App.getInstance().getDaoSession().getCacheDao();
     }
 
     @Override

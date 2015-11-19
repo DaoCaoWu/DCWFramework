@@ -15,7 +15,6 @@ import com.dcw.app.rating.biz.account.LoginFragment;
 import com.dcw.app.rating.biz.contact.ContactListFragment;
 import com.dcw.app.rating.biz.search.SearchFragment;
 import com.dcw.app.rating.biz.select.SelectFragment;
-import com.dcw.app.rating.biz.test.AbsListFragment;
 import com.dcw.app.rating.biz.test.RichTextFragment;
 import com.dcw.app.rating.biz.test.StateViewFragment;
 import com.dcw.app.rating.biz.toolbar.DrawerBarController;
@@ -100,7 +99,7 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
                 fragmentClass = RichTextFragment.class;
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = AbsListFragment.class;
+                fragmentClass = StateViewFragment.class;
                 break;
             case R.id.nav_third_fragment:
                 fragmentClass = StateViewFragment.class;

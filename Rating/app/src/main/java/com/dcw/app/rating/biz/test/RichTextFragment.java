@@ -49,7 +49,7 @@ public class RichTextFragment extends BaseFragmentWrapper {
             @Override
             public void onClick(String content) {
 //                    Toast.makeText(getActivity(), content, 0).show();
-                startFragment(AbsListFragment.class);
+                startFragment(StateViewFragment.class);
             }
         }, "www.google.com").append("\n2.给整个新文本添加点击\n").appendTouchableText("百度网址", new TouchableSpan.OnClickListener() {
             @Override

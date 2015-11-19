@@ -38,7 +38,7 @@ public class DataProvider extends ContentProvider {
 
     public static DBHelper getDBHelper() {
         if (mDBHelper == null) {
-            mDBHelper = new DBHelper(App.getInstance().getApplicationContext());
+//            mDBHelper = new DBHelper(App.getInstance().getApplicationContext());
         }
         return mDBHelper;
     }

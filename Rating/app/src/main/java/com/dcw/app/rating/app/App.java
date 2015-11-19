@@ -20,26 +20,21 @@ import com.dcw.app.rating.error.ErrorReporter;
  */
 public class App extends Application {
 
-    private static App sInstance;
-    private DaoSession daoSession;
-    private ErrorReporter mErrorReporter;
-    private DataCache mDataCache;
+//    private static App sInstance;
+//    private DaoSession daoSession;
+//    private ErrorReporter mErrorReporter;
+//    private DataCache mDataCache;
     private AppComponent mAppComponent;
-
-    public static App getInstance() {
-        return sInstance;
-    }
-
 
     @Override
     public void onCreate() {
         super.onCreate();
         initializeInjector();
-        setupDatabase();
-        sInstance = this;
-        mErrorReporter = new ErrorReporter(this);
-        mDataCache = new DataCache(1024 * 100);
-        mDataCache.clearExpiredCache();
+//        setupDatabase();
+//        sInstance = this;
+//        mErrorReporter = new ErrorReporter(this);
+//        mDataCache = new DataCache(1024 * 100);
+//        mDataCache.clearExpiredCache();
 
     }
 
@@ -49,24 +44,24 @@ public class App extends Application {
                 .build();
     }
 
-    private void setupDatabase() {
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "rating-db", null);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        DaoMaster daoMaster = new DaoMaster(db);
-        daoSession = daoMaster.newSession();
-    }
-
-    public DaoSession getDaoSession() {
-        return daoSession;
-    }
-
-    public ErrorReporter getErrorReporter() {
-        return mErrorReporter;
-    }
-
-    public BaseCache getDataCache() {
-        return mDataCache;
-    }
+//    private void setupDatabase() {
+//        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "rating-db", null);
+//        SQLiteDatabase db = helper.getWritableDatabase();
+//        DaoMaster daoMaster = new DaoMaster(db);
+//        daoSession = daoMaster.newSession();
+//    }
+//
+//    public DaoSession getDaoSession() {
+//        return daoSession;
+//    }
+//
+//    public ErrorReporter getErrorReporter() {
+//        return mErrorReporter;
+//    }
+//
+//    public BaseCache getDataCache() {
+//        return mDataCache;
+//    }
 
     public AppComponent getAppComponent() {
         return mAppComponent;

@@ -4,13 +4,9 @@ import android.os.Handler;
 
 import com.dcw.app.R;
 import com.dcw.app.rating.biz.MainActivity;
-import com.dcw.app.rating.biz.home.HomeFragment;
-import com.dcw.app.rating.biz.share.ShareFragment;
+import com.dcw.app.rating.biz.account.LoginFragment;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
-
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 @InjectLayout(R.layout.fragment_welcome)
 public class WelcomeFragment extends BaseFragmentWrapper {
@@ -35,7 +31,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(ShareFragment.class);
+                startFragment(LoginFragment.class);
             }
         }, 1500);
     }
