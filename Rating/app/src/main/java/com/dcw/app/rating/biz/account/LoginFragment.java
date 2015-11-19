@@ -13,6 +13,7 @@ import com.dcw.app.rating.di.module.ActivityModule;
 import com.dcw.app.rating.di.module.UIModule;
 import com.dcw.app.ui.framework.BaseActivityWrapper;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
+import com.dcw.app.ui.framework.ToastManager;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 import javax.inject.Inject;
@@ -21,6 +22,8 @@ import javax.inject.Inject;
 public class LoginFragment extends BaseFragmentWrapper {
 
     UIComponent mUIComponent;
+    @Inject
+    ToastManager mToastManager;
 
     @Override
     public Class getHostActivity() {
@@ -30,13 +33,14 @@ public class LoginFragment extends BaseFragmentWrapper {
     @Override
     public void initData() {
         mUIComponent = DaggerUIComponent.builder().appComponent(((App)getActivity().getApplication()).getAppComponent()).uIModule(new UIModule()).build();
+        mUIComponent.inject(this);
     }
 
     @Override
     public void initUI() {
         new LoginController((LoginView) findViewById(R.id.root_view), new UserModel());
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName(), false));
-        getUIComponent().toastManager().showToast("kwkwkwkww");
+        mToastManager.showToast("kwkwkwkww");
 //        Toast.makeText(getFragmentComponent().fragment().getActivity(), "dkfjsdjflsjl", Toast.LENGTH_LONG).show();
     }
 

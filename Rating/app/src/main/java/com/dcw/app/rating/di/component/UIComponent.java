@@ -1,6 +1,7 @@
 package com.dcw.app.rating.di.component;
 
 import com.dcw.app.rating.app.App;
+import com.dcw.app.rating.biz.account.LoginFragment;
 import com.dcw.app.rating.di.module.ActivityModule;
 import com.dcw.app.rating.di.module.FragmentModule;
 import com.dcw.app.rating.di.module.UIModule;
@@ -18,6 +19,8 @@ import dagger.Component;
 @FragmentScope
 @Component(dependencies = AppComponent.class, modules = {UIModule.class})
 public interface UIComponent {
+
+    void inject(LoginFragment fragment);
 
     App application();
 
