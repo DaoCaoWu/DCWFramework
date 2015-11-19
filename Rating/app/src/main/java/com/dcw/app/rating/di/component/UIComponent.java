@@ -17,7 +17,7 @@ import dagger.Component;
  * Created by jiaying.cjy@alibaba-inc.com on 2015/11/19.
  */
 @FragmentScope
-@Component(dependencies = AppComponent.class, modules = {UIModule.class})
+@Component(dependencies = {AppComponent.class}, modules = {UIModule.class})
 public interface UIComponent {
 
     void inject(LoginFragment fragment);

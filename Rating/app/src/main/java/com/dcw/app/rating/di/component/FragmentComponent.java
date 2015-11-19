@@ -2,6 +2,7 @@ package com.dcw.app.rating.di.component;
 
 import com.dcw.app.rating.di.module.FragmentModule;
 import com.dcw.app.rating.di.scope.FragmentScope;
+import com.dcw.app.ui.framework.BaseActivityWrapper;
 import com.dcw.app.ui.framework.BaseFragmentWrapper;
 
 import dagger.Component;
@@ -15,6 +16,8 @@ import dagger.Component;
 @FragmentScope
 @Component(dependencies = {ActivityComponent.class}, modules = {FragmentModule.class})
 public interface FragmentComponent {
+
+    BaseActivityWrapper activity();
 
     BaseFragmentWrapper fragment();
 }
