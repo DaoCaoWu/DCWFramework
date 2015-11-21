@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.dcw.app.rating.biz.contact.view.StickyListView
+    <com.dcw.app.biz.contact.view.StickyListView
         android:id="@id/root_view"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
 
-        <com.dcw.app.rating.biz.contact.view.LetterIndexView
+        <com.dcw.app.biz.contact.view.LetterIndexView
             android:id="@id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -45,14 +45,14 @@
                 tools:text="A"
                 tools:visibility="visible"/>
 
-            <com.dcw.app.rating.biz.contact.view.SideBar
+            <com.dcw.app.biz.contact.view.SideBar
                 android:id="@id/sidebar"
                 android:layout_width="@dimen/horizontal_margins_on_gird_view"
                 android:layout_height="match_parent"
                 android:layout_gravity="right|center_vertical"
                 android:paddingBottom="@dimen/screen_edge_left_and_right_margins"
                 android:paddingTop="@dimen/screen_edge_left_and_right_margins"/>
-        </com.dcw.app.rating.biz.contact.view.LetterIndexView>
+        </com.dcw.app.biz.contact.view.LetterIndexView>
 
-    </com.dcw.app.rating.biz.contact.view.StickyListView>
+    </com.dcw.app.biz.contact.view.StickyListView>
 </LinearLayout>

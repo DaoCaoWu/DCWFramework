@@ -1,4 +1,4 @@
-<com.dcw.app.rating.biz.toolbar.NavigationBar xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dcw.app.biz.toolbar.NavigationBar xmlns:android="http://schemas.android.com/apk/res/android"
                                               android:id="@id/toolbar"
                                               android:layout_height="wrap_content"
                                               android:layout_width="match_parent"

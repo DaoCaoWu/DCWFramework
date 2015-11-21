@@ -25,18 +25,21 @@ android {
 //            storePassword 'b-1210132'
 //        }
     }
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
     defaultConfig {
         applicationId "com.dcw.framework.rating"
-        minSdkVersion 8
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release_config
 //            proguardFile 'E:/GitWorksapce/DCWFramework/Rating/app/proguard-rules.pro'
@@ -52,13 +55,29 @@ android {
 }
 
 dependencies {
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
+    compile project(':data')
     compile files('libs/abc.jar')
+
+    apt presentationDependencies.daggerCompiler
+    compile presentationDependencies.dagger
+    compile presentationDependencies.butterKnife
+    compile presentationDependencies.recyclerView
+    compile presentationDependencies.rxJava
+    provided presentationDependencies.javaxAnnotation
+
+    androidTestCompile presentationTestDependencies.mockito
+    androidTestCompile presentationTestDependencies.dexmaker
+    androidTestCompile presentationTestDependencies.dexmakerMockito
+    androidTestCompile presentationTestDependencies.espresso
+    androidTestCompile presentationTestDependencies.testingSupportLib
+
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:design:22.2.1'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     //弹出提示信息    代码地址-----> https://github.com/johnkil/Android-AppMsg
@@ -68,7 +87,4 @@ dependencies {
     //超强滚动效果View    代码地址-----> https://github.com/ksoichiro/Android-ObservableScrollView
     //    compile 'com.github.ksoichiro:android-observablescrollview:1.5.1'
     compile 'com.google.zxing:core:3.2.1'
-    compile 'com.google.dagger:dagger:2.0.2'
-    provided 'com.google.dagger:dagger-compiler:2.0.2'
-    provided 'javax.annotation:javax.annotation-api:1.2'
 }
