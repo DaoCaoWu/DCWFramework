@@ -7,7 +7,7 @@ allprojects {
 ext {
     //Android
     androidBuildToolsVersion = "21.1.2"
-    androidMinSdkVersion = 8
+    androidMinSdkVersion = 9
     androidTargetSdkVersion = 21
     androidCompileSdkVersion = 21
     androidVersionCode = 1
@@ -76,6 +76,7 @@ ext {
             okHttp:             "com.squareup.okhttp:okhttp:${okHttpVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
+            retrofitRxJava:     "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}",
             rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",

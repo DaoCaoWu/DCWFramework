@@ -17,6 +17,7 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
+import retrofit.RxJavaCallAdapterFactory;
 
 /**
  * @author JiaYing.Cheng
@@ -66,9 +67,10 @@ public class NetworkModule {
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
 //                .addConverterFactory(RatingConvertFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl("http://sns.mock.uctest.local:8024")
                 .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         retrofit.client().interceptors().add(new RatingInterceptor());
         return retrofit;

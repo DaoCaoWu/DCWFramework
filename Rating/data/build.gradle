@@ -43,6 +43,7 @@ dependencies {
     compile project(':domain')
 
     compile dataDependencies.rxJava
+    compile dataDependencies.rxAndroid
     compile dataDependencies.gson
     compile dataDependencies.okHttp
 
@@ -52,6 +53,7 @@ dependencies {
 
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitConvertGson
+    compile dataDependencies.retrofitRxJava
     compile dataDependencies.greenDao
 //    compile dataDependencies.androidAnnotations
 //    compile dataDependencies.supportV4

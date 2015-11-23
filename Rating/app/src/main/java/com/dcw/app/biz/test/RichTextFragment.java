@@ -1,10 +1,8 @@
 package com.dcw.app.biz.test;
 
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dcw.app.R;
@@ -16,6 +14,12 @@ import com.dcw.app.biz.test.model.ResultData;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.net.api.GitHub;
+import com.dcw.framework.util.LinkTouchMovementMethod;
+import com.dcw.framework.util.RichTextBuilder;
+import com.dcw.framework.util.TouchableSpan;
+import com.dcw.framework.view.annotation.InjectLayout;
+import com.dcw.framework.view.annotation.InjectView;
+import com.devspark.appmsg.AppMsg;
 
 import cn.ninegame.framework.ToastManager;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
@@ -23,14 +27,9 @@ import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
-
-import com.dcw.framework.util.LinkTouchMovementMethod;
-import com.dcw.framework.util.RichTextBuilder;
-import com.dcw.framework.util.TouchableSpan;
-import com.dcw.framework.view.annotation.InjectLayout;
-import com.dcw.framework.view.annotation.InjectView;
-import com.devspark.appmsg.AppMsg;
-import com.google.gson.Gson;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 @InjectLayout(R.layout.fragment_rich_text)
 public class RichTextFragment extends BaseFragmentWrapper {
@@ -52,7 +51,7 @@ public class RichTextFragment extends BaseFragmentWrapper {
     @Override
     public void initData() {
 //        RetrofitLoaderManager.initLoader(this, new CommentsLoader(getActivity(), mGitHubService), this);
-        mGitHubService = ((App)getActivityComponent().activity().getApplication()).getNetworkComponent().retrofit().create(GitHub.class);
+        mGitHubService = ((App) getActivityComponent().activity().getApplication()).getNetworkComponent().retrofit().create(GitHub.class);
     }
 
     @Override
@@ -76,13 +75,33 @@ public class RichTextFragment extends BaseFragmentWrapper {
         }, "www.baidu.com").append("\n3.给已存在文本添加点击\n").appendTouchableEdge(start, end, new TouchableSpan.OnClickListener() {
             @Override
             public void onClick(String content) {
-                Call<ResultData<ListData<Comment>>> call = mGitHubService.getComments(new RequestData("adaoadaoadaoadaoadao"));
+                Call<ResultData<ListData<Comment>>> call = mGitHubService.getComments(new RequestData("aaaaaa"));
                 call.enqueue(new Callback<ResultData<ListData<Comment>>>() {
                     @Override
                     public void onResponse(Response<ResultData<ListData<Comment>>> response, Retrofit retrofit) {
-                        AppMsg appMsg = AppMsg.makeText(getActivity(), "成功" + response.body().getData().getList().size(), AppMsg.STYLE_INFO);
+                        AppMsg appMsg = AppMsg.makeText(getActivity(), "成功aaa" + response.body().getData().getList().size(), AppMsg.STYLE_INFO);
                         appMsg.setLayoutGravity(Gravity.BOTTOM);
                         appMsg.show();
+                        Observable<ResultData<ListData<Comment>>> observable = mGitHubService.getComments();
+                        observable.observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Subscriber<ResultData<ListData<Comment>>>() {
+                                    @Override
+                                    public void onCompleted() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        ToastManager.getInstance().showToast(e.getMessage());
+                                    }
+
+                                    @Override
+                                    public void onNext(ResultData<ListData<Comment>> listDataResultData) {
+                                        AppMsg appMsg = AppMsg.makeText(getActivity(), "Observable成功" + listDataResultData.getData().getList().size(), AppMsg.STYLE_INFO);
+                                        appMsg.setLayoutGravity(Gravity.BOTTOM);
+                                        appMsg.show();
+                                    }
+                                });
                     }
 
                     @Override
@@ -90,6 +109,8 @@ public class RichTextFragment extends BaseFragmentWrapper {
                         ToastManager.getInstance().showToast(t.getMessage());
                     }
                 });
+
+
             }
         }, "已存在文本").build();
         mTVContent.setText(sp);
