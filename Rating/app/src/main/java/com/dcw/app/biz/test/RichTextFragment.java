@@ -1,7 +1,10 @@
 package com.dcw.app.biz.test;
 
 import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dcw.app.R;
@@ -26,6 +29,7 @@ import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
+import com.devspark.appmsg.AppMsg;
 import com.google.gson.Gson;
 
 @InjectLayout(R.layout.fragment_rich_text)
@@ -76,7 +80,9 @@ public class RichTextFragment extends BaseFragmentWrapper {
                 call.enqueue(new Callback<ResultData<ListData<Comment>>>() {
                     @Override
                     public void onResponse(Response<ResultData<ListData<Comment>>> response, Retrofit retrofit) {
-                        ToastManager.getInstance().showToast("成功"+response.body().getData().getList().size());
+                        AppMsg appMsg = AppMsg.makeText(getActivity(), "成功" + response.body().getData().getList().size(), AppMsg.STYLE_INFO);
+                        appMsg.setLayoutGravity(Gravity.BOTTOM);
+                        appMsg.show();
                     }
 
                     @Override
