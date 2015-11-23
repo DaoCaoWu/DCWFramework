@@ -3,9 +3,9 @@ package com.dcw.app.biz;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
 
-import cn.ninegame.library.ui.framework.BaseActivityWrapper;
-import cn.ninegame.library.ui.framework.FrameworkManifest;
-import cn.ninegame.library.ui.framework.ToastManager;
+import cn.ninegame.framework.adapter.BaseActivityWrapper;
+import cn.ninegame.framework.FrameworkManifest;
+import cn.ninegame.framework.ToastManager;
 import com.dcw.framework.pac.basic.FrameworkFacade;
 
 import java.lang.reflect.Field;

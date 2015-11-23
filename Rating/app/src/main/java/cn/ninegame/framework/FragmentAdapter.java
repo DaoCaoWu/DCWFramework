@@ -1,10 +1,11 @@
-package cn.ninegame.library.ui.framework;
+package cn.ninegame.framework;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import cn.ninegame.library.component.adapter.model.ListDataModel;
 
 import cn.ninegame.library.component.mvc.core.Observable;

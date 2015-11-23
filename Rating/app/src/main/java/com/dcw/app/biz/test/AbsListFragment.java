@@ -13,7 +13,7 @@
 //import com.dcw.app.biz.toolbar.ToolbarModel;
 //import com.dcw.framework.data.db.bean.Cache;
 //import com.dcw.framework.data.db.dao.CacheDao;
-//import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+//import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 //import com.dcw.app.util.TaskExecutor;
 //import com.dcw.framework.view.annotation.InjectLayout;
 //import com.dcw.framework.view.annotation.InjectView;

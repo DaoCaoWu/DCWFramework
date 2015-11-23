@@ -1,6 +1,6 @@
 package com.dcw.app.biz.account;
 
-import cn.ninegame.library.ui.framework.ToastManager;
+import cn.ninegame.framework.ToastManager;
 import cn.ninegame.library.component.mvc.ViewController;
 
 /**

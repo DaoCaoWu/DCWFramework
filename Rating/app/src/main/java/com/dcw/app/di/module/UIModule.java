@@ -1,7 +1,7 @@
 package com.dcw.app.di.module;
 
 import com.dcw.app.di.scope.FragmentScope;
-import cn.ninegame.library.ui.framework.ToastManager;
+import cn.ninegame.framework.ToastManager;
 
 import dagger.Module;
 import dagger.Provides;

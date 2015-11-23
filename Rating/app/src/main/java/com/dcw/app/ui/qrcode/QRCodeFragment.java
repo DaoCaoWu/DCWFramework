@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.dcw.app.R;
 import com.dcw.app.biz.MainActivity;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
 import com.google.zxing.WriterException;

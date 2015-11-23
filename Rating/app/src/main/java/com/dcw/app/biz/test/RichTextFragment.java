@@ -9,7 +9,7 @@ import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.net.api.GitHub;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.framework.util.LinkTouchMovementMethod;
 import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;

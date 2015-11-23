@@ -1,7 +1,7 @@
 package com.dcw.app.di.module;
 
 import com.dcw.app.di.scope.FragmentScope;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 
 import javax.inject.Inject;
 

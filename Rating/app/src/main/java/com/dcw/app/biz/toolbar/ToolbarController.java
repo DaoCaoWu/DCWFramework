@@ -9,7 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import cn.ninegame.library.component.mvc.Controller;

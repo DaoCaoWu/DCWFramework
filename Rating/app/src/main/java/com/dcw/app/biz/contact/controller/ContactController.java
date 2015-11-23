@@ -13,7 +13,7 @@ import com.dcw.app.biz.select.SelectItemView;
 import com.dcw.app.biz.select.SelectItemView1;
 import cn.ninegame.library.component.adapter.ListViewAdapter;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
-import cn.ninegame.library.ui.framework.ToastManager;
+import cn.ninegame.framework.ToastManager;
 import cn.ninegame.library.component.mvc.Controller;
 import cn.ninegame.library.component.mvc.core.Observable;
 import cn.ninegame.library.component.mvc.core.Observer;

@@ -2,7 +2,7 @@ package com.dcw.app.di.component;
 
 import com.dcw.app.di.module.ActivityModule;
 import com.dcw.app.di.scope.ActivityScope;
-import cn.ninegame.library.ui.framework.BaseActivityWrapper;
+import cn.ninegame.framework.adapter.BaseActivityWrapper;
 
 import dagger.Component;
 

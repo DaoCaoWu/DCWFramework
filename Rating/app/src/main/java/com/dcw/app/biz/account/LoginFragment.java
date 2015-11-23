@@ -9,8 +9,8 @@ import com.dcw.app.di.component.DaggerUIComponent;
 import com.dcw.app.di.component.UIComponent;
 import com.dcw.app.di.module.UIModule;
 
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
-import cn.ninegame.library.ui.framework.ToastManager;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
+import cn.ninegame.framework.ToastManager;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 import javax.inject.Inject;

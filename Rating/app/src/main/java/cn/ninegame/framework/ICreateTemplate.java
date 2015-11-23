@@ -1,4 +1,4 @@
-package cn.ninegame.library.ui.framework;
+package cn.ninegame.framework;
 
 public interface ICreateTemplate {
 

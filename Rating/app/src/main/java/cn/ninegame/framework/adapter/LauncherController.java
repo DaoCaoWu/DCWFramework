@@ -1,4 +1,4 @@
-package cn.ninegame.library.ui.framework;
+package cn.ninegame.framework.adapter;
 
 import android.os.Bundle;
 

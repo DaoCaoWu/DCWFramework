@@ -5,7 +5,7 @@ import com.dcw.app.biz.account.LoginFragment;
 import com.dcw.app.di.module.UIModule;
 import com.dcw.app.di.scope.FragmentScope;
 
-import cn.ninegame.library.ui.framework.ToastManager;
+import cn.ninegame.framework.ToastManager;
 
 import dagger.Component;
 

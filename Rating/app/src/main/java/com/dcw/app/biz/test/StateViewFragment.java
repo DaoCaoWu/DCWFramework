@@ -8,7 +8,7 @@ import com.dcw.app.R;
 import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.app.ui.lib.StateView;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;

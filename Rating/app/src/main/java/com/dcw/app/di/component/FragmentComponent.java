@@ -2,8 +2,8 @@ package com.dcw.app.di.component;
 
 import com.dcw.app.di.module.FragmentModule;
 import com.dcw.app.di.scope.FragmentScope;
-import cn.ninegame.library.ui.framework.BaseActivityWrapper;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseActivityWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 
 import dagger.Component;
 

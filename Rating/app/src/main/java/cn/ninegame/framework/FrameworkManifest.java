@@ -1,7 +1,9 @@
-package cn.ninegame.library.ui.framework;
+package cn.ninegame.framework;
 
 
 import com.dcw.framework.pac.basic.IFrameworkManifest;
+
+import cn.ninegame.framework.adapter.LauncherController;
 
 public class FrameworkManifest implements IFrameworkManifest {
     @Override

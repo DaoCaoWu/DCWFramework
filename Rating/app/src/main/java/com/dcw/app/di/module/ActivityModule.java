@@ -1,7 +1,7 @@
 package com.dcw.app.di.module;
 
 import com.dcw.app.di.scope.ActivityScope;
-import cn.ninegame.library.ui.framework.BaseActivityWrapper;
+import cn.ninegame.framework.adapter.BaseActivityWrapper;
 
 import javax.inject.Inject;
 

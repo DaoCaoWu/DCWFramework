@@ -20,9 +20,9 @@ import com.dcw.app.biz.test.StateViewFragment;
 import com.dcw.app.biz.toolbar.DrawerBarController;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
-import cn.ninegame.library.ui.framework.FragmentAdapter;
+import cn.ninegame.framework.FragmentAdapter;
 import cn.ninegame.library.component.adapter.model.ListDataModel;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
 

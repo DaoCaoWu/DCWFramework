@@ -1,4 +1,4 @@
-package cn.ninegame.library.ui.framework;
+package cn.ninegame.framework.adapter;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -21,6 +21,8 @@ import com.dcw.app.di.HasComponent;
 import com.dcw.app.util.Util;
 import com.dcw.framework.pac.ui.BaseFragment;
 import com.dcw.framework.view.DCWAnnotation;
+
+import cn.ninegame.framework.ICreateTemplate;
 
 
 public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate, HasComponent<FragmentComponent> {

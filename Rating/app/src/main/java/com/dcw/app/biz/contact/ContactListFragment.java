@@ -11,7 +11,7 @@ import com.dcw.app.biz.contact.model.ContactModel;
 import com.dcw.app.biz.contact.view.StickyListView;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
-import cn.ninegame.library.ui.framework.BaseFragmentWrapper;
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 @InjectLayout(R.layout.fragment_contact_list)

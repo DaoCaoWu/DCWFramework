@@ -1,4 +1,4 @@
-package cn.ninegame.library.ui.framework;
+package cn.ninegame.framework;
 
 import android.content.Context;
 import android.widget.Toast;
