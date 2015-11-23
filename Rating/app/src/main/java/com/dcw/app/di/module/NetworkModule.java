@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.dcw.app.app.App;
+import com.dcw.app.network.RatingInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,10 +65,12 @@ public class NetworkModule {
     @Singleton
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
+//                .addConverterFactory(RatingConvertFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-//                .baseUrl(mBaseUrl)
+                .baseUrl("http://sns.mock.uctest.local:8024")
                 .client(okHttpClient)
                 .build();
+        retrofit.client().interceptors().add(new RatingInterceptor());
         return retrofit;
     }
 }

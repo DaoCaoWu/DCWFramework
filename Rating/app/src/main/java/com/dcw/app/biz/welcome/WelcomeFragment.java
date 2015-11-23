@@ -6,6 +6,8 @@ import com.dcw.app.R;
 import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.account.LoginFragment;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
+
+import com.dcw.app.biz.test.RichTextFragment;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 @InjectLayout(R.layout.fragment_welcome)
@@ -31,7 +33,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(LoginFragment.class);
+                startFragment(RichTextFragment.class);
             }
         }, 1500);
     }

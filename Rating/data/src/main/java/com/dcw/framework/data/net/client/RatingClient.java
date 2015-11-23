@@ -98,7 +98,7 @@
 //                body.writeTo(os);
 //                byte[] outputBytes = byteArrayOutputStream.toByteArray();
 //                sink.outputStream().write(outputBytes);
-//                sink.outputStream().write(MessageDigest.m9Encode(Defaults.PLATFORM_GAME, outputBytes, Defaults.M9_SECRET_KEY));
+//                sink.outputStream().write(MessageDigest.m9Encode(Defaults.PLATFORM_GAME, outputBytes, Defaults.SECRET_KEY));
 //                sink.outputStream().flush();
 //                sink.outputStream().close();
 //            }
@@ -139,7 +139,7 @@
 //                byte[] outputBytes = new byte[4098];
 //                body.byteStream().read(outputBytes);
 //                body.byteStream().close();
-//                MessageDigest.m9Decode(outputBytes, Defaults.M9_SECRET_KEY);
+//                MessageDigest.m9Decode(outputBytes, Defaults.SECRET_KEY);
 //                int[] offsetAndLength = new int[]{MessageDigest.M9_DECODE_DEST_OFFSET, outputBytes.length - MessageDigest.M9_DECODE_DEST_OFFSET_LENGTH};
 //                InputStream is = new ByteArrayInputStream(outputBytes, offsetAndLength[0], offsetAndLength[1]);
 //                return new GZIPInputStream(is);

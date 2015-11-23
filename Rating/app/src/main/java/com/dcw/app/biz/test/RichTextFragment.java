@@ -5,21 +5,33 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dcw.app.R;
+import com.dcw.app.app.App;
 import com.dcw.app.biz.MainActivity;
+import com.dcw.app.biz.test.model.Comment;
+import com.dcw.app.biz.test.model.ListData;
+import com.dcw.app.biz.test.model.ResultData;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.net.api.GitHub;
+
+import cn.ninegame.framework.ToastManager;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
+
 import com.dcw.framework.util.LinkTouchMovementMethod;
 import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
+import com.google.gson.Gson;
 
 @InjectLayout(R.layout.fragment_rich_text)
 public class RichTextFragment extends BaseFragmentWrapper {
     private static final String TAG = "RichTextFragment";
-    GitHub gitHubService;
+    GitHub mGitHubService;
     @InjectView(value = R.id.tv_content, listeners = View.OnClickListener.class)
     private TextView mTVContent;
 
@@ -35,7 +47,8 @@ public class RichTextFragment extends BaseFragmentWrapper {
 
     @Override
     public void initData() {
-//        RetrofitLoaderManager.initLoader(this, new CommentsLoader(getActivity(), gitHubService), this);
+//        RetrofitLoaderManager.initLoader(this, new CommentsLoader(getActivity(), mGitHubService), this);
+        mGitHubService = ((App)getActivityComponent().activity().getApplication()).getNetworkComponent().retrofit().create(GitHub.class);
     }
 
     @Override
@@ -59,6 +72,18 @@ public class RichTextFragment extends BaseFragmentWrapper {
         }, "www.baidu.com").append("\n3.给已存在文本添加点击\n").appendTouchableEdge(start, end, new TouchableSpan.OnClickListener() {
             @Override
             public void onClick(String content) {
+                Call<ResultData<ListData<Comment>>> call = mGitHubService.getComments(new RequestData("adaoadaoadaoadaoadao"));
+                call.enqueue(new Callback<ResultData<ListData<Comment>>>() {
+                    @Override
+                    public void onResponse(Response<ResultData<ListData<Comment>>> response, Retrofit retrofit) {
+                        ToastManager.getInstance().showToast("成功"+response.body().getData().getList().size());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        ToastManager.getInstance().showToast(t.getMessage());
+                    }
+                });
             }
         }, "已存在文本").build();
         mTVContent.setText(sp);
@@ -70,4 +95,12 @@ public class RichTextFragment extends BaseFragmentWrapper {
 
     }
 
+    public class RequestData {
+
+        public RequestData(String data) {
+            this.data = data;
+        }
+
+        String data;
+    }
 }
