@@ -4,9 +4,12 @@ import android.app.Application;
 
 import com.dcw.app.di.component.AppComponent;
 import com.dcw.app.di.component.DaggerAppComponent;
+import com.dcw.app.di.component.DaggerImageComponent;
 import com.dcw.app.di.component.DaggerNetworkComponent;
+import com.dcw.app.di.component.ImageComponent;
 import com.dcw.app.di.component.NetworkComponent;
 import com.dcw.app.di.module.AppModule;
+import com.dcw.app.di.module.ImageModule;
 import com.dcw.app.di.module.NetworkModule;
 
 /**
@@ -24,6 +27,7 @@ public class App extends Application {
     private AppComponent mAppComponent;
     private AppModule mAppModule;
     private NetworkComponent mNetworkComponent;
+    private ImageComponent mImageComponent;
 
     @Override
     public void onCreate() {
@@ -45,6 +49,10 @@ public class App extends Application {
         mNetworkComponent = DaggerNetworkComponent.builder()
                 .appModule(mAppModule)
                 .networkModule(new NetworkModule())
+                .build();
+        mImageComponent = DaggerImageComponent.builder()
+                .appModule(mAppModule)
+                .imageModule(new ImageModule())
                 .build();
     }
 
@@ -77,5 +85,9 @@ public class App extends Application {
 
     public NetworkComponent getNetworkComponent() {
         return mNetworkComponent;
+    }
+
+    public ImageComponent getImageComponent() {
+        return mImageComponent;
     }
 }

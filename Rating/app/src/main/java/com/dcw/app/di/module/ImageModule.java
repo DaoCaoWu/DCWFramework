@@ -1,6 +1,7 @@
 package com.dcw.app.di.module;
 
 import com.dcw.app.app.App;
+import com.dcw.app.config.ImageLoaderConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 
@@ -17,21 +18,7 @@ public class ImageModule {
 
     @Provides @Singleton
     ImagePipelineConfig provideAppImageConfig(App application) {
-//        return ImagePipelineConfig.newBuilder(application)
-//                .setBitmapMemoryCacheParamsSupplier(bitmapCacheParamsSupplier)
-//                .setCacheKeyFactory(cacheKeyFactory)
-//                .setEncodedMemoryCacheParamsSupplier(encodedCacheParamsSupplier)
-//                .setExecutorSupplier(executorSupplier)
-//                .setImageCacheStatsTracker(imageCacheStatsTracker)
-//                .setMainDiskCacheConfig(mainDiskCacheConfig)
-//                .setMemoryTrimmableRegistry(memoryTrimmableRegistry)
-//                .setNetworkFetchProducer(networkFetchProducer)
-//                .setPoolFactory(poolFactory)
-//                .setProgressiveJpegConfig(progressiveJpegConfig)
-//                .setRequestListeners(requestListeners)
-//                .setSmallImageDiskCacheConfig(smallImageDiskCacheConfig)
-//                .build();
-        return null;
+        return ImageLoaderConfig.getImagePipelineConfig(application);
     }
 
     @Provides @Singleton
