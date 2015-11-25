@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
-interface Environment {
+public interface Environment {
     Activity getCurrentActivity();
     void setCurrentActivity(Activity activity);
     Context getApplicationContext();
     void setApplicationContext(Context context);
+    void startFragment(Class fragmentClazz);
+    void startFragment(Class fragmentClazz, Bundle param);
     void startFragment(String fragmentName, Bundle param);
     /**
      * 启动Fragment

@@ -59,12 +59,25 @@ public class ToolbarController extends Controller<NavigationBar, ToolbarModel> i
 
     }
 
+    // A method to find height of the status bar
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = mFragment.getActivity().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = mFragment.getActivity().getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
     private void initSystemBar(AppCompatActivity activity) {
 
         SystemBarTintManager tintManager = new SystemBarTintManager(activity);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(getView().getDrawingCacheBackgroundColor());
         SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
+
+        // Set the padding to match the Status Bar height
+        getView().setPadding(0, getStatusBarHeight(), 0, 0);
     }
 
 

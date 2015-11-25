@@ -19,7 +19,7 @@ import com.dcw.app.di.component.FragmentComponent;
 import com.dcw.app.di.module.FragmentModule;
 import com.dcw.app.di.HasComponent;
 import com.dcw.app.util.Util;
-import com.dcw.framework.pac.ui.BaseFragment;
+import com.dcw.framework.container.BaseFragment;
 import com.dcw.framework.view.DCWAnnotation;
 
 import cn.ninegame.framework.ICreateTemplate;
@@ -43,12 +43,12 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIsDestroy = false;
-        setHasOptionsMenu(true);
         mFragmentComponent = DaggerFragmentComponent.builder()
                 .activityComponent(getActivityComponent())
                 .fragmentModule(new FragmentModule(this))
                 .build();
+        mIsDestroy = false;
+        setHasOptionsMenu(true);
     }
 
     protected ActivityComponent getActivityComponent() {
@@ -110,7 +110,7 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
         return mRootView == null ? null : (T) mRootView.findViewById(id);
     }
 
-    protected void hideKeyboard() {
+    public void hideKeyboard() {
         Activity activity = getActivity();
         if (activity == null) return;
         try {

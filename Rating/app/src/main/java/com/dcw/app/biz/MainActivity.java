@@ -3,12 +3,13 @@ package com.dcw.app.biz;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
 
-import cn.ninegame.framework.adapter.BaseActivityWrapper;
-import cn.ninegame.framework.FrameworkManifest;
-import cn.ninegame.framework.ToastManager;
-import com.dcw.framework.pac.basic.FrameworkFacade;
+import com.dcw.app.biz.welcome.WelcomeFragment;
+import com.dcw.framework.container.FrameworkFacade;
 
 import java.lang.reflect.Field;
+
+import cn.ninegame.framework.ToastManager;
+import cn.ninegame.framework.adapter.BaseActivityWrapper;
 
 ;
 
@@ -23,9 +24,15 @@ public class MainActivity extends BaseActivityWrapper {
     }
 
     public void startFramework() {
-        FrameworkFacade.getInstance().start(new FrameworkManifest(), this);
+        FrameworkFacade.getInstance().start(getApplicationContext());
+        FrameworkFacade.getInstance().getEnvironment().setCurrentActivity(this);
+        findViewById(android.R.id.content).post(new Runnable() {
+            @Override
+            public void run() {
+                FrameworkFacade.getInstance().getEnvironment().startFragment(WelcomeFragment.class);
+            }
+        });
         ToastManager.getInstance().init(this);
-
     }
 
     private void getOverflowMenu() {

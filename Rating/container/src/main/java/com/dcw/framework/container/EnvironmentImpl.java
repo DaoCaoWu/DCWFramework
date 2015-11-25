@@ -35,6 +35,16 @@ final class EnvironmentImpl implements Environment {
     }
 
     @Override
+    public void startFragment(Class fragmentClazz) {
+        startFragment(fragmentClazz, null);
+    }
+
+    @Override
+    public void startFragment(Class fragmentClazz, Bundle param) {
+        startFragment(fragmentClazz.getName(), null);
+    }
+
+    @Override
     public void startFragment(String fragmentID, Bundle param){
         startFragment(fragmentID, param, false, BaseFragment.LAUNCHER_MODE_NORMAL);
     }

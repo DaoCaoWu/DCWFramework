@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends AppCompatActivity {
 
     public final static String INTENT_EXTRA_FRAGMENT_TAG = "ftag";
     public final static String INTENT_EXTRA_LAUNCHER_MODE = "launcherMode";
@@ -23,10 +23,10 @@ public class BaseActivity extends FragmentActivity {
     }
 
     public Environment getEnvironment() {
-        return  mEnv;
+        return mEnv;
     }
 
-    public boolean isForeground(){
+    public boolean isForeground() {
         return mIsForeground;
     }
 
@@ -43,7 +43,7 @@ public class BaseActivity extends FragmentActivity {
         handleIntent(intent);
     }
 
-    public void handleIntent(Intent intent){
+    public void handleIntent(Intent intent) {
         if (intent == null) {
             return;
         }
@@ -53,13 +53,13 @@ public class BaseActivity extends FragmentActivity {
         int mode = intent.getIntExtra(INTENT_EXTRA_LAUNCHER_MODE, BaseFragment.LAUNCHER_MODE_NORMAL);
 
 
-        if(!TextUtils.isEmpty(fragmentTag)){
+        if (!TextUtils.isEmpty(fragmentTag)) {
             BaseFragment fragment = FragmentCenter.popCacheFragment(fragmentTag);
-            if(fragment == null) {
+            if (fragment == null) {
                 return;
             }
             pushFragment(fragment, mode);
-            if(fragment.getEnvironment() != null) {
+            if (fragment.getEnvironment() != null) {
                 setEnvironment(fragment.getEnvironment());
             }
         }
@@ -68,10 +68,10 @@ public class BaseActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(mEnv == null){
+        if (mEnv == null) {
             mEnv = FrameworkFacade.getInstance().getEnvironment();
         }
-        if(mEnv != null){
+        if (mEnv != null) {
             mEnv.setCurrentActivity(this);
         }
     }
@@ -90,10 +90,11 @@ public class BaseActivity extends FragmentActivity {
 
     /**
      * 压入fragment
+     *
      * @param fragment 需要被压入的fragment
      */
     protected void pushFragment(BaseFragment fragment, int mode) {
-        if(fragment == null) {
+        if (fragment == null) {
             return;
         }
 
@@ -107,12 +108,12 @@ public class BaseActivity extends FragmentActivity {
 
         String fragmentTag = fragment.getClass().getName();
 
-        switch (mode){
+        switch (mode) {
             case BaseFragment.LAUNCHER_MODE_POP_BACK_STACK:
-                BaseFragment fragmentInBackstack = (BaseFragment)fragmentManager.findFragmentByTag(fragmentTag);
-                if(fragmentInBackstack != null){
+                BaseFragment fragmentInBackstack = (BaseFragment) fragmentManager.findFragmentByTag(fragmentTag);
+                if (fragmentInBackstack != null) {
                     fragmentManager.popBackStackImmediate(fragmentTag, 0);
-                    return ;
+                    return;
                 }
                 break;
             case BaseFragment.LAUNCHER_MODE_NORMAL:
@@ -133,7 +134,7 @@ public class BaseActivity extends FragmentActivity {
     }
 
     public void showDialogFragment(DialogFragment diagFragment) {
-        if(diagFragment == null) return;
+        if (diagFragment == null) return;
 
         FragmentTransaction fragAction = getSupportFragmentManager().beginTransaction();
 
@@ -144,8 +145,8 @@ public class BaseActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         Fragment baseFragment = getCurrentFragment();
-        if(baseFragment instanceof  BaseFragment){
-            if(((BaseFragment)baseFragment).goBack()){
+        if (baseFragment instanceof BaseFragment) {
+            if (((BaseFragment) baseFragment).goBack()) {
                 return;
             }
         }
@@ -153,14 +154,14 @@ public class BaseActivity extends FragmentActivity {
         popCurrentFragment();
     }
 
-    public void popCurrentFragment(){
-         //解决fragment addToBackStack后，按返回键出现空白的Activity问题
+    public void popCurrentFragment() {
+        //解决fragment addToBackStack后，按返回键出现空白的Activity问题
         if (getSupportFragmentManager().getBackStackEntryCount() <= 1) {
             finish();
         } else {
             try {
                 super.onBackPressed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

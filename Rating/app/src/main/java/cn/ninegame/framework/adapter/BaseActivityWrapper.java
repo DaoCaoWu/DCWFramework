@@ -12,7 +12,7 @@ import com.dcw.app.di.module.ActivityModule;
 import com.dcw.app.di.component.DaggerActivityComponent;
 import com.dcw.app.app.App;
 import com.dcw.app.di.component.AppComponent;
-import com.dcw.framework.pac.ui.BaseActivity;
+import com.dcw.framework.container.BaseActivity;
 
 public class BaseActivityWrapper extends BaseActivity {
 

@@ -56,10 +56,7 @@ public final class FrameworkFacade {
     }
 
     public Environment getEnvironment() {
-        if (mEnvironmentCenter != null) {
-            return mEnvironmentCenter.getEnvironment();
-        }
-        return null;
+        return mEnvironmentCenter.getEnvironment();
     }
 
     private static void checkThread() {
