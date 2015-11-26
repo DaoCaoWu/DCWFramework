@@ -1,5 +1,6 @@
 package com.dcw.app.biz.welcome;
 
+import android.os.Bundle;
 import android.os.Handler;
 
 import com.dcw.app.R;
@@ -29,11 +30,17 @@ public class WelcomeFragment extends BaseFragmentWrapper {
 
     @Override
     public void initListeners() {
-        new Handler().postDelayed(new Runnable() {
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mRootView.postDelayed(new Runnable() {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(RichTextFragment.class);
+                startFragment(LoginFragment.class);
             }
         }, 1500);
     }

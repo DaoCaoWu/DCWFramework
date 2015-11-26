@@ -43,10 +43,6 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFragmentComponent = DaggerFragmentComponent.builder()
-                .activityComponent(getActivityComponent())
-                .fragmentModule(new FragmentModule(this))
-                .build();
         mIsDestroy = false;
         setHasOptionsMenu(true);
     }
@@ -125,6 +121,10 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mFragmentComponent = DaggerFragmentComponent.builder()
+                .activityComponent(getActivityComponent())
+                .fragmentModule(new FragmentModule(this))
+                .build();
         if (mToolbarController != null) {
             mToolbarController.attachToFragment(this);
         }
