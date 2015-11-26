@@ -7,14 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.dcw.app.di.component.ActivityComponent;
-import com.dcw.app.di.module.ActivityModule;
-import com.dcw.app.di.component.DaggerActivityComponent;
 import com.dcw.app.app.App;
+import com.dcw.app.di.component.ActivityComponent;
 import com.dcw.app.di.component.AppComponent;
-import com.dcw.framework.container.BaseActivity;
+import com.dcw.app.di.component.DaggerActivityComponent;
+import com.dcw.app.di.module.ActivityModule;
+import com.fragmentmaster.app.MasterActionBarActivity;
 
-public class BaseActivityWrapper extends BaseActivity {
+public class BaseActivityWrapper extends MasterActionBarActivity {
 
     ActivityComponent mActivityComponent;
 

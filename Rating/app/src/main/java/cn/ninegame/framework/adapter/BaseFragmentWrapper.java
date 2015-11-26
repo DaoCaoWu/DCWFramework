@@ -10,22 +10,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dcw.app.R;
-import com.dcw.app.di.component.ActivityComponent;
 import com.dcw.app.biz.toolbar.ToolbarController;
-import com.dcw.app.config.BundleConstant;
+import com.dcw.app.di.HasComponent;
+import com.dcw.app.di.component.ActivityComponent;
 import com.dcw.app.di.component.DaggerFragmentComponent;
 import com.dcw.app.di.component.FragmentComponent;
 import com.dcw.app.di.module.FragmentModule;
-import com.dcw.app.di.HasComponent;
 import com.dcw.app.util.Util;
-import com.dcw.framework.container.BaseFragment;
 import com.dcw.framework.view.DCWAnnotation;
+import com.fragmentmaster.app.MasterFragment;
 
 import cn.ninegame.framework.ICreateTemplate;
 
 
-public abstract class BaseFragmentWrapper extends BaseFragment implements ICreateTemplate, HasComponent<FragmentComponent> {
+public abstract class BaseFragmentWrapper extends MasterFragment implements ICreateTemplate, HasComponent<FragmentComponent> {
 
     protected View mRootView;
     protected ToolbarController mToolbarController;
@@ -34,8 +32,8 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
 
     public BaseFragmentWrapper() {
         super();
-        setUseAnim(false);
-        setCustomAnimations(R.anim.open_slide_in, R.anim.open_slide_out, R.anim.close_slide_in, R.anim.close_slide_out);
+//        setUseAnim(false);
+//        setCustomAnimations(R.anim.open_slide_in, R.anim.open_slide_out, R.anim.close_slide_in, R.anim.close_slide_out);
     }
 
     public abstract Class getHostActivity();
@@ -84,23 +82,23 @@ public abstract class BaseFragmentWrapper extends BaseFragment implements ICreat
         mIsDestroy = true;
     }
 
-    public boolean isFragmentDestroy() {
-        return mIsDestroy;
-    }
-
-    public int getFragmentType() {
-        int fragmentType = 0;
-        Bundle bundle = getBundleArguments();
-        if (bundle != null) {
-            fragmentType = bundle.getInt(BundleConstant.KEY_FRAGMENT_TYPE);
-        }
-        return fragmentType;
-    }
-
-    @Override
-    public void onResult(Bundle bundle) {
-        super.onResult(bundle);
-    }
+//    public boolean isFragmentDestroy() {
+//        return mIsDestroy;
+//    }
+//
+//    public int getFragmentType() {
+//        int fragmentType = 0;
+//        Bundle bundle = getBundleArguments();
+//        if (bundle != null) {
+//            fragmentType = bundle.getInt(BundleConstant.KEY_FRAGMENT_TYPE);
+//        }
+//        return fragmentType;
+//    }
+//
+//    @Override
+//    public void onResult(Bundle bundle) {
+//        super.onResult(bundle);
+//    }
 
     protected <T> T findViewById(int id) {
         return mRootView == null ? null : (T) mRootView.findViewById(id);

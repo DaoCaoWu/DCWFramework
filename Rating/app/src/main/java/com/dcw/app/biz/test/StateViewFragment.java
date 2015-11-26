@@ -17,7 +17,7 @@ import com.dcw.framework.view.annotation.InjectView;
  * Created by adao12 on 2015/7/21.
  */
 @InjectLayout(R.layout.fragment_state_view)
-public class StateViewFragment extends BaseFragmentWrapper {
+public class StateViewFragment extends BaseFragmentWrapper implements View.OnClickListener {
 
     StateView.ContentState mState;
 

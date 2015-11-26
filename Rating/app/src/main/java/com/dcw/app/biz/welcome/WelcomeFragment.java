@@ -8,8 +8,10 @@ import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.account.LoginFragment;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 
+import com.dcw.app.biz.home.HomeFragment;
 import com.dcw.app.biz.test.RichTextFragment;
 import com.dcw.framework.view.annotation.InjectLayout;
+import com.fragmentmaster.app.Request;
 
 @InjectLayout(R.layout.fragment_welcome)
 public class WelcomeFragment extends BaseFragmentWrapper {
@@ -39,8 +41,8 @@ public class WelcomeFragment extends BaseFragmentWrapper {
         mRootView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getActivity().getSupportFragmentManager().popBackStack();
-                startFragment(LoginFragment.class);
+                getActivity().getSupportFragmentManager().beginTransaction().remove(WelcomeFragment.this).commit();
+                getFragmentMaster().install(android.R.id.content, new Request(RichTextFragment.class), true);
             }
         }, 1500);
     }

@@ -60,7 +60,7 @@ public class QRCodeFragment extends BaseFragmentWrapper implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        super.onClick(view);
+//        super.onClick(view);
         try {
             String contentString = mEtQrStr.getText().toString();
             if (!contentString.equals("")) {
