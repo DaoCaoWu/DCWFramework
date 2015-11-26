@@ -42,7 +42,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void run() {
                 getActivity().getSupportFragmentManager().beginTransaction().remove(WelcomeFragment.this).commit();
-                getFragmentMaster().install(android.R.id.content, new Request(RichTextFragment.class), true);
+                getFragmentMaster().install(android.R.id.content, new Request(LoginFragment.class), true);
             }
         }, 1500);
     }

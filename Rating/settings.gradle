@@ -1,1 +1,1 @@
-include ':app', ':library', ':data', ':domain', ':container', ':fragmentmaster-appcompat', ':fragmentmaster'
+include ':app', ':library', ':data', ':domain', ':container', ':fragmentmaster-appcompat', ':fragmentmaster', ':smssdk', ':IMKit'

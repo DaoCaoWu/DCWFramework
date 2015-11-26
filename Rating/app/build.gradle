@@ -61,6 +61,7 @@ dependencies {
     compile project(':library')
     compile project(':data')
     compile project(':fragmentmaster-appcompat')
+    compile project(':smssdk')
     compile files('libs/abc.jar')
 
     apt presentationDependencies.daggerCompiler
