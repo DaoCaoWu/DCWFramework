@@ -13,6 +13,7 @@ import com.dcw.app.di.component.UIComponent;
 import com.dcw.app.di.module.UIModule;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
+import com.umeng.share.ShareManager;
 
 import javax.inject.Inject;
 
@@ -79,21 +80,22 @@ public class LoginFragment extends BaseFragmentWrapper {
             @Override
             public void onClick(View v) {
 //                SMSSDK.getVerificationCode("86", "13570320927");
-                final User user = new User();
-                user.setUserName("adao12");
-                user.setPassword("123456");
-                user.setEmail("adao12@qq.com");
-                user.save(getActivity(), new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                        mToastManager.showToast("添加数据成功，返回objectId为："+user.getObjectId());
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        mToastManager.showToast("创建数据失败：" + s);
-                    }
-                });
+//                final User user = new User();
+//                user.setUserName("adao12");
+//                user.setPassword("123456");
+//                user.setEmail("adao12@qq.com");
+//                user.save(getActivity(), new SaveListener() {
+//                    @Override
+//                    public void onSuccess() {
+//                        mToastManager.showToast("添加数据成功，返回objectId为："+user.getObjectId());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int i, String s) {
+//                        mToastManager.showToast("创建数据失败：" + s);
+//                    }
+//                });
+                ShareManager.getInstance().share(getActivity(), "Thanks to use Rating!", "Rating", "http://www.baidu.com", "http://img4.duitang.com/uploads/item/201503/04/20150304191759_mmEtx.jpeg");
             }
         });
     }
