@@ -39,7 +39,7 @@ android {
 dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.dataTestDependencies
-
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':domain')
 
     compile dataDependencies.rxJava

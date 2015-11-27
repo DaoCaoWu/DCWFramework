@@ -11,6 +11,7 @@ import com.fragmentmaster.app.IMasterFragment;
 
 import java.lang.reflect.Field;
 
+import cn.bmob.v3.Bmob;
 import cn.ninegame.framework.ToastManager;
 import cn.ninegame.framework.adapter.BaseActivityWrapper;
 
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivityWrapper {
         getSupportFragmentManager().beginTransaction().add(android.R.id.content, new WelcomeFragment()).commit();
         getFragmentMaster().registerFragmentLifecycleCallbacks(mLifecycleCallbacks);
         ToastManager.getInstance().init(this);
+        Bmob.initialize(this, "1479487dbe427bc688522f817ec993c0");
     }
 
     @Override

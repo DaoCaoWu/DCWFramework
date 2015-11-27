@@ -16,6 +16,7 @@ import com.dcw.framework.view.annotation.InjectView;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.listener.SaveListener;
 import cn.ninegame.framework.ToastManager;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import cn.smssdk.EventHandler;
@@ -77,7 +78,22 @@ public class LoginFragment extends BaseFragmentWrapper {
         mBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SMSSDK.getVerificationCode("86", "13570320927");
+//                SMSSDK.getVerificationCode("86", "13570320927");
+                final User user = new User();
+                user.setUserName("adao12");
+                user.setPassword("123456");
+                user.setEmail("adao12@qq.com");
+                user.save(getActivity(), new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        mToastManager.showToast("添加数据成功，返回objectId为："+user.getObjectId());
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        mToastManager.showToast("创建数据失败：" + s);
+                    }
+                });
             }
         });
     }
