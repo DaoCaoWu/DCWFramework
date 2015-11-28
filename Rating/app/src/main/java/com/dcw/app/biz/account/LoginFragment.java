@@ -1,7 +1,11 @@
 package com.dcw.app.biz.account;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.dcw.app.R;
 import com.dcw.app.app.App;
@@ -13,7 +17,19 @@ import com.dcw.app.di.component.UIComponent;
 import com.dcw.app.di.module.UIModule;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;
+import com.umeng.login.LoginManager;
 import com.umeng.share.ShareManager;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners;
+import com.umeng.socialize.exception.SocializeException;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.utils.Log;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
+
+import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -80,22 +96,9 @@ public class LoginFragment extends BaseFragmentWrapper {
             @Override
             public void onClick(View v) {
 //                SMSSDK.getVerificationCode("86", "13570320927");
-//                final User user = new User();
-//                user.setUserName("adao12");
-//                user.setPassword("123456");
-//                user.setEmail("adao12@qq.com");
-//                user.save(getActivity(), new SaveListener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        mToastManager.showToast("添加数据成功，返回objectId为："+user.getObjectId());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int i, String s) {
-//                        mToastManager.showToast("创建数据失败：" + s);
-//                    }
-//                });
-                ShareManager.getInstance().share(getActivity(), "Thanks to use Rating!", "Rating", "http://www.baidu.com", "http://img4.duitang.com/uploads/item/201503/04/20150304191759_mmEtx.jpeg");
+
+//                ShareManager.getInstance().share(getActivity(), "Thanks to use Rating!", "Rating", "http://www.baidu.com", "http://img4.duitang.com/uploads/item/201503/04/20150304191759_mmEtx.jpeg");
+//                LoginManager.getInstance().login(getActivity(), SHARE_MEDIA.QQ);
             }
         });
     }

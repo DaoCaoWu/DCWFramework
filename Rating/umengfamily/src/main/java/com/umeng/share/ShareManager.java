@@ -71,9 +71,9 @@ public class ShareManager {
      */
     private void addQQQZonePlatform(Context context, String targetUrl) {
 //        String appId = "100424468";
-        String appId = "1104980016";
+        String appId = "1104994100";
 //        String appKey = "c7394704798a158208a74ab60104f0ba";
-        String appKey = "Dz9oJR8HGlmg6Prr";
+        String appKey = "rbiIbFRGStVTCuyY";
         // 添加QQ支持, 并且设置QQ分享内容的target url
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler((Activity) context, appId, appKey);
         qqSsoHandler.setTargetUrl(targetUrl);

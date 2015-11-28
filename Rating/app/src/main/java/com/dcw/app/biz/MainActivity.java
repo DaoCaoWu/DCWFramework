@@ -10,6 +10,8 @@ import com.dcw.app.biz.welcome.WelcomeFragment;
 import com.fragmentmaster.app.FragmentMaster;
 import com.fragmentmaster.app.IMasterFragment;
 import com.umeng.share.ShareManager;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.sso.UMSsoHandler;
 
 import java.lang.reflect.Field;
@@ -64,7 +66,7 @@ public class MainActivity extends BaseActivityWrapper {
         getFragmentMaster().registerFragmentLifecycleCallbacks(mLifecycleCallbacks);
         ToastManager.getInstance().init(this);
         Bmob.initialize(this, "1479487dbe427bc688522f817ec993c0");
-//        UM mController = UMServiceFactory.getUMSocialService("com.umeng.login");
+
     }
 
     @Override
