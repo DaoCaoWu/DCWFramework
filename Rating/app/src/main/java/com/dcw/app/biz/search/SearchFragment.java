@@ -17,11 +17,6 @@ import com.dcw.framework.view.annotation.InjectLayout;
 public class SearchFragment extends BaseFragmentWrapper implements SearchView.OnQueryTextListener {
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
-
-    @Override
     public void initData() {
 
     }

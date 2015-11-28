@@ -30,11 +30,6 @@ public class StateViewFragment extends BaseFragmentWrapper implements View.OnCli
     private int index = 0;
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
-
-    @Override
     public void initData() {
 
     }

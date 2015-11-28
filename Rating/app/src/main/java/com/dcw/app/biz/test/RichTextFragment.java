@@ -44,11 +44,6 @@ public class RichTextFragment extends BaseFragmentWrapper {
     private TextView mTVResult;
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
-
-    @Override
     public void initData() {
 //        RetrofitLoaderManager.initLoader(this, new CommentsLoader(getActivity(), mGitHubService), this);
         mGitHubService = ((App) getActivityComponent().activity().getApplication()).getNetworkComponent().retrofit().create(GitHub.class);

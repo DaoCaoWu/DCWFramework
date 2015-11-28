@@ -18,6 +18,9 @@
     <string name="title">Title</string>
     <string name="content">Content</string>
     <string name="share">Share</string>
+    <string name="qq">QQ</string>
+    <string name="wechat">WeChat</string>
+    <string name="sina">Sina</string>
 
     <string name="dialog_delete_items_title">Delete items</string>
     <string name="dialog_delete_items_confirm">Yes</string>

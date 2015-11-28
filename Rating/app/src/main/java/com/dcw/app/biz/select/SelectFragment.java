@@ -18,11 +18,6 @@ import com.dcw.framework.view.annotation.InjectLayout;
 public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMenuItemClickListener {
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
-
-    @Override
     public void initData() {
 
     }

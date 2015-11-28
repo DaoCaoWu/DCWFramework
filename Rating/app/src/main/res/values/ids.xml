@@ -7,6 +7,9 @@
     <item type="id" name="et_account"/>
     <item type="id" name="et_password"/>
     <item type="id" name="btn_submit"/>
+    <item type="id" name="btn_qq"/>
+    <item type="id" name="btn_wechat"/>
+    <item type="id" name="btn_sina"/>
     <item type="id" name="root_view"/>
     <item type="id" name="iv_icon"/>
     <item type="id" name="tv_subtitle"/>

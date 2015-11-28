@@ -5,22 +5,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.dcw.app.R;
-import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.contact.controller.ContactController;
 import com.dcw.app.biz.contact.model.ContactModel;
 import com.dcw.app.biz.contact.view.StickyListView;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
-import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
+
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 
 @InjectLayout(R.layout.fragment_contact_list)
 public class ContactListFragment extends BaseFragmentWrapper implements MenuItem.OnMenuItemClickListener {
-
-    @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
 
     @Override
     public void initData() {

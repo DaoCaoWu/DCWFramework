@@ -37,11 +37,6 @@ public class HomeFragment extends BaseFragmentWrapper implements ToolbarControll
     CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
-
-    @Override
     public void initData() {
 
     }

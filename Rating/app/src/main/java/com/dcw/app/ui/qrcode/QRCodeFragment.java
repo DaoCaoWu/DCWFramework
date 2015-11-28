@@ -39,11 +39,6 @@ public class QRCodeFragment extends BaseFragmentWrapper implements View.OnClickL
     ImageView mIvQrImage;
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
-    }
-
-    @Override
     public void initData() {
 
     }

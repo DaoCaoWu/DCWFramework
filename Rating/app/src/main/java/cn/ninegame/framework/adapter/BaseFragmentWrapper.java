@@ -17,9 +17,10 @@ import com.dcw.app.di.component.DaggerFragmentComponent;
 import com.dcw.app.di.component.FragmentComponent;
 import com.dcw.app.di.module.FragmentModule;
 import com.dcw.app.util.Util;
-import com.dcw.framework.view.DCWAnnotation;
+import com.dcw.framework.view.annotation.InjectLayout;
 import com.fragmentmaster.app.MasterFragment;
 
+import butterknife.ButterKnife;
 import cn.ninegame.framework.ICreateTemplate;
 
 
@@ -27,21 +28,11 @@ public abstract class BaseFragmentWrapper extends MasterFragment implements ICre
 
     protected View mRootView;
     protected ToolbarController mToolbarController;
-    private boolean mIsDestroy;
     private FragmentComponent mFragmentComponent;
-
-    public BaseFragmentWrapper() {
-        super();
-//        setUseAnim(false);
-//        setCustomAnimations(R.anim.open_slide_in, R.anim.open_slide_out, R.anim.close_slide_in, R.anim.close_slide_out);
-    }
-
-    public abstract Class getHostActivity();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIsDestroy = false;
         setHasOptionsMenu(true);
     }
 
@@ -61,10 +52,14 @@ public abstract class BaseFragmentWrapper extends MasterFragment implements ICre
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mRootView == null) {
-            mRootView = DCWAnnotation.inject(this, inflater);
-            initData();
-            initUI();
-            initListeners();
+            Class<? extends BaseFragmentWrapper> targetClass = getClass();
+            if (targetClass.isAnnotationPresent(InjectLayout.class)) {
+                mRootView = inflater.inflate((targetClass.getAnnotation(InjectLayout.class)).value(), container, false);
+                ButterKnife.bind(this, mRootView);
+                initData();
+                initUI();
+                initListeners();
+            }
         }
         if (mRootView != null) {
             ViewGroup parent = (ViewGroup) mRootView.getParent();
@@ -77,28 +72,19 @@ public abstract class BaseFragmentWrapper extends MasterFragment implements ICre
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mIsDestroy = true;
+    public void initData() {
+
     }
 
-//    public boolean isFragmentDestroy() {
-//        return mIsDestroy;
-//    }
-//
-//    public int getFragmentType() {
-//        int fragmentType = 0;
-//        Bundle bundle = getBundleArguments();
-//        if (bundle != null) {
-//            fragmentType = bundle.getInt(BundleConstant.KEY_FRAGMENT_TYPE);
-//        }
-//        return fragmentType;
-//    }
-//
-//    @Override
-//    public void onResult(Bundle bundle) {
-//        super.onResult(bundle);
-//    }
+    @Override
+    public void initUI() {
+
+    }
+
+    @Override
+    public void initListeners() {
+
+    }
 
     protected <T> T findViewById(int id) {
         return mRootView == null ? null : (T) mRootView.findViewById(id);
@@ -176,5 +162,11 @@ public abstract class BaseFragmentWrapper extends MasterFragment implements ICre
                 mToolbarController.updateOptionMenu();
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

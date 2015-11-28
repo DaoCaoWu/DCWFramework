@@ -1,43 +1,37 @@
 package com.dcw.app.biz.account;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.dcw.app.R;
 import com.dcw.app.app.App;
-import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.di.component.DaggerUIComponent;
 import com.dcw.app.di.component.UIComponent;
 import com.dcw.app.di.module.UIModule;
 import com.dcw.framework.view.annotation.InjectLayout;
-import com.dcw.framework.view.annotation.InjectView;
 import com.umeng.login.LoginManager;
-import com.umeng.share.ShareManager;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.controller.listener.SocializeListeners;
-import com.umeng.socialize.exception.SocializeException;
-import com.umeng.socialize.sso.UMQQSsoHandler;
-import com.umeng.socialize.utils.Log;
-import com.umeng.socialize.weixin.controller.UMWXHandler;
-
-import java.util.Map;
-import java.util.Set;
 
 import javax.inject.Inject;
 
-import cn.bmob.v3.listener.SaveListener;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ninegame.framework.ToastManager;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 @InjectLayout(R.layout.fragment_login)
 public class LoginFragment extends BaseFragmentWrapper {
@@ -46,14 +40,26 @@ public class LoginFragment extends BaseFragmentWrapper {
     @Inject
     ToastManager mToastManager;
 
-    @InjectView(R.id.btn_submit)
-    Button mBtnSubmit;
-
     EventHandler mEventHandler;
+    @Bind(R.id.et_account)
+    EditText mEtAccount;
+    @Bind(R.id.et_password)
+    EditText mEtPassword;
+    @Bind(R.id.btn_submit)
+    Button mBtnSubmit;
+    @Bind(R.id.btn_wechat)
+    ImageButton mBtnWechat;
+    @Bind(R.id.btn_qq)
+    ImageButton mBtnQq;
+    @Bind(R.id.btn_sina)
+    ImageButton mBtnSina;
+    @Bind(R.id.container)
+    LinearLayout mContainer;
 
     @Override
-    public Class getHostActivity() {
-        return MainActivity.class;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ButterKnife.bind(this, super.onCreateView(inflater, container, savedInstanceState));
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -90,17 +96,18 @@ public class LoginFragment extends BaseFragmentWrapper {
 //        Toast.makeText(getFragmentComponent().fragment().getActivity(), "dkfjsdjflsjl", Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void initListeners() {
-        mBtnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                SMSSDK.getVerificationCode("86", "13570320927");
+    @OnClick(R.id.btn_submit)
+    public void previewPhotos() {
+        PhotoPickerIntent intent = new PhotoPickerIntent(getActivity());
+        intent.setPhotoCount(9);
+        intent.setShowCamera(true);
+        intent.setShowGif(true);
+        startActivityForResult(intent, Activity.RESULT_OK);
+    }
 
-//                ShareManager.getInstance().share(getActivity(), "Thanks to use Rating!", "Rating", "http://www.baidu.com", "http://img4.duitang.com/uploads/item/201503/04/20150304191759_mmEtx.jpeg");
-//                LoginManager.getInstance().login(getActivity(), SHARE_MEDIA.QQ);
-            }
-        });
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -112,4 +119,16 @@ public class LoginFragment extends BaseFragmentWrapper {
     UIComponent getUIComponent() {
         return mUIComponent;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.btn_qq)
+    public void onClick() {
+        LoginManager.getInstance().login(getActivity(), SHARE_MEDIA.QQ);
+    }
+
 }
