@@ -11,12 +11,12 @@
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center"
-        android:textColor="@color/top_bar_text_selector"
-        android:textSize="@dimen/text_content_size_14"
         android:drawableLeft="@drawable/top_bar_back_selector"
         android:gravity="center"
         android:paddingLeft="12dip"
-        android:paddingRight="12dip"/>
+        android:paddingRight="12dip"
+        android:textColor="@color/top_bar_text_selector"
+        android:textSize="@dimen/text_content_size_14"/>
 
     <TextView
         android:id="@id/tv_title"
@@ -29,7 +29,7 @@
         android:id="@id/btn_right"
         style="@style/top_bar_btn_comm_right"
         android:visibility="gone"
-        tools:visibility="visible"
-        tools:text="@string/save"/>
+        tools:text="@string/save"
+        tools:visibility="visible"/>
 
 </RelativeLayout>

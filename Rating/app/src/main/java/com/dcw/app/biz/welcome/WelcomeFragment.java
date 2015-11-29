@@ -3,7 +3,7 @@ package com.dcw.app.biz.welcome;
 import android.os.Bundle;
 
 import com.dcw.app.R;
-import com.dcw.app.biz.account.LoginFragment;
+import com.dcw.app.biz.account.fragment.LoginFragment;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.fragmentmaster.app.Request;
 

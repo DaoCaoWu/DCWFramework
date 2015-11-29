@@ -10,8 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.dcw.app.R;
-import com.dcw.app.biz.MainActivity;
-import com.dcw.app.biz.account.LoginFragment;
+import com.dcw.app.biz.account.fragment.LoginFragment;
 import com.dcw.app.biz.contact.ContactListFragment;
 import com.dcw.app.biz.search.SearchFragment;
 import com.dcw.app.biz.select.SelectFragment;

@@ -6,7 +6,10 @@
     <item type="id" name="lv_list"/>
     <item type="id" name="et_account"/>
     <item type="id" name="et_password"/>
+    <item type="id" name="et_sms_code"/>
+    <item type="id" name="et_user_name"/>
     <item type="id" name="btn_submit"/>
+    <item type="id" name="btn_next"/>
     <item type="id" name="btn_qq"/>
     <item type="id" name="btn_wechat"/>
     <item type="id" name="btn_sina"/>

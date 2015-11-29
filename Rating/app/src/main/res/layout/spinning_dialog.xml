@@ -3,33 +3,33 @@
               android:layout_width="250dip"
               android:layout_height="140dip"
               android:layout_centerInParent="true"
+              android:layout_gravity="center"
               android:background="@drawable/system_msg_box_bg"
               android:orientation="vertical"
-              android:padding="20dip"
-              android:layout_gravity="center">
+              android:padding="20dip">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dip"
-        android:layout_weight="1"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_weight="1">
 
         <com.dcw.framework.view.LoadingView
             android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/loading_48"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/loading_48"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/tvMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="12dip"
         android:gravity="center"
-        android:textSize="@dimen/text_title_size_16"
         android:textColor="@color/text_color_33"
-        android:layout_gravity="center"/>
+        android:textSize="@dimen/text_title_size_16"/>
 </LinearLayout>

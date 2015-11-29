@@ -11,9 +11,22 @@
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="account">Account</string>
+    <string name="phone">Phone</string>
+    <string name="register_by_phone">Register By Phone</string>
+    <string name="please_input_phone">Please Input Phone</string>
+    <string name="please_input_sms_code">Please Input SMS Code</string>
+    <string name="please_input_user_name">Input Nick Name, No Less Than 4 Length</string>
+    <string name="please_input_password">Input Password, No Less Than 6 Length</string>
+    <string name="caption_send_sms_code_for_input_phone">We will send sms code to your phone for security</string>
+    <string name="retry_send">Retry Send</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="has_not_receive">Has Not Receive ?</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
     <string name="avatar">Avatar</string>
     <string name="title">Title</string>
     <string name="content">Content</string>
@@ -21,6 +34,7 @@
     <string name="qq">QQ</string>
     <string name="wechat">WeChat</string>
     <string name="sina">Sina</string>
+    <string name="china_smc">+86</string>
 
     <string name="dialog_delete_items_title">Delete items</string>
     <string name="dialog_delete_items_confirm">Yes</string>

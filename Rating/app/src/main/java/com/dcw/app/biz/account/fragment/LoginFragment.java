@@ -1,18 +1,13 @@
-package com.dcw.app.biz.account;
+package com.dcw.app.biz.account.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.dcw.app.R;
 import com.dcw.app.app.App;
+import com.dcw.app.biz.account.LoginController;
+import com.dcw.app.biz.account.LoginView;
+import com.dcw.app.biz.account.UserModel;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.di.component.DaggerUIComponent;
@@ -24,7 +19,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ninegame.framework.ToastManager;
@@ -35,32 +29,10 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 @InjectLayout(R.layout.fragment_login)
 public class LoginFragment extends BaseFragmentWrapper {
-
     UIComponent mUIComponent;
+    EventHandler mEventHandler;
     @Inject
     ToastManager mToastManager;
-
-    EventHandler mEventHandler;
-    @Bind(R.id.et_account)
-    EditText mEtAccount;
-    @Bind(R.id.et_password)
-    EditText mEtPassword;
-    @Bind(R.id.btn_submit)
-    Button mBtnSubmit;
-    @Bind(R.id.btn_wechat)
-    ImageButton mBtnWechat;
-    @Bind(R.id.btn_qq)
-    ImageButton mBtnQq;
-    @Bind(R.id.btn_sina)
-    ImageButton mBtnSina;
-    @Bind(R.id.container)
-    LinearLayout mContainer;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ButterKnife.bind(this, super.onCreateView(inflater, container, savedInstanceState));
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
 
     @Override
     public void initData() {

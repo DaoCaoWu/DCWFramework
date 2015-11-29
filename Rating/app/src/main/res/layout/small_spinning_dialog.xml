@@ -3,9 +3,9 @@
               android:layout_width="180dp"
               android:layout_height="80dp"
               android:layout_centerInParent="true"
+              android:layout_gravity="center"
               android:background="@drawable/system_msg_box_bg"
               android:gravity="center"
-              android:layout_gravity="center"
               android:orientation="vertical"
               android:padding="10dip">
 
@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:textSize="@dimen/text_content_size_14"
+        android:gravity="center"
         android:textColor="@color/text_color_66"
-        android:gravity="center"/>
+        android:textSize="@dimen/text_content_size_14"/>
 
 </LinearLayout>
