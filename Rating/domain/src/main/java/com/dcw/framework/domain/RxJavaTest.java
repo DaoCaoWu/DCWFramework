@@ -1,11 +1,18 @@
 package com.dcw.framework.domain;
 
+import rx.Notification;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.subjects.AsyncSubject;
+import rx.subjects.BehaviorSubject;
+import rx.subjects.PublishSubject;
+import rx.subjects.ReplaySubject;
+import rx.subjects.Subject;
 
 /**
  * create by adao12.vip@gmail.com on 15/12/2
@@ -78,12 +85,101 @@ public class RxJavaTest {
             }
         }).subscribe(helloAction);
 
-        Observable.combineLatest(Observable.just(1, 1, 3, 999), Observable.just("aa", "bb", "cc", "dd", "ee"), new Func2<Integer, String, String>() {
+        Subscription behaviorSubject = Observable.combineLatest(Observable.just(1, 1, 3, 999), Observable.just("aa", "bb", "cc", "dd", "ee"), new Func2<Integer, String, String>() {
             @Override
             public String call(Integer integer, String s) {
                 return s + integer;
             }
         }).subscribe(helloAction);
 
+        Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("a");
+                subscriber.onNext("b");
+                subscriber.onNext("c");
+            }
+        }).subscribe(helloAction);
+
+        Subject bs = BehaviorSubject.create();
+        bs.onNext("11");
+        bs.onNext("0");
+        bs.subscribe(helloAction);
+        bs.onNext("1");
+        bs.onNext("2");
+        bs.onNext("3");
+
+        bs = PublishSubject.create();
+        bs.onNext("11");
+        bs.onNext("0");
+        bs.subscribe(helloAction);
+        bs.onNext("1");
+        bs.onNext("2");
+        bs.onNext("3");
+        bs.onNext("4");
+
+        bs = AsyncSubject.<String>create();
+        bs.onNext("11");
+        bs.onNext("0");
+        bs.subscribe(helloAction);
+        bs.onNext("1");
+        bs.onNext("2");
+        bs.onNext("3");
+        bs.onNext("4");
+        bs.onNext("5!!");
+        bs.onCompleted();
+
+        final ReplaySubject<String> rs = ReplaySubject.create();
+        rs.onNext("11");
+        rs.onNext("0");
+        rs.subscribe(helloAction);
+        rs.onNext("1");
+        rs.onNext("2");
+        rs.onNext("3");
+        rs.onNext("4");
+        rs.onNext("5");
+        rs.onNext("6");
+
+        Observable.combineLatest(Observable.just(1, 1, 3, 999), Observable.just("aa", "bb", "cc", "dd", "ee"), new Func2<Integer, String, String>() {
+            @Override
+            public String call(Integer integer, String s) {
+                return s + integer;
+            }
+        }).materialize().take(1).switchMap(new Func1<Notification<String>, Observable<Notification<String>>>() {
+            @Override
+            public Observable<Notification<String>> call(Notification<String> stringNotification) {
+                return rs.map(new Func1<String, Notification<String>>() {
+                    @Override
+                    public Notification<String> call(String s) {
+                        return Notification.createOnNext(s + s);
+                    }
+                });
+            }
+        }).filter(new Func1<Notification<String>, Boolean>() {
+            @Override
+            public Boolean call(Notification<String> stringNotification) {
+                return true;
+            }
+        }).doOnNext(new Action1<Notification<String>>() {
+            @Override
+            public void call(Notification<String> stringNotification) {
+                System.out.println(stringNotification.getKind() + " || " + stringNotification.getValue());
+            }
+        }).doOnCompleted(new Action0() {
+            @Override
+            public void call() {
+                System.out.println("doOnCompleted");
+            }
+        }).doOnUnsubscribe(new Action0() {
+            @Override
+            public void call() {
+                System.out.println("doOnUnsubscribe");
+            }
+        }).subscribe(new Action1<Notification<String>>() {
+            @Override
+            public void call(Notification<String> stringNotification) {
+                System.out.println(stringNotification.getKind() + " ||| " + stringNotification.getValue());
+            }
+        });
     }
 }

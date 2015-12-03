@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.dcw.app.mvp.factory.PresenterFactory;
-import com.dcw.app.mvp.factory.PresenterRepositoryImp;
+import com.dcw.app.mvp.factory.PresenterRepository;
 import com.dcw.app.mvp.presenter.Presenter;
 
 /**
@@ -68,12 +68,12 @@ public class PresenterLifeCycleDelegate {
     private void restorePresenter() {
         if (mFactory != null) {
             if (mPresenter == null && mPresenterState != null) {
-                mPresenter = PresenterRepositoryImp.getInstance().get(mPresenterState.getString(PRESENTER_ID));
+                mPresenter = PresenterRepository.getInstance().get(mPresenterState.getString(PRESENTER_ID));
             }
             if (mPresenter == null) {
                 mPresenter = mFactory.getPresenter();
-                PresenterRepositoryImp.getInstance().add(mPresenter);
                 if (mPresenter != null) {
+                    PresenterRepository.getInstance().add(mPresenter);
                     mPresenter.create(mPresenterState == null ? null : mPresenterState.getBundle(PRESENTER));
                 }
             }

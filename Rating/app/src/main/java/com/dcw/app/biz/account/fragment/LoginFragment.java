@@ -86,6 +86,7 @@ public class LoginFragment extends BaseFragmentWrapper {
     public void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterEventHandler(mEventHandler);
+
     }
 
     UIComponent getUIComponent() {

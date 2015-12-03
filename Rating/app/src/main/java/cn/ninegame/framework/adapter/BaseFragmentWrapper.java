@@ -17,6 +17,7 @@ import com.dcw.app.di.component.DaggerFragmentComponent;
 import com.dcw.app.di.component.FragmentComponent;
 import com.dcw.app.di.module.FragmentModule;
 import com.dcw.app.mvp.view.PresenterFragment;
+import com.dcw.app.mvp.view.RxFragment;
 import com.dcw.app.util.Util;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.fragmentmaster.app.MasterFragment;

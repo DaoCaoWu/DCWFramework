@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,12 +15,13 @@
 package com.dcw.app.mvp.rxlifecycle;
 
 import android.view.View;
-import com.jakewharton.rxbinding.view.RxView;
-import com.jakewharton.rxbinding.view.ViewAttachEvent;
+
 import rx.Observable;
 import rx.exceptions.Exceptions;
 import rx.functions.Func1;
 import rx.functions.Func2;
+
+import static com.facebook.common.internal.Preconditions.checkNotNull;
 
 public class RxLifecycle {
 
@@ -41,7 +42,7 @@ public class RxLifecycle {
      * @return a reusable {@link Observable.Transformer} that unsubscribes the source at the specified event
      */
     public static <T> Observable.Transformer<? super T, ? extends T> bindUntilFragmentEvent(
-        final Observable<FragmentEvent> lifecycle, final FragmentEvent event) {
+            final Observable<FragmentEvent> lifecycle, final FragmentEvent event) {
         return bindUntilEvent(lifecycle, event);
     }
 
@@ -58,16 +59,15 @@ public class RxLifecycle {
      * @return a reusable {@link Observable.Transformer} that unsubscribes the source at the specified event
      */
     public static <T> Observable.Transformer<? super T, ? extends T> bindUntilActivityEvent(
-        final Observable<ActivityEvent> lifecycle, final ActivityEvent event) {
+            final Observable<ActivityEvent> lifecycle, final ActivityEvent event) {
         return bindUntilEvent(lifecycle, event);
     }
 
     private static <T, R> Observable.Transformer<? super T, ? extends T> bindUntilEvent(final Observable<R> lifecycle,
-                                                                      final R event) {
+                                                                                        final R event) {
         if (lifecycle == null) {
             throw new IllegalArgumentException("Lifecycle must be given");
-        }
-        else if (event == null) {
+        } else if (event == null) {
             throw new IllegalArgumentException("Event must be given");
         }
 
@@ -75,12 +75,12 @@ public class RxLifecycle {
             @Override
             public Observable<T> call(Observable<T> source) {
                 return source.takeUntil(
-                    lifecycle.takeFirst(new Func1<R, Boolean>() {
-                        @Override
-                        public Boolean call(R lifecycleEvent) {
-                            return lifecycleEvent == event;
-                        }
-                    })
+                        lifecycle.takeFirst(new Func1<R, Boolean>() {
+                            @Override
+                            public Boolean call(R lifecycleEvent) {
+                                return lifecycleEvent == event;
+                            }
+                        })
                 );
             }
         };
@@ -150,8 +150,8 @@ public class RxLifecycle {
         if (view == null) {
             throw new IllegalArgumentException("View must be given");
         }
-
-        return bindView(RxView.detaches(view));
+        checkNotNull(view, "view == null");
+        return bindView(Observable.create(null));
     }
 
     /**
@@ -182,7 +182,7 @@ public class RxLifecycle {
     }
 
     private static <T, R> Observable.Transformer<? super T, ? extends T> bind(Observable<R> lifecycle,
-                                                            final Func1<R, R> correspondingEvents) {
+                                                                              final Func1<R, R> correspondingEvents) {
         if (lifecycle == null) {
             throw new IllegalArgumentException("Lifecycle must be given");
         }
@@ -195,17 +195,17 @@ public class RxLifecycle {
             @Override
             public Observable<T> call(Observable<T> source) {
                 return source.takeUntil(
-                    Observable.combineLatest(
-                        sharedLifecycle.take(1).map(correspondingEvents),
-                        sharedLifecycle.skip(1),
-                        new Func2<R, R, Boolean>() {
-                            @Override
-                            public Boolean call(R bindUntilEvent, R lifecycleEvent) {
-                                return lifecycleEvent == bindUntilEvent;
-                            }
-                        })
-                        .onErrorReturn(RESUME_FUNCTION)
-                        .takeFirst(SHOULD_COMPLETE)
+                        Observable.combineLatest(
+                                sharedLifecycle.take(1).map(correspondingEvents),
+                                sharedLifecycle.skip(1),
+                                new Func2<R, R, Boolean>() {
+                                    @Override
+                                    public Boolean call(R bindUntilEvent, R lifecycleEvent) {
+                                        return lifecycleEvent == bindUntilEvent;
+                                    }
+                                })
+                                .onErrorReturn(RESUME_FUNCTION)
+                                .takeFirst(SHOULD_COMPLETE)
                 );
             }
         };
@@ -232,59 +232,59 @@ public class RxLifecycle {
 
     // Figures out which corresponding next lifecycle event in which to unsubscribe, for Activities
     private static final Func1<ActivityEvent, ActivityEvent> ACTIVITY_LIFECYCLE =
-        new Func1<ActivityEvent, ActivityEvent>() {
-            @Override
-            public ActivityEvent call(ActivityEvent lastEvent) {
-                switch (lastEvent) {
-                    case CREATE:
-                        return ActivityEvent.DESTROY;
-                    case START:
-                        return ActivityEvent.STOP;
-                    case RESUME:
-                        return ActivityEvent.PAUSE;
-                    case PAUSE:
-                        return ActivityEvent.STOP;
-                    case STOP:
-                        return ActivityEvent.DESTROY;
-                    case DESTROY:
-                        throw new OutsideLifecycleException("Cannot bind to Activity lifecycle when outside of it.");
-                    default:
-                        throw new UnsupportedOperationException("Binding to " + lastEvent + " not yet implemented");
+            new Func1<ActivityEvent, ActivityEvent>() {
+                @Override
+                public ActivityEvent call(ActivityEvent lastEvent) {
+                    switch (lastEvent) {
+                        case CREATE:
+                            return ActivityEvent.DESTROY;
+                        case START:
+                            return ActivityEvent.STOP;
+                        case RESUME:
+                            return ActivityEvent.PAUSE;
+                        case PAUSE:
+                            return ActivityEvent.STOP;
+                        case STOP:
+                            return ActivityEvent.DESTROY;
+                        case DESTROY:
+                            throw new OutsideLifecycleException("Cannot bind to Activity lifecycle when outside of it.");
+                        default:
+                            throw new UnsupportedOperationException("Binding to " + lastEvent + " not yet implemented");
+                    }
                 }
-            }
-        };
+            };
 
     // Figures out which corresponding next lifecycle event in which to unsubscribe, for Fragments
     private static final Func1<FragmentEvent, FragmentEvent> FRAGMENT_LIFECYCLE =
-        new Func1<FragmentEvent, FragmentEvent>() {
-            @Override
-            public FragmentEvent call(FragmentEvent lastEvent) {
-                switch (lastEvent) {
-                    case ATTACH:
-                        return FragmentEvent.DETACH;
-                    case CREATE:
-                        return FragmentEvent.DESTROY;
-                    case CREATE_VIEW:
-                        return FragmentEvent.DESTROY_VIEW;
-                    case START:
-                        return FragmentEvent.STOP;
-                    case RESUME:
-                        return FragmentEvent.PAUSE;
-                    case PAUSE:
-                        return FragmentEvent.STOP;
-                    case STOP:
-                        return FragmentEvent.DESTROY_VIEW;
-                    case DESTROY_VIEW:
-                        return FragmentEvent.DESTROY;
-                    case DESTROY:
-                        return FragmentEvent.DETACH;
-                    case DETACH:
-                        throw new OutsideLifecycleException("Cannot bind to Fragment lifecycle when outside of it.");
-                    default:
-                        throw new UnsupportedOperationException("Binding to " + lastEvent + " not yet implemented");
+            new Func1<FragmentEvent, FragmentEvent>() {
+                @Override
+                public FragmentEvent call(FragmentEvent lastEvent) {
+                    switch (lastEvent) {
+                        case ATTACH:
+                            return FragmentEvent.DETACH;
+                        case CREATE:
+                            return FragmentEvent.DESTROY;
+                        case CREATE_VIEW:
+                            return FragmentEvent.DESTROY_VIEW;
+                        case START:
+                            return FragmentEvent.STOP;
+                        case RESUME:
+                            return FragmentEvent.PAUSE;
+                        case PAUSE:
+                            return FragmentEvent.STOP;
+                        case STOP:
+                            return FragmentEvent.DESTROY_VIEW;
+                        case DESTROY_VIEW:
+                            return FragmentEvent.DESTROY;
+                        case DESTROY:
+                            return FragmentEvent.DETACH;
+                        case DETACH:
+                            throw new OutsideLifecycleException("Cannot bind to Fragment lifecycle when outside of it.");
+                        default:
+                            throw new UnsupportedOperationException("Binding to " + lastEvent + " not yet implemented");
+                    }
                 }
-            }
-        };
+            };
 
     private static class OutsideLifecycleException extends IllegalStateException {
         public OutsideLifecycleException(String detailMessage) {
