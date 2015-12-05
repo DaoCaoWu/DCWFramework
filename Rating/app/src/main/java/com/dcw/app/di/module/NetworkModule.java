@@ -5,7 +5,6 @@ import android.preference.PreferenceManager;
 
 import com.dcw.app.app.App;
 import com.dcw.app.network.GsonConverterFactory;
-import com.dcw.app.network.RatingInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -70,9 +69,10 @@ public class NetworkModule {
                 .baseUrl("http://sns.mock.uctest.local:8024")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+//                .addConverterFactory(SecurityConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        retrofit.client().interceptors().add(new RatingInterceptor());
+//        retrofit.client().interceptors().add(new RatingInterceptor());
         return retrofit;
     }
 }

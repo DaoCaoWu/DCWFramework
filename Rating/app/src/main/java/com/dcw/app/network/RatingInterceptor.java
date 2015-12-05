@@ -7,6 +7,9 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 
+import org.apache.http.HttpStatus;
+import org.apache.http.protocol.HTTP;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -53,6 +56,8 @@ public class RatingInterceptor implements Interceptor {
         GZIPInputStream in = new GZIPInputStream(is);
         BufferedSource source = Okio.buffer(Okio.source(in));
         responseBody = ResponseBody.create(responseBody.contentType(), responseBody.contentLength(), source);
+        if (response.code() == HttpStatus.SC_OK) {
+        }
         return response.newBuilder().body(responseBody).build();
     }
 }

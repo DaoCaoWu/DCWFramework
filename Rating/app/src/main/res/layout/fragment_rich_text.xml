@@ -26,4 +26,12 @@
         android:textSize="24dp"
         tools:text="结果"/>
 
+
+    <ImageView
+        android:id="@id/iv_icon"
+        android:layout_width="@dimen/icon"
+        android:layout_height="@dimen/icon"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher"/>
+
 </LinearLayout>

@@ -1,15 +1,14 @@
 package com.dcw.app.network;
 
-import com.dcw.app.biz.test.model.ResultData;
+import com.dcw.app.biz.test.model.I;
+import com.dcw.app.biz.test.model.State;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.List;
+import java.net.UnknownServiceException;
 
 import retrofit.Converter;
 
@@ -29,10 +28,19 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     }
 
     @Override
-    public T convert(ResponseBody value) throws IOException {
+    public T convert(ResponseBody originValue) throws IOException {
+        ResponseBody value = new SecurityResponseBodyConverter().convert(originValue);
         Reader reader = value.charStream();
         try {
-            return gson.fromJson(reader, type);
+            I in = gson.fromJson(reader, I.class);
+            State state = in.getState();
+            if (state != null && state.getCode() == 2000000) {
+                return gson.fromJson(gson.toJson(in.getData()), type);
+            } else if (state != null) {
+                throw new UnknownServiceException(state.getMsg());
+            }
+        } catch (Exception e) {
+            throw new UnknownServiceException(e.getMessage());
         } finally {
             try {
                 if (reader != null) {
@@ -41,5 +49,6 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
             } catch (IOException ignored) {
             }
         }
+        return null;
     }
 }

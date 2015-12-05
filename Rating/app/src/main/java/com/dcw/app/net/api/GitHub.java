@@ -1,9 +1,10 @@
 package com.dcw.app.net.api;
 
 
-import com.dcw.app.biz.test.RichTextFragment;
+import com.dcw.app.biz.test.model.O;
 import com.dcw.app.biz.test.model.Comment;
-import com.dcw.app.biz.test.model.ListData;
+import com.dcw.app.biz.test.model.I;
+import com.dcw.app.biz.test.model.IL;
 
 import retrofit.Call;
 import retrofit.http.Body;
@@ -13,8 +14,8 @@ import rx.Observable;
 public interface GitHub {
 
     @POST("/api/topic.comment.getList")
-    Call<ListData<Comment>> getComments(@Body RichTextFragment.RequestData topicId);
+    Call<IL<Comment>> getComments(@Body O<String> topicId);
 
     @POST("/api/topic.comment.getList")
-    Observable<ListData<Comment>> getComments();
+    Observable<IL<Comment>> getComments();
 }

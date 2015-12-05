@@ -6,12 +6,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dcw.app.R;
 import com.dcw.app.app.App;
+import com.dcw.app.biz.test.model.O;
 import com.dcw.app.biz.test.model.Comment;
-import com.dcw.app.biz.test.model.ListData;
+import com.dcw.app.biz.test.model.I;
+import com.dcw.app.biz.test.model.IL;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.net.api.GitHub;
@@ -20,6 +22,10 @@ import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.devspark.appmsg.AppMsg;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,13 +38,16 @@ import retrofit.Retrofit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
-@InjectLayout(R.layout.fragment_rich_text)
+@InjectLayout(com.dcw.app.R.layout.fragment_rich_text)
 public class RichTextFragment extends BaseFragmentWrapper {
     private static final String TAG = "RichTextFragment";
     GitHub mGitHubService;
-    @Bind(R.id.tv_content)
+    @Bind(com.dcw.app.R.id.tv_content)
     TextView mTvContent;
+    @Bind(com.dcw.app.R.id.iv_icon)
+    ImageView mIvIcon;
     //    @InjectView(value = R.id.tv_content, listeners = View.OnClickListener.class)
 
     //    @InjectView(R.id.toolbar)
@@ -54,7 +63,7 @@ public class RichTextFragment extends BaseFragmentWrapper {
 
     @Override
     public void initUI() {
-        mToolbarController = new ToolbarController(findViewById(R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName()));
+        mToolbarController = new ToolbarController(findViewById(com.dcw.app.R.id.toolbar), new ToolbarModel(this.getClass().getSimpleName()));
         final String text = "文本点击事件测试:\n1.给新文本添加部分点击\n谷歌\n2.给整个新文本添加点击\n百度网址\n";
         int start = text.length() + 3;
         int end = start + 5;
@@ -73,33 +82,36 @@ public class RichTextFragment extends BaseFragmentWrapper {
         }, "www.baidu.com").append("\n3.给已存在文本添加点击\n").appendTouchableEdge(start, end, new TouchableSpan.OnClickListener() {
             @Override
             public void onClick(String content) {
-                Call<ListData<Comment>> call = mGitHubService.getComments(new RequestData("aaaaaa"));
-                call.enqueue(new Callback<ListData<Comment>>() {
+                Call<IL<Comment>> call = mGitHubService.getComments(new O<String>("aaaaaa"));
+                call.enqueue(new Callback<IL<Comment>>() {
                     @Override
-                    public void onResponse(Response<ListData<Comment>> response, Retrofit retrofit) {
-                        AppMsg appMsg = AppMsg.makeText(getActivity(), "成功aaa" + response.body().getList().size(), AppMsg.STYLE_INFO);
-                        appMsg.setLayoutGravity(Gravity.BOTTOM);
-                        appMsg.show();
-                        Observable<ListData<Comment>> observable = mGitHubService.getComments();
-                        observable.observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Subscriber<ListData<Comment>>() {
-                                    @Override
-                                    public void onCompleted() {
+                    public void onResponse(Response<IL<Comment>> response, Retrofit retrofit) {
+                        if (response.body() != null && response.body().getList() != null) {
+                            AppMsg appMsg = AppMsg.makeText(getActivity(), "成功aaa" + response.body().getList().size(), AppMsg.STYLE_INFO);
+                            appMsg.setLayoutGravity(Gravity.BOTTOM);
+                            appMsg.show();
+                            Observable<IL<Comment>> observable = mGitHubService.getComments();
+                            observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Subscriber<IL<Comment>>() {
+                                        @Override
+                                        public void onCompleted() {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        ToastManager.getInstance().showToast(e.getMessage());
-                                    }
+                                        @Override
+                                        public void onError(Throwable e) {
+                                            e.printStackTrace();
+                                            ToastManager.getInstance().showToast(e.getMessage());
+                                        }
 
-                                    @Override
-                                    public void onNext(ListData<Comment> listDataResultData) {
-                                        AppMsg appMsg = AppMsg.makeText(getActivity(), "Observable成功" + listDataResultData.getList().size(), AppMsg.STYLE_INFO);
-                                        appMsg.setLayoutGravity(Gravity.BOTTOM);
-                                        appMsg.show();
-                                    }
-                                });
+                                        @Override
+                                        public void onNext(IL<Comment> listDataResultData) {
+                                            AppMsg appMsg = AppMsg.makeText(getActivity(), "Observable成功" + listDataResultData.getList().size(), AppMsg.STYLE_INFO);
+                                            appMsg.setLayoutGravity(Gravity.BOTTOM);
+                                            appMsg.show();
+                                        }
+                                    });
+                        }
                     }
 
                     @Override
@@ -111,6 +123,12 @@ public class RichTextFragment extends BaseFragmentWrapper {
         }, "已存在文本").build();
         mTvContent.setText(sp);
         mTvContent.setMovementMethod(LinkTouchMovementMethod.getInstance());
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity())
+                .defaultDisplayImageOptions(new DisplayImageOptions.Builder().displayer(new RoundedBitmapDisplayer(10)).build())
+                .build();
+        ImageLoader.getInstance().init(config);
+        ImageLoader.getInstance().displayImage("http://img.tupianzj.com/uploads/allimg/140430/4-140430094939.jpg", mIvIcon);
     }
 
     @Override
@@ -130,14 +148,5 @@ public class RichTextFragment extends BaseFragmentWrapper {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-    }
-
-    public class RequestData {
-
-        public RequestData(String data) {
-            this.data = data;
-        }
-
-        String data;
     }
 }
