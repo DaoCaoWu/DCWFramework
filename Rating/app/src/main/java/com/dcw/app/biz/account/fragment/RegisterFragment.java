@@ -44,7 +44,7 @@ public class RegisterFragment extends BaseFragmentWrapper {
 
     @OnClick(R.id.btn_next)
     public void onSignUp() {
-        startFragment(LoginFragment.class);
+        finish();
     }
 
     @OnTextChanged(value = {R.id.et_user_name, R.id.et_password},

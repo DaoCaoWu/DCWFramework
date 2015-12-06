@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.dcw.app.R;
+import com.dcw.app.biz.toolbar.NavigationBar;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.framework.view.annotation.InjectLayout;
@@ -27,10 +28,12 @@ public class SmsCodeFragment extends BaseFragmentWrapper {
     TextInputLayout mTilAccount;
     @Bind(R.id.et_sms_code)
     EditText mEtSmsCode;
+    @Bind(R.id.toolbar)
+    NavigationBar mToolbar;
 
     @Override
     public void initUI() {
-        mToolbarController = new ToolbarController(findViewById(R.id.toolbar)
+        mToolbarController = new ToolbarController(mToolbar
                 , new ToolbarModel(this.getClass().getSimpleName(), true));
         mEtSmsCode.requestFocus();
     }
@@ -39,17 +42,31 @@ public class SmsCodeFragment extends BaseFragmentWrapper {
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void afterSmsTextChanged() {
         if (TextUtils.isEmpty(mTilAccount.getEditText().getText().toString())
-                || LoginFragment.isPhoneNumber(mTilAccount.getEditText().getText().toString().trim())) {
+                || isFormat(mTilAccount.getEditText().getText().toString().trim())) {
             mTilAccount.setHint(getString(R.string.please_input_phone));
         } else {
             mTilAccount.setHint(getString(R.string.please_input_the_right_phone_number));
         }
-        mBtnNext.setEnabled(LoginFragment.isPhoneNumber(mTilAccount.getEditText().getText().toString().trim()));
+        mBtnNext.setEnabled(isFormat(mTilAccount.getEditText().getText().toString().trim()));
+    }
+
+    /**
+     * 是否是合法的手机号
+     */
+    public static boolean isFormat(CharSequence str) {
+        if (TextUtils.isEmpty(str) || str.length() < 6) {
+            return false;
+        }
+        return true;
     }
 
     @OnClick(R.id.btn_next)
     public void onBtnNextClicked() {
-
+        finish();
+        if ("reset".equals(getRequest().getStringExtra("for"))) {
+            startFragment(ResetPasswordFragment.class);
+        } else {
+            startFragment(RegisterFragment.class);
+        }
     }
-
 }

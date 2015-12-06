@@ -8,18 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dcw.app.R;
 import com.dcw.app.app.App;
 import com.dcw.app.biz.account.LoginController;
 import com.dcw.app.biz.account.LoginView;
 import com.dcw.app.biz.account.UserModel;
+import com.dcw.app.biz.toolbar.NavigationBar;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.app.di.component.DaggerUIComponent;
 import com.dcw.app.di.component.UIComponent;
 import com.dcw.app.di.module.UIModule;
 import com.dcw.framework.view.annotation.InjectLayout;
+import com.fragmentmaster.app.Request;
 import com.umeng.login.LoginManager;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
@@ -59,6 +62,10 @@ public class LoginFragment extends BaseFragmentWrapper {
     TextInputLayout mTilAccount;
     @Bind(R.id.til_password)
     TextInputLayout mTilPassword;
+    @Bind(R.id.toolbar)
+    NavigationBar mToolbar;
+    @Bind(R.id.tv_reset)
+    TextView mTvReset;
 
     @Override
     public void initData() {
@@ -92,7 +99,7 @@ public class LoginFragment extends BaseFragmentWrapper {
     @Override
     public void initUI() {
         new LoginController((LoginView) findViewById(R.id.root_view), new UserModel());
-        mToolbarController = new ToolbarController(findViewById(R.id.toolbar)
+        mToolbarController = new ToolbarController(mToolbar
                 , new ToolbarModel(this.getClass().getSimpleName(), false));
     }
 
@@ -171,6 +178,13 @@ public class LoginFragment extends BaseFragmentWrapper {
     @OnClick(R.id.btn_qq)
     public void onClick() {
         LoginManager.getInstance().login(getActivity(), SHARE_MEDIA.QQ);
+    }
+
+    @OnClick(R.id.tv_reset)
+    public void onTvResetClicked() {
+        Request request = new Request(PhoneFragment.class);
+        request.putExtra("for", "reset");
+        startFragment(request);
     }
 
     @OnClick({R.id.et_account, R.id.et_password, R.id.btn_submit, R.id.btn_wechat, R.id.btn_qq, R.id.btn_sina, R.id.btn_next})
