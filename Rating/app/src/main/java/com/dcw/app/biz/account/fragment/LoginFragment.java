@@ -1,9 +1,11 @@
 package com.dcw.app.biz.account.fragment;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -179,7 +181,13 @@ public class LoginFragment extends BaseFragmentWrapper {
 
     @OnClick(R.id.btn_qq)
     public void onClick() {
-        LoginManager.getInstance().login(getActivity(), SHARE_MEDIA.QQ);
+        new AlertDialog.Builder(getActivity()).setMessage("hehe").setNegativeButton("cancel", null).setPositiveButton("ok", null).setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Snackbar.make(mRootView, "haha", Snackbar.LENGTH_SHORT).show();
+            }
+        }).show();
+//        LoginManager.getInstance().login(getActivity(), SHARE_MEDIA.QQ);
     }
 
     @OnClick(R.id.tv_reset)
