@@ -32,7 +32,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
         mRootView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getActivity().getSupportFragmentManager().beginTransaction().remove(WelcomeFragment.this).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().hide(WelcomeFragment.this).commit();
                 getFragmentMaster().install(android.R.id.content, new Request(LoginFragment.class), true);
             }
         }, 1500);
