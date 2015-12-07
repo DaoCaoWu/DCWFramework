@@ -20,6 +20,7 @@
     <item type="id" name="tv_subtitle"/>
     <item type="id" name="tv_content"/>
     <item type="id" name="tv_reset"/>
+    <item type="id" name="btn_retry"/>
     <item type="id" name="tv_float"/>
     <item type="id" name="sidebar"/>
     <item type="id" name="catalog_bar"/>

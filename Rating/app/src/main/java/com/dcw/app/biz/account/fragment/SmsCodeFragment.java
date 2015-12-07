@@ -1,9 +1,14 @@
 package com.dcw.app.biz.account.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dcw.app.R;
 import com.dcw.app.biz.toolbar.NavigationBar;
@@ -12,6 +17,7 @@ import com.dcw.app.biz.toolbar.ToolbarModel;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
@@ -30,6 +36,8 @@ public class SmsCodeFragment extends BaseFragmentWrapper {
     EditText mEtSmsCode;
     @Bind(R.id.toolbar)
     NavigationBar mToolbar;
+    @Bind(R.id.btn_retry)
+    TextView mBtnRetry;
 
     @Override
     public void initUI() {
@@ -68,5 +76,10 @@ public class SmsCodeFragment extends BaseFragmentWrapper {
         } else {
             startFragment(RegisterFragment.class);
         }
+    }
+
+    @OnClick(R.id.btn_retry)
+    public void onBtnRetryClicked() {
+
     }
 }

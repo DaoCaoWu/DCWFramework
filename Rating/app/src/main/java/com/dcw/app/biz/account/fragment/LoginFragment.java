@@ -2,6 +2,7 @@ package com.dcw.app.biz.account.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
@@ -104,12 +105,13 @@ public class LoginFragment extends BaseFragmentWrapper {
     }
 
     @OnClick(R.id.btn_submit)
-    public void onSignIn() {
-        PhotoPickerIntent intent = new PhotoPickerIntent(getActivity());
-        intent.setPhotoCount(9);
-        intent.setShowCamera(true);
-        intent.setShowGif(true);
-        startActivityForResult(intent, Activity.RESULT_OK);
+    public void onSignIn(View view) {
+        Snackbar.make(view, "hehe", Snackbar.LENGTH_SHORT).show();
+//        PhotoPickerIntent intent = new PhotoPickerIntent(getActivity());
+//        intent.setPhotoCount(9);
+//        intent.setShowCamera(true);
+//        intent.setShowGif(true);
+//        startActivityForResult(intent, Activity.RESULT_OK);
     }
 
     @OnClick(R.id.btn_next)
