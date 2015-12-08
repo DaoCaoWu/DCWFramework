@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
+import cn.ninegame.library.component.adapter.viewholder.HeaderViewWrapper;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import cn.ninegame.library.component.adapter.viewholder.RecyclerViewHolder;
@@ -26,6 +27,7 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
     private Context mContext;
     private M mModel;
     private LayoutInflater mInflater;
+    private HeaderViewWrapper mHeaderViewWrapper;
 
     /**
      * @param context the context to get LayoutInflater @see android.view.LayoutInflater

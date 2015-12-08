@@ -18,12 +18,14 @@ public class ListDataModel<D> extends Model {
      */
     private List<D> mDataList = null;
 
-    private SparseArray<ItemViewHolderBean> mHolderBeans;
+    private NormalViewModel<ItemViewHolderBean> mViewModel;
 
     public ListDataModel() {
+        mViewModel = new NormalViewModel<ItemViewHolderBean>();
     }
 
     public ListDataModel(List<D> dataList) {
+        this();
         setDataList(dataList);
     }
 
@@ -54,18 +56,15 @@ public class ListDataModel<D> extends Model {
     }
 
     public void addItemViewHolderBean(int viewType, ItemViewHolderBean bean) {
-        if (mHolderBeans == null) {
-            mHolderBeans = new SparseArray<ItemViewHolderBean>();
-        }
-        mHolderBeans.append(viewType, bean);
+        mViewModel.add(viewType, bean);
     }
 
     public ItemViewHolderBean getItemViewHolderBean(int viewType) {
-        return mHolderBeans.get(viewType);
+        return mViewModel.get(viewType);
     }
 
     public SparseArray<ItemViewHolderBean> getHolderBeans() {
-        return mHolderBeans;
+        return mViewModel.getViewInfos();
     }
 
     /**
@@ -139,11 +138,11 @@ public class ListDataModel<D> extends Model {
     }
 
     public int getViewTypeCount() {
-        return mHolderBeans == null ? 0 : mHolderBeans.size();
+        return mViewModel.getViewTypeCount();
     }
 
     public int getItemViewType(int position) {
-        return 0;
+        return mViewModel.getViewTypeCount();
     }
 
     /**

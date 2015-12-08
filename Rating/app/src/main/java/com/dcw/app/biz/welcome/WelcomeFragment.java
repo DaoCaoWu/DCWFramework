@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import com.dcw.app.R;
 import com.dcw.app.biz.account.fragment.LoginFragment;
+import com.dcw.app.biz.contact.ContactListFragment;
+import com.dcw.app.biz.contact.SearchContactFragment;
+import com.dcw.app.biz.select.SelectFragment;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.fragmentmaster.app.Request;
 
@@ -38,7 +41,7 @@ public class WelcomeFragment extends BaseFragmentWrapper {
             @Override
             public void call(Long aLong) {
                 getActivity().getSupportFragmentManager().beginTransaction().hide(WelcomeFragment.this).remove(WelcomeFragment.this).commit();
-                getFragmentMaster().install(android.R.id.content, new Request(LoginFragment.class), true);
+                getFragmentMaster().install(android.R.id.content, new Request(SelectFragment.class), true);
             }
         });
     }

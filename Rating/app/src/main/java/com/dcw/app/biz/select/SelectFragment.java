@@ -8,11 +8,15 @@ import com.dcw.app.R;
 import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.contact.SearchContactFragment;
 import com.dcw.app.biz.contact.model.ContactModel;
+import com.dcw.app.biz.contact.model.bean.Contact;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 
+import com.dcw.app.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
+
+import java.util.List;
 
 @InjectLayout(R.layout.fragment_contact_recycler_view)
 public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMenuItemClickListener {
@@ -27,12 +31,12 @@ public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMe
         ToolbarModel model = new ToolbarModel(this.getClass().getSimpleName(), R.menu.menu_home, true);
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
         final SelectContactController scc = new SelectContactController((ContactRecyclerView) findViewById(R.id.root_view), new ContactModel());
-//        scc.getModel().loadContactListAsyn(getActivity(), new TaskExecutor.RunnableCallback<List<Contact>>() {
-//            @Override
-//            public void onRun(List<Contact> data) {
-//                scc.getModel().setMaxSelectNum(scc.getModel().getCount());
-//            }
-//        });
+        scc.getModel().loadContactListAsyn(getActivity(), new TaskExecutor.RunnableCallback<List<Contact>>() {
+            @Override
+            public void onRun(List<Contact> data) {
+                scc.getModel().setMaxSelectNum(scc.getModel().getCount());
+            }
+        });
     }
 
     @Override
