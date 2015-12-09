@@ -26,7 +26,7 @@ public class ItemViewHolderBean {
 
     /**
      * @param itemViewHolderLayoutId the view's layoutId that would be used to inflating item view
-     * @param itemViewHolderClazz the class of the {@link ItemViewHolder}'s implement
+     * @param itemViewHolderClazz    the class of the {@link ItemViewHolder}'s implement
      */
     public ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz) {
         this(itemViewHolderLayoutId, itemViewHolderClazz, null);
@@ -34,9 +34,9 @@ public class ItemViewHolderBean {
 
     /**
      * @param itemViewHolderLayoutId the view's layoutId that would be used to inflating item view
-     * @param itemViewHolderClazz the class of the {@link ItemViewHolder}'s implement
-     * @param listener the listener of events that views included in {@link ItemViewHolder} dispatched
-     * @param <L> the class type of the class implement listener
+     * @param itemViewHolderClazz    the class of the {@link ItemViewHolder}'s implement
+     * @param listener               the listener of events that views included in {@link ItemViewHolder} dispatched
+     * @param <L>                    the class type of the class implement listener
      */
     public <L> ItemViewHolderBean(@LayoutRes int itemViewHolderLayoutId, Class<? extends ItemViewHolder> itemViewHolderClazz, L listener) {
         mItemViewHolderLayoutId = itemViewHolderLayoutId;
@@ -52,7 +52,7 @@ public class ItemViewHolderBean {
      */
     @SuppressWarnings("unchecked")
     public <L> L getViewHolderListener() throws ClassCastException {
-        return (L)mViewHolderListener;
+        return (L) mViewHolderListener;
     }
 
     public

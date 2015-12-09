@@ -33,6 +33,7 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
 
     /**
      * Returns the {@link ViewHolderHelper}
+     *
      * @return The holder's ViewHolderHelper
      */
     public ViewHolderHelper getHelper() {
@@ -51,7 +52,7 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
     }
 
     public <D> D getData() {
-        return (D)mData;
+        return (D) mData;
     }
 
     public void setData(Object data) {

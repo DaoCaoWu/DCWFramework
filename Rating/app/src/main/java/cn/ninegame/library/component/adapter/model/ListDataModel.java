@@ -2,11 +2,11 @@ package cn.ninegame.library.component.adapter.model;
 
 import android.util.SparseArray;
 
-import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
-import cn.ninegame.library.component.mvc.Model;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
+import cn.ninegame.library.component.mvc.Model;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/21.
@@ -105,6 +105,26 @@ public class ListDataModel<D> extends Model {
         notifyObservers();
     }
 
+    public void insertItem(int index, D item) {
+        if (item == null) return;
+
+        if (mDataList == null) {
+            mDataList = new ArrayList<D>();
+        }
+
+        this.mDataList.add(index, item);
+        notifyObservers();
+    }
+
+    public void setItem(int index, D item) {
+        if (mDataList == null) {
+            mDataList = new ArrayList<D>();
+        }
+
+        this.mDataList.set(index, item);
+        notifyObservers();
+    }
+
     /**
      * not working in these version
      */
@@ -130,6 +150,7 @@ public class ListDataModel<D> extends Model {
 
     /**
      * simple return the position, and you can override the method to make your work well
+     *
      * @param position the position exclude header views
      * @return Returns the position
      */
@@ -147,6 +168,7 @@ public class ListDataModel<D> extends Model {
 
     /**
      * replace the old data set with {@param items}
+     *
      * @param items the new data set
      */
     public void replaceAll(List<D> items) {

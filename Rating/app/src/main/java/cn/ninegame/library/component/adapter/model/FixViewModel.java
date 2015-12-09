@@ -63,7 +63,7 @@ public class FixViewModel {
      * @param position the position that you want add header view into
      * @param holder   the {@link ItemViewHolder} you want to binding with header view
      */
-    public void add(int position,@NonNull ItemViewHolder holder) {
+    public void add(int position, @NonNull ItemViewHolder holder) {
         if (position < 0) return;
         if (mHolders.size() > 0 && position <= mHolders.keyAt(mHolders.size() - 1)) {
             SparseArray<ItemViewHolder> tempBeans = mHolders;

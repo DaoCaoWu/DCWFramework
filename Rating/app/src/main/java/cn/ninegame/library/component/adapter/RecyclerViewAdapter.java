@@ -8,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import cn.ninegame.library.component.adapter.model.ListDataModel;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import cn.ninegame.library.component.adapter.model.FixViewModel;
+import cn.ninegame.library.component.adapter.model.ListDataModel;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import cn.ninegame.library.component.adapter.viewholder.RecyclerViewHolder;
 import cn.ninegame.library.component.mvc.core.Observable;
 import cn.ninegame.library.component.mvc.core.Observer;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
@@ -35,7 +35,7 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
 
     /**
      * @param context the context to get LayoutInflater @see android.view.LayoutInflater
-     * @param model the model of model layer, which contains the data set to show
+     * @param model   the model of model layer, which contains the data set to show
      */
     public RecyclerViewAdapter(Context context, M model) {
         mContext = context;
@@ -47,9 +47,9 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
     }
 
     /**
-     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
-     * @param model the model of model layer, which contains the data set to show
-     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param context         the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model           the model of model layer, which contains the data set to show
+     * @param layoutResId     the view's layoutId that would be used to inflating item view
      * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
      */
     public RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz) {
@@ -57,12 +57,12 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
     }
 
     /**
-     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
-     * @param model the model of model layer, which contains the data set to show
-     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param context         the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model           the model of model layer, which contains the data set to show
+     * @param layoutResId     the view's layoutId that would be used to inflating item view
      * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
-     * @param listener the listener of events that views included in {@link ItemViewHolder} dispatched
-     * @param <L> the class type of the class implement listener
+     * @param listener        the listener of events that views included in {@link ItemViewHolder} dispatched
+     * @param <L>             the class type of the class implement listener
      */
     public <L> RecyclerViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, L listener) {
         this(context, model);
@@ -106,7 +106,7 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
                 && position - getHeaderViewCount() - mModel.getCount() < getFooterViewCount()) {
             return mFooters.getViewType(position - getHeaderViewCount() - mModel.getCount());
         } else {
-            return getModel().getItemViewType(position- mHeaders.getCount());
+            return getModel().getItemViewType(position - mHeaders.getCount());
         }
     }
 
@@ -167,7 +167,6 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
     public <T> void update(Observable observable, T data, Object... args) {
         notifyDataSetChanged();
     }
-
 
 
     public void addHeaderView(ItemViewHolder holder) {

@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import cn.ninegame.library.component.adapter.model.ListDataModel;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import cn.ninegame.library.component.mvc.core.Observable;
 import cn.ninegame.library.component.mvc.core.Observer;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
@@ -28,7 +28,7 @@ public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implem
 
     /**
      * @param context the context to get LayoutInflater @see android.view.LayoutInflater
-     * @param model the model of model layer, which contains the data set to show
+     * @param model   the model of model layer, which contains the data set to show
      */
     public ListViewAdapter(@NonNull Context context, @NonNull M model) {
         mContext = context;
@@ -38,9 +38,9 @@ public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implem
     }
 
     /**
-     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
-     * @param model the model of model layer, which contains the data set to show
-     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param context         the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model           the model of model layer, which contains the data set to show
+     * @param layoutResId     the view's layoutId that would be used to inflating item view
      * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
      */
     public ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz) {
@@ -48,12 +48,12 @@ public class ListViewAdapter<M extends ListDataModel> extends BaseAdapter implem
     }
 
     /**
-     * @param context the context to get LayoutInflater @see android.view.LayoutInflater
-     * @param model the model of model layer, which contains the data set to show
-     * @param layoutResId the view's layoutId that would be used to inflating item view
+     * @param context         the context to get LayoutInflater @see android.view.LayoutInflater
+     * @param model           the model of model layer, which contains the data set to show
+     * @param layoutResId     the view's layoutId that would be used to inflating item view
      * @param viewHolderClazz the class of the {@link ItemViewHolder}'s implement
-     * @param listener the listener of events that views included in {@link ItemViewHolder} dispatched
-     * @param <L> the class type of the class implement listener
+     * @param listener        the listener of events that views included in {@link ItemViewHolder} dispatched
+     * @param <L>             the class type of the class implement listener
      */
     public <L> ListViewAdapter(@NonNull Context context, @NonNull M model, @LayoutRes int layoutResId, @NonNull Class<? extends ItemViewHolder<M>> viewHolderClazz, L listener) {
         this(context, model);
