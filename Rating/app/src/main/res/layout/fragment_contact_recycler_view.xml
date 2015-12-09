@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:background="@android:color/transparent"
               android:orientation="vertical">
 
@@ -24,10 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@id/lv_list"
+            <com.dcw.app.ui.loadmore.LoadMoreRecyclerViewContainer
+                android:id="@+id/LoadMoreRecyclerViewContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                app:targetId="@id/lv_list">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@id/lv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.dcw.app.ui.loadmore.LoadMoreRecyclerViewContainer>
+
 
             <include
                 android:id="@id/catalog_bar"

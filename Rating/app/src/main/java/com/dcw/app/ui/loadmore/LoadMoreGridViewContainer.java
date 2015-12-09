@@ -1,5 +1,7 @@
 package com.dcw.app.ui.loadmore;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AbsListView;
 
@@ -9,9 +11,17 @@ public class LoadMoreGridViewContainer extends LoadMoreContainerBase<GridViewWit
 
     private AbsListView.OnScrollListener mOnScrollListener;
 
-    public LoadMoreGridViewContainer(GridViewWithHeaderAndFooter targetView) {
-        super(targetView);
+    public LoadMoreGridViewContainer(Context context) {
+        super(context);
     }
+
+    public LoadMoreGridViewContainer(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    //    public LoadMoreGridViewContainer(GridViewWithHeaderAndFooter targetView) {
+//        super(targetView);
+//    }
 
     public void setOnScrollListener(AbsListView.OnScrollListener onScrollListener) {
         mOnScrollListener = onScrollListener;

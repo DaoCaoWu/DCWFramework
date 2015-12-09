@@ -1,5 +1,7 @@
 package com.dcw.app.ui.loadmore;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -8,9 +10,17 @@ public class LoadMoreListViewContainer extends LoadMoreContainerBase<ListView> {
 
     private AbsListView.OnScrollListener mOnScrollListener;
 
-    public LoadMoreListViewContainer(ListView targetView) {
-        super(targetView);
+    public LoadMoreListViewContainer(Context context) {
+        super(context);
     }
+
+    public LoadMoreListViewContainer(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    //    public LoadMoreListViewContainer(ListView targetView) {
+//        super(targetView);
+//    }
 
     public void setOnScrollListener(AbsListView.OnScrollListener onScrollListener) {
         mOnScrollListener = onScrollListener;

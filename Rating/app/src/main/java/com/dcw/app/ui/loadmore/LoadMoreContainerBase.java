@@ -1,11 +1,18 @@
 package com.dcw.app.ui.loadmore;
 
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-public abstract class LoadMoreContainerBase<V extends ViewGroup> implements LoadMoreContainer {
+import com.dcw.app.R;
 
-    final private V mTargetView;
+public abstract class LoadMoreContainerBase<V extends ViewGroup> extends LinearLayout implements LoadMoreContainer {
+
+    private int mLayoutId;
+    private V mTargetView;
     private LoadMoreUIHandler mLoadMoreUIHandler;
     private LoadMoreHandler mLoadMoreHandler;
     private boolean mIsLoading;
@@ -17,10 +24,41 @@ public abstract class LoadMoreContainerBase<V extends ViewGroup> implements Load
     private View mFooterView;
 
 
-    public LoadMoreContainerBase(V targetView) {
-        mTargetView = targetView;
-        init();
+    public LoadMoreContainerBase(Context context) {
+        super(context);
     }
+
+    public LoadMoreContainerBase(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        if (attrs != null) {
+            parseAttrs(context, attrs);
+        }
+    }
+
+    /**
+     * Parses the incoming attributes from XML inflation
+     */
+    private void parseAttrs(Context context, AttributeSet attrs) {
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.LoadMoreContainerBase, 0, 0);
+        try {
+            mLayoutId = a.getResourceId(R.styleable.LoadMoreContainerBase_targetId, R.id.listView);
+        } finally {
+            a.recycle();
+        }
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        mTargetView = (V)findViewById(mLayoutId);
+        init();
+        useDefaultFooter();
+    }
+
+    //    public LoadMoreContainerBase(V targetView) {
+//        mTargetView = targetView;
+//        init();
+//    }
 
     public V getTargetView() {
         return mTargetView;
@@ -28,7 +66,7 @@ public abstract class LoadMoreContainerBase<V extends ViewGroup> implements Load
 
     public void useDefaultFooter() {
         LoadMoreDefaultFooterView footerView = new LoadMoreDefaultFooterView(getTargetView().getContext());
-        footerView.setVisibility(View.GONE);
+        footerView.setVisibility(View.VISIBLE);
         setLoadMoreView(footerView);
         setLoadMoreUIHandler(footerView);
     }

@@ -8,7 +8,6 @@ public interface LoadMoreContainer {
 
     public void setAutoLoadMore(boolean autoLoadMore);
 
-
     public void setupReachBottomRule();
 
     public void setLoadMoreView(View view);

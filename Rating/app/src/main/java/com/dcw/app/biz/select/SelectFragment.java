@@ -13,6 +13,8 @@ import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 
+import com.dcw.app.ui.loadmore.LoadMoreDefaultFooterView;
+import com.dcw.app.ui.loadmore.LoadMoreRecyclerViewContainer;
 import com.dcw.app.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
 
@@ -37,6 +39,10 @@ public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMe
                 scc.getModel().setMaxSelectNum(scc.getModel().getCount());
             }
         });
+        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).setAutoLoadMore(true);
+        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).setupReachBottomRule();
+        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).useDefaultFooter();
+        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).loadMoreFinish(false, true);
     }
 
     @Override
