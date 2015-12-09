@@ -38,14 +38,12 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
 
     @Override
     public void setupReachBottomRule() {
-        if (getTargetView().getLayoutManager() instanceof LinearLayoutManager) {
-            getTargetView().addOnScrollListener(new EndlessRecyclerOnScrollListener() {
-                @Override
-                public void onLoadMore() {
-                    onReachBottom();
-                }
-            });
-        }
+        getTargetView().addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                onReachBottom();
+            }
+        });
     }
 
     @Override
@@ -72,10 +70,21 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
         int mFirstVisibleItem, mVisibleItemCount, mTotalItemCount, mLastVisibleItemPosition;
         int[] mLastPositions;
         int layoutManagerType;
+        private boolean mIsEnd = false;
 
         public EndlessRecyclerOnScrollListener() {
         }
 
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE || newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                if (mIsEnd) {
+                    // End has been reached
+                    onLoadMore();
+                }
+            }
+        }
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -124,11 +133,13 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
 //                mPreviousTotal = mTotalItemCount;
 //            }
 
-            if ((mTotalItemCount - mVisibleItemCount) <= (mFirstVisibleItem + VISIBLE_THRESHOLD)) {
-                // End has been reached
-                onLoadMore();
+            if (mFirstVisibleItem + mVisibleItemCount >= mTotalItemCount - 1) {
+
                 mIsLoadingMore = true;
+                mIsEnd = true;
 //                mPreviousTotal = mTotalItemCount;
+            } else {
+                mIsEnd = false;
             }
         }
 

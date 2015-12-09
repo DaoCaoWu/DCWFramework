@@ -52,7 +52,12 @@ public abstract class LoadMoreContainerBase<V extends ViewGroup> extends LinearL
         super.onFinishInflate();
         mTargetView = (V)findViewById(mLayoutId);
         init();
-        useDefaultFooter();
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                useDefaultFooter();
+            }
+        }, 0);
     }
 
     //    public LoadMoreContainerBase(V targetView) {

@@ -5,20 +5,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.dcw.app.R;
-import com.dcw.app.biz.MainActivity;
 import com.dcw.app.biz.contact.SearchContactFragment;
 import com.dcw.app.biz.contact.model.ContactModel;
 import com.dcw.app.biz.contact.model.bean.Contact;
 import com.dcw.app.biz.toolbar.ToolbarController;
 import com.dcw.app.biz.toolbar.ToolbarModel;
-import cn.ninegame.framework.adapter.BaseFragmentWrapper;
-
-import com.dcw.app.ui.loadmore.LoadMoreDefaultFooterView;
+import com.dcw.app.ui.loadmore.LoadMoreContainer;
+import com.dcw.app.ui.loadmore.LoadMoreHandler;
 import com.dcw.app.ui.loadmore.LoadMoreRecyclerViewContainer;
 import com.dcw.app.util.TaskExecutor;
 import com.dcw.framework.view.annotation.InjectLayout;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import cn.ninegame.framework.adapter.BaseFragmentWrapper;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 @InjectLayout(R.layout.fragment_contact_recycler_view)
 public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMenuItemClickListener {
@@ -39,10 +43,26 @@ public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMe
                 scc.getModel().setMaxSelectNum(scc.getModel().getCount());
             }
         });
-        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).setAutoLoadMore(true);
-        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).setupReachBottomRule();
-        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).useDefaultFooter();
-        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).loadMoreFinish(false, true);
+        //first load
+        Observable.timer(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
+            @Override
+            public void call(Long aLong) {
+                ((LoadMoreRecyclerViewContainer) scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).loadMoreFinish(false, true);
+            }
+        });
+        //next Page
+        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).setLoadMoreHandler(new LoadMoreHandler() {
+            @Override
+            public void onLoadMore(final LoadMoreContainer loadMoreContainer) {
+                Observable.timer(6, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        loadMoreContainer.loadMoreFinish(false, true);
+                    }
+                });
+            }
+        });
+//        ((LoadMoreRecyclerViewContainer)scc.getView().findViewById(R.id.LoadMoreRecyclerViewContainer)).useDefaultFooter();
     }
 
     @Override

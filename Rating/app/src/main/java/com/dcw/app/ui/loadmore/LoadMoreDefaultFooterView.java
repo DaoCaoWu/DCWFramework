@@ -31,6 +31,11 @@ public class LoadMoreDefaultFooterView extends RelativeLayout implements LoadMor
     }
 
     @Override
+    public void setVisibility(int visibility) {
+        mTextView.setVisibility(visibility);
+    }
+
+    @Override
     public void onLoading(LoadMoreContainer container) {
         setVisibility(VISIBLE);
         mTextView.setText(R.string.cube_views_load_more_loading);
@@ -46,7 +51,7 @@ public class LoadMoreDefaultFooterView extends RelativeLayout implements LoadMor
                 mTextView.setText(R.string.cube_views_load_more_loaded_no_more);
             }
         } else {
-            setVisibility(INVISIBLE);
+            setVisibility(GONE);
         }
     }
 
