@@ -9,16 +9,16 @@ import android.util.SparseArray;
  * @author JiaYing.Cheng
  * @version 1.0
  */
-public class NormalViewModel<ViewInfo> {
+public class ItemViewModel<ViewInfo> {
 
     private SparseArray<ViewInfo> mViewInfos;
     private ViewTypeDelegate mViewTypeDelegate;
 
-    public NormalViewModel() {
+    public ItemViewModel() {
         mViewInfos = new SparseArray<ViewInfo>();
     }
 
-    public NormalViewModel(@NonNull SparseArray<ViewInfo> viewInfos) {
+    public ItemViewModel(@NonNull SparseArray<ViewInfo> viewInfos) {
         this();
         mViewInfos = viewInfos;
     }

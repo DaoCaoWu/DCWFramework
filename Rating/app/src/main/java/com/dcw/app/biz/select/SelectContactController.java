@@ -10,7 +10,6 @@ import com.dcw.app.biz.contact.view.SideBar;
 import com.dcw.app.biz.contact.view.StickyListView;
 import cn.ninegame.library.component.adapter.RecyclerViewAdapter;
 import cn.ninegame.library.component.adapter.model.select.SelectModel;
-import cn.ninegame.library.component.adapter.viewholder.FixViewHolderBean;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import cn.ninegame.library.component.mvc.Controller;
 import cn.ninegame.library.component.mvc.core.Observable;
@@ -22,15 +21,22 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
         super(view, model);
         final RecyclerViewAdapter<ContactModel> adapter = new RecyclerViewAdapter<ContactModel>(getView().getContext(), getModel());
         final HeaderView headerView = new HeaderView(LayoutInflater.from(getView().getContext()).inflate(R.layout.item_view_select, null));
+        final HeaderView headerView2 = new HeaderView(LayoutInflater.from(getView().getContext()).inflate(R.layout.item_view_select, null));
+//        final View headerView = LayoutInflater.from(getView().getContext()).inflate(R.layout.layout_list_item_catalog, null);
+//        final View headerView2 = LayoutInflater.from(getView().getContext()).inflate(R.layout.layout_list_item_catalog, null);
+//        ((TextView)headerView.findViewById(R.id.tv_content)).setText("aa");
+//        ((TextView)headerView2.findViewById(R.id.tv_content)).setText("bb");
+//        new HeaderView(headerView).setData("ada");
+//        new HeaderView(headerView2).setData("ada");
         getView().postDelayed(new Runnable() {
             @Override
             public void run() {
 //                getModel().addHeaderViewHolderBean(3, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "哈哈0"));
 //                getModel().addFooterViewHolderBean(5, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "哈哈0"));
 //                getModel().setFooterData(4, "哈哈1");
-                adapter.removeHeaderView(headerView);
-//                adapter.removeFooterView(headerView);
-                adapter.notifyDataSetChanged();
+                adapter.removeHeaderView(1);
+                adapter.removeFooterView(0);
+//                adapter.addHeaderView(headerView);
 //                getModel().removeHeaderViewHolderBean(2);
 //                getModel().removeFooterViewHolderBean(4);
             }
@@ -41,12 +47,12 @@ public class SelectContactController extends Controller<ContactRecyclerView, Con
 //        getModel().addHeaderViewHolderBean(4, new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "哈哈3"));
 //        getModel().addFooterViewHolderBean(4,new FixViewHolderBean(R.layout.item_view_select, HeaderView.class));
 //        getModel().addFooterViewHolderBean(5,new FixViewHolderBean(R.layout.item_view_select, HeaderView.class, "abc"));
-//        getModel().addItemViewHolderBean(0, new ItemViewHolderBean(R.layout.item_view_select, SelectItemView.class));
-//        getModel().addItemViewHolderBean(1, new ItemViewHolderBean(R.layout.item_view_select_1, SelectItemView1.class));
+        getModel().addItemViewHolderBean(0, new ItemViewHolderBean(R.layout.item_view_select, SelectItemView.class));
+        getModel().addItemViewHolderBean(1, new ItemViewHolderBean(R.layout.item_view_select_1, SelectItemView1.class));
 //        getModel().setFooterData(0, "哈哈4");
 //        getModel().setFooterData(4, "哈哈1");
-        adapter.addHeaderView(headerView);
-//        adapter.addFooterView(headerView);
+//        adapter.addHeaderView(1, headerView);
+        adapter.addFooterView(headerView2);
         getView().getRecyclerView().setAdapter(adapter);
         getView().setViewListener(this);
         getView().setColorSchemeResources(R.color.holo_blue_light, R.color.holo_red_light, R.color.holo_orange_light, R.color.holo_green_light);

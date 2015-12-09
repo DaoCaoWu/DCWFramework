@@ -9,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cn.ninegame.library.component.adapter.model.ListDataModel;
-import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
-import cn.ninegame.library.component.adapter.viewholder.HeaderViewWrapper;
+import cn.ninegame.library.component.adapter.model.FixViewModel;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolderBean;
 import cn.ninegame.library.component.adapter.viewholder.RecyclerViewHolder;
@@ -25,11 +24,14 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.Adapter<RecyclerViewHolder<M>> implements Observer {
 
+    public static final int ITEM_VIEW_TYPE_HEADER = Integer.MIN_VALUE;
+    public static final int ITEM_VIEW_TYPE_FOOTER = Integer.MAX_VALUE / 2;
+
     private Context mContext;
     private M mModel;
     private LayoutInflater mInflater;
-    private HeaderViewWrapper mHeaders;
-    private HeaderViewWrapper mFooters;
+    private FixViewModel mHeaders;
+    private FixViewModel mFooters;
 
     /**
      * @param context the context to get LayoutInflater @see android.view.LayoutInflater
@@ -40,8 +42,8 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
         mModel = model;
         mModel.addObserver(this);
         mInflater = LayoutInflater.from(mContext);
-        mHeaders = new HeaderViewWrapper();
-        mFooters = new HeaderViewWrapper();
+        mHeaders = new FixViewModel(ITEM_VIEW_TYPE_HEADER);
+        mFooters = new FixViewModel(ITEM_VIEW_TYPE_FOOTER);
     }
 
     /**
@@ -79,12 +81,30 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
         return mContext;
     }
 
+    public FixViewModel getHeaders() {
+        return mHeaders;
+    }
+
+    public void setHeaders(FixViewModel headers) {
+        mHeaders = headers;
+    }
+
+    public FixViewModel getFooters() {
+        return mFooters;
+    }
+
+    public void setFooters(FixViewModel footers) {
+        mFooters = footers;
+    }
+
     @Override
     public int getItemViewType(int position) {
         if (getHeaderViewCount() > 0 && position < getHeaderViewCount()) {
             return mHeaders.getViewType(position);
-        } else if (getFooterViewCount() > 0 && position - getHeaderViewCount() + mModel.getCount() < getFooterViewCount()) {
-            return mFooters.getViewType(position - getHeaderViewCount() + mModel.getCount());
+        } else if (getFooterViewCount() > 0
+                && position - getHeaderViewCount() - mModel.getCount() >= 0
+                && position - getHeaderViewCount() - mModel.getCount() < getFooterViewCount()) {
+            return mFooters.getViewType(position - getHeaderViewCount() - mModel.getCount());
         } else {
             return getModel().getItemViewType(position- mHeaders.getCount());
         }
@@ -92,7 +112,7 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
 
     @Override
     public int getItemCount() {
-        return getHeaderViewCount() + getModel().getCount() + getFooterViewCount();
+        return getHeaderViewCount() + mModel.getCount() + getFooterViewCount();
     }
 
     @Override
@@ -104,8 +124,8 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
             } else if (mFooters.containsViewType(viewType)) {
                 return new RecyclerViewHolder<M>(mFooters.get(mFooters.getPosition(viewType)));
             } else {
-                Constructor<? extends ItemViewHolder> constructor = getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
-                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
+                Constructor<? extends ItemViewHolder> constructor = mModel.getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
+                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(mModel.getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
             }
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -126,18 +146,20 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
         if (getHeaderViewCount() > 0 && position < getHeaderViewCount()) {
             holder.mdItemViewHolder.setListener(mHeaders.getItemViewHolder(position).getListener());
             holder.mdItemViewHolder.setData(mHeaders.getItemViewHolder(position).getData());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
-            holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
-        } else if (getFooterViewCount() > 0 && position - getHeaderViewCount() + mModel.getCount() < getFooterViewCount()) {
-            int adjPosition = position - getHeaderViewCount() + mModel.getCount();
+            holder.mdItemViewHolder.onBindViewEvent(mModel, position);  //real position
+            holder.mdItemViewHolder.onBindData(mModel, position);   //real position
+        } else if (getFooterViewCount() > 0
+                && position - getHeaderViewCount() - mModel.getCount() >= 0
+                && position - getHeaderViewCount() - mModel.getCount() < getFooterViewCount()) {
+            int adjPosition = position - getHeaderViewCount() - mModel.getCount();
             holder.mdItemViewHolder.setListener(mFooters.getItemViewHolder(adjPosition).getListener());
             holder.mdItemViewHolder.setData(mFooters.getItemViewHolder(adjPosition).getData());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), adjPosition);  //real position
-            holder.mdItemViewHolder.onBindData(getModel(), adjPosition);   //real position
+            holder.mdItemViewHolder.onBindViewEvent(mModel, adjPosition);  //real position
+            holder.mdItemViewHolder.onBindData(mModel, adjPosition);   //real position
         } else {
-            holder.mdItemViewHolder.setListener(getModel().getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getHeaderViewCount());    //adjust position
-            holder.mdItemViewHolder.onBindData(getModel(), position - getHeaderViewCount()); //adjust position
+            holder.mdItemViewHolder.setListener(mModel.getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
+            holder.mdItemViewHolder.onBindViewEvent(mModel, position - getHeaderViewCount());    //adjust position
+            holder.mdItemViewHolder.onBindData(mModel, position - getHeaderViewCount()); //adjust position
         }
     }
 
@@ -146,36 +168,46 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
         notifyDataSetChanged();
     }
 
+
+
     public void addHeaderView(ItemViewHolder holder) {
         mHeaders.add(holder);
+        notifyItemInserted(getHeaderViewCount());
     }
 
     public void addHeaderView(View view) {
         mHeaders.add(view);
+        notifyItemInserted(getHeaderViewCount());
     }
 
     public void addHeaderView(View view, Object listener) {
         mHeaders.add(view, listener);
+        notifyItemInserted(getHeaderViewCount());
     }
 
     public void addHeaderView(View view, Object listener, Object data) {
         mHeaders.add(view, listener, data);
+        notifyItemInserted(getHeaderViewCount());
     }
 
     public void addHeaderView(int position, ItemViewHolder holder) {
         mHeaders.add(position, holder);
+        notifyDataSetChanged();
     }
 
     public void removeHeaderView(ItemViewHolder holder) {
         mHeaders.remove(holder);
+        notifyDataSetChanged();
     }
 
     public void removeHeaderView(View view) {
         mHeaders.remove(view);
+        notifyDataSetChanged();
     }
 
     public void removeHeaderView(int position) {
         mHeaders.remove(position);
+        notifyDataSetChanged();
     }
 
     public int getHeaderViewCount() {
@@ -184,34 +216,42 @@ public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.A
 
     public void addFooterView(ItemViewHolder holder) {
         mFooters.add(holder);
+        notifyItemChanged(getItemCount());
     }
 
     public void addFooterView(View view) {
         mFooters.add(view);
+        notifyItemChanged(getItemCount());
     }
 
     public void addFooterView(View view, Object listener) {
         mFooters.add(view, listener);
+        notifyItemInserted(getItemCount());
     }
 
     public void addFooterView(View view, Object listener, Object data) {
         mFooters.add(view, listener, data);
+        notifyItemInserted(getItemCount());
     }
 
     public void addFooterView(int position, ItemViewHolder holder) {
         mFooters.add(position, holder);
+        notifyDataSetChanged();
     }
 
     public void removeFooterView(ItemViewHolder holder) {
         mFooters.remove(holder);
+        notifyDataSetChanged();
     }
 
     public void removeFooterView(int position) {
         mFooters.remove(position);
+        notifyDataSetChanged();
     }
 
     public void removeFooterView(View view) {
         mFooters.remove(view);
+        notifyDataSetChanged();
     }
 
     public int getFooterViewCount() {

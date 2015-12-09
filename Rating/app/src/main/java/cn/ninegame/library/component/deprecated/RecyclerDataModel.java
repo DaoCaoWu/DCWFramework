@@ -1,11 +1,11 @@
-package cn.ninegame.library.component.adapter.model;
+package cn.ninegame.library.component.deprecated;
 
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 
 import java.util.List;
 
-import cn.ninegame.library.component.adapter.viewholder.FixViewHolderBean;
+import cn.ninegame.library.component.adapter.model.ListDataModel;
 
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/11/5.

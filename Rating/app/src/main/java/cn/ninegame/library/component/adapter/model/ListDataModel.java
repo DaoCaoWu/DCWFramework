@@ -18,10 +18,10 @@ public class ListDataModel<D> extends Model {
      */
     private List<D> mDataList = null;
 
-    private NormalViewModel<ItemViewHolderBean> mViewModel;
+    private ItemViewModel<ItemViewHolderBean> mViewModel;
 
     public ListDataModel() {
-        mViewModel = new NormalViewModel<ItemViewHolderBean>();
+        mViewModel = new ItemViewModel<ItemViewHolderBean>();
     }
 
     public ListDataModel(List<D> dataList) {
@@ -142,7 +142,7 @@ public class ListDataModel<D> extends Model {
     }
 
     public int getItemViewType(int position) {
-        return mViewModel.getViewTypeCount();
+        return mViewModel.getItemViewType(position);
     }
 
     /**

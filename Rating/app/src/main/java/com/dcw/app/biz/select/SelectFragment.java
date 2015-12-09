@@ -31,12 +31,12 @@ public class SelectFragment extends BaseFragmentWrapper implements MenuItem.OnMe
         ToolbarModel model = new ToolbarModel(this.getClass().getSimpleName(), R.menu.menu_home, true);
         mToolbarController = new ToolbarController(findViewById(R.id.toolbar), model);
         final SelectContactController scc = new SelectContactController((ContactRecyclerView) findViewById(R.id.root_view), new ContactModel());
-//        scc.getModel().loadContactListAsyn(getActivity(), new TaskExecutor.RunnableCallback<List<Contact>>() {
-//            @Override
-//            public void onRun(List<Contact> data) {
-//                scc.getModel().setMaxSelectNum(scc.getModel().getCount());
-//            }
-//        });
+        scc.getModel().loadContactListAsyn(getActivity(), new TaskExecutor.RunnableCallback<List<Contact>>() {
+            @Override
+            public void onRun(List<Contact> data) {
+                scc.getModel().setMaxSelectNum(scc.getModel().getCount());
+            }
+        });
     }
 
     @Override

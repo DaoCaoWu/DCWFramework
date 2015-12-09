@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.ninegame.library.component.adapter.model.ListDataModel;
-import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
 
 public abstract class SelectModel<T> extends ListDataModel<T> implements ISelect<T> {
 

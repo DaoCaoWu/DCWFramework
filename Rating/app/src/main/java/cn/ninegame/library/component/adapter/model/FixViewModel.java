@@ -1,10 +1,12 @@
-package cn.ninegame.library.component.adapter.viewholder;
+package cn.ninegame.library.component.adapter.model;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.View;
 
-import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
+import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
+import cn.ninegame.library.component.adapter.viewholder.SimpleItemViewHolder;
 
 /**
  * create by adao12.vip@gmail.com on 15/12/8
@@ -12,42 +14,35 @@ import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
  * @author JiaYing.Cheng
  * @version 1.0
  */
-public class HeaderViewWrapper {
+public class FixViewModel {
 
-    public static final int ITEM_VIEW_TYPE_HEADER = Integer.MIN_VALUE;
-
+    private final int mItemViewTypeBase;
     private SparseArray<ItemViewHolder> mHolders;
     private SparseIntArray mViewTypeToPositions;
 
-    public HeaderViewWrapper() {
+    public FixViewModel(int itemViewTypeBase) {
+        mItemViewTypeBase = itemViewTypeBase;
         mHolders = new SparseArray<ItemViewHolder>();
         mViewTypeToPositions = new SparseIntArray();
     }
 
     /**
-     * @param location the real position, include header view and normal item view, and footer view
-     */
-    public boolean contains(int location) {
-        return mHolders != null && location >= 0 && location < mHolders.size();
-    }
-
-    /**
-     * @param viewType header view's view type for adapter, base on {@link HeaderViewWrapper#ITEM_VIEW_TYPE_HEADER}
+     * @param viewType header view's view type for adapter, base on {@link FixViewModel#mItemViewTypeBase}
      */
     public boolean containsViewType(int viewType) {
-        return viewType < 0 && getPosition(viewType) != -1;
+        return getPosition(viewType) != -1;
     }
 
     /**
      * @param holder the {@link ItemViewHolder} you want to binding with header view
      */
-    public void add(ItemViewHolder holder) {
+    public void add(@NonNull ItemViewHolder holder) {
         int adjKey = mHolders.size() == 0 ? 0 : mHolders.keyAt(mHolders.size() - 1) + 1;
-        mViewTypeToPositions.append(ITEM_VIEW_TYPE_HEADER + adjKey, adjKey);
+        mViewTypeToPositions.append(mItemViewTypeBase + adjKey, adjKey);
         mHolders.append(adjKey, holder);
     }
 
-    public void add(View view) {
+    public void add(@NonNull View view) {
         add(new SimpleItemViewHolder(view));
     }
 
@@ -57,7 +52,7 @@ public class HeaderViewWrapper {
         add(holder);
     }
 
-    public void add(View view, Object listener, Object data) {
+    public void add(@NonNull View view, Object listener, Object data) {
         final ItemViewHolder holder = new SimpleItemViewHolder(view);
         holder.setListener(listener);
         holder.setData(data);
@@ -66,9 +61,9 @@ public class HeaderViewWrapper {
 
     /**
      * @param position the position that you want add header view into
-     * @param holder     the {@link ItemViewHolder} you want to binding with header view
+     * @param holder   the {@link ItemViewHolder} you want to binding with header view
      */
-    public void add(int position, ItemViewHolder holder) {
+    public void add(int position,@NonNull ItemViewHolder holder) {
         if (position < 0) return;
         if (mHolders.size() > 0 && position <= mHolders.keyAt(mHolders.size() - 1)) {
             SparseArray<ItemViewHolder> tempBeans = mHolders;
@@ -88,10 +83,10 @@ public class HeaderViewWrapper {
             }
             mViewTypeToPositions.clear();
             for (int i = 0; i < mHolders.size(); i++) {
-                mViewTypeToPositions.append(ITEM_VIEW_TYPE_HEADER + mHolders.keyAt(i), mHolders.keyAt(i));
+                mViewTypeToPositions.append(mItemViewTypeBase + mHolders.keyAt(i), mHolders.keyAt(i));
             }
         } else {
-            mViewTypeToPositions.append(ITEM_VIEW_TYPE_HEADER + position, position);
+            mViewTypeToPositions.append(mItemViewTypeBase + position, position);
             mHolders.append(position, holder);
         }
     }
@@ -108,14 +103,17 @@ public class HeaderViewWrapper {
     }
 
     public void remove(ItemViewHolder holder) {
-        int key = mHolders.keyAt(mHolders.indexOfValue(holder));
-        mViewTypeToPositions.removeAt(mViewTypeToPositions.indexOfKey(ITEM_VIEW_TYPE_HEADER + key));
-        mHolders.remove(key);
+        int index = mHolders.indexOfValue(holder);
+        if (index != -1) {
+            int key = mHolders.keyAt(index);
+            mViewTypeToPositions.removeAt(mViewTypeToPositions.indexOfKey(mItemViewTypeBase + key));
+            mHolders.remove(key);
+        }
     }
 
     public void remove(int position) {
         for (int i = 0; i < mViewTypeToPositions.size(); i++) {
-            if (mViewTypeToPositions.keyAt(i) == ITEM_VIEW_TYPE_HEADER + position) {
+            if (mViewTypeToPositions.keyAt(i) == mItemViewTypeBase + position) {
                 mViewTypeToPositions.removeAt(i);
             }
         }
@@ -140,7 +138,7 @@ public class HeaderViewWrapper {
     /**
      * get the adjust position of the header view list according to the view type of header view
      *
-     * @param viewType header view's view type equal the sum of {@link RecyclerDataModel#ITEM_VIEW_TYPE_HEADER} and position
+     * @param viewType header view's view type equal the sum of {@link FixViewModel#mItemViewTypeBase} and position
      */
     public int getPosition(int viewType) {
         return mViewTypeToPositions.get(viewType, -1);
@@ -148,5 +146,25 @@ public class HeaderViewWrapper {
 
     public int getViewType(int index) {
         return mViewTypeToPositions.keyAt(index);
+    }
+
+    public void setData(int position, Object data) {
+        ItemViewHolder holder = get(position);
+        holder.setData(data);
+    }
+
+    public void setData(ItemViewHolder holder, Object data) {
+        holder.setData(data);
+    }
+
+    public void setData(View view, Object data) {
+        for (int i = 0; i < mHolders.size(); i++) {
+            ItemViewHolder holder = mHolders.valueAt(i);
+            if (holder.itemView == view) {
+                int position = mHolders.keyAt(i);
+                setData(position, data);
+                break;
+            }
+        }
     }
 }
