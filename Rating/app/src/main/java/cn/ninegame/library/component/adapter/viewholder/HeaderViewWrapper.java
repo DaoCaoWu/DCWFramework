@@ -28,7 +28,7 @@ public class HeaderViewWrapper {
      * @param location the real position, include header view and normal item view, and footer view
      */
     public boolean contains(int location) {
-        return mHolders != null && location > 0 && location < mHolders.size();
+        return mHolders != null && location >= 0 && location < mHolders.size();
     }
 
     /**
@@ -54,6 +54,13 @@ public class HeaderViewWrapper {
     public void add(View view, Object listener) {
         final ItemViewHolder holder = new SimpleItemViewHolder(view);
         holder.setListener(listener);
+        add(holder);
+    }
+
+    public void add(View view, Object listener, Object data) {
+        final ItemViewHolder holder = new SimpleItemViewHolder(view);
+        holder.setListener(listener);
+        holder.setData(data);
         add(holder);
     }
 
@@ -102,7 +109,7 @@ public class HeaderViewWrapper {
 
     public void remove(ItemViewHolder holder) {
         int key = mHolders.keyAt(mHolders.indexOfValue(holder));
-        mViewTypeToPositions.removeAt(ITEM_VIEW_TYPE_HEADER + key);
+        mViewTypeToPositions.removeAt(mViewTypeToPositions.indexOfKey(ITEM_VIEW_TYPE_HEADER + key));
         mHolders.remove(key);
     }
 

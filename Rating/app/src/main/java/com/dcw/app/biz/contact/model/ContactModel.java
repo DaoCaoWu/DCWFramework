@@ -178,7 +178,7 @@ public class ContactModel extends SelectModel<Contact> implements SectionIndexer
 
     @Override
     public int getPositionForSection(int section) {
-        for (int i = getHeaderViewCount(); i < getCount(); i++) {
+        for (int i = 0; i < getCount(); i++) {
             if (getItem(i).getSortKey() == null) {
                 continue;
             }

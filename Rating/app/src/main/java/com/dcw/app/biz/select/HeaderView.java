@@ -28,7 +28,7 @@ public class HeaderView extends ItemViewHolder<ContactModel> {
 
     @Override
     public void onBindData(ContactModel model, int position) {
-        String s = model.getHeaderOrFooterItem(position);
+        String s = "aadafs";
         mItemView.update(s, s, s, s);
         getHelper().setTextColor(R.id.tv_title, R.color.color_99);
     }

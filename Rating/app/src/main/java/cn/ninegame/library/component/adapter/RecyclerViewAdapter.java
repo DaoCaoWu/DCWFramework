@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cn.ninegame.library.component.adapter.model.ListDataModel;
 import cn.ninegame.library.component.adapter.model.RecyclerDataModel;
 import cn.ninegame.library.component.adapter.viewholder.HeaderViewWrapper;
 import cn.ninegame.library.component.adapter.viewholder.ItemViewHolder;
@@ -22,12 +23,13 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by jiaying.cjy@alibaba-inc.com on 2015/10/25.
  */
-public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerView.Adapter<RecyclerViewHolder<M>> implements Observer {
+public class RecyclerViewAdapter<M extends ListDataModel> extends RecyclerView.Adapter<RecyclerViewHolder<M>> implements Observer {
 
     private Context mContext;
     private M mModel;
     private LayoutInflater mInflater;
-    private HeaderViewWrapper mHeaderViewWrapper;
+    private HeaderViewWrapper mHeaders;
+    private HeaderViewWrapper mFooters;
 
     /**
      * @param context the context to get LayoutInflater @see android.view.LayoutInflater
@@ -38,6 +40,8 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
         mModel = model;
         mModel.addObserver(this);
         mInflater = LayoutInflater.from(mContext);
+        mHeaders = new HeaderViewWrapper();
+        mFooters = new HeaderViewWrapper();
     }
 
     /**
@@ -77,30 +81,28 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
 
     @Override
     public int getItemViewType(int position) {
-        if (getModel().isHeader(position)) {
-            return getModel().getHeaderViewType(position);
-        } else if (getModel().isFooter(position)) {
-            return getModel().getFooterViewType(position - getModel().getCount() - getModel().getHeaderViewCount());
+        if (getHeaderViewCount() > 0 && position < getHeaderViewCount()) {
+            return mHeaders.getViewType(position);
+        } else if (getFooterViewCount() > 0 && position - getHeaderViewCount() + mModel.getCount() < getFooterViewCount()) {
+            return mFooters.getViewType(position - getHeaderViewCount() + mModel.getCount());
         } else {
-            return getModel().getItemViewType(position - getModel().getHeaderViewCount());
+            return getModel().getItemViewType(position- mHeaders.getCount());
         }
     }
 
     @Override
     public int getItemCount() {
-        return getModel().getHeaderViewCount() + getModel().getCount() + getModel().getFooterViewCount();
+        return getHeaderViewCount() + getModel().getCount() + getFooterViewCount();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public RecyclerViewHolder<M> onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
-            if (getModel().isHeaderViewType(viewType)) {
-                Constructor<? extends ItemViewHolder> constructor = getModel().getHeaderViewHolderBean(getModel().getHeaderPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
-                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getHeaderViewHolderBean(getModel().getHeaderPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
-            } else if (getModel().isFooterViewType(viewType)) {
-                Constructor<? extends ItemViewHolder> constructor = getModel().getFooterViewHolderBean(getModel().getFooterPosition(viewType)).getItemViewHolderClazz().getConstructor(View.class);
-                return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getFooterViewHolderBean(getModel().getFooterPosition(viewType)).getItemViewHolderLayoutId(), parent, false)));
+            if (mHeaders.containsViewType(viewType)) {
+                return new RecyclerViewHolder<M>(mHeaders.get(mHeaders.getPosition(viewType)));
+            } else if (mFooters.containsViewType(viewType)) {
+                return new RecyclerViewHolder<M>(mFooters.get(mFooters.getPosition(viewType)));
             } else {
                 Constructor<? extends ItemViewHolder> constructor = getModel().getItemViewHolderBean(viewType).getItemViewHolderClazz().getConstructor(View.class);
                 return new RecyclerViewHolder<M>(constructor.newInstance(getInflater().inflate(getModel().getItemViewHolderBean(viewType).getItemViewHolderLayoutId(), parent, false)));
@@ -121,23 +123,98 @@ public class RecyclerViewAdapter<M extends RecyclerDataModel> extends RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder<M> holder, int position) {
-        if (getModel().isHeader(position)) {
-            holder.mdItemViewHolder.setListener(getModel().getHeaderViewHolderBeanByIndex(position).getViewHolderListener());
+        if (getHeaderViewCount() > 0 && position < getHeaderViewCount()) {
+            holder.mdItemViewHolder.setListener(mHeaders.getItemViewHolder(position).getListener());
+            holder.mdItemViewHolder.setData(mHeaders.getItemViewHolder(position).getData());
             holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
             holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
-        } else if (getModel().isFooter(position)) {
-            holder.mdItemViewHolder.setListener(getModel().getFooterViewHolderBeanByIndex(position - getModel().getCount() - getModel().getHeaderViewCount()).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position);  //real position
-            holder.mdItemViewHolder.onBindData(getModel(), position);   //real position
+        } else if (getFooterViewCount() > 0 && position - getHeaderViewCount() + mModel.getCount() < getFooterViewCount()) {
+            int adjPosition = position - getHeaderViewCount() + mModel.getCount();
+            holder.mdItemViewHolder.setListener(mFooters.getItemViewHolder(adjPosition).getListener());
+            holder.mdItemViewHolder.setData(mFooters.getItemViewHolder(adjPosition).getData());
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), adjPosition);  //real position
+            holder.mdItemViewHolder.onBindData(getModel(), adjPosition);   //real position
         } else {
             holder.mdItemViewHolder.setListener(getModel().getItemViewHolderBean(getItemViewType(position)).getViewHolderListener());
-            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getModel().getHeaderViewCount());    //adjust position
-            holder.mdItemViewHolder.onBindData(getModel(), position - getModel().getHeaderViewCount()); //adjust position
+            holder.mdItemViewHolder.onBindViewEvent(getModel(), position - getHeaderViewCount());    //adjust position
+            holder.mdItemViewHolder.onBindData(getModel(), position - getHeaderViewCount()); //adjust position
         }
     }
 
     @Override
     public <T> void update(Observable observable, T data, Object... args) {
         notifyDataSetChanged();
+    }
+
+    public void addHeaderView(ItemViewHolder holder) {
+        mHeaders.add(holder);
+    }
+
+    public void addHeaderView(View view) {
+        mHeaders.add(view);
+    }
+
+    public void addHeaderView(View view, Object listener) {
+        mHeaders.add(view, listener);
+    }
+
+    public void addHeaderView(View view, Object listener, Object data) {
+        mHeaders.add(view, listener, data);
+    }
+
+    public void addHeaderView(int position, ItemViewHolder holder) {
+        mHeaders.add(position, holder);
+    }
+
+    public void removeHeaderView(ItemViewHolder holder) {
+        mHeaders.remove(holder);
+    }
+
+    public void removeHeaderView(View view) {
+        mHeaders.remove(view);
+    }
+
+    public void removeHeaderView(int position) {
+        mHeaders.remove(position);
+    }
+
+    public int getHeaderViewCount() {
+        return mHeaders.getCount();
+    }
+
+    public void addFooterView(ItemViewHolder holder) {
+        mFooters.add(holder);
+    }
+
+    public void addFooterView(View view) {
+        mFooters.add(view);
+    }
+
+    public void addFooterView(View view, Object listener) {
+        mFooters.add(view, listener);
+    }
+
+    public void addFooterView(View view, Object listener, Object data) {
+        mFooters.add(view, listener, data);
+    }
+
+    public void addFooterView(int position, ItemViewHolder holder) {
+        mFooters.add(position, holder);
+    }
+
+    public void removeFooterView(ItemViewHolder holder) {
+        mFooters.remove(holder);
+    }
+
+    public void removeFooterView(int position) {
+        mFooters.remove(position);
+    }
+
+    public void removeFooterView(View view) {
+        mFooters.remove(view);
+    }
+
+    public int getFooterViewCount() {
+        return mFooters.getCount();
     }
 }

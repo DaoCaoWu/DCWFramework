@@ -18,6 +18,7 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
      */
     private final ViewHolderHelper mHelper;
     Object mListener;
+    Object mData;
 
     /**
      * @param itemView the view shows as a item of {@link android.widget.AbsListView} or {@link android.support.v7.widget.RecyclerView}
@@ -47,6 +48,14 @@ public abstract class ItemViewHolder<M extends ListDataModel> implements OnBindD
     @ViewDebug.CapturedViewProperty
     public Context getContext() {
         return itemView.getContext();
+    }
+
+    public <D> D getData() {
+        return (D)mData;
+    }
+
+    public void setData(Object data) {
+        mData = data;
     }
 
     /**
