@@ -60,11 +60,6 @@ public abstract class LoadMoreContainerBase<V extends ViewGroup> extends LinearL
         }, 0);
     }
 
-    //    public LoadMoreContainerBase(V targetView) {
-//        mTargetView = targetView;
-//        init();
-//    }
-
     public V getTargetView() {
         return mTargetView;
     }

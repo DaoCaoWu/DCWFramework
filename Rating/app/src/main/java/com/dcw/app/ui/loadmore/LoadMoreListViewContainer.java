@@ -18,10 +18,6 @@ public class LoadMoreListViewContainer extends LoadMoreContainerBase<ListView> {
         super(context, attrs);
     }
 
-    //    public LoadMoreListViewContainer(ListView targetView) {
-//        super(targetView);
-//    }
-
     public void setOnScrollListener(AbsListView.OnScrollListener onScrollListener) {
         mOnScrollListener = onScrollListener;
     }

@@ -19,10 +19,6 @@ public class LoadMoreGridViewContainer extends LoadMoreContainerBase<GridViewWit
         super(context, attrs);
     }
 
-    //    public LoadMoreGridViewContainer(GridViewWithHeaderAndFooter targetView) {
-//        super(targetView);
-//    }
-
     public void setOnScrollListener(AbsListView.OnScrollListener onScrollListener) {
         mOnScrollListener = onScrollListener;
     }

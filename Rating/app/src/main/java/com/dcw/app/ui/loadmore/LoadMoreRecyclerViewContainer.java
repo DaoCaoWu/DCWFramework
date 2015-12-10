@@ -32,10 +32,6 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
         mOnScrollListener = onScrollListener;
     }
 
-//    public LoadMoreRecyclerViewContainer(RecyclerView targetView) {
-//        super(targetView);
-//    }
-
     @Override
     public void setupReachBottomRule() {
         getTargetView().addOnScrollListener(new EndlessRecyclerOnScrollListener() {
@@ -64,13 +60,11 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
 
     public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
 
-        int mPreviousTotal = 0; // The total number of items in the dataset after the last load
-        boolean mIsLoadingMore = true; // True if we are still waiting for the last set of data to load.
+        boolean mIsEnd = false;
         static final int VISIBLE_THRESHOLD = 1; // The minimum amount of items to have below your current scroll position before loading more.
+        int mLayoutManagerType;
         int mFirstVisibleItem, mVisibleItemCount, mTotalItemCount, mLastVisibleItemPosition;
         int[] mLastPositions;
-        int layoutManagerType;
-        private boolean mIsEnd = false;
 
         public EndlessRecyclerOnScrollListener() {
         }
@@ -79,10 +73,10 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
             if (newState == RecyclerView.SCROLL_STATE_IDLE || newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                if (mIsEnd) {
-                    // End has been reached
-                    onLoadMore();
-                }
+            }
+            if (mIsEnd) {
+                // End has been reached
+                onLoadMore();
             }
         }
 
@@ -93,19 +87,19 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
 
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
-            if (layoutManagerType == 0) {
+            if (mLayoutManagerType == 0) {
                 if (layoutManager instanceof GridLayoutManager) {
-                    layoutManagerType = 1;
+                    mLayoutManagerType = 1;
                 } else if (layoutManager instanceof LinearLayoutManager) {
-                    layoutManagerType = 2;
+                    mLayoutManagerType = 2;
                 } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                    layoutManagerType = 3;
+                    mLayoutManagerType = 3;
                 } else {
                     throw new RuntimeException("Unsupported LayoutManager used. Valid ones are LinearLayoutManager, GridLayoutManager and StaggeredGridLayoutManager");
                 }
             }
 
-            switch (layoutManagerType) {
+            switch (mLayoutManagerType) {
                 case 2:
                     mVisibleItemCount = layoutManager.getChildCount();
                     mTotalItemCount = layoutManager.getItemCount();
@@ -126,18 +120,8 @@ public class LoadMoreRecyclerViewContainer extends LoadMoreContainerBase<Recycle
                     break;
             }
 
-//            if (mIsLoadingMore) {
-//                if (mTotalItemCount > mPreviousTotal) {
-//                    mIsLoadingMore = false;
-//                }
-//                mPreviousTotal = mTotalItemCount;
-//            }
-
-            if (mFirstVisibleItem + mVisibleItemCount >= mTotalItemCount - 1) {
-
-                mIsLoadingMore = true;
+            if ((mTotalItemCount - mVisibleItemCount) <= (mFirstVisibleItem + VISIBLE_THRESHOLD)) {
                 mIsEnd = true;
-//                mPreviousTotal = mTotalItemCount;
             } else {
                 mIsEnd = false;
             }

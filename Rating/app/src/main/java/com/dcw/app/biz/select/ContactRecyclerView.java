@@ -3,8 +3,10 @@ package com.dcw.app.biz.select;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +15,8 @@ import com.dcw.app.R;
 import com.dcw.app.biz.contact.model.ContactModel;
 import com.dcw.app.biz.contact.view.LetterIndexView;
 import com.dcw.app.biz.contact.view.StickyListView;
+
+import cn.ninegame.library.component.adapter.RecyclerViewAdapter;
 import cn.ninegame.library.component.mvc.BaseView;
 import cn.ninegame.library.component.mvc.core.Observable;
 import com.dcw.framework.view.DCWAnnotation;
@@ -83,6 +87,19 @@ public class ContactRecyclerView extends SwipeRefreshLayout implements BaseView<
     protected void onFinishInflate() {
         super.onFinishInflate();
         DCWAnnotation.inject(this);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (mRecyclerView.getAdapter().getItemViewType(position) >= RecyclerViewAdapter.ITEM_VIEW_TYPE_FOOTER) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        });
+//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
+//        mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setOnScrollListener(mOnScrollListener);

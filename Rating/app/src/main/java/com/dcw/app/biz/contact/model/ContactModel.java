@@ -201,6 +201,6 @@ public class ContactModel extends SelectModel<Contact> implements SectionIndexer
 
     @Override
     public int getCount() {
-        return super.getCount() >= 2 ? 20 : 0;
+        return super.getCount() >= 2 ? 8 : 0;
     }
 }
