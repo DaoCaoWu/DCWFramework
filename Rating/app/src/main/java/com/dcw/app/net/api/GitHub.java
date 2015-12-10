@@ -1,10 +1,9 @@
 package com.dcw.app.net.api;
 
 
-import com.dcw.app.biz.test.model.O;
-import com.dcw.app.biz.test.model.Comment;
-import com.dcw.app.biz.test.model.I;
-import com.dcw.app.biz.test.model.IL;
+import com.dcw.app.presentation.test.model.O;
+import com.dcw.app.presentation.test.model.Comment;
+import com.dcw.app.presentation.test.model.IL;
 
 import retrofit.Call;
 import retrofit.http.Body;

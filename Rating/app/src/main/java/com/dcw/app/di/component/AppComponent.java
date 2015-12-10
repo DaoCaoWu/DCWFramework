@@ -1,7 +1,7 @@
 package com.dcw.app.di.component;
 
 import com.dcw.app.app.App;
-import com.dcw.app.biz.account.User;
+import com.dcw.app.presentation.account.model.User;
 import com.dcw.app.di.module.AppModule;
 import com.dcw.app.di.module.UserModule;
 

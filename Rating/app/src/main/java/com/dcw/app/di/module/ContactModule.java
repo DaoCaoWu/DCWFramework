@@ -2,8 +2,8 @@ package com.dcw.app.di.module;
 
 import com.dcw.app.di.component.FragmentComponent;
 import com.dcw.app.di.scope.ContactModuleScope;
-import com.dcw.app.biz.contact.controller.ContactController;
-import com.dcw.app.biz.contact.model.bean.Contact;
+import com.dcw.app.presentation.contact.controller.ContactController;
+import com.dcw.app.presentation.contact.model.bean.Contact;
 
 import java.util.List;
 

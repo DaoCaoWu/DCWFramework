@@ -1,14 +1,8 @@
 package com.dcw.app.network;
 
-import com.dcw.app.biz.test.model.I;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.RequestBody;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

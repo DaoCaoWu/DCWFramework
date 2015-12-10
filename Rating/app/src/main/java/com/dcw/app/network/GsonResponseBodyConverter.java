@@ -1,7 +1,7 @@
 package com.dcw.app.network;
 
-import com.dcw.app.biz.test.model.I;
-import com.dcw.app.biz.test.model.State;
+import com.dcw.app.presentation.test.model.I;
+import com.dcw.app.presentation.test.model.State;
 import com.google.gson.Gson;
 import com.squareup.okhttp.ResponseBody;
 

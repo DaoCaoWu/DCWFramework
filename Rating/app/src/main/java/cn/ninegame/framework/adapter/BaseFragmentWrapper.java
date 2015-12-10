@@ -10,17 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dcw.app.biz.toolbar.ToolbarController;
+import com.dcw.app.base.mvp.view.PresenterFragment;
+import com.dcw.app.presentation.toolbar.ToolbarController;
 import com.dcw.app.di.HasComponent;
 import com.dcw.app.di.component.ActivityComponent;
 import com.dcw.app.di.component.DaggerFragmentComponent;
 import com.dcw.app.di.component.FragmentComponent;
 import com.dcw.app.di.module.FragmentModule;
-import com.dcw.app.mvp.view.PresenterFragment;
-import com.dcw.app.mvp.view.RxFragment;
-import com.dcw.app.util.Util;
+import com.dcw.app.util.KeyboardHelper;
 import com.dcw.framework.view.annotation.InjectLayout;
-import com.fragmentmaster.app.MasterFragment;
 
 import butterknife.ButterKnife;
 import cn.ninegame.framework.ICreateTemplate;
@@ -98,7 +96,7 @@ public abstract class BaseFragmentWrapper extends PresenterFragment implements I
         try {
             View v = getActivity().getCurrentFocus();
             if (v != null) {
-                Util.hideKeyboard(getActivity(), v.getWindowToken());
+                KeyboardHelper.hideKeyboard(getActivity(), v.getWindowToken());
             }
         } catch (Exception e) {
         }
