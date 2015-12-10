@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.dcw.app.app.App;
-import com.dcw.app.network.GsonConverterFactory;
+import com.dcw.app.network.converter.GsonConverterFactory;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,4 +1,4 @@
-package com.dcw.app.net.api;
+package com.dcw.app.network.api;
 
 
 import com.dcw.app.presentation.test.model.O;

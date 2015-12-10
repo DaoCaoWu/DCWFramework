@@ -1,4 +1,4 @@
-package com.dcw.app.network;
+package com.dcw.app.network.converter;
 
 import com.dcw.app.presentation.test.model.I;
 import com.dcw.app.presentation.test.model.State;

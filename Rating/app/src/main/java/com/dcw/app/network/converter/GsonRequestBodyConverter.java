@@ -1,4 +1,4 @@
-package com.dcw.app.network;
+package com.dcw.app.network.converter;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;

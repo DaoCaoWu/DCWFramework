@@ -15,7 +15,7 @@ import com.dcw.app.presentation.test.model.Comment;
 import com.dcw.app.presentation.test.model.IL;
 import com.dcw.app.presentation.toolbar.ToolbarController;
 import com.dcw.app.presentation.toolbar.ToolbarModel;
-import com.dcw.app.net.api.GitHub;
+import com.dcw.app.network.api.GitHub;
 import com.dcw.framework.util.LinkTouchMovementMethod;
 import com.dcw.framework.util.RichTextBuilder;
 import com.dcw.framework.util.TouchableSpan;

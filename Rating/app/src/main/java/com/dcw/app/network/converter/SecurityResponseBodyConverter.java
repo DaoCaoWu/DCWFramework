@@ -1,4 +1,4 @@
-package com.dcw.app.network;
+package com.dcw.app.network.converter;
 
 import com.dcw.framework.data.net.client.Defaults;
 import com.squareup.okhttp.ResponseBody;
