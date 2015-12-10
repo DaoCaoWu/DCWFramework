@@ -1,4 +1,4 @@
-package com.dcw.app.config;
+package com.dcw.app.base.config;
 
 import android.content.Context;
 import android.content.res.Resources;

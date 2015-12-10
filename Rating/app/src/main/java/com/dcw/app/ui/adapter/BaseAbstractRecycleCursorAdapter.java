@@ -1,4 +1,4 @@
-package com.dcw.app.adapter;
+package com.dcw.app.ui.adapter;
 /*
  * Copyright (C) 2013 The Android Open Source Project
  *

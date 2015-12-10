@@ -1,4 +1,4 @@
-package com.dcw.app.adapter;
+package com.dcw.app.ui.adapter;
 
 import android.database.Cursor;
 import android.widget.Filter;

@@ -1,4 +1,4 @@
-package com.dcw.app.config;
+package com.dcw.app.base.config;
 
 public interface NotificationDef {
 
