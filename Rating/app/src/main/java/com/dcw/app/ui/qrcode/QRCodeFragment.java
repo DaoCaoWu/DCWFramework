@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dcw.app.R;
-import com.dcw.app.biz.MainActivity;
+
 import cn.ninegame.framework.adapter.BaseFragmentWrapper;
 import com.dcw.framework.view.annotation.InjectLayout;
 import com.dcw.framework.view.annotation.InjectView;

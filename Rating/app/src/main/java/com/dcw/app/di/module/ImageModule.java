@@ -1,7 +1,7 @@
 package com.dcw.app.di.module;
 
 import com.dcw.app.app.App;
-import com.dcw.app.config.ImageLoaderConfig;
+import com.dcw.app.base.config.ImageLoaderConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 

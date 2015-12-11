@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AbsListView;
 
-import com.dcw.app.ui.GridViewWithHeaderAndFooter;
+import com.dcw.app.ui.widget.GridViewWithHeaderAndFooter;
 
 public class LoadMoreGridViewContainer extends LoadMoreContainerBase<GridViewWithHeaderAndFooter> {
 

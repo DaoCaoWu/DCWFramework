@@ -1,6 +1,6 @@
 package com.dcw.app.di.module;
 
-import com.dcw.app.biz.account.User;
+import com.dcw.app.presentation.account.model.User;
 
 import javax.inject.Named;
 

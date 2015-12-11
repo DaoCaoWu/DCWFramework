@@ -1,4 +1,5 @@
-<com.dcw.app.biz.toolbar.NavigationBar android:id="@id/toolbar"
+<com.dcw.app.presentation.toolbar.NavigationBar
+    android:id="@id/toolbar"
                                        xmlns:android="http://schemas.android.com/apk/res/android"
                                        android:layout_width="match_parent"
                                        android:layout_height="wrap_content"
