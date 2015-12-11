@@ -13,17 +13,15 @@ sourceSets {
 }
 
 dependencies {
-    def domainDependencies = rootProject.ext.domainDependencies
-    def domainTestDependencies = rootProject.ext.domainTestDependencies
 
-    provided domainDependencies.daggerCompiler
-    provided domainDependencies.javaxAnnotation
-//    provided domainDependencies.androidAnnotations
+    compile "com.google.dagger:dagger:2.0.2"
+    provided "com.google.dagger:dagger-compiler:2.0.2"
+    provided "javax.annotation:javax.annotation-api:1.2"
 
-    compile domainDependencies.dagger
-    compile domainDependencies.rxJava
-    compile domainDependencies.gson
+    compile "io.reactivex:rxjava:1.0.16"
 
-    testCompile domainTestDependencies.junit
-    testCompile domainTestDependencies.mockito
+    compile "com.google.code.gson:gson:2.3"
+
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:1.9.5"
 }

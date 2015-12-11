@@ -2,8 +2,6 @@ package com.dcw.framework.data.api;
 
 import com.dcw.framework.domain.user.User;
 
-import org.apache.http.protocol.RequestDate;
-
 import retrofit.Call;
 import retrofit.http.Body;
 
@@ -15,6 +13,6 @@ import retrofit.http.Body;
  */
 public interface UserService {
 
-    Call<User> login(@Body RequestDate user);
+    Call<User> login(@Body User user);
 
 }
