@@ -1,1 +1,1 @@
-include ':app', ':library', ':data', ':domain', ':fragmentmaster-appcompat', ':fragmentmaster', ':smssdk', ':IMKit', ':umengfamily'
+include ':app', ':library', ':data', ':domain', ':fragmentmaster-appcompat', ':fragmentmaster', ':smssdk', ':IMKit', ':umengfamily', ':urlrewrite'
