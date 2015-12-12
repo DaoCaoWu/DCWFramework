@@ -1,6 +1,8 @@
 package com.dcw.framework.rating;
 
+import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.dcw.app.R;
@@ -26,6 +28,13 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
     public void testGreet() {
         MainActivity activity = getActivity();
 
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                getInstrumentation().callActivityOnResume(getActivity());
+            }
+        });
+
         // Type name in text input
         // ----------------------
 
@@ -36,7 +45,9 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
-                nameEditText.requestFocus();
+                if (nameEditText != null) {
+                    nameEditText.requestFocus();
+                }
             }
         });
 
